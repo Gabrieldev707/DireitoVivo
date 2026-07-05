@@ -1,6 +1,882 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
-/* Base acessível: texto maior por padrão (público com baixa alfabetização digital). */
-html {
-  font-size: 17px;
+@layer base {
+  :root {
+    --font-sans: 'Inter', 'Roboto', system-ui, sans-serif;
+    --font-heading: 'Roboto', 'Inter', system-ui, sans-serif;
+    --gov-blue: #1351b4;
+    --gov-blue-dark: #071d41;
+    --gov-blue-deeper: #04152f;
+    --gov-green: #168821;
+    --gov-yellow: #ffcd07;
+    --gov-surface: #f6f8fb;
+    --gov-red: #c41414;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background:
+      linear-gradient(180deg, rgba(255, 205, 7, 0.08) 0, rgba(255, 255, 255, 0) 17rem),
+      radial-gradient(circle at 8% 4%, rgba(22, 136, 33, 0.08), transparent 16rem),
+      var(--gov-surface);
+    overflow-x: clip;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    letter-spacing: 0;
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+}
+
+.skip-link {
+  position: fixed;
+  left: 1rem;
+  top: 0.75rem;
+  z-index: 9999;
+  transform: translateY(-140%);
+  border-radius: 0.5rem;
+  background: var(--gov-yellow);
+  color: var(--gov-blue-dark);
+  padding: 0.75rem 1rem;
+  font-weight: 900;
+  box-shadow: 0 12px 30px rgba(4, 21, 47, 0.22);
+  transition: transform 0.18s ease;
+}
+
+.skip-link:focus {
+  transform: translateY(0);
+  outline: 3px solid #ffffff;
+}
+
+@layer components {
+  .btn-gov-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[#1351B4] px-6 py-3 font-black text-white shadow-[0_12px_26px_rgba(19,81,180,0.22)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#0c326f] hover:shadow-[0_16px_34px_rgba(19,81,180,0.28)] focus:outline-none focus:ring-4 focus:ring-[#1351B4]/30 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-gov-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-[#1351B4] bg-white px-6 py-3 font-black text-[#1351B4] shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-blue-50 focus:outline-none focus:ring-4 focus:ring-[#1351B4]/20 active:translate-y-0 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+
+  .btn-gov-success {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[#168821] px-6 py-3 font-black text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#0f6f1a] focus:outline-none focus:ring-4 focus:ring-[#168821]/25 active:translate-y-0;
+  }
+
+  .btn-gov-light {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/25 bg-white px-5 py-3 text-sm font-black text-[#071D41] shadow-sm transition hover:-translate-y-0.5 hover:bg-[#FFCD07] focus:outline-none focus:ring-4 focus:ring-white/35;
+  }
+
+  .btn-gov-hero {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-[#FFCD07] px-6 py-3.5 text-sm font-black text-[#071D41] shadow-[0_18px_36px_rgba(255,205,7,0.25)] transition hover:-translate-y-0.5 hover:bg-[#ffd93d] focus:outline-none focus:ring-4 focus:ring-white/40 active:translate-y-0;
+  }
+
+  .btn-gov-hero-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-white/45 bg-white/12 px-6 py-3.5 text-sm font-black text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/20 focus:outline-none focus:ring-4 focus:ring-white/30 active:translate-y-0;
+  }
+
+  .badge-gov {
+    @apply inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-wide;
+  }
+
+  .gov-panel {
+    @apply rounded-lg border border-slate-200 bg-white shadow-[0_10px_30px_rgba(7,29,65,0.06)];
+  }
+
+  .gov-kicker {
+    @apply inline-flex items-center gap-2 text-xs font-black uppercase tracking-wide text-[#1351B4];
+  }
+
+  .gov-photo {
+    @apply h-full w-full object-cover;
+  }
+}
+
+.access-button {
+  display: inline-flex;
+  min-height: 1.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.55rem;
+  font-weight: 900;
+  transition: background-color 0.16s ease, color 0.16s ease, transform 0.16s ease;
+}
+
+.access-button:hover {
+  transform: translateY(-1px);
+}
+
+.access-button:focus-visible,
+.nav-tab:focus-visible,
+.footer-link:focus-visible,
+.suggestion-button:focus-visible,
+.listen-button:focus-visible,
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid rgba(255, 205, 7, 0.95);
+  outline-offset: 3px;
+}
+
+.nav-tab {
+  display: inline-flex;
+  min-height: 3.25rem;
+  align-items: center;
+  gap: 0.65rem;
+  border-radius: 0.5rem;
+  border: 1px solid transparent;
+  padding: 0.65rem 0.95rem;
+  color: #334155;
+  font-size: 0.875rem;
+  font-weight: 900;
+  transition: background-color 0.18s ease, border-color 0.18s ease, color 0.18s ease, transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.nav-tab:hover {
+  transform: translateY(-1px);
+  border-color: rgba(19, 81, 180, 0.18);
+  background: #ffffff;
+  color: var(--gov-blue);
+  box-shadow: 0 8px 18px rgba(7, 29, 65, 0.08);
+}
+
+.nav-tab--active {
+  background: #ffffff;
+  color: var(--gov-blue);
+  border-color: rgba(19, 81, 180, 0.22);
+  box-shadow: inset 0 -3px 0 var(--gov-yellow), 0 8px 18px rgba(7, 29, 65, 0.08);
+}
+
+.nav-tab__badge {
+  border-radius: 999px;
+  background: rgba(255, 205, 7, 0.25);
+  color: var(--gov-blue-dark);
+  padding: 0.15rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 900;
+}
+
+.gov-ribbon {
+  height: 0.375rem;
+  width: 100%;
+  background: linear-gradient(90deg, #168821 0 34%, #ffcd07 34% 67%, #1351b4 67% 100%);
+}
+
+.home-hero {
+  position: relative;
+  min-height: clamp(38rem, calc(100vh - 8rem), 48rem);
+  overflow: hidden;
+  background: var(--gov-blue-dark);
+}
+
+.home-hero__inner {
+  min-height: clamp(38rem, calc(100vh - 8rem), 48rem);
+}
+
+.home-hero__inner > * {
+  min-width: 0;
+}
+
+.home-hero__image,
+.home-hero__overlay,
+.home-hero__watermark {
+  position: absolute;
+  inset: 0;
+}
+
+.home-hero__image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.home-hero__overlay {
+  background:
+    linear-gradient(90deg, rgba(4, 21, 47, 0.98) 0%, rgba(7, 29, 65, 0.9) 43%, rgba(7, 29, 65, 0.42) 70%, rgba(7, 29, 65, 0.18) 100%),
+    linear-gradient(180deg, rgba(22, 136, 33, 0.32), rgba(19, 81, 180, 0.18));
+}
+
+.home-hero__watermark {
+  left: auto;
+  right: -9rem;
+  top: 8rem;
+  height: min(46vw, 34rem);
+  width: auto;
+  opacity: 0.035;
+  filter: saturate(0.9);
+}
+
+.hero-service-panel {
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 0.75rem;
+  background: rgba(7, 29, 65, 0.76);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+  backdrop-filter: blur(14px);
+}
+
+.hero-stat {
+  border-left-width: 4px;
+  background: rgba(255, 255, 255, 0.12);
+  padding: 0.9rem 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.hero-stat dt {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 900;
+}
+
+.hero-stat dd {
+  color: #eaf2ff;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.identity-brasil-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: center;
+  border: 1px solid rgba(19, 81, 180, 0.14);
+  border-radius: 0.75rem;
+  background:
+    linear-gradient(135deg, rgba(255, 205, 7, 0.18), rgba(255, 255, 255, 0.92) 38%),
+    #ffffff;
+  padding: 1.5rem;
+  box-shadow: 0 14px 34px rgba(7, 29, 65, 0.08);
+}
+
+.identity-brasil-section__logo {
+  border-radius: 0.75rem;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  background: #ffffff;
+  padding: 1.25rem;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.65);
+}
+
+.feature-card {
+  overflow: hidden;
+  border: 1px solid #e2e8f0;
+  border-top-width: 5px;
+  border-radius: 0.65rem;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(7, 29, 65, 0.07);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 18px 44px rgba(7, 29, 65, 0.12);
+}
+
+.feature-card__media {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #dbeafe;
+}
+
+.feature-card:hover .feature-card__media img {
+  transform: scale(1.025);
+}
+
+.feature-card__media img {
+  transition: transform 0.35s ease;
+}
+
+.brasil-focus-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background:
+    radial-gradient(circle at 82% 25%, rgba(255, 205, 7, 0.32), transparent 15rem),
+    linear-gradient(135deg, #04152f, #0c326f 58%, #1351b4);
+  padding: 1.5rem;
+  box-shadow: 0 20px 52px rgba(7, 29, 65, 0.18);
+}
+
+.brasil-globe-card {
+  display: grid;
+  justify-items: center;
+  gap: 0.45rem;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  text-align: center;
+  color: #ffffff;
+  backdrop-filter: blur(10px);
+}
+
+.brasil-globe-card > span {
+  max-width: 18rem;
+  color: #dbeafe;
+  font-size: 0.82rem;
+}
+
+.brasil-globe {
+  position: relative;
+  height: 14rem;
+  width: 14rem;
+  overflow: hidden;
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.72), transparent 0.5rem),
+    radial-gradient(circle at 32% 30%, #47a5ff, #1351b4 48%, #071d41 100%);
+  box-shadow: inset -32px -22px 44px rgba(4, 21, 47, 0.46), 0 24px 55px rgba(0, 0, 0, 0.3);
+}
+
+.brasil-globe__grid {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    repeating-linear-gradient(90deg, transparent 0 1.6rem, rgba(255, 255, 255, 0.18) 1.7rem 1.78rem),
+    repeating-linear-gradient(0deg, transparent 0 1.8rem, rgba(255, 255, 255, 0.14) 1.9rem 1.98rem);
+  opacity: 0.68;
+  animation: globeGrid 8s linear infinite;
+}
+
+.brasil-globe__land {
+  position: absolute;
+  display: block;
+  background: linear-gradient(135deg, #49b658, #168821);
+  filter: drop-shadow(0 4px 8px rgba(4, 21, 47, 0.28));
+}
+
+.brasil-globe__land--one {
+  left: 45%;
+  top: 44%;
+  height: 4.7rem;
+  width: 3.8rem;
+  border-radius: 52% 42% 48% 60%;
+  transform: rotate(18deg);
+}
+
+.brasil-globe__land--two {
+  left: 35%;
+  top: 30%;
+  height: 2.6rem;
+  width: 4.1rem;
+  border-radius: 60% 45% 55% 42%;
+  transform: rotate(-14deg);
+  opacity: 0.78;
+}
+
+.brasil-globe__focus,
+.brasil-globe__pulse {
+  position: absolute;
+  left: 53%;
+  top: 56%;
+  border-radius: 999px;
+  transform: translate(-50%, -50%);
+}
+
+.brasil-globe__focus {
+  height: 1rem;
+  width: 1rem;
+  background: var(--gov-yellow);
+  box-shadow: 0 0 0 4px rgba(255, 205, 7, 0.24);
+}
+
+.brasil-globe__pulse {
+  height: 3.8rem;
+  width: 3.8rem;
+  border: 2px solid rgba(255, 205, 7, 0.72);
+  animation: pulseBrazil 2.4s ease-out infinite;
+}
+
+.step-card,
+.support-card {
+  border: 1px solid #e2e8f0;
+  border-radius: 0.65rem;
+  background: #ffffff;
+  padding: 1.25rem;
+  box-shadow: 0 10px 28px rgba(7, 29, 65, 0.06);
+}
+
+.support-card {
+  border-left: 4px solid var(--gov-blue);
+  background: #f8fafc;
+}
+
+.catalog-hero-visual,
+.scenario-hero-visual {
+  position: relative;
+  min-height: 18rem;
+  overflow: hidden;
+  background: #dbeafe;
+}
+
+.catalog-hero-visual__badge,
+.scenario-hero-visual__badge {
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 1rem;
+  border-radius: 0.65rem;
+  background: rgba(7, 29, 65, 0.86);
+  color: #ffffff;
+  padding: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.catalog-hero-visual__badge strong,
+.scenario-hero-visual__badge strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 900;
+}
+
+.catalog-hero-visual__badge span,
+.scenario-hero-visual__badge span {
+  margin-top: 0.25rem;
+  display: block;
+  color: #dbeafe;
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.service-strip,
+.scenario-priority-band {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.9rem;
+}
+
+.service-strip > div,
+.scenario-priority-band > div {
+  border-radius: 0.65rem;
+  border: 1px solid #dbe3ee;
+  background: #ffffff;
+  padding: 1rem;
+  box-shadow: 0 10px 28px rgba(7, 29, 65, 0.05);
+}
+
+.service-strip strong,
+.scenario-priority-band strong {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--gov-blue-dark);
+  font-weight: 900;
+}
+
+.service-strip p,
+.scenario-priority-band p {
+  margin-top: 0.25rem;
+  color: #475569;
+  font-size: 0.82rem;
+  line-height: 1.5;
+}
+
+.service-strip__number {
+  display: inline-flex;
+  height: 2rem;
+  width: 2rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.45rem;
+  background: var(--gov-blue);
+  color: #ffffff;
+  font-weight: 900;
+}
+
+.scenario-priority-band__tag {
+  display: inline-flex;
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.chat-guide-panel {
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid rgba(19, 81, 180, 0.24);
+  background:
+    radial-gradient(circle at 80% 0%, rgba(255, 205, 7, 0.2), transparent 12rem),
+    linear-gradient(180deg, #071d41, #0c326f);
+  box-shadow: 0 18px 44px rgba(7, 29, 65, 0.18);
+}
+
+.chat-signal {
+  position: relative;
+  display: grid;
+  height: 8rem;
+  place-items: center;
+}
+
+.chat-signal__ring,
+.chat-signal__core {
+  position: absolute;
+  border-radius: 999px;
+}
+
+.chat-signal__ring {
+  height: 6.8rem;
+  width: 6.8rem;
+  border: 1px solid rgba(255, 205, 7, 0.38);
+  animation: pulseBrazil 2.8s ease-out infinite;
+}
+
+.chat-signal__core {
+  display: grid;
+  height: 5rem;
+  width: 5rem;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: inset 0 0 22px rgba(255, 255, 255, 0.08);
+}
+
+.suggestion-button {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.55rem;
+  border-radius: 0.55rem;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.7rem 0.8rem;
+  color: #ffffff;
+  text-align: left;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1.45;
+  transition: transform 0.16s ease, background-color 0.16s ease, border-color 0.16s ease;
+}
+
+.suggestion-button:hover {
+  transform: translateX(2px);
+  border-color: rgba(255, 205, 7, 0.48);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.suggestion-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+.chat-shell {
+  border-radius: 0.75rem;
+  border: 1px solid #dbe3ee;
+  background: #ffffff;
+  box-shadow: 0 18px 44px rgba(7, 29, 65, 0.08);
+}
+
+.chat-messages {
+  background:
+    linear-gradient(90deg, rgba(19, 81, 180, 0.035) 1px, transparent 1px),
+    linear-gradient(180deg, rgba(19, 81, 180, 0.035) 1px, transparent 1px),
+    #eef3f8;
+  background-size: 2.5rem 2.5rem;
+}
+
+.online-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 999px;
+  background: #dcfce7;
+  color: #14532d;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.72rem;
+  font-weight: 900;
+}
+
+.message-bubble {
+  white-space: pre-wrap;
+  border-radius: 0.9rem;
+  padding: 1rem 1.1rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  box-shadow: 0 8px 20px rgba(7, 29, 65, 0.07);
+}
+
+.message-bubble--user {
+  border-top-right-radius: 0.25rem;
+  background: linear-gradient(135deg, #1351b4, #0c326f);
+  color: #ffffff;
+}
+
+.message-bubble--assistant {
+  border: 1px solid #dbe3ee;
+  border-top-left-radius: 0.25rem;
+  background: #ffffff;
+  color: #1f2937;
+}
+
+.listen-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 0.4rem;
+  background: #ffffff;
+  color: #475569;
+  padding: 0.35rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 900;
+  transition: background-color 0.16s ease, color 0.16s ease;
+}
+
+.listen-button:hover,
+.listen-button--active {
+  background: #fff7d6;
+  color: #713f12;
+}
+
+.footer-brasil__watermark {
+  position: absolute;
+  bottom: -8rem;
+  right: -4rem;
+  width: min(52vw, 34rem);
+  max-width: none;
+  opacity: 0.07;
+  pointer-events: none;
+}
+
+.footer-history {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.footer-history span {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.08);
+  padding: 0.45rem 0.75rem;
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+.footer-link {
+  display: inline-flex;
+  border-radius: 0.35rem;
+  padding: 0.2rem 0;
+  color: #dbeafe;
+  font-weight: 700;
+  transition: color 0.16s ease, transform 0.16s ease;
+}
+
+.footer-link:hover {
+  transform: translateX(2px);
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes globeGrid {
+  from { transform: translateX(-1.6rem); }
+  to { transform: translateX(1.6rem); }
+}
+
+@keyframes pulseBrazil {
+  0% { opacity: 0.85; transform: translate(-50%, -50%) scale(0.75); }
+  75% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Modo de alto contraste */
+body.alto-contraste {
+  background: #000000 !important;
+  color: #ffffff !important;
+}
+
+body.alto-contraste *,
+body.alto-contraste *::before,
+body.alto-contraste *::after {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+body.alto-contraste header,
+body.alto-contraste footer,
+body.alto-contraste section,
+body.alto-contraste main,
+body.alto-contraste nav,
+body.alto-contraste form,
+body.alto-contraste article,
+body.alto-contraste aside,
+body.alto-contraste div,
+body.alto-contraste li,
+body.alto-contraste details {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: #ffea00 !important;
+}
+
+body.alto-contraste p,
+body.alto-contraste span,
+body.alto-contraste strong,
+body.alto-contraste h1,
+body.alto-contraste h2,
+body.alto-contraste h3,
+body.alto-contraste h4,
+body.alto-contraste dt,
+body.alto-contraste dd,
+body.alto-contraste label {
+  color: #ffffff !important;
+}
+
+body.alto-contraste button,
+body.alto-contraste a {
+  background: #ffea00 !important;
+  color: #000000 !important;
+  border-color: #ffffff !important;
+  font-weight: 900 !important;
+}
+
+body.alto-contraste button *,
+body.alto-contraste a * {
+  color: #000000 !important;
+}
+
+body.alto-contraste svg {
+  color: currentColor !important;
+  stroke: currentColor !important;
+}
+
+body.alto-contraste input,
+body.alto-contraste textarea,
+body.alto-contraste select {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border: 2px solid #ffea00 !important;
+}
+
+body.alto-contraste input::placeholder,
+body.alto-contraste textarea::placeholder {
+  color: #e5e7eb !important;
+}
+
+body.alto-contraste img:not(.gov-logo-img):not(.gov-mark-logo) {
+  filter: grayscale(1) contrast(1.2) brightness(0.82) !important;
+}
+
+body.alto-contraste .gov-logo-img,
+body.alto-contraste .gov-mark-logo {
+  background: #ffffff !important;
+  border: 2px solid #ffea00 !important;
+}
+
+body.alto-contraste :focus-visible {
+  outline: 4px solid #ffea00 !important;
+  outline-offset: 3px !important;
+}
+
+@media (min-width: 768px) {
+  .service-strip,
+  .scenario-priority-band {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .identity-brasil-section {
+    grid-template-columns: minmax(0, 1fr) 24rem;
+    padding: 2rem;
+  }
+
+  .brasil-focus-section {
+    grid-template-columns: minmax(0, 1fr) 23rem;
+    padding: 2rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .brand-lockup {
+    align-items: flex-start;
+  }
+
+  .brand-lockup .gov-logo-img {
+    max-width: 7.5rem;
+  }
+
+  .home-hero {
+    min-height: auto;
+  }
+
+  .home-hero h1 {
+    max-width: calc(100vw - 2rem);
+    overflow-wrap: break-word;
+    font-size: clamp(2.5rem, 11vw, 3rem);
+    line-height: 1.12;
+  }
+
+  .home-hero p,
+  .hero-service-panel {
+    max-width: calc(100vw - 2rem);
+  }
+
+  .btn-gov-hero,
+  .btn-gov-hero-secondary {
+    width: 100%;
+  }
+
+  .home-hero__overlay {
+    background: linear-gradient(180deg, rgba(4, 21, 47, 0.98), rgba(7, 29, 65, 0.76));
+  }
+
+  .home-hero__watermark {
+    display: none;
+  }
+
+  .brasil-globe {
+    height: 11.5rem;
+    width: 11.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
