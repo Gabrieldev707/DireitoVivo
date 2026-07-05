@@ -1,0 +1,6 @@
+@import 'tailwindcss';
+
+/* Base acessível: texto maior por padrão (público com baixa alfabetização digital). */
+html {
+  font-size: 17px;
+}
