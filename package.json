@@ -13,10 +13,14 @@
   "scripts": {
     "db:seed": "npm run seed -w db",
     "db:embeddings": "npm run embeddings -w db",
+    "db:catalogo": "npm run catalogo -w db",
     "rag:cli": "npm run cli -w rag",
     "rag:testes": "npm run testar-perfis -w rag",
+    "rag:auditar": "npm run auditar -w rag",
     "api:dev": "npm run dev -w api",
     "front:dev": "npm run dev -w frontend",
-    "typecheck": "npm run typecheck -w rag && npm run typecheck -w api && npm run typecheck -w frontend"
+    "typecheck": "npm run typecheck -w rag && npm run typecheck -w api && npm run typecheck -w frontend",
+    "test": "npm run test -w rag && npm run test -w api && npm run test -w frontend",
+    "build": "npm run build -w frontend"
   }
 }

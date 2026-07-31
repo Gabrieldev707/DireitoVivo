@@ -9,6 +9,8 @@
   "scripts": {
     "cli": "tsx scripts/triagem-cli.ts",
     "testar-perfis": "tsx scripts/testar-perfis.ts",
+    "auditar": "tsx scripts/auditar-qualidade.ts",
+    "test": "vitest run",
     "typecheck": "tsc -p tsconfig.json"
   },
   "dependencies": {
@@ -18,7 +20,9 @@
   },
   "devDependencies": {
     "@types/node": "^22.10.0",
+    "@vitest/coverage-v8": "^4.1.10",
     "tsx": "^4.19.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.10"
   }
 }
