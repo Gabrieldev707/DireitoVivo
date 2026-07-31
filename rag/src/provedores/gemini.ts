@@ -15,7 +15,10 @@ const ORCAMENTO_RETRY_MS = 25_000;
 
 export function criarProvedorGemini(): ProvedorLLM {
   const ai = new GoogleGenAI({ apiKey: obterEnv('GEMINI_API_KEY') });
-  const modeloChat = obterEnv('GEMINI_MODELO_CHAT', 'gemini-2.5-flash');
+  // Padrão em "flash-lite": no tier free ele tem cota por minuto mais folgada que
+  // o "flash" cheio, e o gargalo aqui é justamente requisição por minuto — cada
+  // turno de conversa gasta duas chamadas (embedding da consulta + geração).
+  const modeloChat = obterEnv('GEMINI_MODELO_CHAT', 'gemini-3.5-flash-lite');
   const modeloEmbedding = obterEnv('GEMINI_MODELO_EMBEDDING', 'gemini-embedding-001');
 
   return {

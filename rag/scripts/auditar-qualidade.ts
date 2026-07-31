@@ -7,6 +7,14 @@ import { executarTriagem, MAX_PERGUNTAS, type MensagemChat, type RespostaTriagem
 
 const RODADAS_POR_PERFIL = 3;
 
+// Pausa entre rodadas. Sem ela o script dispara ~27 gerações em poucos segundos e
+// estoura a cota por minuto de qualquer tier free — as falhas então medem a
+// impaciência do script, não a qualidade da triagem. Uma pessoa real leva dezenas
+// de segundos para ler e responder; aqui só recriamos esse compasso.
+const PAUSA_ENTRE_RODADAS_MS = 20_000;
+
+const pausar = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 interface Perfil {
   nome: string;
   respostas: string[];
@@ -140,16 +148,23 @@ async function medirUmaRodada(perfil: Perfil, rodada: number): Promise<Medicao> 
 }
 
 const medicoes: Medicao[] = [];
+const totalRodadas = perfis.length * RODADAS_POR_PERFIL;
+let rodadasFeitas = 0;
 
 for (const perfil of perfis) {
   console.log(`\n${'='.repeat(70)}\nPERFIL: ${perfil.nome}\n${'='.repeat(70)}`);
   for (let rodada = 1; rodada <= RODADAS_POR_PERFIL; rodada++) {
     const m = await medirUmaRodada(perfil, rodada);
     medicoes.push(m);
+    rodadasFeitas++;
     const status = m.erro ? `ERRO: ${m.erro}` : `${m.qtdItens} itens: ${m.ids.join(', ')}`;
     console.log(
       `  rodada ${rodada}: ${m.perguntasFeitas} pergunta(s) de ${MAX_PERGUNTAS} permitidas | ${status}`,
     );
+    if (rodadasFeitas < totalRodadas) {
+      console.log(`  (pausa de ${PAUSA_ENTRE_RODADAS_MS / 1000}s para não estourar a cota por minuto)`);
+      await pausar(PAUSA_ENTRE_RODADAS_MS);
+    }
   }
 }
 
