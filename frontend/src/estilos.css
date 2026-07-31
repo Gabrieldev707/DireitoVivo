@@ -203,8 +203,8 @@ textarea:focus-visible {
 
 .home-hero__overlay {
   background:
-    linear-gradient(90deg, rgba(4, 21, 47, 0.98) 0%, rgba(7, 29, 65, 0.9) 43%, rgba(7, 29, 65, 0.42) 70%, rgba(7, 29, 65, 0.18) 100%),
-    linear-gradient(180deg, rgba(22, 136, 33, 0.32), rgba(19, 81, 180, 0.18));
+    linear-gradient(90deg, rgba(6, 73, 66, 0.97) 0%, rgba(7, 94, 84, 0.9) 43%, rgba(7, 94, 84, 0.45) 70%, rgba(7, 94, 84, 0.2) 100%),
+    linear-gradient(180deg, rgba(18, 140, 126, 0.28), rgba(37, 211, 102, 0.16));
 }
 
 .home-hero__watermark {
@@ -879,4 +879,473 @@ body.alto-contraste :focus-visible {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+/* ================================================================
+   Chat estilo WhatsApp — mensageria enxuta em cima do tema gov.br
+   Tokens claros/escuros, bolhas com tail, timestamp, ticks, typing.
+   ================================================================ */
+
+:root {
+  --wa-teal: #075e54;
+  --wa-teal-strong: #064942;
+  --wa-teal-soft: #128c7e;
+  --wa-green: #25d366;
+  --wa-canvas: #ece5dd;
+  --wa-canvas-pattern: rgba(31, 41, 55, 0.055);
+  --wa-user-bubble: #dcf8c6;
+  --wa-user-text: #0b141a;
+  --wa-bot-bubble: #ffffff;
+  --wa-bot-text: #0b141a;
+  --wa-meta: #56727a;
+  --wa-tick: #34b7f1;
+  --wa-header: #075e54;
+  --wa-header-fg: #ffffff;
+  --wa-input-bg: #ffffff;
+  --wa-input-border: #e2e8f0;
+  --wa-composer-bg: #f0f2f5;
+  --wa-shadow: 0 12px 34px rgba(15, 23, 42, 0.12);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) {
+    --wa-canvas: #0b141a;
+    --wa-canvas-pattern: rgba(255, 255, 255, 0.04);
+    --wa-user-bubble: #005c4b;
+    --wa-user-text: #e9edef;
+    --wa-bot-bubble: #202c33;
+    --wa-bot-text: #e9edef;
+    --wa-meta: #8696a0;
+    --wa-tick: #53bdeb;
+    --wa-header: #1f2c33;
+    --wa-header-fg: #e9edef;
+    --wa-input-bg: #202c33;
+    --wa-input-border: rgba(255, 255, 255, 0.08);
+    --wa-composer-bg: #111b21;
+    --wa-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
+  }
+}
+
+:root[data-tema='escuro'] {
+  --wa-canvas: #0b141a;
+  --wa-canvas-pattern: rgba(255, 255, 255, 0.04);
+  --wa-user-bubble: #005c4b;
+  --wa-user-text: #e9edef;
+  --wa-bot-bubble: #202c33;
+  --wa-bot-text: #e9edef;
+  --wa-meta: #8696a0;
+  --wa-tick: #53bdeb;
+  --wa-header: #1f2c33;
+  --wa-header-fg: #e9edef;
+  --wa-input-bg: #202c33;
+  --wa-input-border: rgba(255, 255, 255, 0.08);
+  --wa-composer-bg: #111b21;
+  --wa-shadow: 0 12px 34px rgba(0, 0, 0, 0.4);
+}
+
+.wa-chat {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 44rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--wa-input-border);
+  background: var(--wa-canvas);
+  box-shadow: var(--wa-shadow);
+}
+
+@media (max-width: 640px) {
+  .wa-chat {
+    min-height: calc(100dvh - 8rem);
+    border-radius: 0.75rem;
+  }
+}
+
+.wa-chat__header {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: var(--wa-header);
+  color: var(--wa-header-fg);
+}
+
+.wa-chat__avatar {
+  position: relative;
+  display: grid;
+  height: 2.75rem;
+  width: 2.75rem;
+  place-items: center;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #25d366, #128c7e);
+  color: #ffffff;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.14);
+}
+
+.wa-chat__avatar::after {
+  content: '';
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  height: 0.65rem;
+  width: 0.65rem;
+  border-radius: 999px;
+  background: var(--wa-green);
+  box-shadow: 0 0 0 2px var(--wa-header);
+}
+
+.wa-chat__identity {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.wa-chat__identity strong {
+  font-size: 0.98rem;
+  font-weight: 800;
+  color: var(--wa-header-fg);
+}
+
+.wa-chat__identity span {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.wa-chat__actions {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 0.35rem;
+}
+
+.wa-chat__action {
+  display: grid;
+  height: 2.25rem;
+  width: 2.25rem;
+  place-items: center;
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.88);
+  transition: background-color 0.16s ease, transform 0.16s ease;
+}
+
+.wa-chat__action:hover {
+  background: rgba(255, 255, 255, 0.12);
+  transform: translateY(-1px);
+}
+
+.wa-chat__messages {
+  position: relative;
+  overflow-y: auto;
+  padding: 1.1rem 0.85rem 1.4rem;
+  background:
+    radial-gradient(circle at 20% 10%, var(--wa-canvas-pattern) 1px, transparent 1.5px),
+    radial-gradient(circle at 65% 45%, var(--wa-canvas-pattern) 1px, transparent 1.5px),
+    radial-gradient(circle at 80% 80%, var(--wa-canvas-pattern) 1px, transparent 1.5px),
+    var(--wa-canvas);
+  background-size: 42px 42px, 66px 66px, 90px 90px, auto;
+  background-position: 0 0, 22px 33px, 41px 8px, 0 0;
+}
+
+.wa-chat__day {
+  display: flex;
+  justify-content: center;
+  margin: 0.75rem 0 1rem;
+}
+
+.wa-chat__day span {
+  background: color-mix(in srgb, var(--wa-canvas) 70%, black 6%);
+  color: var(--wa-meta);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.wa-row {
+  display: flex;
+  margin-bottom: 0.35rem;
+  padding: 0 0.35rem;
+}
+
+.wa-row + .wa-row {
+  margin-top: 0;
+}
+
+.wa-row--user {
+  justify-content: flex-end;
+}
+
+.wa-row--bot {
+  justify-content: flex-start;
+}
+
+.wa-bubble {
+  position: relative;
+  max-width: min(78%, 32rem);
+  padding: 0.55rem 0.75rem 0.4rem;
+  border-radius: 0.55rem;
+  font-size: 0.94rem;
+  line-height: 1.42;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  box-shadow: 0 1px 0.5px rgba(0, 0, 0, 0.13);
+}
+
+.wa-bubble--user {
+  background: var(--wa-user-bubble);
+  color: var(--wa-user-text);
+  border-top-right-radius: 0.12rem;
+}
+
+.wa-bubble--bot {
+  background: var(--wa-bot-bubble);
+  color: var(--wa-bot-text);
+  border-top-left-radius: 0.12rem;
+}
+
+/* Tail em SVG puro para ficar nítido em qualquer densidade */
+.wa-bubble--user::before,
+.wa-bubble--bot::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 0.6rem;
+  height: 0.7rem;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.wa-bubble--user::before {
+  right: -0.55rem;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 13'><path d='M0 0h5.7C7.3 0 8 1.8 6.9 3L0 13V0z' fill='%23dcf8c6'/></svg>");
+}
+
+.wa-bubble--bot::before {
+  left: -0.55rem;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 13'><path d='M8 0H2.3C0.7 0 0 1.8 1.1 3L8 13V0z' fill='%23ffffff'/></svg>");
+}
+
+/* Dark: substituir cores dos tails */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) .wa-bubble--user::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 13'><path d='M0 0h5.7C7.3 0 8 1.8 6.9 3L0 13V0z' fill='%23005c4b'/></svg>");
+  }
+  :root:not([data-tema='claro']) .wa-bubble--bot::before {
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 13'><path d='M8 0H2.3C0.7 0 0 1.8 1.1 3L8 13V0z' fill='%23202c33'/></svg>");
+  }
+}
+
+:root[data-tema='escuro'] .wa-bubble--user::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 13'><path d='M0 0h5.7C7.3 0 8 1.8 6.9 3L0 13V0z' fill='%23005c4b'/></svg>");
+}
+
+:root[data-tema='escuro'] .wa-bubble--bot::before {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 13'><path d='M8 0H2.3C0.7 0 0 1.8 1.1 3L8 13V0z' fill='%23202c33'/></svg>");
+}
+
+.wa-bubble__meta {
+  margin-top: 0.15rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.68rem;
+  color: var(--wa-meta);
+  float: right;
+  margin-left: 0.55rem;
+  line-height: 1;
+}
+
+.wa-bubble__ticks {
+  display: inline-flex;
+  color: var(--wa-tick);
+  transform: translateY(1px);
+}
+
+.wa-typing {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 0.28rem;
+  padding: 0.65rem 0.8rem;
+}
+
+.wa-typing span {
+  display: inline-block;
+  height: 0.5rem;
+  width: 0.5rem;
+  border-radius: 999px;
+  background: var(--wa-meta);
+  opacity: 0.4;
+  animation: waTyping 1.15s infinite ease-in-out;
+}
+
+.wa-typing span:nth-child(2) { animation-delay: 0.18s; }
+.wa-typing span:nth-child(3) { animation-delay: 0.36s; }
+
+@keyframes waTyping {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
+  30% { transform: translateY(-3px); opacity: 0.95; }
+}
+
+.wa-error {
+  margin: 0.5rem 0.7rem;
+  border-radius: 0.6rem;
+  border: 1px solid rgba(220, 38, 38, 0.35);
+  background: rgba(254, 226, 226, 0.9);
+  color: #7f1d1d;
+  padding: 0.7rem 0.85rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-tema='claro']) .wa-error {
+    background: rgba(127, 29, 29, 0.6);
+    color: #fecaca;
+    border-color: rgba(220, 38, 38, 0.5);
+  }
+}
+
+.wa-composer {
+  display: flex;
+  align-items: end;
+  gap: 0.5rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--wa-composer-bg);
+  border-top: 1px solid var(--wa-input-border);
+}
+
+.wa-composer__field {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: end;
+  gap: 0.35rem;
+  border-radius: 1.4rem;
+  background: var(--wa-input-bg);
+  border: 1px solid var(--wa-input-border);
+  padding: 0.45rem 0.85rem;
+  min-height: 2.75rem;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.wa-composer__field textarea {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--wa-user-text);
+  font-size: 0.98rem;
+  line-height: 1.35;
+  max-height: 8rem;
+  padding: 0.25rem 0;
+}
+
+.wa-composer__field textarea::placeholder {
+  color: var(--wa-meta);
+}
+
+.wa-composer__send {
+  display: grid;
+  height: 2.75rem;
+  width: 2.75rem;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--wa-teal-soft);
+  color: #ffffff;
+  transition: background-color 0.16s ease, transform 0.16s ease;
+  box-shadow: 0 4px 10px rgba(18, 140, 126, 0.28);
+}
+
+.wa-composer__send:hover:not(:disabled) {
+  background: var(--wa-teal);
+  transform: translateY(-1px);
+}
+
+.wa-composer__send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.wa-composer__hint {
+  display: block;
+  padding: 0.35rem 0.9rem 0.05rem;
+  font-size: 0.7rem;
+  color: var(--wa-meta);
+}
+
+.wa-quickchips {
+  display: flex;
+  overflow-x: auto;
+  gap: 0.4rem;
+  padding: 0.5rem 0.75rem 0.15rem;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.wa-quickchips::-webkit-scrollbar { display: none; }
+
+.wa-quickchip {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  border-radius: 999px;
+  border: 1px solid var(--wa-input-border);
+  background: var(--wa-input-bg);
+  color: var(--wa-user-text);
+  padding: 0.42rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.16s ease, background-color 0.16s ease, transform 0.16s ease;
+}
+
+.wa-quickchip:hover:not(:disabled) {
+  border-color: var(--wa-teal-soft);
+  color: var(--wa-teal-soft);
+  transform: translateY(-1px);
+}
+
+.wa-quickchip:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.wa-listen {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--wa-meta);
+  padding: 0.12rem 0.4rem;
+  font-size: 0.7rem;
+  font-weight: 700;
+  transition: color 0.16s ease, background-color 0.16s ease;
+}
+
+.wa-listen:hover,
+.wa-listen--ativo {
+  color: var(--wa-teal-soft);
+  background: color-mix(in srgb, var(--wa-teal-soft) 12%, transparent);
+}
+
+.wa-chat__banner {
+  display: flex;
+  gap: 0.55rem;
+  margin: 0 0.7rem 0.75rem;
+  padding: 0.55rem 0.8rem;
+  border-radius: 0.6rem;
+  background: color-mix(in srgb, var(--wa-teal-soft) 10%, var(--wa-canvas));
+  color: var(--wa-user-text);
+  font-size: 0.75rem;
+  line-height: 1.45;
+  border: 1px solid color-mix(in srgb, var(--wa-teal-soft) 25%, transparent);
+}
+
+.wa-chat__banner svg {
+  color: var(--wa-teal-soft);
+  flex-shrink: 0;
+  margin-top: 0.1rem;
 }

@@ -144,6 +144,7 @@ export function App() {
             enviando={enviando}
             erro={erro}
             aoEnviar={aoEnviar}
+            aoLimpar={recomecar}
           />
         )}
 

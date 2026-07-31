@@ -1,28 +1,44 @@
 <!doctype html>
-<html lang="pt-BR">
+<html lang="pt-BR" data-tema="claro">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#075e54" />
+    <meta name="color-scheme" content="light dark" />
     <meta
       name="description"
-      content="Direito Vivo — Portal Oficial de Direitos e Cidadania. Descubra, de forma rápida, gratuita e 100% anônima, benefícios sociais, serviços públicos e direitos garantidos por lei."
+      content="Direito Vivo — triagem conversacional anônima e gratuita de benefícios, direitos e serviços públicos brasileiros. Sem CPF, sem cadastro, sem log de conversa."
     />
-    <!-- Favicon 100% SVG (Escudo Gov com Verificação - Sem Emoji) -->
+
+    <!-- Open Graph / Twitter (compartilhamento) -->
+    <meta property="og:title" content="Direito Vivo — sua triagem anônima de direitos" />
+    <meta property="og:description" content="Descubra em poucas mensagens benefícios sociais, direitos e serviços públicos federais aos quais você provavelmente tem direito. Anônimo, gratuito, sem armazenar dado nenhum." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="Direito Vivo" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Direito Vivo — triagem anônima de direitos" />
+    <meta name="twitter:description" content="Anônimo, gratuito e sem cadastro. Descubra em poucas mensagens quais direitos você provavelmente tem." />
+
+    <!-- Favicon SVG (escudo com check) e PWA manifest -->
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231351b4'%3E%3Cpath d='M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 2.18l6 2.25v4.66c0 4.14-2.61 8.01-6 9.07-3.39-1.06-6-4.93-6-9.07V6.43l6-2.25z'/%3E%3Cpath d='M10.5 14.5l-3-3 1.41-1.41 1.59 1.59 4.09-4.09 1.41 1.41-5.5 5.5z' fill='%2310b981'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23075e54'%3E%3Cpath d='M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3zm0 2.18l6 2.25v4.66c0 4.14-2.61 8.01-6 9.07-3.39-1.06-6-4.93-6-9.07V6.43l6-2.25z'/%3E%3Cpath d='M10.5 14.5l-3-3 1.41-1.41 1.59 1.59 4.09-4.09 1.41 1.41-5.5 5.5z' fill='%2325d366'/%3E%3C/svg%3E"
     />
-    <!-- Google Fonts: Inter & Roboto (Padrão DSGOV) -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' rx='24' fill='%23075e54'/%3E%3Cpath d='M64 22L32 32v32.6c0 26.9 18.2 52.1 42.6 58.3C99.1 116.7 117.5 91.5 117.5 64.6V32L82 22z' fill='%23fff' opacity='.15' transform='translate(-9 0)'/%3E%3Cpath d='M64 22L32 32v32.6c0 26.9 18.2 52.1 42.6 58.3C99.1 116.7 117.5 91.5 117.5 64.6V32L64 22zm0 11.6l32 12v24.9c0 22.1-13.9 42.8-32 48.4-18.1-5.6-32-26.3-32-48.4V45.6z' fill='%2325d366'/%3E%3C/svg%3E" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Google Fonts: Inter & Roboto -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Roboto:wght@300;400;500;700;900&display=swap"
       rel="stylesheet"
     />
-    <title>Direito Vivo — Portal Oficial de Direitos e Cidadania</title>
+    <title>Direito Vivo — triagem anônima de direitos</title>
   </head>
-  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-blue-600 selection:text-white">
+  <body class="bg-slate-50 text-slate-900 antialiased selection:bg-emerald-600 selection:text-white">
     <div id="raiz"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
