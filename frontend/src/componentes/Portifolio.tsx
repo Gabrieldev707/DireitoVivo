@@ -127,7 +127,10 @@ export function Portifolio({ aoSelecionarDireitoParaChat }: PropriedadesPortifol
         item.criterios_elegibilidade.toLowerCase().includes(termo) ||
         item.motivo.toLowerCase().includes(termo) ||
         item.fonte_legal.toLowerCase().includes(termo) ||
-        item.documentos_necessarios.some((doc) => doc.toLowerCase().includes(termo))
+        item.documentos_necessarios.some((doc) => doc.toLowerCase().includes(termo)) ||
+        // Termos que a pessoa realmente digita ("encostado", "auxílio doença"),
+        // que muitas vezes não aparecem no nome oficial do benefício.
+        item.termos_populares.some((t) => t.toLowerCase().includes(termo))
       );
     });
   }, [termoBusca, categoriaSelecionada]);

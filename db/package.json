@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "seed": "tsx scripts/carregar-seed.ts",
-    "embeddings": "tsx scripts/gerar-embeddings.ts"
+    "embeddings": "tsx scripts/gerar-embeddings.ts",
+    "catalogo": "tsx scripts/gerar-catalogo-frontend.ts"
   },
   "dependencies": {
     "@direito-vivo/rag": "*",

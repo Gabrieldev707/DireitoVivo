@@ -1,527 +1,1127 @@
-import type { ItemLinhaDaVida } from '../tipos';
+import type { ItemCatalogo } from '../tipos';
 
-// Base de dados local oficial para o Portfólio de Direitos e Cenários de Vida do Direito Vivo.
-// Estruturada de acordo com o Design System do Governo Federal (DSGOV) e legislação vigente.
-export const CATALOGO_DIREITOS: ItemLinhaDaVida[] = [
-  // --- FAMÍLIA / CRIANÇA ---
+// ⚠️ ARQUIVO GERADO — não edite à mão.
+// Fonte de verdade: db/seed/itens.json. Regenere com `npm run db:catalogo`.
+// Gerado a partir de 30 itens da base de conhecimento.
+export const CATALOGO_DIREITOS: ItemCatalogo[] = [
   {
-    id: 'bolsa_familia',
-    nome_popular: 'Programa Bolsa Família',
-    categoria_vida: 'familia_crianca',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Famílias com renda mensal por pessoa de até R$ 218,00 ou inscritas em programas de proteção social, devidamente cadastradas no Cadastro Único (CadÚnico) com dados atualizados nos últimos 2 anos.',
-    documentos_necessarios: [
-      'CPF ou Título de Eleitor do Responsável Familiar',
-      'Documento de identificação (RG ou Certidão de Nascimento) de todos os moradores da casa',
-      'Comprovante de residência atualizado (ou declaração de residência)',
-      'Comprovante de matrícula escolar das crianças e adolescentes',
-      'Caderneta de vacinação atualizada'
+    "id": "bolsa-familia",
+    "nome_popular": "Bolsa Família",
+    "categoria_vida": "familia_crianca",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Para famílias com renda de até R$ 218 por pessoa ao mês (valor de referência — confirme no CRAS). É preciso estar inscrito no CadÚnico. Famílias com crianças, gestantes e adolescentes recebem valores extras.",
+    "documentos_necessarios": [
+      "Documento de identificação de cada pessoa da família (certidão de nascimento, RG ou CPF)",
+      "Comprovante de endereço (se tiver)",
+      "Comprovante de renda (se tiver)"
     ],
-    canal_solicitacao: {
-      tipo: 'presencial',
-      detalhe: 'CRAS (Centro de Referência de Assistência Social) mais próximo do seu domicílio ou posto de atendimento do Cadastro Único no município.'
+    "canal_solicitacao": {
+      "tipo": "app_cadunico",
+      "detalhe": "CRAS mais próximo (cadastro) + aplicativo CadÚnico (acompanhamento)"
     },
-    passo_a_passo: [
-      'Reúna os documentos de todas as pessoas que moram na mesma casa.',
-      'Compareça ao CRAS da sua cidade ou faça o agendamento prévio (se disponível no seu município).',
-      'Realize ou atualize a entrevista do Cadastro Único com o assistente social.',
-      'Aguarde a análise e validação pelo Sistema de Benefícios do Governo Federal.',
-      'Acompanhe a aprovação pelo aplicativo oficial Bolsa Família, Caixa Tem ou pelo telefone 111.'
+    "passo_a_passo": [
+      "Vá ao CRAS mais próximo da sua casa e peça para entrar no CadÚnico (ou atualizar, se já tiver).",
+      "Leve os documentos de todo mundo que mora com você.",
+      "Depois do cadastro, a seleção é automática — não precisa de um pedido separado.",
+      "Acompanhe pelo aplicativo CadÚnico ou pelo aplicativo Bolsa Família.",
+      "Se aprovado, o pagamento cai no Caixa Tem no mês seguinte à seleção."
     ],
-    fonte_legal: 'Lei nº 14.601/2023 (Programa Bolsa Família)',
-    prioridade_base: 1,
-    ultima_revisao: '2026-06-01',
-    abrangencia: 'federal',
-    posicao: 1,
-    motivo: 'Garantia de renda básica essencial para subsistência alimentar e proteção da infância.'
+    "fonte_legal": "Lei 14.601/2023",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "bolsa",
+      "auxílio do governo",
+      "benefício do governo",
+      "cadastro único",
+      "cadunico",
+      "renda baixa",
+      "sem renda",
+      "mãe solo",
+      "criança pequena"
+    ],
+    "posicao": 1,
+    "motivo": "Para famílias com renda de até R$ 218 por pessoa ao mês (valor de referência — confirme no CRAS). É preciso estar inscrito no CadÚnico. Famílias com crianças, gestantes e adolescentes recebem valores extras."
   },
   {
-    id: 'tarifa_social_energia',
-    nome_popular: 'Tarifa Social de Energia Elétrica (Desconto de até 65%)',
-    categoria_vida: 'familia_crianca',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Famílias inscritas no CadÚnico com renda familiar mensal por pessoa menor ou igual a meio salário mínimo, ou quem receba o BPC (Benefício de Prestação Continuada).',
-    documentos_necessarios: [
-      'Número de Identificação Social (NIS) ou CPF do beneficiário do BPC',
-      'Conta de luz recente da residência (código da unidade consumidora)',
-      'Documento de identidade com foto (RG ou CNH)'
+    "id": "bolsa-familia-prioridade-violencia",
+    "nome_popular": "Bolsa Família com prioridade para mulher em situação de violência",
+    "categoria_vida": "violencia_domestica",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Mulher que saiu de casa (ou precisa sair) por violência doméstica pode fazer o próprio CadÚnico, separado do agressor, e receber o Bolsa Família como responsável pela família — mesmo que o cadastro antigo estivesse no nome dele ou em outra cidade. Com medida protetiva, os dados dela no cadastro podem ser protegidos para o agressor não localizar.",
+    "documentos_necessarios": [
+      "Documento de identificação (se os documentos ficaram para trás, veja o item 'Documentação civil gratuita')",
+      "Documentos dos filhos que estão com você (se houver)",
+      "Medida protetiva ou boletim de ocorrência (ajudam, mas a falta deles não impede o cadastro)"
     ],
-    canal_solicitacao: {
-      tipo: 'online_telefone',
-      detalhe: 'Atendimento telefônico, WhatsApp ou site oficial da distribuidora de energia elétrica da sua região (ex: Enel, Light, Cemig, CPFL).'
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "CRAS mais próximo de onde você está agora — explique a situação de violência ao atendente"
     },
-    passo_a_passo: [
-      'Verifique se o seu NIS no Cadastro Único está atualizado.',
-      'Entre em contato com os canais de atendimento da distribuidora de luz do seu estado.',
-      'Informe o número do NIS ou CPF e o código da unidade consumidora que consta na conta.',
-      'A distribuidora cruzará os dados automaticamente com o Governo Federal e aplicará o desconto na próxima fatura.'
+    "passo_a_passo": [
+      "Vá ao CRAS mais próximo de onde você está morando agora (pode ser casa de parente, abrigo ou outra cidade).",
+      "Diga que está em situação de violência doméstica e quer cadastro próprio, separado do antigo.",
+      "Peça também a proteção/sigilo dos seus dados no CadÚnico, principalmente se tiver medida protetiva.",
+      "Com o cadastro feito, a seleção para o Bolsa Família é automática — mulheres responsáveis pela família são titulares preferenciais.",
+      "O CRAS também pode te encaminhar para a rede de apoio (psicólogo, abrigo, CREAS)."
     ],
-    fonte_legal: 'Lei nº 12.212/2010 e Lei nº 14.203/2021 (Concessão Automática)',
-    prioridade_base: 2,
-    ultima_revisao: '2026-05-15',
-    abrangencia: 'federal',
-    posicao: 2,
-    motivo: 'Alívio imediato no orçamento familiar com redução do custo de serviço público essencial.'
+    "fonte_legal": "Lei 14.601/2023; normas do CadÚnico para situação de violência doméstica",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "saí de casa",
+      "fugi de casa",
+      "cadastro no nome do marido",
+      "benefício no nome dele",
+      "recomeçar",
+      "violência",
+      "agressor"
+    ],
+    "posicao": 2,
+    "motivo": "Mulher que saiu de casa (ou precisa sair) por violência doméstica pode fazer o próprio CadÚnico, separado do agressor, e receber o Bolsa Família como responsável pela família — mesmo que o cadastro antigo estivesse no nome dele ou em outra cidade. Com medida protetiva, os dados dela no cadastro podem ser protegidos para o agressor não localizar."
   },
   {
-    id: 'salario_maternidade',
-    nome_popular: 'Salário-Maternidade (INSS / Urbano e Rural)',
-    categoria_vida: 'familia_crianca',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Seguradas do INSS por motivo de nascimento de filho, aborto não criminoso, adoção ou guarda judicial. Para quem está desempregada, é necessário estar no período de graça (qualidade de segurada). Para trabalhadoras rurais, bastam 10 meses de atividade rural comprovada.',
-    documentos_necessarios: [
-      'Certidão de Nascimento da criança (ou atestado médico/guia de adoção)',
-      'Documento de identidade original com foto e CPF',
-      'Carteira de Trabalho ou carnês de contribuição ao INSS',
-      'Para rurais: autodeclaração de segurado especial ou notas fiscais de produção'
+    "id": "bpc-loas-idoso",
+    "nome_popular": "BPC/LOAS para idosos",
+    "categoria_vida": "idoso",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Um salário mínimo por mês para quem tem 65 anos ou mais e renda familiar de menos de 1/4 de salário mínimo por pessoa. Não precisa ter contribuído para o INSS. Precisa estar no CadÚnico.",
+    "documentos_necessarios": [
+      "Documento de identificação com foto",
+      "CPF",
+      "Comprovante de inscrição no CadÚnico (feito no CRAS)",
+      "Comprovantes de renda da família (se houver)"
     ],
-    canal_solicitacao: {
-      tipo: 'online',
-      detalhe: 'Aplicativo Meu INSS (gov.br), site meu.inss.gov.br ou Central Telefônica 135.'
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Aplicativo ou site Meu INSS"
     },
-    passo_a_passo: [
-      'Acesse o aplicativo ou site Meu INSS usando seu login Gov.br.',
-      'Clique em "Novo Pedido" e busque por "Salário-Maternidade Urbano" ou "Rural".',
-      'Preencha os dados solicitados e anexe a foto ou PDF da Certidão de Nascimento.',
-      'Anote o número de protocolo e acompanhe o andamento pela aba "Consultar Pedidos".'
+    "passo_a_passo": [
+      "Primeiro, garanta que você (ou o idoso) está no CadÚnico — isso se faz no CRAS.",
+      "Abra o aplicativo Meu INSS (ou o site meu.inss.gov.br) e entre com a conta gov.br.",
+      "Toque em 'Novo Pedido' e busque por 'BPC' ou 'Benefício Assistencial ao Idoso'.",
+      "Preencha as informações e envie.",
+      "Acompanhe o andamento pelo próprio aplicativo. Se negarem, você pode recorrer."
     ],
-    fonte_legal: 'Art. 71 da Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)',
-    prioridade_base: 1,
-    ultima_revisao: '2026-04-10',
-    abrangencia: 'federal',
-    posicao: 3,
-    motivo: 'Proteção à maternidade e garantia de sustento nos primeiros meses após o parto ou adoção.'
-  },
-
-  // --- IDOSO ---
-  {
-    id: 'bpc_idoso',
-    nome_popular: 'BPC / LOAS para Idosos (1 Salário Mínimo Mensal)',
-    categoria_vida: 'idoso',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Pessoas com 65 anos ou mais, que comprovem não possuir meios de prover a própria manutenção nem de tê-la provida por sua família (renda familiar mensal per capita igual ou inferior a 1/4 do salário mínimo). Não exige contribuição prévia ao INSS.',
-    documentos_necessarios: [
-      'Inscrição ativa e atualizada no Cadastro Único (CadÚnico) da família',
-      'CPF e RG do requerente e de todos os membros que moram na residência',
-      'Comprovante de residência ou declaração firmada'
+    "fonte_legal": "Lei 8.742/1993 (LOAS), art. 20",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "loas",
+      "aposentadoria sem contribuir",
+      "benefício do idoso",
+      "salário do idoso",
+      "nunca trabalhei de carteira assinada",
+      "vovô",
+      "vovó",
+      "65 anos"
     ],
-    canal_solicitacao: {
-      tipo: 'online_telefone',
-      detalhe: 'Aplicativo Meu INSS (com login Gov.br), site meu.inss.gov.br ou Central Telefônica 135.'
-    },
-    passo_a_passo: [
-      'Certifique-se de que o CadÚnico está atualizado no CRAS antes de dar entrada no INSS.',
-      'Acesse o portal ou aplicativo Meu INSS com sua conta Gov.br (prata ou ouro).',
-      'Selecione "Novo Pedido" e digite "Benefício Assistencial à Pessoa Idosa".',
-      'Confirme seus dados cadastrais, responda ao questionário socioeconômico e envie o pedido.',
-      'Em caso de dúvidas, ligue gratuitamente para o 135 de segunda a sábado.'
-    ],
-    fonte_legal: 'Art. 20 da Lei nº 8.742/1993 (LOAS - Lei Orgânica da Assistência Social)',
-    prioridade_base: 1,
-    ultima_revisao: '2026-06-10',
-    abrangencia: 'federal',
-    posicao: 1,
-    motivo: 'Benefício assistencial vitalício para dignidade e proteção social da pessoa idosa vulnerável.'
+    "posicao": 3,
+    "motivo": "Um salário mínimo por mês para quem tem 65 anos ou mais e renda familiar de menos de 1/4 de salário mínimo por pessoa. Não precisa ter contribuído para o INSS. Precisa estar no CadÚnico."
   },
   {
-    id: 'passe_livre_idoso',
-    nome_popular: 'Carteira da Pessoa Idosa (Viagens Interestaduais Gratuitas)',
-    categoria_vida: 'idoso',
-    natureza: 'servico',
-    criterios_elegibilidade: 'Pessoas com 60 anos ou mais, inscritas no Cadastro Único com renda individual ou familiar de até dois salários mínimos, que não possuam comprovante de renda convencional.',
-    documentos_necessarios: [
-      'Número de Identificação Social (NIS) atualizado',
-      'Documento oficial de identificação com foto (RG ou CNH)',
-      'CPF'
+    "id": "bpc-loas-pcd",
+    "nome_popular": "BPC/LOAS para pessoa com deficiência",
+    "categoria_vida": "pcd",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Um salário mínimo por mês para pessoa com deficiência de longo prazo (física, mental, intelectual ou sensorial), de QUALQUER idade — não é só para idosos. A renda da família deve ser menor que 1/4 de salário mínimo por pessoa. Não precisa ter contribuído para o INSS. Passa por avaliação médica e social do INSS.",
+    "documentos_necessarios": [
+      "Documento de identificação com foto e CPF",
+      "Comprovante de inscrição no CadÚnico",
+      "Laudos e exames médicos que mostrem a deficiência (quanto mais detalhados, melhor)"
     ],
-    canal_solicitacao: {
-      tipo: 'online_presencial',
-      detalhe: 'Emissão online imediata pelo portal carteiraidoso.cidadania.gov.br ou presencialmente no CRAS do município.'
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Aplicativo ou site Meu INSS"
     },
-    passo_a_passo: [
-      'Acesse o site oficial da Carteira da Pessoa Idosa (carteiraidoso.cidadania.gov.br).',
-      'Clique em "Emitir Carteira" e faça o login com sua conta Gov.br.',
-      'O sistema gerará a carteirinha digital ou em PDF pronta para impressão.',
-      'Apresente a carteira junto com documento oficial nos guichês das empresas de ônibus para garantir passagens gratuitas ou com 50% de desconto.'
+    "passo_a_passo": [
+      "Faça ou atualize o CadÚnico no CRAS.",
+      "Junte todos os laudos médicos que você tiver (com CID e assinatura do médico).",
+      "No aplicativo Meu INSS, toque em 'Novo Pedido' e busque 'BPC' ou 'Benefício Assistencial à Pessoa com Deficiência'.",
+      "O INSS vai marcar uma avaliação médica e uma avaliação social — compareça às duas.",
+      "Acompanhe pelo aplicativo. Se negarem, você pode recorrer em até 30 dias."
     ],
-    fonte_legal: 'Estatuto da Pessoa Idosa (Lei nº 10.741/2003, Art. 40) e Decreto nº 9.921/2019',
-    prioridade_base: 2,
-    ultima_revisao: '2026-03-20',
-    abrangencia: 'federal',
-    posicao: 2,
-    motivo: 'Garantia legal do direito de ir e vir, convívio familiar e mobilidade interestadual.'
-  },
-
-  // --- PCD (PESSOA COM DEFICIÊNCIA) ---
-  {
-    id: 'bpc_pcd',
-    nome_popular: 'BPC / LOAS para Pessoa com Deficiência',
-    categoria_vida: 'pcd',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Pessoas de qualquer idade com impedimento de longo prazo (mínimo de 2 anos) de natureza física, mental, intelectual ou sensorial, com renda familiar por pessoa igual ou inferior a 1/4 do salário mínimo.',
-    documentos_necessarios: [
-      'Cadastro Único (CadÚnico) atualizado',
-      'Laudos médicos, exames, receitas e relatórios clínicos que comprovem a deficiência e limitações',
-      'Documento de identidade com foto e CPF de toda a família'
+    "fonte_legal": "Lei 8.742/1993 (LOAS), art. 20",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "loas deficiente",
+      "benefício para deficiente",
+      "criança autista",
+      "autismo",
+      "deficiência",
+      "não consigo trabalhar",
+      "filho especial",
+      "salário para pcd"
     ],
-    canal_solicitacao: {
-      tipo: 'online',
-      detalhe: 'Aplicativo Meu INSS ou Central 135. Requer agendamento de perícia médica e avaliação social no INSS.'
-    },
-    passo_a_passo: [
-      'Atualize o CadÚnico no CRAS da sua cidade.',
-      'Reúna todos os laudos e relatórios médicos atualizados que descrevam o impedimento e histórico do tratamento.',
-      'Acesse o Meu INSS, clique em "Novo Pedido" e selecione "Benefício Assistencial à Pessoa com Deficiência".',
-      'Agende a Perícia Médica e a Avaliação Social em uma agência do INSS.',
-      'Compareça nas datas agendadas portando todos os documentos originais e laudos.'
-    ],
-    fonte_legal: 'Art. 20 da Lei nº 8.742/1993 e Estatuto da Pessoa com Deficiência (Lei nº 13.146/2015)',
-    prioridade_base: 1,
-    ultima_revisao: '2026-06-15',
-    abrangencia: 'federal',
-    posicao: 1,
-    motivo: 'Suporte financeiro vital para custear terapias, cuidados e inclusão social.'
+    "posicao": 4,
+    "motivo": "Um salário mínimo por mês para pessoa com deficiência de longo prazo (física, mental, intelectual ou sensorial), de QUALQUER idade — não é só para idosos. A renda da família deve ser menor que 1/4 de salário mínimo por pessoa. Não precisa ter contribuído para o INSS. Passa por avaliação médica e social do INSS."
   },
   {
-    id: 'isencao_impostos_pcd',
-    nome_popular: 'Isenção de IPI, ICMS e IPVA para Aquisição de Veículos',
-    categoria_vida: 'pcd',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Pessoas com deficiência física, visual, mental severa ou profunda, ou autistas (diretamente ou por intermédio de seu representante legal) para compra de veículo automotor novo.',
-    documentos_necessarios: [
-      'Laudo de Avaliação emitido por prestador de serviço público de saúde (SUS) ou credenciado',
-      'CNH especial (caso o próprio PCD seja o condutor) ou indicação de até 3 condutores autorizados',
-      'Comprovante de disponibilidade financeira ou patrimonial',
-      'RG, CPF e comprovante de residência'
+    "id": "cadunico-sem-endereco",
+    "nome_popular": "CadÚnico para quem não tem endereço fixo",
+    "categoria_vida": "situacao_rua",
+    "natureza": "servico",
+    "criterios_elegibilidade": "Pessoa em situação de rua PODE se cadastrar no CadÚnico mesmo sem endereço — usando um endereço de referência, como o CRAS, o Centro POP ou uma instituição de acolhida. O CadÚnico é a porta de entrada para Bolsa Família, tarifa social, BPC e outros direitos.",
+    "documentos_necessarios": [
+      "Qualquer documento que tiver (certidão, RG, CPF ou título)",
+      "Se não tiver nenhum documento, o próprio CRAS/Centro POP orienta a tirar a 2ª via gratuita primeiro"
     ],
-    canal_solicitacao: {
-      tipo: 'online',
-      detalhe: 'Sistema Sisen da Receita Federal (para IPI) e Secretaria da Fazenda Estadual / SEFAZ (para ICMS e IPVA).'
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "Centro POP ou CRAS mais próximo"
     },
-    passo_a_passo: [
-      'Obtenha o laudo médico oficial no modelo exigido pela Receita Federal e SEFAZ.',
-      'Acesse o sistema Sisen no portal da Receita Federal com login Gov.br e solicite a isenção do IPI.',
-      'Com a autorização do IPI em mãos, solicite a isenção de ICMS no portal da SEFAZ do seu estado.',
-      'Após a compra do veículo, solicite a isenção do IPVA junto ao Detran ou SEFAZ estadual.'
+    "passo_a_passo": [
+      "Procure o Centro POP (serviço para população em situação de rua) ou o CRAS mais próximo.",
+      "Diga que quer se inscrever no CadÚnico usando endereço de referência — o atendente é obrigado a saber como fazer.",
+      "Sem documentos? Peça primeiro ajuda para tirar a 2ª via gratuita (o próprio serviço encaminha).",
+      "Com o cadastro feito, pergunte quais benefícios você já pode receber (Bolsa Família, BPC se for o caso).",
+      "O Centro POP também oferece banho, guarda de pertences, correspondência e encaminhamentos — tudo gratuito."
     ],
-    fonte_legal: 'Lei nº 8.989/1995, Lei nº 14.287/2021 e Convênio ICMS 38/2012',
-    prioridade_base: 3,
-    ultima_revisao: '2026-02-10',
-    abrangencia: 'estadual_variavel',
-    posicao: 2,
-    motivo: 'Acessibilidade e autonomia no transporte diário, consultas e locomoção.'
-  },
-
-  // --- SAÚDE MENTAL ---
-  {
-    id: 'atendimento_caps',
-    nome_popular: 'Atendimento Psicológico e Psiquiátrico Gratuito (CAPS / SUS)',
-    categoria_vida: 'saude_mental',
-    natureza: 'servico',
-    criterios_elegibilidade: 'Qualquer cidadão em sofrimento psíquico ou transtorno mental, incluindo quadros relacionados ao uso de álcool e outras drogas. O atendimento é porta aberta (não exige encaminhamento prévio).',
-    documentos_necessarios: [
-      'Documento de identidade com foto (RG ou CNH)',
-      'Cartão Nacional de Saúde (Cartão do SUS)',
-      'Comprovante de residência (opcional, não impede o primeiro acolhimento)'
+    "fonte_legal": "Decreto 11.016/2022; Decreto 7.053/2009 (Política Nacional para População em Situação de Rua)",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "morando na rua",
+      "sem endereço",
+      "sem casa",
+      "albergue",
+      "centro pop",
+      "situação de rua",
+      "não tenho comprovante de residência"
     ],
-    canal_solicitacao: {
-      tipo: 'presencial',
-      detalhe: 'Comparecimento direto à unidade do CAPS (Centro de Atenção Psicossocial) ou Unidade Básica de Saúde (UBS) do seu bairro.'
-    },
-    passo_a_passo: [
-      'Localize o CAPS mais próximo no site da prefeitura ou perguntando no posto de saúde (UBS) do bairro.',
-      'Dirija-se ao local em horário comercial de segunda a sexta (ou 24h nos CAPS III).',
-      'Solicite o "Acolhimento Inicial" na recepção.',
-      'Um psicólogo, enfermeiro ou assistente social fará a escuta qualificada e iniciará o Projeto Terapêutico Singular.'
-    ],
-    fonte_legal: 'Lei da Reforma Psiquiátrica (Lei nº 10.216/2001) e Portaria GM/MS nº 3.088/2011',
-    prioridade_base: 1,
-    ultima_revisao: '2026-05-01',
-    abrangencia: 'federal',
-    posicao: 1,
-    motivo: 'Garantia de cuidado humanizado em liberdade, fornecimento de medicação e suporte psicossocial.'
+    "posicao": 5,
+    "motivo": "Pessoa em situação de rua PODE se cadastrar no CadÚnico mesmo sem endereço — usando um endereço de referência, como o CRAS, o Centro POP ou uma instituição de acolhida. O CadÚnico é a porta de entrada para Bolsa Família, tarifa social, BPC e outros direitos."
   },
   {
-    id: 'auxilio_doenca_saude_mental',
-    nome_popular: 'Auxílio-Doença por Transtorno Mental (Benefício por Incapacidade)',
-    categoria_vida: 'saude_mental',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Trabalhadores segurados do INSS incapacitados temporariamente para o trabalho por mais de 15 dias consecutivos devido a quadros como depressão severa, ansiedade generalizada, burnout ou síndrome do pânico. Exige carência mínima de 12 contribuições (salvo acidente de trabalho).',
-    documentos_necessarios: [
-      'Atestado médico detalhado com CID (Código Internacional de Doenças), carimbo e assinatura do médico',
-      'Relatórios clínicos, histórico de receitas de medicamentos e laudos psicológicos/psiquiátricos',
-      'Carteira de Trabalho, carnês ou comprovante de segurado',
-      'RG e CPF'
+    "id": "caps",
+    "nome_popular": "CAPS — Centro de Atenção Psicossocial",
+    "categoria_vida": "saude_mental",
+    "natureza": "servico",
+    "criterios_elegibilidade": "Atendimento GRATUITO do SUS para quem está em sofrimento mental (depressão grave, crises, pensamentos de morte, esquizofrenia) ou com problemas com álcool e outras drogas (CAPS AD). Há CAPS infantojuvenil (CAPSi) para crianças e adolescentes. Não precisa de encaminhamento: pode chegar direto, e não paga nada.",
+    "documentos_necessarios": [
+      "Se tiver, leve documento de identificação e cartão do SUS — mas o atendimento não pode ser negado por falta de documento"
     ],
-    canal_solicitacao: {
-      tipo: 'online',
-      detalhe: 'Aplicativo Meu INSS (com opção de análise documental Atestmed sem perícia presencial em muitos casos).'
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "CAPS mais próximo (a UBS/posto de saúde informa o endereço); em crise grave, ligue 188 (CVV) ou vá ao pronto-socorro"
     },
-    passo_a_passo: [
-      'Peça ao seu médico psiquiatra um laudo detalhado constando o tempo estimado de repouso necessário.',
-      'Acesse o aplicativo Meu INSS e clique em "Pedir Benefício por Incapacidade (Auxílio-Doença)".',
-      'Escolha a opção de "Análise Documental (Atestmed)" para envio digital do atestado e laudos sem filas.',
-      'Anexe fotos nítidas do documento médico e de identificação.',
-      'Acompanhe o resultado pelo aplicativo em até 30 dias.'
+    "passo_a_passo": [
+      "Descubra o CAPS mais perto: pergunte no posto de saúde ou busque 'CAPS + nome da sua cidade'.",
+      "Vá até lá — pode ir sem agendamento e sem encaminhamento. Chegando, diga que quer acolhimento.",
+      "Você vai conversar com a equipe (psicólogo, assistente social ou enfermeiro) e sair com um plano de cuidado.",
+      "O CAPS também fornece remédio psiquiátrico gratuito e laudos que servem para pedir benefícios do INSS.",
+      "Se a angústia for insuportável agora: ligue 188 (CVV, 24 horas, gratuito) ou procure a emergência mais próxima."
     ],
-    fonte_legal: 'Art. 59 da Lei nº 8.213/1991 e Portaria Conjunta MPS/INSS nº 38/2023',
-    prioridade_base: 2,
-    ultima_revisao: '2026-06-05',
-    abrangencia: 'federal',
-    posicao: 2,
-    motivo: 'Segurança financeira durante o período de tratamento e recuperação da saúde mental.'
-  },
-
-  // --- TRABALHO / ACIDENTE ---
-  {
-    id: 'seguro_desemprego',
-    nome_popular: 'Seguro-Desemprego (Até 5 Parcelas)',
-    categoria_vida: 'trabalho_acidente',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Trabalhador formal demitido sem justa causa que comprove vínculo empregatício por pelo menos 12 meses nos últimos 18 meses (na 1ª solicitação), 9 meses (na 2ª) ou 6 meses (nas demais). Não estar recebendo benefício de prestação continuada da Previdência Social (exceto pensão por morte ou auxílio-acidente).',
-    documentos_necessarios: [
-      'Requerimento do Seguro-Desemprego (emitido e entregue pela empresa empregadora na demissão)',
-      'Carteira de Trabalho (Digital ou Física) e Termo de Rescisão de Contrato de Trabalho (TRCT)',
-      'RG, CPF e número do PIS/PASEP'
+    "fonte_legal": "Lei 10.216/2001; Portaria GM/MS 3.088/2011 (RAPS)",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "depressão",
+      "ansiedade",
+      "crise",
+      "pensamento ruim",
+      "vontade de sumir",
+      "psicólogo de graça",
+      "psiquiatra de graça",
+      "álcool",
+      "droga",
+      "vício",
+      "surto"
     ],
-    canal_solicitacao: {
-      tipo: 'online',
-      detalhe: 'Aplicativo Carteira de Trabalho Digital (gov.br) ou Portal Emprega Brasil.'
-    },
-    passo_a_passo: [
-      'Baixe no celular o aplicativo oficial "Carteira de Trabalho Digital" e entre com sua conta Gov.br.',
-      'No menu inferior, toque em "Benefícios" e depois em "Seguro-Desemprego".',
-      'Digite o número do Requerimento de Seguro-Desemprego (10 ou 11 dígitos) fornecido pela empresa.',
-      'Confira os dados da rescisão, confirme a solicitação e indique uma conta bancária de sua titularidade.',
-      'A primeira parcela será depositada em cerca de 30 dias após o requerimento.'
-    ],
-    fonte_legal: 'Lei nº 7.998/1990 e Art. 7º, inciso II da Constituição Federal',
-    prioridade_base: 1,
-    ultima_revisao: '2026-05-20',
-    abrangencia: 'federal',
-    posicao: 1,
-    motivo: 'Amparo financeiro imediato após demissão involuntária para busca de recolocação profissional.'
+    "posicao": 6,
+    "motivo": "Atendimento GRATUITO do SUS para quem está em sofrimento mental (depressão grave, crises, pensamentos de morte, esquizofrenia) ou com problemas com álcool e outras drogas (CAPS AD). Há CAPS infantojuvenil (CAPSi) para crianças e adolescentes. Não precisa de encaminhamento: pode chegar direto, e não paga nada."
   },
   {
-    id: 'auxilio_acidente',
-    nome_popular: 'Auxílio-Acidente (Indenização Mensal do INSS)',
-    categoria_vida: 'trabalho_acidente',
-    natureza: 'beneficio',
-    criterios_elegibilidade: 'Trabalhadores empregados, avulsos e segurados especiais que sofreram acidente (de trabalho ou de qualquer natureza) do qual resultaram sequelas definitivas que reduzam a capacidade para o trabalho que exerciam habitualmente. Pode ser acumulado com o salário caso volte a trabalhar!',
-    documentos_necessarios: [
-      'Comunicação de Acidente de Trabalho (CAT) registrada pela empresa (se acidente laboral)',
-      'Laudos de alta médica do auxílio-doença anterior constando a consolidação das sequelas',
-      'Exames de imagem, receitas e relatórios médicos de reabilitação',
-      'RG, CPF e Carteira de Trabalho'
+    "id": "casa-da-mulher-brasileira",
+    "nome_popular": "Casa da Mulher Brasileira e rede de acolhimento",
+    "categoria_vida": "violencia_domestica",
+    "natureza": "servico",
+    "criterios_elegibilidade": "Atendimento GRATUITO e integrado para mulheres em situação de violência: delegacia, apoio psicológico e social, orientação jurídica, encaminhamento para abrigo e até ajuda para autonomia financeira — tudo no mesmo lugar. Onde não há Casa da Mulher Brasileira, existem CRAM (Centro de Referência da Mulher) e CREAS fazendo papel parecido.",
+    "documentos_necessarios": [
+      "Nenhum documento é obrigatório para ser acolhida"
     ],
-    canal_solicitacao: {
-      tipo: 'online',
-      detalhe: 'Meu INSS ou Central 135. É concedido automaticamente após a alta do auxílio-doença acidentário em muitos casos.'
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "Casa da Mulher Brasileira da sua cidade; Ligue 180 para descobrir a unidade ou serviço equivalente mais próximo"
     },
-    passo_a_passo: [
-      'Verifique se, ao receber alta do Auxílio-Doença, você permaneceu com sequela motora, visual ou funcional definitiva.',
-      'Caso o INSS não tenha implantado automaticamente, acesse o Meu INSS.',
-      'Solicite agendamento de "Perícia Médica para Auxílio-Acidente" ou recurso administrativo.',
-      'Apresente os laudos que comprovam a redução da capacidade laboral em comparação ao que você fazia antes do acidente.'
+    "passo_a_passo": [
+      "Ligue 180 (gratuito, 24h) e pergunte qual é o serviço de atendimento à mulher mais próximo de você.",
+      "Vá até lá — pode ir sem agendamento. Se precisar, leve as crianças.",
+      "Você será acolhida por uma equipe (assistente social, psicóloga) e poderá registrar ocorrência e pedir medida protetiva ali mesmo, onde houver delegacia integrada.",
+      "Se não for seguro voltar para casa, peça encaminhamento para casa-abrigo — o endereço é sigiloso.",
+      "O serviço também orienta sobre benefícios (Bolsa Família, documentos) para recomeçar."
     ],
-    fonte_legal: 'Art. 86 da Lei nº 8.213/1991',
-    prioridade_base: 2,
-    ultima_revisao: '2026-04-15',
-    abrangencia: 'federal',
-    posicao: 2,
-    motivo: 'Indenização mensal de 50% do salário de benefício até a aposentadoria, sem impedir o trabalho.'
-  },
-
-  // --- SITUAÇÃO DE RUA / EXTREMA POBREZA ---
-  {
-    id: 'cadunico_sem_residencia',
-    nome_popular: 'Inscrição no Cadastro Único para Pessoa em Situação de Rua',
-    categoria_vida: 'situacao_rua',
-    natureza: 'servico',
-    criterios_elegibilidade: 'Pessoas ou famílias que utilizam os espaços públicos e áreas degradadas como moradia e sustento, de forma temporária ou permanente. NÃO é obrigatório ter comprovante de residência ou documentos de todos os tipos para realizar o cadastro inicial.',
-    documentos_necessarios: [
-      'Qualquer documento de identificação com foto (se possuir: RG, CPF, Título de Eleitor, Certidão ou Carteira de Trabalho)',
-      'Nota: Caso não possua nenhum documento, o assistente social do Centro Pop ou CRAS emitirá encaminhamento para certidão gratuita.'
+    "fonte_legal": "Lei 11.340/2006; Programa Mulher Viver sem Violência (Decreto 11.640/2023)",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "abrigo para mulher",
+      "para onde ir",
+      "sair de casa com os filhos",
+      "apoio para mulher agredida",
+      "casa abrigo",
+      "delegacia da mulher"
     ],
-    canal_solicitacao: {
-      tipo: 'presencial',
-      detalhe: 'Centro Pop (Centro de Referência Especializado para População em Situação de Rua), CRAS ou equipes de Abordagem Social.'
-    },
-    passo_a_passo: [
-      'Procure a unidade do Centro Pop ou o CRAS mais próximo no município.',
-      'Informe que está em situação de rua ou acolhimento e deseja realizar o Cadastro Único.',
-      'O endereço cadastrado poderá ser o próprio Centro Pop, abrigo ou localidade de referência territorial.',
-      'Com o NIS gerado, você poderá acessar o Bolsa Família, restaurantes populares e isenção de taxas públicas.'
-    ],
-    fonte_legal: 'Decreto nº 7.053/2009 (Política Nacional para a População em Situação de Rua) e Decreto nº 11.016/2022',
-    prioridade_base: 1,
-    ultima_revisao: '2026-06-01',
-    abrangencia: 'federal',
-    posicao: 1,
-    motivo: 'Portaria de entrada fundamental para cidadania, alimentação, documentação e programas de transferência de renda.'
+    "posicao": 7,
+    "motivo": "Atendimento GRATUITO e integrado para mulheres em situação de violência: delegacia, apoio psicológico e social, orientação jurídica, encaminhamento para abrigo e até ajuda para autonomia financeira — tudo no mesmo lugar. Onde não há Casa da Mulher Brasileira, existem CRAM (Centro de Referência da Mulher) e CREAS fazendo papel parecido."
   },
   {
-    id: 'isencao_documentos_rua',
-    nome_popular: 'Emissão Gratuita de Documentos Civil (RG, Certidão e CPF)',
-    categoria_vida: 'situacao_rua',
-    natureza: 'servico',
-    criterios_elegibilidade: 'Cidadãos em situação de rua, vulnerabilidade socioeconômica ou extrema pobreza que necessitem de 2ª via da Certidão de Nascimento/Casamento ou emissão de RG para acesso a direitos sociais.',
-    documentos_necessarios: [
-      'Declaração de hipossuficiência (pobreza) emitida pela Defensoria Pública, CRAS ou Centro Pop',
-      'Qualquer documento ou boletim de ocorrência em caso de perda/roubo (se houver)'
+    "id": "cat-comunicacao-acidente",
+    "nome_popular": "CAT — registro do acidente de trabalho",
+    "categoria_vida": "trabalho_acidente",
+    "natureza": "servico",
+    "criterios_elegibilidade": "Todo acidente de trabalho (inclusive no trajeto casa-trabalho) e toda doença causada pelo trabalho devem ser registrados na CAT. A empresa é OBRIGADA a emitir até o 1º dia útil após o acidente — mas se ela se recusar, você mesmo, o sindicato ou o médico podem emitir. Sem CAT, você pode perder a estabilidade e outros direitos.",
+    "documentos_necessarios": [
+      "Dados do acidente (data, hora, local, o que aconteceu)",
+      "Atestado ou relatório médico do atendimento",
+      "CPF e dados da empresa (CNPJ, se souber)"
     ],
-    canal_solicitacao: {
-      tipo: 'presencial',
-      detalhe: 'Defensoria Pública do Estado, Cartórios de Registro Civil (com requisição social) ou mutirões "PopRuaJud" do Judiciário.'
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Meu INSS / site gov.br (busque 'registrar CAT') — o próprio trabalhador pode emitir"
     },
-    passo_a_passo: [
-      'Solicite ao assistente social do Centro Pop/CRAS uma declaração de encaminhamento para gratuidade documental.',
-      'Dirija-se ao cartório de registro civil ou posto de identificação do Estado portando a requisição.',
-      'A emissão da 1ª e 2ª via de certidões e identidade será feita sem cobrança de taxas ou emolumentos.'
+    "passo_a_passo": [
+      "Logo após o acidente, peça à empresa a emissão da CAT — e uma cópia para você.",
+      "Se a empresa se recusar ou enrolar: entre no gov.br, busque 'Registrar Comunicação de Acidente de Trabalho' e emita você mesmo.",
+      "Preencha com o máximo de detalhes e anexe o atestado do atendimento médico.",
+      "Guarde o número da CAT — ele é a prova que garante estabilidade e auxílios acidentários.",
+      "Acidente de trajeto (indo ou voltando do trabalho) também conta: registre do mesmo jeito."
     ],
-    fonte_legal: 'Lei nº 13.845/2019, Provimento nº 140/2023 do CNJ e Art. 5º, LXXVI da Constituição Federal',
-    prioridade_base: 2,
-    ultima_revisao: '2026-03-10',
-    abrangencia: 'federal',
-    posicao: 2,
-    motivo: 'Resgate da dignidade civil; sem documento oficial não é possível sacar benefícios nem obter emprego.'
-  },
-
-  // --- VIOLÊNCIA DOMÉSTICA ---
-  {
-    id: 'medida_protetiva_urgencia',
-    nome_popular: 'Medida Protetiva de Urgência (Lei Maria da Penha)',
-    categoria_vida: 'violencia_domestica',
-    natureza: 'servico',
-    criterios_elegibilidade: 'Qualquer mulher em situação de violência doméstica e familiar (física, psicológica, moral, sexual ou patrimonial) cometida por cônjuge, companheiro, parente ou pessoa com quem coabite ou tenha convivido.',
-    documentos_necessarios: [
-      'Documento de identidade com foto (RG ou CNH)',
-      'Comprovante de residência',
-      'Provas da violência (mensagens de áudio/texto, fotos de lesões, laudos médicos ou testemunhas - se houver)'
+    "fonte_legal": "Lei 8.213/1991, art. 22",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "sofri acidente no trabalho",
+      "empresa não registrou acidente",
+      "acidente de trajeto",
+      "machuquei no serviço",
+      "firma não quer emitir cat"
     ],
-    canal_solicitacao: {
-      tipo: 'presencial_online',
-      detalhe: 'Delegacia Especializada de Atendimento à Mulher (DEAM), qualquer Delegacia de Polícia civil, ou online pelas Delegacias Virtuais do Estado. Em emergência, ligue 190 (PM) ou 180 (Central de Atendimento à Mulher).'
-    },
-    passo_a_passo: [
-      'Em caso de agressão iminente ou perigo atual, ligue imediatamente para o 190 (Polícia Militar).',
-      'Para solicitar proteção legal, compareça a uma Delegacia (preferencialmente DEAM) ou acesse a Delegacia Virtual da Mulher do seu estado.',
-      'Registre o Boletim de Ocorrência e solicite expressamente as "Medidas Protetivas de Urgência".',
-      'O delegado remeterá o pedido ao Juiz em até 48 horas, que decidirá sobre o afastamento do agressor do lar e proibição de contato.'
-    ],
-    fonte_legal: 'Lei nº 11.340/2006 (Lei Maria da Penha - Arts. 18 ao 24)',
-    prioridade_base: 1,
-    ultima_revisao: '2026-06-20',
-    abrangencia: 'federal',
-    posicao: 1,
-    motivo: 'Proteção imediata da integridade física e psicológica da vítima, com força policial e judicial.'
+    "posicao": 8,
+    "motivo": "Todo acidente de trabalho (inclusive no trajeto casa-trabalho) e toda doença causada pelo trabalho devem ser registrados na CAT. A empresa é OBRIGADA a emitir até o 1º dia útil após o acidente — mas se ela se recusar, você mesmo, o sindicato ou o médico podem emitir. Sem CAT, você pode perder a estabilidade e outros direitos."
   },
   {
-    id: 'afastamento_trabalho_violencia',
-    nome_popular: 'Afastamento do Trabalho com Manutenção do Vínculo (Até 6 Meses)',
-    categoria_vida: 'violencia_domestica',
-    natureza: 'servico',
-    criterios_elegibilidade: 'Mulheres com contrato de trabalho formal (CLT) ou servidoras públicas que precisem se afastar do local de trabalho para preservar sua integridade física ou psicológica em decorrência de violência doméstica.',
-    documentos_necessarios: [
-      'Decisão judicial que concede a Medida Protetiva e determina ou autoriza o afastamento laboral',
-      'Boletim de Ocorrência policial',
-      'Carteira de Trabalho e documento de identidade'
+    "id": "documentacao-civil-gratuita",
+    "nome_popular": "Documentos de graça (2ª via de certidão, RG/CIN)",
+    "categoria_vida": "situacao_rua",
+    "natureza": "servico",
+    "criterios_elegibilidade": "Quem não pode pagar tem direito à 2ª via GRATUITA da certidão de nascimento ou casamento — basta declarar que é pobre, direto no cartório (não precisa provar). A 1ª via da nova carteira de identidade (CIN) é gratuita para todos; a 2ª via gratuita para quem é de baixa renda varia por estado. Sem documento não se acessa quase nenhum benefício — este costuma ser o primeiro passo.",
+    "documentos_necessarios": [
+      "Para a certidão: informações de nascimento (nome, nome da mãe, cidade, data aproximada)",
+      "Para o RG/CIN: certidão de nascimento ou casamento"
     ],
-    canal_solicitacao: {
-      tipo: 'judicial_presencial',
-      detalhe: 'Pedido formulado diretamente ao Juiz da Vara de Violência Doméstica ou através do Defensor Público/Advogado no momento da solicitação da medida protetiva.'
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "Cartório de registro civil (certidão); posto de identificação do estado (RG/CIN); Defensoria Pública e mutirões ajudam em casos difíceis"
     },
-    passo_a_passo: [
-      'Ao solicitar a Medida Protetiva ao Juiz ou na delegacia, informe sua situação profissional e a necessidade de afastamento para segurança.',
-      'O Juiz emitirá ordem judicial determinando a manutenção do vínculo trabalhista por até 6 meses.',
-      'Apresente (ou peça para um advogado/representante apresentar) a ordem judicial ao setor de Recursos Humanos da sua empresa.',
-      'A empresa não poderá demitir sem justa causa durante o período de proteção.'
+    "passo_a_passo": [
+      "Comece pela certidão de nascimento: vá a qualquer cartório de registro civil e peça a 2ª via, declarando que não pode pagar (é um direito — Lei 9.534/97).",
+      "Se você não sabe em que cartório foi registrado, o atendente pode buscar no sistema nacional (CRC).",
+      "Com a certidão em mãos, agende o RG/CIN no posto de identificação do seu estado (a 1ª via da CIN é gratuita).",
+      "O CPF pode ser emitido de graça em agência dos Correios, Banco do Brasil ou Caixa, ou online no site da Receita.",
+      "Se o cartório cobrar ou dificultar, procure a Defensoria Pública — mutirões de documentação também acontecem em CRAS e Centros POP."
     ],
-    fonte_legal: 'Art. 9º, § 2º, inciso II da Lei nº 11.340/2006 (Lei Maria da Penha) e jurisprudência do STJ',
-    prioridade_base: 2,
-    ultima_revisao: '2026-04-01',
-    abrangencia: 'federal',
-    posicao: 2,
-    motivo: 'Garantia de segurança pessoal sem perder o emprego e a independência financeira para recomeçar.'
-  },
-
-  // --- DÍVIDA / CRÉDITO ---
-  {
-    id: 'lei_superendividamento',
-    nome_popular: 'Proteção legal da Lei do Superendividamento (Renegociação em Bloco)',
-    categoria_vida: 'divida_credito',
-    natureza: 'servico',
-    criterios_elegibilidade: 'Consumidor pessoa física, de boa-fé, que está impossibilitado de pagar a totalidade de suas dívidas de consumo (empréstimos bancários, cartões de crédito, crediários, financeiras) sem comprometer o seu "mínimo existencial" (despesas básicas com alimentação, luz, água e moradia).',
-    documentos_necessarios: [
-      'RG, CPF e comprovantes de renda atualizados (holerites, extratos ou declaração de IR)',
-      'Comprovantes de todas as despesas mensais básicas (aluguel, água, luz, gás, remédios, supermercado)',
-      'Contratos, faturas, extratos e relatórios de dívidas do Registrado do Banco Central (SCR) ou Serasa/SPC'
+    "fonte_legal": "Lei 9.534/1997; Lei 6.015/1973, art. 30; Decreto 10.977/2022 (CIN)",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "perdi meus documentos",
+      "sem documento",
+      "tirar rg de graça",
+      "certidão de nascimento",
+      "roubaram meus documentos",
+      "segunda via"
     ],
-    canal_solicitacao: {
-      tipo: 'presencial_online',
-      detalhe: 'Núcleo de Defesa do Consumidor da Defensoria Pública do seu Estado (NUDECON), Procon Estadual/Municipal ou Juizado Especial Cível.'
-    },
-    passo_a_passo: [
-      'Faça uma lista completa de todas as suas rendas e de todos os gastos essenciais para sobrevivência da família.',
-      'Reúna os extratos de todas as dívidas e empréstimos em aberto.',
-      'Agende atendimento no Procon da sua cidade ou no Núcleo de Superendividamento da Defensoria Pública.',
-      'O órgão convocará todos os seus credores para uma audiência única de conciliação para propor um Plano de Pagamento em até 5 anos (60 meses), garantindo a preservação do seu mínimo existencial.'
-    ],
-    fonte_legal: 'Lei nº 14.181/2021 (Atualiza o Código de Defesa do Consumidor - Arts. 54-A a 54-G e 104-A)',
-    prioridade_base: 1,
-    ultima_revisao: '2026-06-10',
-    abrangencia: 'federal',
-    posicao: 1,
-    motivo: 'Evita a falência civil da família, reduz juros abusivos e unifica o pagamento respeitando a dignidade.'
+    "posicao": 9,
+    "motivo": "Quem não pode pagar tem direito à 2ª via GRATUITA da certidão de nascimento ou casamento — basta declarar que é pobre, direto no cartório (não precisa provar). A 1ª via da nova carteira de identidade (CIN) é gratuita para todos; a 2ª via gratuita para quem é de baixa renda varia por estado. Sem documento não se acessa quase nenhum benefício — este costuma ser o primeiro passo."
   },
   {
-    id: 'revisao_juros_defensoria',
-    nome_popular: 'Assistência Jurídica Gratuita para Defesa contra Juros Abusivos e Fraudes',
-    categoria_vida: 'divida_credito',
-    natureza: 'servico',
-    criterios_elegibilidade: 'Cidadãos com renda familiar individual ou conjunta de até 3 salários mínimos (ou em situação de vulnerabilidade que impeça pagar advogado sem prejuízo do sustento), que sofreram golpes bancários, empréstimos consignados não autorizados ou cobranças abusivas.',
-    documentos_necessarios: [
-      'Documento de identidade (RG/CNH) e CPF',
-      'Comprovante de residência e comprovantes de renda (ou carteira de trabalho)',
-      'Extratos bancários que mostrem os descontos indevidos, contratos de empréstimo e números de protocolo de reclamação no banco'
+    "id": "farmacia-popular",
+    "nome_popular": "Farmácia Popular",
+    "categoria_vida": "familia_crianca",
+    "natureza": "servico",
+    "criterios_elegibilidade": "Remédios de graça (ou com grande desconto) para qualquer pessoa com receita médica válida. Cobre remédios de pressão alta, diabetes, asma, colesterol, osteoporose, anticoncepcionais, fraldas geriátricas e outros. Não precisa de cadastro prévio.",
+    "documentos_necessarios": [
+      "Receita médica válida (vale receita do SUS ou de médico particular, emitida há menos de 180 dias)",
+      "Documento oficial com CPF"
     ],
-    canal_solicitacao: {
-      tipo: 'presencial_online',
-      detalhe: 'Defensoria Pública do seu Estado (agendamento pelo site oficial ou telefone da Defensoria, ex: 129 em SP, 129 no RJ).'
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "Qualquer farmácia com o selo 'Aqui Tem Farmácia Popular'"
     },
-    passo_a_passo: [
-      'Ao identificar desconto desconhecido ou juros absurdos em sua aposentadoria ou conta, contate o banco e anote o protocolo.',
-      'Acesse o site da Defensoria Pública do seu Estado e agende triagem em "Direito do Consumidor / Cível".',
-      'Compareça ao atendimento portando os extratos e comprovantes de renda.',
-      'O Defensor Público ajuizará ação gratuita pedindo liminar para suspensão imediata dos descontos e devolução em dobro do valor cobrado indevidamente.'
+    "passo_a_passo": [
+      "Pegue a receita com o médico (do posto de saúde ou particular).",
+      "Procure uma farmácia com o adesivo 'Aqui Tem Farmácia Popular' — a maioria das grandes redes participa.",
+      "Apresente a receita e um documento com CPF no balcão.",
+      "Se o remédio estiver na lista do programa, sai de graça ou com desconto na hora."
     ],
-    fonte_legal: 'Art. 5º, LXXIV da Constituição Federal, Lei Complementar nº 80/1994 e Art. 42 do CDC',
-    prioridade_base: 2,
-    ultima_revisao: '2026-05-10',
-    abrangencia: 'estadual_variavel',
-    posicao: 2,
-    motivo: 'Acesso universal à Justiça gratuita para conter abusos financeiros do mercado de crédito.'
+    "fonte_legal": "Lei 10.858/2004 e Decreto 5.090/2004",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "remédio de graça",
+      "remédio caro",
+      "não consigo comprar remédio",
+      "pressão alta",
+      "diabetes",
+      "insulina",
+      "asma",
+      "bombinha",
+      "fralda geriátrica"
+    ],
+    "posicao": 10,
+    "motivo": "Remédios de graça (ou com grande desconto) para qualquer pessoa com receita médica válida. Cobre remédios de pressão alta, diabetes, asma, colesterol, osteoporose, anticoncepcionais, fraldas geriátricas e outros. Não precisa de cadastro prévio."
+  },
+  {
+    "id": "medida-protetiva",
+    "nome_popular": "Medida protetiva (Lei Maria da Penha)",
+    "categoria_vida": "violencia_domestica",
+    "natureza": "servico",
+    "criterios_elegibilidade": "Proteção urgente e GRATUITA para mulher em situação de violência doméstica (física, psicológica, sexual, patrimonial ou moral). O juiz pode obrigar o agressor a sair de casa e a manter distância. Decisão sai em até 48 horas. Não precisa de advogado nem de marca visível de agressão — violência psicológica também conta.",
+    "documentos_necessarios": [
+      "Documento de identificação (se tiver — a falta de documento não impede o pedido)",
+      "Se tiver: prints de ameaças, fotos, nomes de testemunhas (ajudam, mas não são obrigatórios)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "telefone",
+      "detalhe": "Emergência: 190. Orientação: Ligue 180 (24h, gratuito). Pedido: Delegacia da Mulher ou qualquer delegacia (muitos estados têm delegacia virtual online)"
+    },
+    "passo_a_passo": [
+      "Se você está em perigo AGORA: ligue 190 ou peça para alguém ligar.",
+      "Para se orientar com segurança (inclusive por chat): Ligue 180 — funciona 24 horas e não aparece na conta telefônica.",
+      "Vá à Delegacia da Mulher (ou qualquer delegacia) e diga que quer registrar a ocorrência e pedir medida protetiva. Muitos estados aceitam o pedido online, pela delegacia virtual.",
+      "Descreva as ameaças e agressões — inclusive as psicológicas. Leve prints se tiver.",
+      "O pedido vai ao juiz, que decide em até 48 horas. Guarde o número do processo e, se a medida for descumprida, ligue 190 na hora: descumprimento é crime e dá prisão."
+    ],
+    "fonte_legal": "Lei 11.340/2006 (Lei Maria da Penha), arts. 18 a 24-A",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "ele me ameaça",
+      "apanho em casa",
+      "marido agressivo",
+      "ex não me deixa em paz",
+      "medo do meu marido",
+      "medida contra agressor",
+      "maria da penha"
+    ],
+    "posicao": 11,
+    "motivo": "Proteção urgente e GRATUITA para mulher em situação de violência doméstica (física, psicológica, sexual, patrimonial ou moral). O juiz pode obrigar o agressor a sair de casa e a manter distância. Decisão sai em até 48 horas. Não precisa de advogado nem de marca visível de agressão — violência psicológica também conta."
+  },
+  {
+    "id": "seguro-desemprego",
+    "nome_popular": "Seguro-Desemprego",
+    "categoria_vida": "trabalho_acidente",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Para quem trabalhava de carteira assinada e foi demitido sem justa causa. No primeiro pedido, é preciso ter trabalhado pelo menos 12 meses nos últimos 18. Paga de 3 a 5 parcelas, conforme o tempo trabalhado.",
+    "documentos_necessarios": [
+      "Termo de rescisão do contrato",
+      "Documento de identificação e CPF",
+      "Carteira de trabalho (física ou digital)",
+      "Requerimento do seguro-desemprego (entregue pela empresa na demissão)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "site_especifico",
+      "detalhe": "Aplicativo Carteira de Trabalho Digital ou portal gov.br"
+    },
+    "passo_a_passo": [
+      "Baixe o aplicativo 'Carteira de Trabalho Digital' e entre com a conta gov.br.",
+      "Toque em 'Benefícios' e depois em 'Seguro-Desemprego'.",
+      "Confira os dados da demissão e envie o pedido.",
+      "Atenção ao prazo: do 7º ao 120º dia depois da demissão.",
+      "As parcelas caem na conta indicada ou no Caixa Tem."
+    ],
+    "fonte_legal": "Lei 7.998/1990",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "fui demitido",
+      "mandado embora",
+      "perdi o emprego",
+      "desempregado",
+      "rescisão",
+      "carteira assinada"
+    ],
+    "posicao": 12,
+    "motivo": "Para quem trabalhava de carteira assinada e foi demitido sem justa causa. No primeiro pedido, é preciso ter trabalhado pelo menos 12 meses nos últimos 18. Paga de 3 a 5 parcelas, conforme o tempo trabalhado."
+  },
+  {
+    "id": "tarifa-social-energia",
+    "nome_popular": "Tarifa Social de Energia (e de Água)",
+    "categoria_vida": "situacao_rua",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Desconto (ou até gratuidade em faixas de baixo consumo) na conta de luz para famílias no CadÚnico com renda de até meio salário mínimo por pessoa, e para quem recebe BPC. O desconto costuma ser aplicado automaticamente para quem está no CadÚnico. Para água e esgoto, muitas cidades têm tarifa social parecida — procure a companhia de água local.",
+    "documentos_necessarios": [
+      "Inscrição no CadÚnico atualizada (feita no CRAS)",
+      "Conta de luz (código da unidade consumidora)",
+      "Documento de identificação e CPF do titular"
+    ],
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "CRAS (CadÚnico em dia); se o desconto não aparecer na conta, procure a distribuidora de energia"
+    },
+    "passo_a_passo": [
+      "Mantenha o CadÚnico atualizado no CRAS — o desconto na luz costuma ser automático para quem se enquadra.",
+      "Confira na conta de luz se aparece 'Tarifa Social' ou benefício aplicado.",
+      "Se não aparecer, ligue ou vá até a distribuidora de energia da sua região com CPF e o número da conta.",
+      "Para a conta de água, procure a companhia de saneamento da sua cidade e pergunte pela tarifa social — a regra varia por município."
+    ],
+    "fonte_legal": "Lei 12.212/2010 (energia); água conforme norma municipal/estadual",
+    "prioridade_base": 1,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "conta de luz cara",
+      "desconto na luz",
+      "não consigo pagar a luz",
+      "conta de água",
+      "luz cortada",
+      "energia"
+    ],
+    "posicao": 13,
+    "motivo": "Desconto (ou até gratuidade em faixas de baixo consumo) na conta de luz para famílias no CadÚnico com renda de até meio salário mínimo por pessoa, e para quem recebe BPC. O desconto costuma ser aplicado automaticamente para quem está no CadÚnico. Para água e esgoto, muitas cidades têm tarifa social parecida — procure a companhia de água local."
+  },
+  {
+    "id": "prioridade-fila-inss-cadunico",
+    "nome_popular": "Atendimento prioritário (INSS, CRAS e filas em geral)",
+    "categoria_vida": "pcd",
+    "natureza": "servico",
+    "criterios_elegibilidade": "Pessoas com deficiência, idosos (60+), gestantes, lactantes, pessoas com criança de colo e autistas têm direito a atendimento prioritário em órgãos públicos, bancos e empresas — incluindo INSS e CRAS. Idosos e PCD também têm direito a tramitação mais rápida de processos administrativos e judiciais. Não precisa requerer: é só se identificar.",
+    "documentos_necessarios": [
+      "Documento que comprove a condição (identidade para idade; laudo ou carteira de identificação para deficiência/autismo)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "No ato do atendimento — em qualquer órgão público, banco ou empresa"
+    },
+    "passo_a_passo": [
+      "Ao chegar em qualquer atendimento (INSS, CRAS, banco, hospital), informe que você tem direito a prioridade e mostre o documento.",
+      "Em processos do INSS, pessoas com 60+ ou com deficiência podem pedir tramitação prioritária — peça ao atendente que registre.",
+      "Para autistas, a carteira CIPTEA (emitida pelo estado/município) facilita a identificação.",
+      "Se a prioridade for negada, peça o registro da reclamação e procure a ouvidoria do órgão."
+    ],
+    "fonte_legal": "Lei 10.048/2000; Lei 13.146/2015, art. 9º; Lei 12.764/2012 (autismo)",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "fila preferencial",
+      "prioridade",
+      "atendimento preferencial",
+      "fila do inss demora",
+      "processo demorado inss"
+    ],
+    "posicao": 14,
+    "motivo": "Pessoas com deficiência, idosos (60+), gestantes, lactantes, pessoas com criança de colo e autistas têm direito a atendimento prioritário em órgãos públicos, bancos e empresas — incluindo INSS e CRAS. Idosos e PCD também têm direito a tramitação mais rápida de processos administrativos e judiciais. Não precisa requerer: é só se identificar."
+  },
+  {
+    "id": "auxilio-acidente",
+    "nome_popular": "Auxílio-Acidente (indenização por sequela)",
+    "categoria_vida": "trabalho_acidente",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Se um acidente (de trabalho ou não) deixou sequela PERMANENTE que reduz sua capacidade de trabalhar — perda de movimento, amputação, perda de audição/visão parcial — você pode receber uma indenização mensal de 50% do salário de benefício. E pode CONTINUAR TRABALHANDO enquanto recebe: pouca gente sabe disso.",
+    "documentos_necessarios": [
+      "Laudos e exames que comprovem a sequela permanente",
+      "Documentos do acidente (CAT, boletim de ocorrência, prontuários)",
+      "Documento de identificação e CPF"
+    ],
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Aplicativo ou site Meu INSS (em geral é concedido na perícia; se não, peça expressamente)"
+    },
+    "passo_a_passo": [
+      "Junte laudos que descrevam a sequela e a limitação que ficou (ex: 'perda parcial de movimento na mão direita').",
+      "Muitas vezes o auxílio-acidente é devido quando o auxílio-doença termina com sequela — o perito deveria indicar isso.",
+      "Se não foi concedido automaticamente: no Meu INSS, toque em 'Novo Pedido' e busque 'Auxílio-Acidente'.",
+      "Anexe os laudos e o histórico do acidente.",
+      "Se negarem, vale recorrer ou procurar a Defensoria — esse benefício é negado com frequência e revertido na justiça."
+    ],
+    "fonte_legal": "Lei 8.213/1991, art. 86",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "sequela",
+      "perdi o movimento",
+      "amputação",
+      "acidente de moto",
+      "não fiquei bom",
+      "indenização inss",
+      "voltei a trabalhar com sequela"
+    ],
+    "posicao": 15,
+    "motivo": "Se um acidente (de trabalho ou não) deixou sequela PERMANENTE que reduz sua capacidade de trabalhar — perda de movimento, amputação, perda de audição/visão parcial — você pode receber uma indenização mensal de 50% do salário de benefício. E pode CONTINUAR TRABALHANDO enquanto recebe: pouca gente sabe disso."
+  },
+  {
+    "id": "auxilio-incapacidade-temporaria",
+    "nome_popular": "Auxílio-Doença (Auxílio por Incapacidade Temporária)",
+    "categoria_vida": "trabalho_acidente",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Para quem contribui (ou contribuiu há pouco tempo) para o INSS e está sem condições de trabalhar por mais de 15 dias por doença ou acidente. Em geral, pede 12 meses de contribuição — mas acidentes e algumas doenças graves não exigem esse tempo mínimo.",
+    "documentos_necessarios": [
+      "Documento de identificação e CPF",
+      "Atestado ou laudo médico legível, com CID, data, assinatura e tempo de afastamento sugerido",
+      "Exames e receitas que comprovem o problema de saúde"
+    ],
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Aplicativo ou site Meu INSS"
+    },
+    "passo_a_passo": [
+      "Peça ao médico um atestado ou laudo detalhado (com CID e tempo de afastamento).",
+      "Abra o aplicativo Meu INSS e toque em 'Novo Pedido'.",
+      "Busque por 'Benefício por Incapacidade' e escolha a análise por documentos (Atestmed), se disponível.",
+      "Anexe fotos legíveis do laudo e dos exames.",
+      "Se for marcada perícia presencial, compareça na data. Acompanhe tudo pelo aplicativo."
+    ],
+    "fonte_legal": "Lei 8.213/1991, art. 59",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "encostado",
+      "encostar no inss",
+      "afastado do trabalho",
+      "atestado",
+      "perícia",
+      "doente sem poder trabalhar",
+      "cirurgia"
+    ],
+    "posicao": 16,
+    "motivo": "Para quem contribui (ou contribuiu há pouco tempo) para o INSS e está sem condições de trabalhar por mais de 15 dias por doença ou acidente. Em geral, pede 12 meses de contribuição — mas acidentes e algumas doenças graves não exigem esse tempo mínimo."
+  },
+  {
+    "id": "auxilio-doenca-transtorno-mental",
+    "nome_popular": "Auxílio-Doença por transtorno mental",
+    "categoria_vida": "saude_mental",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Depressão grave, transtorno de ansiedade incapacitante, transtorno bipolar, esquizofrenia e outros transtornos mentais DÃO direito a auxílio-doença, sim — desde que impeçam de trabalhar por mais de 15 dias e você tenha qualidade de segurado do INSS. O que mais reprova é laudo fraco: ele precisa ser detalhado.",
+    "documentos_necessarios": [
+      "Laudo psiquiátrico detalhado: CID, sintomas, medicações, tempo de tratamento e tempo de afastamento sugerido",
+      "Receitas e relatórios de acompanhamento (CAPS, psicólogo, psiquiatra)",
+      "Documento de identificação e CPF"
+    ],
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Aplicativo ou site Meu INSS"
+    },
+    "passo_a_passo": [
+      "Peça ao psiquiatra (do CAPS, do SUS ou particular) um laudo completo — com CID, medicação e prazo de afastamento.",
+      "Abra o Meu INSS, toque em 'Novo Pedido' e busque 'Benefício por Incapacidade'.",
+      "Anexe o laudo e os relatórios de tratamento.",
+      "Se houver perícia presencial, leve todos os papéis originais e conte ao perito como a doença afeta seu dia a dia de trabalho.",
+      "Se negarem, você pode recorrer em 30 dias — o CAPS e a Defensoria Pública podem ajudar."
+    ],
+    "fonte_legal": "Lei 8.213/1991, art. 59",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "depressão atestado",
+      "encostar por depressão",
+      "burnout",
+      "esgotamento",
+      "síndrome do pânico",
+      "não aguento mais trabalhar",
+      "afastamento saúde mental"
+    ],
+    "posicao": 17,
+    "motivo": "Depressão grave, transtorno de ansiedade incapacitante, transtorno bipolar, esquizofrenia e outros transtornos mentais DÃO direito a auxílio-doença, sim — desde que impeçam de trabalhar por mais de 15 dias e você tenha qualidade de segurado do INSS. O que mais reprova é laudo fraco: ele precisa ser detalhado."
+  },
+  {
+    "id": "estabilidade-acidente-trabalho",
+    "nome_popular": "Estabilidade de 12 meses após acidente de trabalho",
+    "categoria_vida": "trabalho_acidente",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Quem sofre acidente de trabalho (ou doença ocupacional), fica afastado mais de 15 dias e recebe auxílio-doença acidentário (código B91) tem estabilidade de 12 MESES ao voltar: a empresa não pode demitir sem justa causa nesse período. Para isso, é essencial que o acidente tenha sido registrado com a CAT.",
+    "documentos_necessarios": [
+      "CAT (Comunicação de Acidente de Trabalho) registrada",
+      "Comprovante do benefício acidentário (B91)",
+      "Atestados e laudos do acidente"
+    ],
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "A estabilidade é automática por lei; se a empresa descumprir, procure o sindicato, a Defensoria Pública ou a Justiça do Trabalho"
+    },
+    "passo_a_passo": [
+      "Garanta que a CAT foi emitida no acidente (a empresa é obrigada; se ela não fizer, você mesmo pode emitir).",
+      "Confirme no Meu INSS que o benefício recebido foi o acidentário (B91), não o comum (B31).",
+      "Ao voltar ao trabalho, você tem 12 meses de estabilidade a partir da alta.",
+      "Se for demitido nesse período, guarde os documentos e procure o sindicato ou a Defensoria — você pode ter direito à reintegração ou indenização."
+    ],
+    "fonte_legal": "Lei 8.213/1991, art. 118",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "me acidentei no trabalho",
+      "demitido depois do acidente",
+      "voltei do inss e fui demitido",
+      "acidente na firma",
+      "doença do trabalho"
+    ],
+    "posicao": 18,
+    "motivo": "Quem sofre acidente de trabalho (ou doença ocupacional), fica afastado mais de 15 dias e recebe auxílio-doença acidentário (código B91) tem estabilidade de 12 MESES ao voltar: a empresa não pode demitir sem justa causa nesse período. Para isso, é essencial que o acidente tenha sido registrado com a CAT."
+  },
+  {
+    "id": "novo-desenrola-brasil",
+    "nome_popular": "Novo Desenrola Brasil (renegociação de dívidas)",
+    "categoria_vida": "divida_credito",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Programa federal para renegociar dívidas atrasadas com grandes descontos e limpar o nome. Criado por Medida Provisória em 2026 como sucessor do Desenrola Brasil. Voltado principalmente a pessoas negativadas de baixa renda ou inscritas no CadÚnico. As condições exatas (faixas, prazos e descontos) devem ser confirmadas no site oficial, pois o programa é recente.",
+    "documentos_necessarios": [
+      "CPF e conta gov.br",
+      "Informações das dívidas (não precisa levar papel — o sistema mostra as dívidas elegíveis)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "site_especifico",
+      "detalhe": "Simulador oficial no site do Ministério da Fazenda / plataforma do programa"
+    },
+    "passo_a_passo": [
+      "Acesse o site oficial do programa (busque 'Novo Desenrola' no gov.br — desconfie de sites parecidos e de links por WhatsApp).",
+      "Entre com a conta gov.br (nível prata ou ouro).",
+      "Veja as dívidas elegíveis e simule o desconto.",
+      "Escolha pagar à vista (desconto maior) ou parcelado.",
+      "Guarde os comprovantes — o nome deve ser limpo depois da confirmação do acordo."
+    ],
+    "fonte_legal": "Medida Provisória de 2026 (sucessora do Desenrola Brasil — confirme a norma vigente no site do Ministério da Fazenda)",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "nome sujo",
+      "limpar o nome",
+      "dívida atrasada",
+      "serasa",
+      "spc",
+      "negativado",
+      "renegociar dívida",
+      "desenrola"
+    ],
+    "posicao": 19,
+    "motivo": "Programa federal para renegociar dívidas atrasadas com grandes descontos e limpar o nome. Criado por Medida Provisória em 2026 como sucessor do Desenrola Brasil. Voltado principalmente a pessoas negativadas de baixa renda ou inscritas no CadÚnico. As condições exatas (faixas, prazos e descontos) devem ser confirmadas no site oficial, pois o programa é recente."
+  },
+  {
+    "id": "pe-de-meia",
+    "nome_popular": "Pé-de-Meia",
+    "categoria_vida": "familia_crianca",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Poupança para estudantes do ensino médio público. Paga incentivos por matrícula, frequência e conclusão de cada ano, mais um valor extra por fazer o Enem. Para estudantes de famílias inscritas no CadÚnico.",
+    "documentos_necessarios": [
+      "CPF do estudante",
+      "Matrícula ativa no ensino médio público",
+      "Família inscrita no CadÚnico"
+    ],
+    "canal_solicitacao": {
+      "tipo": "app_pe_de_meia",
+      "detalhe": "Adesão automática; acompanhe pelo aplicativo Jornada do Estudante e movimente pelo Caixa Tem"
+    },
+    "passo_a_passo": [
+      "Confirme que a família está com o CadÚnico atualizado (isso se resolve no CRAS).",
+      "Garanta a matrícula e a frequência na escola — o dinheiro depende disso.",
+      "A inscrição no programa é automática, feita pela própria escola/MEC.",
+      "Baixe o aplicativo 'Jornada do Estudante' para acompanhar os depósitos.",
+      "O dinheiro fica numa conta da Caixa no nome do estudante — parte pode sacar na hora, parte só ao concluir o ensino médio."
+    ],
+    "fonte_legal": "Lei 14.818/2024",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "poupança do ensino médio",
+      "dinheiro pra estudar",
+      "bolsa estudante",
+      "filho na escola",
+      "ensino médio",
+      "enem"
+    ],
+    "posicao": 20,
+    "motivo": "Poupança para estudantes do ensino médio público. Paga incentivos por matrícula, frequência e conclusão de cada ano, mais um valor extra por fazer o Enem. Para estudantes de famílias inscritas no CadÚnico."
+  },
+  {
+    "id": "pensao-morte-rural",
+    "nome_popular": "Pensão por Morte Rural",
+    "categoria_vida": "familia_crianca",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Para a família de trabalhador rural que faleceu — MESMO que ele nunca tenha tido carteira assinada nem pago INSS. O trabalhador rural em regime familiar é 'segurado especial': basta provar que ele vivia do campo (declarações, notas de venda da produção, documentos da terra).",
+    "documentos_necessarios": [
+      "Certidão de óbito",
+      "Documento de identificação e CPF de quem pede",
+      "Provas da atividade rural do falecido (autodeclaração, declaração do sindicato rural, notas de venda de produção, contrato de terra)",
+      "Documentos de vínculo (certidão de casamento, certidão de nascimento dos filhos)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Aplicativo ou site Meu INSS"
+    },
+    "passo_a_passo": [
+      "Reúna qualquer papel que mostre que a pessoa trabalhava na roça (sindicato, notas, declarações de vizinhos ajudam).",
+      "Abra o Meu INSS e toque em 'Novo Pedido'.",
+      "Busque por 'Pensão por Morte' e escolha a opção de trabalhador rural.",
+      "Anexe a certidão de óbito e as provas da atividade rural.",
+      "Se o pedido for negado por falta de prova, o sindicato rural ou a Defensoria Pública podem ajudar a recorrer."
+    ],
+    "fonte_legal": "Lei 8.213/1991, arts. 11, 39 e 74",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "viúva da roça",
+      "marido faleceu",
+      "trabalhava na roça",
+      "agricultor",
+      "lavoura",
+      "sem carteira assinada",
+      "segurado especial",
+      "pensão"
+    ],
+    "posicao": 21,
+    "motivo": "Para a família de trabalhador rural que faleceu — MESMO que ele nunca tenha tido carteira assinada nem pago INSS. O trabalhador rural em regime familiar é 'segurado especial': basta provar que ele vivia do campo (declarações, notas de venda da produção, documentos da terra)."
+  },
+  {
+    "id": "restituicao-ir-nao-sacada",
+    "nome_popular": "Restituição de Imposto de Renda esquecida",
+    "categoria_vida": "divida_credito",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Se você já trabalhou com desconto de imposto de renda na folha e não declarou (ou declarou e não sacou a restituição), pode haver dinheiro seu parado na Receita Federal. A restituição não sacada em até 1 ano volta para a Receita, mas continua sua — basta pedir de novo. Não tem prazo para perder esse dinheiro.",
+    "documentos_necessarios": [
+      "CPF e conta gov.br",
+      "Dados bancários ou chave Pix (CPF) para receber"
+    ],
+    "canal_solicitacao": {
+      "tipo": "site_especifico",
+      "detalhe": "Portal e-CAC / Meu Imposto de Renda (Receita Federal)"
+    },
+    "passo_a_passo": [
+      "Entre no site ou aplicativo 'Meu Imposto de Renda' com a conta gov.br.",
+      "Consulte 'Restituições' e veja se há valores de anos anteriores não pagos.",
+      "Se houver restituição não resgatada, peça a reprogramação do pagamento pelo próprio sistema.",
+      "O valor cai na conta ou chave Pix (CPF) indicada.",
+      "Dica: aproveite e confira também o sistema 'Valores a Receber' do Banco Central — dinheiro esquecido em bancos."
+    ],
+    "fonte_legal": "Regras anuais do IRPF (Receita Federal); Regulamento do IR — Decreto 9.580/2018",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "dinheiro esquecido",
+      "restituição",
+      "imposto de renda",
+      "dinheiro parado na receita",
+      "malha fina",
+      "leão"
+    ],
+    "posicao": 22,
+    "motivo": "Se você já trabalhou com desconto de imposto de renda na folha e não declarou (ou declarou e não sacou a restituição), pode haver dinheiro seu parado na Receita Federal. A restituição não sacada em até 1 ano volta para a Receita, mas continua sua — basta pedir de novo. Não tem prazo para perder esse dinheiro."
+  },
+  {
+    "id": "seguro-defeso",
+    "nome_popular": "Seguro-Defeso (pescador artesanal)",
+    "categoria_vida": "trabalho_acidente",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Um salário mínimo por mês para pescadores artesanais durante o período de defeso (época em que a pesca é proibida para proteger a reprodução dos peixes). É preciso ter o Registro Geral da Pesca (RGP) ativo e viver da pesca.",
+    "documentos_necessarios": [
+      "Registro Geral da Pesca (RGP) ativo há pelo menos 1 ano",
+      "Documento de identificação e CPF",
+      "Comprovantes de venda do pescado ou declaração da colônia de pescadores (se pedido)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Aplicativo ou site Meu INSS"
+    },
+    "passo_a_passo": [
+      "Confirme que seu RGP está ativo — a colônia de pescadores pode ajudar a verificar.",
+      "Quando começar o defeso da sua região, abra o Meu INSS.",
+      "Toque em 'Novo Pedido' e busque por 'Seguro-Defeso'.",
+      "Envie o pedido e acompanhe pelo aplicativo.",
+      "O pagamento é uma parcela por mês de defeso."
+    ],
+    "fonte_legal": "Lei 10.779/2003",
+    "prioridade_base": 2,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "pescador",
+      "pesca proibida",
+      "defeso",
+      "colônia de pescadores",
+      "piracema",
+      "vivo da pesca"
+    ],
+    "posicao": 23,
+    "motivo": "Um salário mínimo por mês para pescadores artesanais durante o período de defeso (época em que a pesca é proibida para proteger a reprodução dos peixes). É preciso ter o Registro Geral da Pesca (RGP) ativo e viver da pesca."
+  },
+  {
+    "id": "adicional-insalubridade-periculosidade",
+    "nome_popular": "Adicional de insalubridade / periculosidade",
+    "categoria_vida": "trabalho_acidente",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Quem trabalha exposto a agentes nocivos (calor extremo, ruído, produtos químicos, lixo, hospital) tem direito a adicional de insalubridade de 10%, 20% ou 40% do salário mínimo. Quem trabalha em atividade perigosa (inflamáveis, eletricidade, explosivos, vigilância, moto) tem direito a 30% a mais sobre o salário. O direito depende de perícia no local de trabalho.",
+    "documentos_necessarios": [
+      "Contracheques (para ver se o adicional já é pago)",
+      "Descrição da função e do ambiente de trabalho",
+      "Se tiver: PPP, laudos internos (LTCAT) ou fotos do ambiente"
+    ],
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "Primeiro o RH/sindicato; se não resolver, denúncia ao Ministério do Trabalho (gov.br) ou ação na Justiça do Trabalho"
+    },
+    "passo_a_passo": [
+      "Confira no contracheque se já existe a linha 'insalubridade' ou 'periculosidade'.",
+      "Se não existe e você acha que deveria, pergunte ao sindicato da sua categoria — eles conhecem os laudos da função.",
+      "É possível denunciar pelo gov.br (busque 'denúncia trabalhista') sem se identificar para a empresa.",
+      "Na Justiça do Trabalho, um perito visita o local e decide; a Defensoria ou o sindicato podem mover a ação.",
+      "Atenção: os dois adicionais não se acumulam — em geral se escolhe o mais vantajoso."
+    ],
+    "fonte_legal": "CLT, arts. 189 a 197",
+    "prioridade_base": 3,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "trabalho perigoso",
+      "trabalho insalubre",
+      "produto químico",
+      "trabalho no sol",
+      "adicional",
+      "vigilante",
+      "motoboy",
+      "hospital limpeza"
+    ],
+    "posicao": 24,
+    "motivo": "Quem trabalha exposto a agentes nocivos (calor extremo, ruído, produtos químicos, lixo, hospital) tem direito a adicional de insalubridade de 10%, 20% ou 40% do salário mínimo. Quem trabalha em atividade perigosa (inflamáveis, eletricidade, explosivos, vigilância, moto) tem direito a 30% a mais sobre o salário. O direito depende de perícia no local de trabalho."
+  },
+  {
+    "id": "auxilio-reclusao",
+    "nome_popular": "Auxílio-Reclusão",
+    "categoria_vida": "familia_crianca",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Pago à família (dependentes) de quem está preso em regime fechado — não é pago ao preso. A pessoa presa precisava estar contribuindo para o INSS antes da prisão e ser considerada de baixa renda. Filhos menores de 21 anos e cônjuge contam como dependentes.",
+    "documentos_necessarios": [
+      "Documento de identificação e CPF de quem pede (dependente)",
+      "Certidão que comprove a prisão (emitida pelo presídio)",
+      "Documentos que comprovem o vínculo (certidão de nascimento dos filhos, certidão de casamento ou prova de união estável)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "app_meu_inss",
+      "detalhe": "Aplicativo ou site Meu INSS"
+    },
+    "passo_a_passo": [
+      "Peça no presídio a certidão de recolhimento à prisão.",
+      "Abra o Meu INSS com a conta gov.br do dependente (por exemplo, a esposa ou responsável pelos filhos).",
+      "Toque em 'Novo Pedido' e busque por 'Auxílio-Reclusão'.",
+      "Anexe a certidão e os documentos de vínculo familiar.",
+      "A cada 3 meses é preciso provar que a pessoa continua presa (declaração de cárcere)."
+    ],
+    "fonte_legal": "Lei 8.213/1991, art. 80",
+    "prioridade_base": 3,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "marido preso",
+      "esposa presa",
+      "pai preso",
+      "presídio",
+      "cadeia",
+      "detento",
+      "família de preso"
+    ],
+    "posicao": 25,
+    "motivo": "Pago à família (dependentes) de quem está preso em regime fechado — não é pago ao preso. A pessoa presa precisava estar contribuindo para o INSS antes da prisão e ser considerada de baixa renda. Filhos menores de 21 anos e cônjuge contam como dependentes."
+  },
+  {
+    "id": "estabilidade-licenca-psiquiatrica",
+    "nome_popular": "Estabilidade no emprego após licença psiquiátrica",
+    "categoria_vida": "saude_mental",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Se o transtorno mental foi CAUSADO ou agravado pelo trabalho (assédio, pressão extrema, burnout) e o INSS reconhecer isso (benefício acidentário, código B91), você tem 12 meses de estabilidade no emprego depois de voltar — não pode ser demitido sem justa causa nesse período.",
+    "documentos_necessarios": [
+      "Laudos médicos ligando a doença ao trabalho",
+      "Comprovante do benefício acidentário (B91) recebido",
+      "Provas da situação no trabalho, se houver (mensagens, testemunhas, escalas)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "presencial",
+      "detalhe": "Sindicato da categoria, Defensoria Pública ou advogado trabalhista — a estabilidade é automática, mas pode ser preciso defendê-la"
+    },
+    "passo_a_passo": [
+      "Ao pedir o auxílio-doença, relate ao médico e ao perito a relação da doença com o trabalho.",
+      "Verifique no Meu INSS qual código foi concedido: B91 (acidentário) garante a estabilidade; B31 (comum) não.",
+      "Se o INSS classificou como B31 e você entende que a causa foi o trabalho, dá para contestar (pedido de reconsideração ou via justiça).",
+      "Se for demitido dentro dos 12 meses de estabilidade, procure o sindicato ou a Defensoria — a demissão pode ser anulada ou indenizada."
+    ],
+    "fonte_legal": "Lei 8.213/1991, art. 118",
+    "prioridade_base": 3,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "voltar do afastamento",
+      "demitido depois do atestado",
+      "burnout demissão",
+      "assédio no trabalho",
+      "adoeci por causa do trabalho"
+    ],
+    "posicao": 26,
+    "motivo": "Se o transtorno mental foi CAUSADO ou agravado pelo trabalho (assédio, pressão extrema, burnout) e o INSS reconhecer isso (benefício acidentário, código B91), você tem 12 meses de estabilidade no emprego depois de voltar — não pode ser demitido sem justa causa nesse período."
+  },
+  {
+    "id": "passe-livre-meia-entrada-pcd",
+    "nome_popular": "Passe Livre e meia-entrada para PCD",
+    "categoria_vida": "pcd",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Pessoa com deficiência de baixa renda tem passagem GRATUITA em ônibus interestaduais (viagens entre estados) — e o acompanhante pode ter direito também. Em eventos culturais e esportivos, PCD e acompanhante pagam meia-entrada. No transporte da sua cidade e do seu estado, a gratuidade varia — procure a prefeitura ou o órgão estadual.",
+    "documentos_necessarios": [
+      "Laudo médico com CID comprovando a deficiência",
+      "Documento de identificação e CPF",
+      "Comprovante de renda ou inscrição no CadÚnico (para o Passe Livre interestadual)"
+    ],
+    "canal_solicitacao": {
+      "tipo": "site_especifico",
+      "detalhe": "Passe Livre interestadual: site gov.br (Ministério dos Transportes). Transporte local: prefeitura/órgão estadual"
+    },
+    "passo_a_passo": [
+      "Para viagens entre estados: busque 'Passe Livre' no gov.br e faça o pedido online com o laudo médico.",
+      "Com a carteirinha do Passe Livre, peça a passagem na rodoviária com antecedência — as empresas são obrigadas a reservar vagas.",
+      "Para ônibus da sua cidade ou do seu estado: pergunte no órgão de transporte municipal/estadual ou no CRAS como pedir a gratuidade local.",
+      "Para shows, cinema e estádios: apresente documento que comprove a deficiência na bilheteria e pague meia-entrada (vale para o acompanhante quando necessário)."
+    ],
+    "fonte_legal": "Lei 8.899/1994 (Passe Livre interestadual); Lei 12.933/2013 (meia-entrada); regras locais variam",
+    "prioridade_base": 3,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "estadual_variavel",
+    "termos_populares": [
+      "passagem de graça",
+      "ônibus de graça",
+      "viajar de graça",
+      "meia entrada",
+      "carteirinha pcd",
+      "transporte deficiente"
+    ],
+    "posicao": 27,
+    "motivo": "Pessoa com deficiência de baixa renda tem passagem GRATUITA em ônibus interestaduais (viagens entre estados) — e o acompanhante pode ter direito também. Em eventos culturais e esportivos, PCD e acompanhante pagam meia-entrada. No transporte da sua cidade e do seu estado, a gratuidade varia — procure a prefeitura ou o órgão estadual."
+  },
+  {
+    "id": "vaga-reservada-lei-cotas",
+    "nome_popular": "Vaga reservada para PCD (Lei de Cotas)",
+    "categoria_vida": "pcd",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Empresas com 100 ou mais funcionários são OBRIGADAS a reservar de 2% a 5% das vagas para pessoas com deficiência ou reabilitadas pelo INSS. Vale para qualquer deficiência comprovada por laudo. Receber BPC não impede de tentar — há regras que permitem suspender o benefício e recuperá-lo se o emprego acabar.",
+    "documentos_necessarios": [
+      "Laudo médico com CID comprovando a deficiência",
+      "Currículo e documentos comuns de contratação"
+    ],
+    "canal_solicitacao": {
+      "tipo": "site_especifico",
+      "detalhe": "SINE, portais de emprego (filtro 'vagas PCD') e RH das empresas; denúncia de descumprimento no Ministério do Trabalho (gov.br)"
+    },
+    "passo_a_passo": [
+      "Tenha em mãos um laudo médico atualizado com o CID.",
+      "Busque vagas marcadas como 'PCD' no SINE da sua cidade e nos portais de emprego.",
+      "No processo seletivo, a empresa pode pedir o laudo — isso é normal para vaga de cota.",
+      "Se você recebe BPC: ao ser contratado, o benefício fica suspenso (não cancelado) e pode voltar se o emprego terminar.",
+      "Se souber de empresa grande sem nenhum funcionário PCD, é possível denunciar ao Ministério do Trabalho pelo gov.br."
+    ],
+    "fonte_legal": "Lei 8.213/1991, art. 93; Lei 13.146/2015 (Estatuto da Pessoa com Deficiência)",
+    "prioridade_base": 3,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "emprego para deficiente",
+      "vaga pcd",
+      "cota deficiente",
+      "trabalhar com deficiência",
+      "reabilitado inss"
+    ],
+    "posicao": 28,
+    "motivo": "Empresas com 100 ou mais funcionários são OBRIGADAS a reservar de 2% a 5% das vagas para pessoas com deficiência ou reabilitadas pelo INSS. Vale para qualquer deficiência comprovada por laudo. Receber BPC não impede de tentar — há regras que permitem suspender o benefício e recuperá-lo se o emprego acabar."
+  },
+  {
+    "id": "isencao-impostos-carro-pcd",
+    "nome_popular": "Isenção de IPI/ICMS na compra de carro para PCD",
+    "categoria_vida": "pcd",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Pessoas com deficiência física, visual, mental severa ou autismo podem comprar carro novo sem pagar IPI (imposto federal) — e, em muitos estados, também sem ICMS. Vale mesmo se a pessoa não dirige: o carro pode ficar no nome dela com outro condutor. O desconto total costuma passar de 20% do valor do carro.",
+    "documentos_necessarios": [
+      "Laudo médico específico para isenção (modelo do Detran/SUS, com CID)",
+      "Documento de identificação e CPF",
+      "CNH (do condutor, se a pessoa com deficiência não dirigir)",
+      "Declarações de imposto de renda ou de isenção"
+    ],
+    "canal_solicitacao": {
+      "tipo": "site_especifico",
+      "detalhe": "Sistema Sisen da Receita Federal (IPI) + Secretaria da Fazenda do seu estado (ICMS — regras variam por estado)"
+    },
+    "passo_a_passo": [
+      "Consiga o laudo médico no modelo exigido (clínicas credenciadas pelo Detran ou serviço público de saúde).",
+      "Peça a isenção do IPI pelo sistema Sisen, no site da Receita Federal (acesso com conta gov.br).",
+      "Para o ICMS, procure a Secretaria da Fazenda do seu estado — cada estado tem regra e teto de valor próprios.",
+      "Com as aprovações em mãos, negocie o carro na concessionária já com os descontos.",
+      "Atenção: há prazo mínimo para revender o carro sem devolver o imposto (em geral, alguns anos)."
+    ],
+    "fonte_legal": "Lei 8.989/1995 (IPI); ICMS conforme convênio CONFAZ e lei estadual",
+    "prioridade_base": 4,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "carro pcd",
+      "carro com desconto",
+      "isenção de imposto carro",
+      "carro para deficiente",
+      "autismo carro",
+      "comprar carro mais barato"
+    ],
+    "posicao": 29,
+    "motivo": "Pessoas com deficiência física, visual, mental severa ou autismo podem comprar carro novo sem pagar IPI (imposto federal) — e, em muitos estados, também sem ICMS. Vale mesmo se a pessoa não dirige: o carro pode ficar no nome dela com outro condutor. O desconto total costuma passar de 20% do valor do carro."
+  },
+  {
+    "id": "saque-aniversario-fgts",
+    "nome_popular": "Saque-Aniversário do FGTS",
+    "categoria_vida": "divida_credito",
+    "natureza": "beneficio",
+    "criterios_elegibilidade": "Quem tem saldo no FGTS pode optar por sacar uma parte todo ano, no mês do aniversário. ATENÇÃO à troca: quem escolhe o saque-aniversário PERDE o direito de sacar o valor total se for demitido (a multa de 40% continua). E para voltar ao modelo antigo há uma carência de 2 anos. Vale a pena principalmente para quem precisa de dinheiro agora e tem estabilidade.",
+    "documentos_necessarios": [
+      "CPF e conta gov.br",
+      "Aplicativo FGTS instalado"
+    ],
+    "canal_solicitacao": {
+      "tipo": "app_fgts",
+      "detalhe": "Aplicativo FGTS (Caixa)"
+    },
+    "passo_a_passo": [
+      "Baixe o aplicativo FGTS e entre com CPF e senha.",
+      "Veja primeiro o seu saldo e simule quanto sairia por ano no saque-aniversário.",
+      "Pense bem: se há risco de demissão em breve, o saque-rescisão (modelo padrão) costuma ser melhor.",
+      "Se decidir trocar, toque em 'Saque-Aniversário' e confirme a opção.",
+      "O valor fica disponível do primeiro dia do mês do aniversário até 2 meses depois."
+    ],
+    "fonte_legal": "Lei 13.932/2019",
+    "prioridade_base": 4,
+    "ultima_revisao": "2026-07-05",
+    "abrangencia": "federal",
+    "termos_populares": [
+      "fgts",
+      "sacar fgts",
+      "fundo de garantia",
+      "dinheiro do fgts",
+      "saque aniversário",
+      "preciso de dinheiro"
+    ],
+    "posicao": 30,
+    "motivo": "Quem tem saldo no FGTS pode optar por sacar uma parte todo ano, no mês do aniversário. ATENÇÃO à troca: quem escolhe o saque-aniversário PERDE o direito de sacar o valor total se for demitido (a multa de 40% continua). E para voltar ao modelo antigo há uma carência de 2 anos. Vale a pena principalmente para quem precisa de dinheiro agora e tem estabilidade."
   }
 ];
 
-// Helper para buscar itens por categoria
-export function buscarDireitosPorCategoria(categoria?: string): ItemLinhaDaVida[] {
-  if (!categoria || categoria === 'todos') {
-    return CATALOGO_DIREITOS;
-  }
-  return CATALOGO_DIREITOS.filter((item) => item.categoria_vida === categoria);
-}
-
-// Helper para buscar por termo (nome, descrição ou critério)
-export function pesquisarDireitos(termo: string): ItemLinhaDaVida[] {
-  const limpo = termo.toLowerCase().trim();
-  if (!limpo) return CATALOGO_DIREITOS;
-
-  return CATALOGO_DIREITOS.filter((item) =>
-    item.nome_popular.toLowerCase().includes(limpo) ||
-    item.criterios_elegibilidade.toLowerCase().includes(limpo) ||
-    item.motivo.toLowerCase().includes(limpo) ||
-    item.fonte_legal.toLowerCase().includes(limpo) ||
-    item.documentos_necessarios.some((doc) => doc.toLowerCase().includes(limpo))
-  );
-}
+/** Quantidade de itens da base — use no lugar de números escritos à mão na interface. */
+export const TOTAL_DIREITOS = CATALOGO_DIREITOS.length;

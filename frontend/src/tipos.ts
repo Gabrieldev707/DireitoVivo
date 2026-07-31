@@ -45,6 +45,15 @@ export interface ItemLinhaDaVida {
   motivo: string;
 }
 
+/**
+ * Item como aparece no catálogo navegável. Estende a ficha da linha de vida com
+ * `termos_populares` — as palavras que a pessoa realmente usa ("auxílio doença",
+ * "encostado") e que a busca do catálogo varre além do nome oficial.
+ */
+export interface ItemCatalogo extends ItemLinhaDaVida {
+  termos_populares: string[];
+}
+
 export type RespostaTriagem =
   | { tipo: 'pergunta'; mensagem: string }
   | { tipo: 'resultado'; mensagem: string; itens: ItemLinhaDaVida[] }
