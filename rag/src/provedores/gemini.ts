@@ -6,6 +6,13 @@ import type { ProvedorLLM } from '../provedor-llm.js';
 
 const MAX_TENTATIVAS_429 = 5;
 
+// Teto de espera somando todas as tentativas. Existe por causa da pessoa do outro
+// lado: enquanto tentamos de novo, ela vê apenas "digitando…" sem explicação. Uma
+// falha assumida em 25s é melhor do que dois minutos de tela parada — ela pode
+// reenviar, e o frontend mantém o histórico. Sem este teto, cinco tentativas com
+// retryDelay de ~11s cada passavam de um minuto.
+const ORCAMENTO_RETRY_MS = 25_000;
+
 export function criarProvedorGemini(): ProvedorLLM {
   const ai = new GoogleGenAI({ apiKey: obterEnv('GEMINI_API_KEY') });
   const modeloChat = obterEnv('GEMINI_MODELO_CHAT', 'gemini-2.5-flash');
@@ -64,6 +71,7 @@ export function criarProvedorGemini(): ProvedorLLM {
 //
 // Sem tratar o 503 o usuário via erro numa falha que se resolveria sozinha em segundos.
 async function comRetryQuota<T>(operacao: () => Promise<T>): Promise<T> {
+  const inicio = Date.now();
   let ultimoErro: unknown;
   for (let tentativa = 1; tentativa <= MAX_TENTATIVAS_429; tentativa++) {
     try {
@@ -73,7 +81,12 @@ async function comRetryQuota<T>(operacao: () => Promise<T>): Promise<T> {
       const status = (excecao as { status?: number })?.status;
       if (status !== 429 && status !== 503) throw excecao;
       if (tentativa === MAX_TENTATIVAS_429) throw excecao;
-      await new Promise((resolve) => setTimeout(resolve, calcularEspera(excecao, status, tentativa)));
+
+      const espera = calcularEspera(excecao, status, tentativa);
+      // Desiste se a próxima espera estourar o orçamento: melhor falhar agora,
+      // com o histórico preservado para reenviar, do que prender a pessoa na tela.
+      if (Date.now() - inicio + espera > ORCAMENTO_RETRY_MS) throw excecao;
+      await new Promise((resolve) => setTimeout(resolve, espera));
     }
   }
   throw ultimoErro;

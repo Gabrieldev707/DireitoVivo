@@ -45,6 +45,21 @@ export interface ItemLinhaDaVida {
   motivo: string;
 }
 
+/** Rótulos legíveis dos canais — a interface nunca deve exibir o enum cru. */
+export const ROTULOS_CANAL: Record<string, string> = {
+  app_meu_inss: 'Aplicativo Meu INSS',
+  app_cadunico: 'Aplicativo CadÚnico',
+  app_pe_de_meia: 'Aplicativo Pé-de-Meia',
+  app_fgts: 'Aplicativo FGTS',
+  site_especifico: 'Site oficial',
+  presencial: 'Atendimento presencial',
+  telefone: 'Telefone',
+};
+
+export function rotularCanal(tipo: string): string {
+  return ROTULOS_CANAL[tipo] ?? tipo.replace(/_/g, ' ');
+}
+
 /**
  * Item como aparece no catálogo navegável. Estende a ficha da linha de vida com
  * `termos_populares` — as palavras que a pessoa realmente usa ("auxílio doença",

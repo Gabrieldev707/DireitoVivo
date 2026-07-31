@@ -69,7 +69,21 @@ describe('retry do provedor Gemini', () => {
     expect(mockGenerateContent).toHaveBeenCalledTimes(1);
   });
 
-  it('desiste após esgotar as tentativas e propaga o erro', async () => {
+  it('respeita o orçamento total de espera em vez de tentar as 5 vezes', async () => {
+    // retryDelay alto: a segunda espera já estouraria o orçamento de 25s.
+    mockGenerateContent.mockRejectedValue(erroApi(429, '{"error":{"retryDelay":"20s"}}'));
+
+    const provedor = criarProvedorGemini();
+    const promessa = provedor.gerarTexto('sistema', [{ papel: 'usuario', conteudo: 'oi' }]);
+    const resultado = expect(promessa).rejects.toThrow();
+
+    await vi.advanceTimersByTimeAsync(120_000);
+    await resultado;
+    // Uma espera de 20,5s cabe; a segunda passaria de 25s — então para em 2 chamadas.
+    expect(mockGenerateContent).toHaveBeenCalledTimes(2);
+  });
+
+  it('desiste e propaga o erro quando as tentativas não resolvem', async () => {
     mockGenerateContent.mockRejectedValue(erroApi(503, 'high demand'));
 
     const provedor = criarProvedorGemini();
@@ -79,7 +93,10 @@ describe('retry do provedor Gemini', () => {
 
     await vi.advanceTimersByTimeAsync(120_000);
     await resultado;
-    expect(mockGenerateContent).toHaveBeenCalledTimes(5);
+    // Backoff de 2s+4s+8s = 14s; a próxima espera (16s) passaria dos 25s de orçamento,
+    // então para na 4ª em vez de gastar as 5 tentativas. O limite que importa para a
+    // pessoa é o tempo de tela parada, não a contagem de tentativas.
+    expect(mockGenerateContent).toHaveBeenCalledTimes(4);
   });
 
   it('erro de resposta vazia não vira retry infinito', async () => {
