@@ -1,4 +1,6 @@
 import { TEXTO_DISCLAIMER } from '../tipos';
+import { SimboloDireitoVivo } from './MarcaDireitoVivo';
+import { TOTAL_DIREITOS } from '../dados/catalogoDireitos';
 
 interface PropriedadesTelaInicial {
   aoComecar: () => void;
@@ -82,7 +84,6 @@ export function TelaInicial({ aoComecar, aoVerCatalogo, aoVerCenarios }: Proprie
           className="home-hero__image"
         />
         <div className="home-hero__overlay" aria-hidden="true" />
-        <img src="/assets/brasao-republica.png" alt="" aria-hidden="true" className="home-hero__watermark" />
 
         <div className="home-hero__inner relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-[minmax(0,1fr)_25rem] lg:px-8">
           <div className="max-w-3xl text-white">
@@ -122,7 +123,7 @@ export function TelaInicial({ aoComecar, aoVerCatalogo, aoVerCenarios }: Proprie
               </div>
               <div className="hero-stat border-[#168821]">
                 <dt>Catálogo</dt>
-                <dd>14+ direitos e serviços</dd>
+                <dd>{TOTAL_DIREITOS} direitos e serviços</dd>
               </div>
               <div className="hero-stat border-[#4f9cf9]">
                 <dt>Canais</dt>
@@ -163,22 +164,31 @@ export function TelaInicial({ aoComecar, aoVerCatalogo, aoVerCenarios }: Proprie
         <section className="identity-brasil-section">
           <div>
             <div className="gov-kicker">
-              <span className="h-2 w-2 rounded-full bg-[#168821]" />
-              Identificação brasileira
+              <span className="h-2 w-2 rounded-full bg-[#25d366]" />
+              Como este projeto se posiciona
             </div>
-            <h2 className="mt-3 text-2xl font-black text-[#071D41] sm:text-3xl">
-              Um portal visualmente público, acessível e direto.
+            <h2 className="mt-3 text-2xl font-black text-[#064942] sm:text-3xl">
+              Um atalho até o balcão certo — não um substituto dele.
             </h2>
             <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-700">
-              A interface usa cores nacionais, sinais institucionais e uma navegação parecida com serviços públicos digitais: entrar por perfil, por tema ou pela situação vivida.
+              O Direito Vivo é um <strong>projeto independente</strong>, sem vínculo com o Governo
+              Federal. Ele não recebe pedidos, não consulta sistemas públicos e não decide
+              benefício: organiza a informação que já é pública e indica onde confirmar
+              oficialmente. Toda a conversa é anônima e nada é armazenado.
             </p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {['Sem CPF ou RG', 'Sem cadastro', 'Nada é salvo', 'Gratuito'].map((selo) => (
+                <span
+                  key={selo}
+                  className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-black text-[#075e54]"
+                >
+                  {selo}
+                </span>
+              ))}
+            </div>
           </div>
-          <div className="identity-brasil-section__logo">
-            <img
-              src="/assets/governo-brasil-2025.png"
-              alt="Governo do Brasil - Do lado do povo brasileiro"
-              className="gov-mark-logo h-auto w-full object-contain"
-            />
+          <div className="identity-brasil-section__logo flex items-center justify-center">
+            <SimboloDireitoVivo tamanho={150} />
           </div>
         </section>
 

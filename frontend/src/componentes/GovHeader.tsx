@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
+import { SimboloDireitoVivo } from './MarcaDireitoVivo';
+import { TOTAL_DIREITOS } from '../dados/catalogoDireitos';
 
 export type AbaNavegacao = 'inicio' | 'catalogo' | 'cenarios' | 'chat' | 'resultado';
 
@@ -29,7 +31,7 @@ const ABAS: Array<{
     id: 'catalogo',
     rotulo: 'Direitos',
     descricao: 'Catálogo',
-    badge: '14+',
+    badge: String(TOTAL_DIREITOS),
     icone: (
       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M12 6.25v13m0-13C10.8 5.45 9.25 5 7.5 5S4.2 5.45 3 6.25v13C4.2 18.45 5.75 18 7.5 18s3.3.45 4.5 1.25m0-13C13.2 5.45 14.75 5 16.5 5s3.3.45 4.5 1.25v13C19.8 18.45 18.25 18 16.5 18s-3.3.45-4.5 1.25" />
@@ -95,14 +97,15 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
 
   return (
     <header className="site-header sticky top-0 z-50 w-full border-b border-slate-200 bg-white shadow-[0_6px_22px_rgba(7,29,65,0.08)]">
-      <div className="bg-[#071D41] text-white">
+      <div className="bg-[#064942] text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-2 text-xs font-bold sm:px-6 lg:px-8">
-          <div className="flex min-w-0 items-center gap-3">
-            <span className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded bg-[#FFCD07] text-[#071D41] ring-1 ring-white/25">
-              BR
+          <div className="flex min-w-0 items-center gap-2">
+            <svg className="h-3.5 w-3.5 shrink-0 text-[#a7f3d0]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M12 9v4m0 3h.01M4.72 19h14.56c1.44 0 2.34-1.55 1.62-2.8L13.62 4.2a1.88 1.88 0 00-3.24 0L3.1 16.2c-.72 1.25.18 2.8 1.62 2.8z" />
+            </svg>
+            <span className="truncate">
+              Projeto independente — não é um serviço oficial do Governo Federal
             </span>
-            <span className="truncate">Serviços e Informações do Brasil</span>
-            <span className="hidden text-slate-300 md:inline">Direito Vivo • orientação cidadã</span>
           </div>
 
           <div className="flex items-center gap-2">
@@ -147,22 +150,16 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
         <div className="mx-auto grid max-w-7xl gap-4 px-4 py-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-center lg:px-8">
           <button
             type="button"
-            className="brand-lockup group flex min-w-0 items-center gap-4 rounded-lg text-left focus:outline-none focus:ring-4 focus:ring-[#1351B4]/20"
+            className="brand-lockup group flex min-w-0 items-center gap-3 rounded-lg text-left focus:outline-none focus:ring-4 focus:ring-[#075e54]/20"
             onClick={() => aoMudarAba('inicio')}
           >
-            <span className="flex h-14 w-32 shrink-0 items-center justify-center rounded bg-white px-2 ring-1 ring-slate-200 transition group-hover:ring-[#1351B4]/40 sm:w-36">
-              <img
-                src="/assets/govbr-logo-oficial.webp"
-                alt="gov.br"
-                className="gov-logo-img h-10 w-auto object-contain"
-              />
-            </span>
+            <SimboloDireitoVivo tamanho={48} className="shrink-0 transition group-hover:scale-105" />
             <span className="min-w-0">
               <span className="flex flex-wrap items-center gap-2">
-                <span className="text-xl font-black tracking-tight text-[#071D41] sm:text-2xl">
-                  Direito Vivo
+                <span className="text-xl font-black tracking-tight text-[#075e54] sm:text-2xl">
+                  Direito<span className="text-[#25d366]">Vivo</span>
                 </span>
-                <span className="rounded-full bg-[#168821]/10 px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-[#0f6f1a]">
+                <span className="rounded-full bg-[#25d366]/12 px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-[#075e54]">
                   IA social
                 </span>
               </span>
@@ -172,8 +169,8 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
             </span>
           </button>
 
-          <div className="hidden items-center gap-3 rounded-lg border border-blue-100 bg-[#f3f7ff] px-4 py-3 text-sm text-[#071D41] lg:flex">
-            <svg className="h-5 w-5 text-[#1351B4]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <div className="hidden items-center gap-3 rounded-lg border border-emerald-100 bg-[#f0fdf9] px-4 py-3 text-sm text-[#064942] lg:flex">
+            <svg className="h-5 w-5 text-[#075e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M21 21l-5.2-5.2m1.7-4.3a6 6 0 1 1-12 0 6 6 0 0 1 12 0z" />
             </svg>
             <div>

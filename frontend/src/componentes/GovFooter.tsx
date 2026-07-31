@@ -1,15 +1,16 @@
 import { TEXTO_DISCLAIMER } from '../tipos';
 import type { AbaNavegacao } from './GovHeader';
+import { SimboloDireitoVivo } from './MarcaDireitoVivo';
 
 interface PropriedadesGovFooter {
   aoMudarAba?: (aba: AbaNavegacao) => void;
 }
 
-const MARCOS_BRASIL = [
-  'Independência',
-  'República',
-  'Constituição de 1988',
-  'Acesso à Informação',
+const PRINCIPIOS = [
+  'Anônimo',
+  'Gratuito',
+  'Sem cadastro',
+  'Código aberto',
 ];
 
 const CANAIS = [
@@ -21,42 +22,38 @@ const CANAIS = [
 
 export function GovFooter({ aoMudarAba }: PropriedadesGovFooter) {
   return (
-    <footer className="footer-brasil relative mt-16 overflow-hidden border-t border-[#0b3471] bg-[#071D41] text-white">
-      <img
-        src="/assets/brasao-republica.png"
-        alt=""
-        aria-hidden="true"
-        className="footer-brasil__watermark"
-      />
+    <footer className="footer-brasil relative mt-16 overflow-hidden border-t border-[#0a5f55] bg-[#064942] text-white">
       <div className="gov-ribbon" aria-hidden="true" />
 
       <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           <section className="space-y-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <span className="inline-flex w-fit rounded bg-white px-3 py-2 shadow-sm">
-                <img
-                  src="/assets/govbr-logo-oficial.webp"
-                  alt="gov.br"
-                  className="gov-logo-img h-9 w-auto object-contain"
-                />
-              </span>
+              <SimboloDireitoVivo tamanho={56} className="shrink-0" />
               <div>
-                <h2 className="text-2xl font-black tracking-tight">Direito Vivo</h2>
-                <p className="mt-1 max-w-2xl text-sm leading-relaxed text-blue-100">
+                <h2 className="text-2xl font-black tracking-tight">
+                  Direito<span className="text-[#25d366]">Vivo</span>
+                </h2>
+                <p className="mt-1 max-w-2xl text-sm leading-relaxed text-emerald-50">
                   Uma camada de orientação cidadã para organizar direitos, documentos e próximos passos antes do atendimento oficial.
                 </p>
               </div>
             </div>
 
-            <div className="footer-history" aria-label="Referências históricas e institucionais do Brasil">
-              {MARCOS_BRASIL.map((marco) => (
-                <span key={marco}>{marco}</span>
+            <div className="footer-history" aria-label="Princípios do projeto">
+              {PRINCIPIOS.map((principio) => (
+                <span key={principio}>{principio}</span>
               ))}
             </div>
 
-            <div className="rounded-lg border border-white/15 bg-white/8 p-4 text-xs leading-relaxed text-blue-50 backdrop-blur">
-              <strong className="text-white">Aviso legal:</strong> {TEXTO_DISCLAIMER}
+            <div className="rounded-lg border-2 border-[#25d366]/40 bg-[#25d366]/10 p-4 text-xs leading-relaxed text-emerald-50 backdrop-blur">
+              <strong className="block text-white">
+                Projeto independente, sem vínculo com o Governo Federal.
+              </strong>
+              <span className="mt-1 block">
+                O Direito Vivo não é um canal oficial, não recebe pedidos de benefício e não
+                consulta sistemas públicos. {TEXTO_DISCLAIMER}
+              </span>
             </div>
           </section>
 
