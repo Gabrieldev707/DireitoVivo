@@ -4,6 +4,8 @@ import { obterEnv } from '../config.js';
 import { DIMENSOES_EMBEDDING } from '../embeddings.js';
 import type { ProvedorLLM } from '../provedor-llm.js';
 
+const MAX_TENTATIVAS_429 = 5;
+
 export function criarProvedorGemini(): ProvedorLLM {
   const ai = new GoogleGenAI({ apiKey: obterEnv('GEMINI_API_KEY') });
   const modeloChat = obterEnv('GEMINI_MODELO_CHAT', 'gemini-2.5-flash');
@@ -13,32 +15,36 @@ export function criarProvedorGemini(): ProvedorLLM {
     nome: `gemini (${modeloChat} / ${modeloEmbedding})`,
 
     async gerarTexto(instrucaoSistema, mensagens, opcoes) {
-      const resposta = await ai.models.generateContent({
-        model: modeloChat,
-        contents: mensagens.map((m) => ({
-          role: m.papel === 'usuario' ? 'user' : 'model',
-          parts: [{ text: m.conteudo }],
-        })),
-        config: {
-          systemInstruction: instrucaoSistema,
-          temperature: opcoes?.temperatura ?? 0.4,
-          ...(opcoes?.formatoJson ? { responseMimeType: 'application/json' } : {}),
-        },
-      });
+      const resposta = await comRetryQuota(() =>
+        ai.models.generateContent({
+          model: modeloChat,
+          contents: mensagens.map((m) => ({
+            role: m.papel === 'usuario' ? 'user' : 'model',
+            parts: [{ text: m.conteudo }],
+          })),
+          config: {
+            systemInstruction: instrucaoSistema,
+            temperature: opcoes?.temperatura ?? 0.4,
+            ...(opcoes?.formatoJson ? { responseMimeType: 'application/json' } : {}),
+          },
+        }),
+      );
       const texto = resposta.text;
       if (!texto) throw new Error('O Gemini retornou resposta vazia.');
       return texto;
     },
 
     async gerarEmbedding(texto, finalidade) {
-      const resposta = await ai.models.embedContent({
-        model: modeloEmbedding,
-        contents: texto,
-        config: {
-          taskType: finalidade === 'documento' ? 'RETRIEVAL_DOCUMENT' : 'RETRIEVAL_QUERY',
-          outputDimensionality: DIMENSOES_EMBEDDING,
-        },
-      });
+      const resposta = await comRetryQuota(() =>
+        ai.models.embedContent({
+          model: modeloEmbedding,
+          contents: texto,
+          config: {
+            taskType: finalidade === 'documento' ? 'RETRIEVAL_DOCUMENT' : 'RETRIEVAL_QUERY',
+            outputDimensionality: DIMENSOES_EMBEDDING,
+          },
+        }),
+      );
       const valores = resposta.embeddings?.[0]?.values;
       if (!valores || valores.length !== DIMENSOES_EMBEDDING) {
         throw new Error(`Embedding inválido do Gemini (dimensões: ${valores?.length ?? 0}).`);
@@ -46,6 +52,53 @@ export function criarProvedorGemini(): ProvedorLLM {
       return normalizar(valores);
     },
   };
+}
+
+// Duas falhas transitórias distintas do Gemini, ambas recuperáveis:
+//
+//   429 — cota. O free tier do 2.5 Flash dá 5 req/min por modelo. Uma pessoa
+//         conversando no ritmo natural não bate; rodar perfis em sequência bate.
+//         A resposta traz `retryDelay` explícito, então esperamos exatamente isso.
+//   503 — modelo sobrecarregado ("high demand"). Não vem com retryDelay; aqui o
+//         certo é backoff exponencial com jitter, para não sincronizar as tentativas.
+//
+// Sem tratar o 503 o usuário via erro numa falha que se resolveria sozinha em segundos.
+async function comRetryQuota<T>(operacao: () => Promise<T>): Promise<T> {
+  let ultimoErro: unknown;
+  for (let tentativa = 1; tentativa <= MAX_TENTATIVAS_429; tentativa++) {
+    try {
+      return await operacao();
+    } catch (excecao) {
+      ultimoErro = excecao;
+      const status = (excecao as { status?: number })?.status;
+      if (status !== 429 && status !== 503) throw excecao;
+      if (tentativa === MAX_TENTATIVAS_429) throw excecao;
+      await new Promise((resolve) => setTimeout(resolve, calcularEspera(excecao, status, tentativa)));
+    }
+  }
+  throw ultimoErro;
+}
+
+function calcularEspera(excecao: unknown, status: number, tentativa: number): number {
+  if (status === 429) {
+    // O servidor sabe quando a janela reabre — obedecemos.
+    return extrairRetryDelayMs(excecao) ?? tentativa * 15_000;
+  }
+  // 503: exponencial (2s, 4s, 8s, 16s…) + jitter de até 1s.
+  return 2 ** tentativa * 1000 + Math.floor(Math.random() * 1000);
+}
+
+function extrairRetryDelayMs(excecao: unknown): number | undefined {
+  const mensagem = (excecao as { message?: string })?.message;
+  if (typeof mensagem !== 'string') return undefined;
+  // O Gemini serializa o corpo do 429 dentro da mensagem; encontramos algo como
+  // "retryDelay":"11s" ou "retryDelay":"11.7s".
+  const match = mensagem.match(/"retryDelay":"([\d.]+)s"/);
+  if (!match) return undefined;
+  const segundos = Number(match[1]);
+  if (!Number.isFinite(segundos)) return undefined;
+  // Pequena folga para não bater exatamente no reset.
+  return Math.ceil(segundos * 1000) + 500;
 }
 
 // O gemini-embedding-001 só retorna vetores normalizados em 3072 dims; ao truncar
