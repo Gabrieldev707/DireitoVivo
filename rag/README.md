@@ -1,6 +1,8 @@
 # Módulo `rag` — Motor de triagem
 
-Coração do produto: recebe a conversa, busca itens candidatos na base de conhecimento (busca semântica) e usa o LLM para decidir entre **fazer a próxima pergunta** ou **entregar o resultado como "linha de vida"** (RF02 + RF04).
+Coração do produto: mascara padrões conhecidos de dados pessoais, trata urgências explícitas sem dependências externas e, nos demais casos, busca itens candidatos e usa o LLM para decidir entre **fazer a próxima pergunta** ou **entregar uma orientação verificável**.
+
+A orientação separa critérios confirmados dos pendentes. Documentos e próximos passos vêm da base curada, não do texto gerado pelo modelo. O mascaramento cobre CPF, e-mail, telefone e CEP; ele não substitui a orientação de evitar dados pessoais.
 
 ## Responsabilidades
 
@@ -21,4 +23,4 @@ npm run rag:cli      # chat interativo no terminal
 npm run rag:testes   # roda os 3 perfis dos critérios de aceite (seção 7 do SDD)
 ```
 
-`rag:testes` valida automaticamente: ≥1 item relevante por perfil, ficha completa (RF05) e resultado ordenado (RF04).
+`rag:testes` executa perfis contra serviços reais quando há credenciais. A suíte padrão usa dependências falsas e valida contratos, proteção de dados, urgência, ficha completa e ordenação.

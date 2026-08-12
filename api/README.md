@@ -7,7 +7,9 @@ Servidor Fastify fino: valida a entrada, chama o motor de triagem (`@direito-viv
 | Método | Rota | Descrição |
 |---|---|---|
 | `GET` | `/api/saude` | Healthcheck (`{ok: true}`) |
-| `POST` | `/api/triagem` | Corpo: `{mensagens: [{papel: 'usuario'\|'assistente', conteudo: string}]}`. Resposta: `{tipo: 'pergunta'\|'resultado'\|'sem_match', mensagem, itens?}` |
+| `POST` | `/api/triagem` | Corpo: `{mensagens, aceite_demo?}`. Em modo `demo`, `aceite_demo: true` é obrigatório. Resposta: `pergunta`, `orientacao`, `sem_match` ou `urgencia`. |
+
+`MODO_APLICACAO=producao` permanece bloqueado nesta etapa. A API é stateless e não deve registrar o conteúdo da conversa.
 
 A API é **stateless**: o histórico da conversa vem do cliente a cada chamada e **nada é persistido** — não existe sessão, cookie ou tabela de conversa (privacidade por design, SDD seção 3).
 

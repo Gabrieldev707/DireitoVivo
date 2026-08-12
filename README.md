@@ -1,8 +1,8 @@
 # Direito Vivo
 
-**Triagem conversacional anônima de direitos, benefícios e serviços públicos brasileiros — feita para quem tem menos acesso a informação.**
+**Demonstração de triagem conversacional de direitos, benefícios e serviços públicos brasileiros.**
 
-> Você provavelmente tem direito a coisas que nem sabe que existem. O Direito Vivo faz uma conversa curta, sem pedir CPF nem nome, e devolve uma "linha de vida" priorizada de por onde começar.
+> O Direito Vivo organiza caminhos que podem ser compatíveis com a situação relatada e mostra o que confirmar, quais documentos preparar e onde buscar atendimento oficial.
 
 📚 Fonte de verdade do escopo: [docs/brief-projeto-direitos-invisiveis.md](docs/brief-projeto-direitos-invisiveis.md) e [docs/sdd-direito-vivo.md](docs/sdd-direito-vivo.md).
 
@@ -12,11 +12,14 @@
 
 No Brasil, milhões de pessoas não recebem o que já é delas por lei — Bolsa Família, BPC/LOAS, tarifa social de energia, isenção de IR — porque **ninguém explicou que existe, quem tem direito ou como pedir**. As pessoas mais vulneráveis são justamente as com menos acesso a informação organizada.
 
-O Direito Vivo ataca esse ponto: **triagem por linguagem natural, gratuita, anônima, sem cadastro**, com resposta priorizada por urgência real (violência doméstica e risco de vida sempre no topo) e com passo a passo até o balcão certo.
+O Direito Vivo ataca esse ponto com uma **demonstração gratuita e sem cadastro**. A resposta separa sinais compatíveis de requisitos ainda pendentes; perigo atual interrompe o fluxo comum e exibe canais de ajuda imediata.
 
 ## O que o produto faz hoje
 
-- **Chat de triagem** em português coloquial que faz perguntas incrementais e devolve entre 1 e 5 direitos que provavelmente se aplicam
+- **Chat de triagem** em português coloquial que faz perguntas incrementais e devolve orientações para confirmação
+- **Consentimento explícito no modo demo**, exigido também pela API em cada requisição
+- **Mascaramento por padrões** de CPF, e-mail, telefone e CEP antes da primeira chamada externa
+- **Urgência determinística** para perigo atual, violência e risco de autoextermínio, sem chamar LLM, busca ou banco
 - **Linha de vida** priorizada: o que resolver primeiro, o que destrava o próximo, ficha completa (critérios, documentos, canal, passo a passo, base legal, data de revisão)
 - **Base curada de 30 direitos federais** com fonte legal e prazo de revisão explícito
 - **Compartilhar o resultado** (Web Share API + fallback pra área de transferência)
@@ -28,8 +31,9 @@ O Direito Vivo ataca esse ponto: **triagem por linguagem natural, gratuita, anô
 
 O SDD trata privacidade como restrição de projeto, não como cláusula:
 
-- **Zero PII persistida.** Nenhuma tabela guarda nome, CPF, RG ou conversa. O histórico vive só na aba do navegador; fechar apaga.
+- **Sem persistência de conversa no banco da aplicação.** O histórico vive no estado da aba e o aceite não é salvo no navegador.
 - **API stateless.** O cliente reenvia o histórico completo a cada `POST /api/triagem` — não há sessão, cookie ou identificador.
+- **Processamento externo explícito.** O texto protegido por padrões é enviado ao provedor de IA. O mascaramento reduz exposição, mas não é garantia absoluta; por isso a interface orienta a não informar dados pessoais.
 - **Sem log de requisição.** `disableRequestLogging: true` no Fastify: relato de triagem + IP + timestamp permitiria reidentificar quem foi. Erros logam só a mensagem técnica, nunca o corpo.
 - **LLM instruído a recusar coleta.** O prompt do sistema proíbe pedir dado identificável e nunca promete aprovação de benefício.
 
@@ -43,7 +47,7 @@ api (Fastify 5, stateless)
       │
       ▼
 rag (Node)
-      ├─ provedor-llm  → Gemini 2.5 Flash (tier free)
+      ├─ provedor-llm  → Gemini (modelo configurável)
       └─ busca         → Supabase pgvector
 ```
 
@@ -65,16 +69,11 @@ rag (Node)
 
 ## Qualidade
 
-```
-Testes automatizados     39 tests, 3 suítes  (rag: 12 · api: 10 · frontend: 17)
-Perfis de aceite (SDD)   3/3 passam ponta a ponta (Gemini + Supabase real)
-Typecheck (strict)       rag, api, frontend  — sem erros
-Advisors de segurança    Supabase — limpos
-```
+Verificação local da Fase 1 (12/08/2026): **83 testes passaram** (RAG 45, API 17, frontend 21), typecheck e build passaram, e `npm audit --omit=dev` retornou zero vulnerabilidades. Testes que dependem de Gemini e Supabase reais são separados das suítes determinísticas e exigem credenciais próprias.
 
-- **RAG**: pureza de `ordenarLinhaDaVida`, decisão pergunta/resultado/sem_match com provider mockado, robustez do parser (cerca markdown, JSON inválido, formato inesperado)
+- **RAG**: mascaramento de dados, urgência sem dependências externas, ordenação, contrato pergunta/orientação/sem_match e robustez do parser
 - **API**: `fastify.inject` cobre schema (papel, tamanho, tamanho da conversa), erro genérico vs erro de triagem (mensagem opaca — nunca vaza detalhe do provider), teste explícito de que **o corpo da requisição nunca aparece no log**
-- **Frontend**: Chat (envio, sugestões rápidas, estado enviando, banner de anonimato), LinhaDaVida (ordem RF04, sem_match, share via Web Share API), TelaInicial (disclaimer RF06 presente, CTAs)
+- **Frontend**: consentimento da demo, chat, painel de urgência, orientação estruturada, sem_match e compartilhamento
 - **Perfis end-to-end**: `npm run rag:testes` roda 3 conversas roteirizadas (mãe solo desempregada, idoso com deficiência, trabalhador informal acidentado) contra Gemini e Supabase reais e valida que cada perfil recebe ao menos 1 item esperado + ficha completa + ordem correta
 
 ## Como rodar
@@ -98,14 +97,14 @@ npm run front:dev    # terminal 2 → http://localhost:5173
 
 # Extras
 npm run typecheck    # strict em rag + api + frontend
-npm test             # 39 tests unitários (Vitest)
+npm test             # suítes determinísticas (Vitest)
 ```
 
 ## Status dos critérios de aceite (SDD seção 7)
 
 | Critério | Status |
 |---|---|
-| Triagem completa sem CPF/RG/nome | ✅ Sem login/cadastro; prompt proíbe coleta; nada é persistido |
+| Triagem sem exigir CPF/RG/nome | ✅ Sem login/cadastro; interface orienta a não enviar PII; padrões conhecidos são mascarados |
 | ≥1 item relevante para 3 perfis de teste | ✅ 3/3 passam em `npm run rag:testes` (com retry automático nos rate-limits do free tier) |
 | Ficha completa por item (RF05) | ✅ Todos os 30 itens têm todos os campos; validação automatizada |
 | Resultado em ordem de prioridade (RF04) | ✅ Violência/risco no topo, depois `prioridade_base`, alfabético como desempate |
