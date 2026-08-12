@@ -146,6 +146,7 @@ export function App() {
     setResultado(undefined);
     setUrgencia(undefined);
     setErro(undefined);
+    setAceiteDemo(false);
     setAbaAtiva('inicio');
   }
 
