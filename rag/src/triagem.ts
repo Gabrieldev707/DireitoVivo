@@ -4,6 +4,7 @@
 import { buscarFichasPorIds, buscarItensRelevantes } from './busca.js';
 import { obterProvedorLLM } from './provedor-llm.js';
 import { MENSAGEM_SEM_MATCH, montarPromptTriagem } from './prompts.js';
+import { protegerMensagens } from './protecao-dados.js';
 import type { DireitoItem, ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos.js';
 
 const LIMITE_CANDIDATOS = 10;
@@ -15,30 +16,42 @@ export async function executarTriagem(mensagens: MensagemChat[]): Promise<Respos
     throw new ErroTriagem('A triagem precisa terminar com uma mensagem do usuário.');
   }
 
-  // O "perfil" da busca é tudo que o usuário contou até aqui.
-  const relatoUsuario = mensagens
+  const protecao = protegerMensagens(mensagens);
+  const mensagensProtegidas = protecao.mensagens;
+  const houveMascaramento = protecao.categoriasMascaradas.length > 0;
+
+  // O "perfil" da busca é tudo que o usuário contou até aqui, já protegido.
+  const relatoUsuario = mensagensProtegidas
     .filter((m) => m.papel === 'usuario')
     .map((m) => m.conteudo)
     .join('\n');
 
   const candidatos = await buscarItensRelevantes(relatoUsuario, LIMITE_CANDIDATOS);
-  const perguntasFeitas = mensagens.filter((m) => m.papel === 'assistente').length;
+  const perguntasFeitas = mensagensProtegidas.filter((m) => m.papel === 'assistente').length;
 
   const bruto = await obterProvedorLLM().gerarTexto(
     montarPromptTriagem(candidatos, perguntasFeitas),
-    mensagens,
+    mensagensProtegidas,
     { formatoJson: true },
   );
 
   const saida = interpretarSaida(bruto);
   if (saida.tipo === 'pergunta') {
-    return { tipo: 'pergunta', mensagem: saida.mensagem };
+    return {
+      tipo: 'pergunta',
+      mensagem: saida.mensagem,
+      ...(houveMascaramento ? { aviso_dados_mascarados: true } : {}),
+    };
   }
 
   // Só aceita ids que existem entre os candidatos (o LLM não pode inventar item).
   const indicados = saida.itens.filter((i) => candidatos.some((c) => c.id === i.id));
   if (indicados.length === 0) {
-    return { tipo: 'sem_match', mensagem: saida.mensagem || MENSAGEM_SEM_MATCH };
+    return {
+      tipo: 'sem_match',
+      mensagem: saida.mensagem || MENSAGEM_SEM_MATCH,
+      ...(houveMascaramento ? { aviso_dados_mascarados: true } : {}),
+    };
   }
 
   const fichas = await buscarFichasPorIds(indicados.map((i) => i.id));
@@ -49,7 +62,12 @@ export async function executarTriagem(mensagens: MensagemChat[]): Promise<Respos
     motivo: motivoPorId.get(item.id) ?? '',
   }));
 
-  return { tipo: 'resultado', mensagem: saida.mensagem, itens };
+  return {
+    tipo: 'resultado',
+    mensagem: saida.mensagem,
+    itens,
+    ...(houveMascaramento ? { aviso_dados_mascarados: true } : {}),
+  };
 }
 
 /**

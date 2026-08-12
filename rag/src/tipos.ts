@@ -71,9 +71,9 @@ export interface MensagemChat {
 }
 
 export type RespostaTriagem =
-  | { tipo: 'pergunta'; mensagem: string }
-  | { tipo: 'resultado'; mensagem: string; itens: ItemLinhaDaVida[] }
-  | { tipo: 'sem_match'; mensagem: string };
+  | { tipo: 'pergunta'; mensagem: string; aviso_dados_mascarados?: boolean }
+  | { tipo: 'resultado'; mensagem: string; itens: ItemLinhaDaVida[]; aviso_dados_mascarados?: boolean }
+  | { tipo: 'sem_match'; mensagem: string; aviso_dados_mascarados?: boolean };
 
 /** Linha retornada pela função SQL buscar_direitos / select na tabela. */
 export interface LinhaDireitoItem {

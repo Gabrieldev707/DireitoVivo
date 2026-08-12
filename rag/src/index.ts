@@ -8,3 +8,4 @@ export { buscarItensRelevantes, listarTodosItens, buscarFichasPorIds } from './b
 export { executarTriagem, ordenarLinhaDaVida, ErroTriagem, TEXTO_DISCLAIMER } from './triagem.js';
 export { MAX_PERGUNTAS, MENSAGEM_SEM_MATCH } from './prompts.js';
 export { obterModoAplicacao, validarModoAplicacao, type ModoAplicacao } from './modo-aplicacao.js';
+export { protegerMensagens, type CategoriaDado } from './protecao-dados.js';

@@ -133,6 +133,36 @@ describe('executarTriagem', () => {
     expect(mockBuscarFichasPorIds).not.toHaveBeenCalled();
   });
 
+  it('não envia dados pessoais reconhecíveis para busca nem geração', async () => {
+    mockBuscarItensRelevantes.mockResolvedValue([]);
+    mockGerarTexto.mockResolvedValue(
+      JSON.stringify({ tipo: 'pergunta', mensagem: 'Qual a renda aproximada da casa?' }),
+    );
+
+    const resposta = await executarTriagem([
+      {
+        papel: 'usuario',
+        conteudo: 'Meu CPF é 123.456.789-09 e meu e-mail é pessoa@exemplo.com',
+      },
+    ]);
+
+    expect(mockBuscarItensRelevantes).toHaveBeenCalledWith(
+      'Meu CPF é [CPF REMOVIDO] e meu e-mail é [E-MAIL REMOVIDO]',
+      10,
+    );
+    const mensagensEnviadas = mockGerarTexto.mock.calls[0][1] as MensagemChat[];
+    expect(mensagensEnviadas[0].conteudo).toBe(
+      'Meu CPF é [CPF REMOVIDO] e meu e-mail é [E-MAIL REMOVIDO]',
+    );
+    expect(JSON.stringify(mensagensEnviadas)).not.toContain('123.456.789-09');
+    expect(JSON.stringify(mensagensEnviadas)).not.toContain('pessoa@exemplo.com');
+    expect(resposta).toEqual({
+      tipo: 'pergunta',
+      mensagem: 'Qual a renda aproximada da casa?',
+      aviso_dados_mascarados: true,
+    });
+  });
+
   it('devolve sem_match quando o LLM propõe id que não está entre candidatos', async () => {
     const bolsa = criarItem({ id: 'bolsa-familia', prioridade_base: 1 });
     mockBuscarItensRelevantes.mockResolvedValue([bolsa]);
