@@ -7,3 +7,4 @@ export { construirTextoEmbedding, DIMENSOES_EMBEDDING, type EntradaTextoEmbeddin
 export { buscarItensRelevantes, listarTodosItens, buscarFichasPorIds } from './busca.js';
 export { executarTriagem, ordenarLinhaDaVida, ErroTriagem, TEXTO_DISCLAIMER } from './triagem.js';
 export { MAX_PERGUNTAS, MENSAGEM_SEM_MATCH } from './prompts.js';
+export { obterModoAplicacao, validarModoAplicacao, type ModoAplicacao } from './modo-aplicacao.js';
