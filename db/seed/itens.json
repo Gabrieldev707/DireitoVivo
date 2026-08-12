@@ -25,7 +25,43 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["bolsa", "auxílio do governo", "benefício do governo", "cadastro único", "cadunico", "renda baixa", "sem renda", "mãe solo", "criança pequena"]
+    "termos_populares": [
+      "bolsa",
+      "auxílio do governo",
+      "benefício do governo",
+      "cadastro único",
+      "cadunico",
+      "renda baixa",
+      "sem renda",
+      "mãe solo",
+      "criança pequena"
+    ],
+    "resumo_simples": "Programa federal de transferência de renda cuja entrada depende do Cadastro Único e da análise das regras vigentes.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Para famílias com renda de até R$ 218 por pessoa ao mês (valor de referência — confirme no CRAS). É preciso estar inscrito no CadÚnico. Famílias com crianças, gestantes e adolescentes recebem valores extras.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [
+      {
+        "titulo": "Receber o Bolsa Família",
+        "url": "https://www.gov.br/pt-br/servicos/receber-o-bolsa-familia",
+        "orgao": "Ministério do Desenvolvimento e Assistência Social",
+        "acessado_em": "2026-08-12"
+      }
+    ],
+    "status_conteudo": "publicavel",
+    "revisado_por": "curadoria-editorial-2026-08",
+    "revisao_prevista_em": "2026-11-12",
+    "vigencia_inicio": "2023-06-19",
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "bpc-loas-idoso",
@@ -54,7 +90,42 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["loas", "aposentadoria sem contribuir", "benefício do idoso", "salário do idoso", "nunca trabalhei de carteira assinada", "vovô", "vovó", "65 anos"]
+    "termos_populares": [
+      "loas",
+      "aposentadoria sem contribuir",
+      "benefício do idoso",
+      "salário do idoso",
+      "nunca trabalhei de carteira assinada",
+      "vovô",
+      "vovó",
+      "65 anos"
+    ],
+    "resumo_simples": "Benefício assistencial para pessoa idosa que cumpra os requisitos legais e cadastrais verificados pelo INSS.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Um salário mínimo por mês para quem tem 65 anos ou mais e renda familiar de menos de 1/4 de salário mínimo por pessoa. Não precisa ter contribuído para o INSS. Precisa estar no CadÚnico.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [
+      {
+        "titulo": "Benefícios Assistenciais",
+        "url": "https://www.gov.br/inss/pt-br/servicos/beneficios-assistenciais",
+        "orgao": "Instituto Nacional do Seguro Social",
+        "acessado_em": "2026-08-12"
+      }
+    ],
+    "status_conteudo": "publicavel",
+    "revisado_por": "curadoria-editorial-2026-08",
+    "revisao_prevista_em": "2026-11-12",
+    "vigencia_inicio": "1993-12-07",
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "bpc-loas-pcd",
@@ -82,7 +153,42 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["loas deficiente", "benefício para deficiente", "criança autista", "autismo", "deficiência", "não consigo trabalhar", "filho especial", "salário para pcd"]
+    "termos_populares": [
+      "loas deficiente",
+      "benefício para deficiente",
+      "criança autista",
+      "autismo",
+      "deficiência",
+      "não consigo trabalhar",
+      "filho especial",
+      "salário para pcd"
+    ],
+    "resumo_simples": "Benefício assistencial para pessoa com deficiência que cumpra os requisitos legais, sociais e cadastrais.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Um salário mínimo por mês para pessoa com deficiência de longo prazo (física, mental, intelectual ou sensorial), de QUALQUER idade — não é só para idosos. A renda da família deve ser menor que 1/4 de salário mínimo por pessoa. Não precisa ter contribuído para o INSS. Passa por avaliação médica e social do INSS.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [
+      {
+        "titulo": "Benefício assistencial à pessoa com deficiência (BPC-Loas)",
+        "url": "https://www.gov.br/inss/pt-br/direitos-e-deveres/beneficios-assistenciais/beneficio-assistencial-a-pessoa-com-deficiencia-bpc-loas",
+        "orgao": "Instituto Nacional do Seguro Social",
+        "acessado_em": "2026-08-12"
+      }
+    ],
+    "status_conteudo": "publicavel",
+    "revisado_por": "curadoria-editorial-2026-08",
+    "revisao_prevista_em": "2026-11-12",
+    "vigencia_inicio": "1993-12-07",
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "seguro-desemprego",
@@ -111,7 +217,40 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["fui demitido", "mandado embora", "perdi o emprego", "desempregado", "rescisão", "carteira assinada"]
+    "termos_populares": [
+      "fui demitido",
+      "mandado embora",
+      "perdi o emprego",
+      "desempregado",
+      "rescisão",
+      "carteira assinada"
+    ],
+    "resumo_simples": "Assistência financeira temporária para trabalhador dispensado sem justa causa que cumpra os requisitos oficiais.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Para quem trabalhava de carteira assinada e foi demitido sem justa causa. No primeiro pedido, é preciso ter trabalhado pelo menos 12 meses nos últimos 18. Paga de 3 a 5 parcelas, conforme o tempo trabalhado.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [
+      {
+        "titulo": "Solicitar o Seguro-Desemprego",
+        "url": "https://www.gov.br/pt-br/servicos/solicitar-o-seguro-desemprego",
+        "orgao": "Ministério do Trabalho e Emprego",
+        "acessado_em": "2026-08-12"
+      }
+    ],
+    "status_conteudo": "publicavel",
+    "revisado_por": "curadoria-editorial-2026-08",
+    "revisao_prevista_em": "2026-11-12",
+    "vigencia_inicio": "1990-01-11",
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "auxilio-incapacidade-temporaria",
@@ -139,7 +278,41 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["encostado", "encostar no inss", "afastado do trabalho", "atestado", "perícia", "doente sem poder trabalhar", "cirurgia"]
+    "termos_populares": [
+      "encostado",
+      "encostar no inss",
+      "afastado do trabalho",
+      "atestado",
+      "perícia",
+      "doente sem poder trabalhar",
+      "cirurgia"
+    ],
+    "resumo_simples": "Benefício previdenciário sujeito à comprovação de incapacidade temporária e aos demais requisitos do INSS.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Para quem contribui (ou contribuiu há pouco tempo) para o INSS e está sem condições de trabalhar por mais de 15 dias por doença ou acidente. Em geral, pede 12 meses de contribuição — mas acidentes e algumas doenças graves não exigem esse tempo mínimo.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [
+      {
+        "titulo": "Solicitar Auxílio por Incapacidade Temporária",
+        "url": "https://www.gov.br/pt-br/servicos/solicitar-beneficio-por-incapacidade-temporaria-auxilio-doenca",
+        "orgao": "Instituto Nacional do Seguro Social",
+        "acessado_em": "2026-08-12"
+      }
+    ],
+    "status_conteudo": "publicavel",
+    "revisado_por": "curadoria-editorial-2026-08",
+    "revisao_prevista_em": "2026-11-12",
+    "vigencia_inicio": "1991-07-24",
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "farmacia-popular",
@@ -165,7 +338,43 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["remédio de graça", "remédio caro", "não consigo comprar remédio", "pressão alta", "diabetes", "insulina", "asma", "bombinha", "fralda geriátrica"]
+    "termos_populares": [
+      "remédio de graça",
+      "remédio caro",
+      "não consigo comprar remédio",
+      "pressão alta",
+      "diabetes",
+      "insulina",
+      "asma",
+      "bombinha",
+      "fralda geriátrica"
+    ],
+    "resumo_simples": "Programa que oferece medicamentos e insumos por farmácias credenciadas, conforme produtos e documentos vigentes.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Remédios de graça (ou com grande desconto) para qualquer pessoa com receita médica válida. Cobre remédios de pressão alta, diabetes, asma, colesterol, osteoporose, anticoncepcionais, fraldas geriátricas e outros. Não precisa de cadastro prévio.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [
+      {
+        "titulo": "Farmácia Popular",
+        "url": "https://www.gov.br/saude/pt-br/composicao/sectics/daf/farmacia-popular",
+        "orgao": "Ministério da Saúde",
+        "acessado_em": "2026-08-12"
+      }
+    ],
+    "status_conteudo": "publicavel",
+    "revisado_por": "curadoria-editorial-2026-08",
+    "revisao_prevista_em": "2026-11-12",
+    "vigencia_inicio": "2004-04-13",
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "pe-de-meia",
@@ -193,7 +402,33 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["poupança do ensino médio", "dinheiro pra estudar", "bolsa estudante", "filho na escola", "ensino médio", "enem"]
+    "termos_populares": [
+      "poupança do ensino médio",
+      "dinheiro pra estudar",
+      "bolsa estudante",
+      "filho na escola",
+      "ensino médio",
+      "enem"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Pé-de-Meia.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Poupança para estudantes do ensino médio público. Paga incentivos por matrícula, frequência e conclusão de cada ano, mais um valor extra por fazer o Enem. Para estudantes de famílias inscritas no CadÚnico.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "seguro-defeso",
@@ -221,7 +456,33 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["pescador", "pesca proibida", "defeso", "colônia de pescadores", "piracema", "vivo da pesca"]
+    "termos_populares": [
+      "pescador",
+      "pesca proibida",
+      "defeso",
+      "colônia de pescadores",
+      "piracema",
+      "vivo da pesca"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Seguro-Defeso (pescador artesanal).",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Um salário mínimo por mês para pescadores artesanais durante o período de defeso (época em que a pesca é proibida para proteger a reprodução dos peixes). É preciso ter o Registro Geral da Pesca (RGP) ativo e viver da pesca.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "auxilio-reclusao",
@@ -249,7 +510,34 @@
     "prioridade_base": 3,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["marido preso", "esposa presa", "pai preso", "presídio", "cadeia", "detento", "família de preso"]
+    "termos_populares": [
+      "marido preso",
+      "esposa presa",
+      "pai preso",
+      "presídio",
+      "cadeia",
+      "detento",
+      "família de preso"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Auxílio-Reclusão.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Pago à família (dependentes) de quem está preso em regime fechado — não é pago ao preso. A pessoa presa precisava estar contribuindo para o INSS antes da prisão e ser considerada de baixa renda. Filhos menores de 21 anos e cônjuge contam como dependentes.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "pensao-morte-rural",
@@ -278,7 +566,35 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["viúva da roça", "marido faleceu", "trabalhava na roça", "agricultor", "lavoura", "sem carteira assinada", "segurado especial", "pensão"]
+    "termos_populares": [
+      "viúva da roça",
+      "marido faleceu",
+      "trabalhava na roça",
+      "agricultor",
+      "lavoura",
+      "sem carteira assinada",
+      "segurado especial",
+      "pensão"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Pensão por Morte Rural.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Para a família de trabalhador rural que faleceu — MESMO que ele nunca tenha tido carteira assinada nem pago INSS. O trabalhador rural em regime familiar é 'segurado especial': basta provar que ele vivia do campo (declarações, notas de venda da produção, documentos da terra).",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "isencao-impostos-carro-pcd",
@@ -307,7 +623,33 @@
     "prioridade_base": 4,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["carro pcd", "carro com desconto", "isenção de imposto carro", "carro para deficiente", "autismo carro", "comprar carro mais barato"]
+    "termos_populares": [
+      "carro pcd",
+      "carro com desconto",
+      "isenção de imposto carro",
+      "carro para deficiente",
+      "autismo carro",
+      "comprar carro mais barato"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Isenção de IPI/ICMS na compra de carro para PCD.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Pessoas com deficiência física, visual, mental severa ou autismo podem comprar carro novo sem pagar IPI (imposto federal) — e, em muitos estados, também sem ICMS. Vale mesmo se a pessoa não dirige: o carro pode ficar no nome dela com outro condutor. O desconto total costuma passar de 20% do valor do carro.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "tarifa-social-energia",
@@ -334,7 +676,33 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["conta de luz cara", "desconto na luz", "não consigo pagar a luz", "conta de água", "luz cortada", "energia"]
+    "termos_populares": [
+      "conta de luz cara",
+      "desconto na luz",
+      "não consigo pagar a luz",
+      "conta de água",
+      "luz cortada",
+      "energia"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Tarifa Social de Energia (e de Água).",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Desconto (ou até gratuidade em faixas de baixo consumo) na conta de luz para famílias no CadÚnico com renda de até meio salário mínimo por pessoa, e para quem recebe BPC. O desconto costuma ser aplicado automaticamente para quem está no CadÚnico. Para água e esgoto, muitas cidades têm tarifa social parecida — procure a companhia de água local.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "restituicao-ir-nao-sacada",
@@ -361,7 +729,33 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["dinheiro esquecido", "restituição", "imposto de renda", "dinheiro parado na receita", "malha fina", "leão"]
+    "termos_populares": [
+      "dinheiro esquecido",
+      "restituição",
+      "imposto de renda",
+      "dinheiro parado na receita",
+      "malha fina",
+      "leão"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Restituição de Imposto de Renda esquecida.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Se você já trabalhou com desconto de imposto de renda na folha e não declarou (ou declarou e não sacou a restituição), pode haver dinheiro seu parado na Receita Federal. A restituição não sacada em até 1 ano volta para a Receita, mas continua sua — basta pedir de novo. Não tem prazo para perder esse dinheiro.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "passe-livre-meia-entrada-pcd",
@@ -388,7 +782,33 @@
     "prioridade_base": 3,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "estadual_variavel",
-    "termos_populares": ["passagem de graça", "ônibus de graça", "viajar de graça", "meia entrada", "carteirinha pcd", "transporte deficiente"]
+    "termos_populares": [
+      "passagem de graça",
+      "ônibus de graça",
+      "viajar de graça",
+      "meia entrada",
+      "carteirinha pcd",
+      "transporte deficiente"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Passe Livre e meia-entrada para PCD.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Pessoa com deficiência de baixa renda tem passagem GRATUITA em ônibus interestaduais (viagens entre estados) — e o acompanhante pode ter direito também. Em eventos culturais e esportivos, PCD e acompanhante pagam meia-entrada. No transporte da sua cidade e do seu estado, a gratuidade varia — procure a prefeitura ou o órgão estadual.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "saque-aniversario-fgts",
@@ -415,7 +835,33 @@
     "prioridade_base": 4,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["fgts", "sacar fgts", "fundo de garantia", "dinheiro do fgts", "saque aniversário", "preciso de dinheiro"]
+    "termos_populares": [
+      "fgts",
+      "sacar fgts",
+      "fundo de garantia",
+      "dinheiro do fgts",
+      "saque aniversário",
+      "preciso de dinheiro"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Saque-Aniversário do FGTS.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Quem tem saldo no FGTS pode optar por sacar uma parte todo ano, no mês do aniversário. ATENÇÃO à troca: quem escolhe o saque-aniversário PERDE o direito de sacar o valor total se for demitido (a multa de 40% continua). E para voltar ao modelo antigo há uma carência de 2 anos. Vale a pena principalmente para quem precisa de dinheiro agora e tem estabilidade.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "novo-desenrola-brasil",
@@ -442,7 +888,35 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["nome sujo", "limpar o nome", "dívida atrasada", "serasa", "spc", "negativado", "renegociar dívida", "desenrola"]
+    "termos_populares": [
+      "nome sujo",
+      "limpar o nome",
+      "dívida atrasada",
+      "serasa",
+      "spc",
+      "negativado",
+      "renegociar dívida",
+      "desenrola"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Novo Desenrola Brasil (renegociação de dívidas).",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Programa federal para renegociar dívidas atrasadas com grandes descontos e limpar o nome. Criado por Medida Provisória em 2026 como sucessor do Desenrola Brasil. Voltado principalmente a pessoas negativadas de baixa renda ou inscritas no CadÚnico. As condições exatas (faixas, prazos e descontos) devem ser confirmadas no site oficial, pois o programa é recente.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "rascunho",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": true
   },
   {
     "id": "caps",
@@ -468,7 +942,45 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["depressão", "ansiedade", "crise", "pensamento ruim", "vontade de sumir", "psicólogo de graça", "psiquiatra de graça", "álcool", "droga", "vício", "surto"]
+    "termos_populares": [
+      "depressão",
+      "ansiedade",
+      "crise",
+      "pensamento ruim",
+      "vontade de sumir",
+      "psicólogo de graça",
+      "psiquiatra de graça",
+      "álcool",
+      "droga",
+      "vício",
+      "surto"
+    ],
+    "resumo_simples": "Serviço público comunitário de saúde mental, com modalidades e funcionamento definidos pela rede local do SUS.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Atendimento GRATUITO do SUS para quem está em sofrimento mental (depressão grave, crises, pensamentos de morte, esquizofrenia) ou com problemas com álcool e outras drogas (CAPS AD). Há CAPS infantojuvenil (CAPSi) para crianças e adolescentes. Não precisa de encaminhamento: pode chegar direto, e não paga nada.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [
+      {
+        "titulo": "Centros de Atenção Psicossocial (CAPS)",
+        "url": "https://www.gov.br/saude/pt-br/composicao/saes/desmad/raps/caps",
+        "orgao": "Ministério da Saúde",
+        "acessado_em": "2026-08-12"
+      }
+    ],
+    "status_conteudo": "publicavel",
+    "revisado_por": "curadoria-editorial-2026-08",
+    "revisao_prevista_em": "2026-11-12",
+    "vigencia_inicio": "2001-04-06",
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "auxilio-doenca-transtorno-mental",
@@ -496,7 +1008,34 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["depressão atestado", "encostar por depressão", "burnout", "esgotamento", "síndrome do pânico", "não aguento mais trabalhar", "afastamento saúde mental"]
+    "termos_populares": [
+      "depressão atestado",
+      "encostar por depressão",
+      "burnout",
+      "esgotamento",
+      "síndrome do pânico",
+      "não aguento mais trabalhar",
+      "afastamento saúde mental"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Auxílio-Doença por transtorno mental.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Depressão grave, transtorno de ansiedade incapacitante, transtorno bipolar, esquizofrenia e outros transtornos mentais DÃO direito a auxílio-doença, sim — desde que impeçam de trabalhar por mais de 15 dias e você tenha qualidade de segurado do INSS. O que mais reprova é laudo fraco: ele precisa ser detalhado.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "estabilidade-licenca-psiquiatrica",
@@ -523,7 +1062,32 @@
     "prioridade_base": 3,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["voltar do afastamento", "demitido depois do atestado", "burnout demissão", "assédio no trabalho", "adoeci por causa do trabalho"]
+    "termos_populares": [
+      "voltar do afastamento",
+      "demitido depois do atestado",
+      "burnout demissão",
+      "assédio no trabalho",
+      "adoeci por causa do trabalho"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Estabilidade no emprego após licença psiquiátrica.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Se o transtorno mental foi CAUSADO ou agravado pelo trabalho (assédio, pressão extrema, burnout) e o INSS reconhecer isso (benefício acidentário, código B91), você tem 12 meses de estabilidade no emprego depois de voltar — não pode ser demitido sem justa causa nesse período.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "vaga-reservada-lei-cotas",
@@ -550,7 +1114,32 @@
     "prioridade_base": 3,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["emprego para deficiente", "vaga pcd", "cota deficiente", "trabalhar com deficiência", "reabilitado inss"]
+    "termos_populares": [
+      "emprego para deficiente",
+      "vaga pcd",
+      "cota deficiente",
+      "trabalhar com deficiência",
+      "reabilitado inss"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Vaga reservada para PCD (Lei de Cotas).",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Empresas com 100 ou mais funcionários são OBRIGADAS a reservar de 2% a 5% das vagas para pessoas com deficiência ou reabilitadas pelo INSS. Vale para qualquer deficiência comprovada por laudo. Receber BPC não impede de tentar — há regras que permitem suspender o benefício e recuperá-lo se o emprego acabar.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "prioridade-fila-inss-cadunico",
@@ -575,7 +1164,32 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["fila preferencial", "prioridade", "atendimento preferencial", "fila do inss demora", "processo demorado inss"]
+    "termos_populares": [
+      "fila preferencial",
+      "prioridade",
+      "atendimento preferencial",
+      "fila do inss demora",
+      "processo demorado inss"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Atendimento prioritário (INSS, CRAS e filas em geral).",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Pessoas com deficiência, idosos (60+), gestantes, lactantes, pessoas com criança de colo e autistas têm direito a atendimento prioritário em órgãos públicos, bancos e empresas — incluindo INSS e CRAS. Idosos e PCD também têm direito a tramitação mais rápida de processos administrativos e judiciais. Não precisa requerer: é só se identificar.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "estabilidade-acidente-trabalho",
@@ -602,7 +1216,32 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["me acidentei no trabalho", "demitido depois do acidente", "voltei do inss e fui demitido", "acidente na firma", "doença do trabalho"]
+    "termos_populares": [
+      "me acidentei no trabalho",
+      "demitido depois do acidente",
+      "voltei do inss e fui demitido",
+      "acidente na firma",
+      "doença do trabalho"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Estabilidade de 12 meses após acidente de trabalho.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Quem sofre acidente de trabalho (ou doença ocupacional), fica afastado mais de 15 dias e recebe auxílio-doença acidentário (código B91) tem estabilidade de 12 MESES ao voltar: a empresa não pode demitir sem justa causa nesse período. Para isso, é essencial que o acidente tenha sido registrado com a CAT.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "cat-comunicacao-acidente",
@@ -630,7 +1269,32 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["sofri acidente no trabalho", "empresa não registrou acidente", "acidente de trajeto", "machuquei no serviço", "firma não quer emitir cat"]
+    "termos_populares": [
+      "sofri acidente no trabalho",
+      "empresa não registrou acidente",
+      "acidente de trajeto",
+      "machuquei no serviço",
+      "firma não quer emitir cat"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: CAT — registro do acidente de trabalho.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Todo acidente de trabalho (inclusive no trajeto casa-trabalho) e toda doença causada pelo trabalho devem ser registrados na CAT. A empresa é OBRIGADA a emitir até o 1º dia útil após o acidente — mas se ela se recusar, você mesmo, o sindicato ou o médico podem emitir. Sem CAT, você pode perder a estabilidade e outros direitos.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "adicional-insalubridade-periculosidade",
@@ -658,7 +1322,35 @@
     "prioridade_base": 3,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["trabalho perigoso", "trabalho insalubre", "produto químico", "trabalho no sol", "adicional", "vigilante", "motoboy", "hospital limpeza"]
+    "termos_populares": [
+      "trabalho perigoso",
+      "trabalho insalubre",
+      "produto químico",
+      "trabalho no sol",
+      "adicional",
+      "vigilante",
+      "motoboy",
+      "hospital limpeza"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Adicional de insalubridade / periculosidade.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Quem trabalha exposto a agentes nocivos (calor extremo, ruído, produtos químicos, lixo, hospital) tem direito a adicional de insalubridade de 10%, 20% ou 40% do salário mínimo. Quem trabalha em atividade perigosa (inflamáveis, eletricidade, explosivos, vigilância, moto) tem direito a 30% a mais sobre o salário. O direito depende de perícia no local de trabalho.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "auxilio-acidente",
@@ -686,7 +1378,34 @@
     "prioridade_base": 2,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["sequela", "perdi o movimento", "amputação", "acidente de moto", "não fiquei bom", "indenização inss", "voltei a trabalhar com sequela"]
+    "termos_populares": [
+      "sequela",
+      "perdi o movimento",
+      "amputação",
+      "acidente de moto",
+      "não fiquei bom",
+      "indenização inss",
+      "voltei a trabalhar com sequela"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Auxílio-Acidente (indenização por sequela).",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Se um acidente (de trabalho ou não) deixou sequela PERMANENTE que reduz sua capacidade de trabalhar — perda de movimento, amputação, perda de audição/visão parcial — você pode receber uma indenização mensal de 50% do salário de benefício. E pode CONTINUAR TRABALHANDO enquanto recebe: pouca gente sabe disso.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "bolsa-familia-prioridade-violencia",
@@ -714,7 +1433,34 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["saí de casa", "fugi de casa", "cadastro no nome do marido", "benefício no nome dele", "recomeçar", "violência", "agressor"]
+    "termos_populares": [
+      "saí de casa",
+      "fugi de casa",
+      "cadastro no nome do marido",
+      "benefício no nome dele",
+      "recomeçar",
+      "violência",
+      "agressor"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Bolsa Família com prioridade para mulher em situação de violência.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Mulher que saiu de casa (ou precisa sair) por violência doméstica pode fazer o próprio CadÚnico, separado do agressor, e receber o Bolsa Família como responsável pela família — mesmo que o cadastro antigo estivesse no nome dele ou em outra cidade. Com medida protetiva, os dados dela no cadastro podem ser protegidos para o agressor não localizar.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "medida-protetiva",
@@ -741,7 +1487,34 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["ele me ameaça", "apanho em casa", "marido agressivo", "ex não me deixa em paz", "medo do meu marido", "medida contra agressor", "maria da penha"]
+    "termos_populares": [
+      "ele me ameaça",
+      "apanho em casa",
+      "marido agressivo",
+      "ex não me deixa em paz",
+      "medo do meu marido",
+      "medida contra agressor",
+      "maria da penha"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Medida protetiva (Lei Maria da Penha).",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Proteção urgente e GRATUITA para mulher em situação de violência doméstica (física, psicológica, sexual, patrimonial ou moral). O juiz pode obrigar o agressor a sair de casa e a manter distância. Decisão sai em até 48 horas. Não precisa de advogado nem de marca visível de agressão — violência psicológica também conta.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "casa-da-mulher-brasileira",
@@ -767,7 +1540,33 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["abrigo para mulher", "para onde ir", "sair de casa com os filhos", "apoio para mulher agredida", "casa abrigo", "delegacia da mulher"]
+    "termos_populares": [
+      "abrigo para mulher",
+      "para onde ir",
+      "sair de casa com os filhos",
+      "apoio para mulher agredida",
+      "casa abrigo",
+      "delegacia da mulher"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Casa da Mulher Brasileira e rede de acolhimento.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Atendimento GRATUITO e integrado para mulheres em situação de violência: delegacia, apoio psicológico e social, orientação jurídica, encaminhamento para abrigo e até ajuda para autonomia financeira — tudo no mesmo lugar. Onde não há Casa da Mulher Brasileira, existem CRAM (Centro de Referência da Mulher) e CREAS fazendo papel parecido.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "cadunico-sem-endereco",
@@ -794,7 +1593,34 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["morando na rua", "sem endereço", "sem casa", "albergue", "centro pop", "situação de rua", "não tenho comprovante de residência"]
+    "termos_populares": [
+      "morando na rua",
+      "sem endereço",
+      "sem casa",
+      "albergue",
+      "centro pop",
+      "situação de rua",
+      "não tenho comprovante de residência"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: CadÚnico para quem não tem endereço fixo.",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Pessoa em situação de rua PODE se cadastrar no CadÚnico mesmo sem endereço — usando um endereço de referência, como o CRAS, o Centro POP ou uma instituição de acolhida. O CadÚnico é a porta de entrada para Bolsa Família, tarifa social, BPC e outros direitos.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   },
   {
     "id": "documentacao-civil-gratuita",
@@ -821,6 +1647,32 @@
     "prioridade_base": 1,
     "ultima_revisao": "2026-07-05",
     "abrangencia": "federal",
-    "termos_populares": ["perdi meus documentos", "sem documento", "tirar rg de graça", "certidão de nascimento", "roubaram meus documentos", "segunda via"]
+    "termos_populares": [
+      "perdi meus documentos",
+      "sem documento",
+      "tirar rg de graça",
+      "certidão de nascimento",
+      "roubaram meus documentos",
+      "segunda via"
+    ],
+    "resumo_simples": "Conteúdo em revisão editorial: Documentos de graça (2ª via de certidão, RG/CIN).",
+    "criterios_estruturados": [
+      {
+        "id": "confirmar-requisitos-oficiais",
+        "descricao": "Quem não pode pagar tem direito à 2ª via GRATUITA da certidão de nascimento ou casamento — basta declarar que é pobre, direto no cartório (não precisa provar). A 1ª via da nova carteira de identidade (CIN) é gratuita para todos; a 2ª via gratuita para quem é de baixa renda varia por estado. Sem documento não se acessa quase nenhum benefício — este costuma ser o primeiro passo.",
+        "confirmacao": "avaliacao_oficial"
+      }
+    ],
+    "excecoes_e_alertas": [
+      "A orientação não garante concessão; confirme regras e documentos no canal oficial."
+    ],
+    "fontes_oficiais": [],
+    "status_conteudo": "revisao_pendente",
+    "revisado_por": "pendente-revisao-editorial",
+    "revisao_prevista_em": "2026-09-12",
+    "vigencia_inicio": null,
+    "vigencia_fim": null,
+    "versao_conteudo": 1,
+    "programa_temporario": false
   }
 ]
