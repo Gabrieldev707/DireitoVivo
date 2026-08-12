@@ -1,5 +1,11 @@
 import type { FastifyInstance } from 'fastify';
-import { ErroTriagem, executarTriagem, type MensagemChat } from '@direito-vivo/rag';
+import {
+  ErroTriagem,
+  executarTriagem,
+  obterModoAplicacao,
+  validarModoAplicacao,
+  type MensagemChat,
+} from '@direito-vivo/rag';
 
 // Limites defensivos: conversa curta por natureza (máx. 6 perguntas do assistente).
 const esquemaCorpo = {
@@ -7,6 +13,7 @@ const esquemaCorpo = {
   required: ['mensagens'],
   additionalProperties: false,
   properties: {
+    aceite_demo: { type: 'boolean' },
     mensagens: {
       type: 'array',
       minItems: 1,
@@ -28,7 +35,16 @@ export async function rotasTriagem(app: FastifyInstance) {
   app.get('/saude', async () => ({ ok: true }));
 
   app.post('/triagem', { schema: { body: esquemaCorpo } }, async (requisicao, resposta) => {
-    const { mensagens } = requisicao.body as { mensagens: MensagemChat[] };
+    const { mensagens, aceite_demo } = requisicao.body as {
+      mensagens: MensagemChat[];
+      aceite_demo?: boolean;
+    };
+    const modo = obterModoAplicacao();
+    validarModoAplicacao(modo);
+    if (modo === 'demo' && aceite_demo !== true) {
+      resposta.status(403);
+      return { erro: 'Confirme os termos da demonstração antes de continuar.' };
+    }
     try {
       return await executarTriagem(mensagens);
     } catch (erro) {

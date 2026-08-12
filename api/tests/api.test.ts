@@ -19,6 +19,7 @@ vi.mock('@direito-vivo/rag', async (importOriginal) => {
 });
 
 const { rotasTriagem } = await import('../src/rotas/triagem.js');
+const modoAplicacaoOriginal = process.env.MODO_APLICACAO;
 
 async function montarApp(): Promise<FastifyInstance> {
   const app = Fastify({ disableRequestLogging: true, logger: false });
@@ -36,6 +37,8 @@ beforeEach(async () => {
 
 afterEach(async () => {
   await app.close();
+  if (modoAplicacaoOriginal === undefined) delete process.env.MODO_APLICACAO;
+  else process.env.MODO_APLICACAO = modoAplicacaoOriginal;
 });
 
 describe('GET /api/saude', () => {
@@ -50,6 +53,36 @@ describe('POST /api/triagem', () => {
   const historicoValido = {
     mensagens: [{ papel: 'usuario', conteudo: 'estou desempregado' }],
   };
+
+  it('recusa triagem sem aceite no modo demo', async () => {
+    process.env.MODO_APLICACAO = 'demo';
+
+    const r = await app.inject({
+      method: 'POST',
+      url: '/api/triagem',
+      payload: historicoValido,
+    });
+
+    expect(r.statusCode).toBe(403);
+    expect(r.json()).toEqual({
+      erro: 'Confirme os termos da demonstração antes de continuar.',
+    });
+    expect(mockExecutarTriagem).not.toHaveBeenCalled();
+  });
+
+  it('aceita a triagem consentida no modo demo', async () => {
+    process.env.MODO_APLICACAO = 'demo';
+    mockExecutarTriagem.mockResolvedValue({ tipo: 'pergunta', mensagem: 'renda?' });
+
+    const r = await app.inject({
+      method: 'POST',
+      url: '/api/triagem',
+      payload: { ...historicoValido, aceite_demo: true },
+    });
+
+    expect(r.statusCode).toBe(200);
+    expect(mockExecutarTriagem).toHaveBeenCalledWith(historicoValido.mensagens);
+  });
 
   it('encaminha para o motor e devolve a resposta', async () => {
     mockExecutarTriagem.mockResolvedValue({ tipo: 'pergunta', mensagem: 'renda?' });
