@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "test": "vitest run",
+    "auditar": "tsx scripts/auditar-conteudo.ts",
     "seed": "tsx scripts/carregar-seed.ts",
     "embeddings": "tsx scripts/gerar-embeddings.ts",
     "catalogo": "tsx scripts/gerar-catalogo-frontend.ts"
@@ -14,6 +16,7 @@
   },
   "devDependencies": {
     "tsx": "^4.19.0",
-    "typescript": "^5.6.0"
+    "typescript": "^5.6.0",
+    "vitest": "^4.1.10"
   }
 }
