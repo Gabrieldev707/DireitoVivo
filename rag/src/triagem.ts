@@ -5,6 +5,7 @@ import { buscarFichasPorIds, buscarItensRelevantes } from './busca.js';
 import { obterProvedorLLM } from './provedor-llm.js';
 import { MENSAGEM_SEM_MATCH, montarPromptTriagem } from './prompts.js';
 import { protegerMensagens } from './protecao-dados.js';
+import { detectarUrgencia } from './urgencia.js';
 import type { DireitoItem, ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos.js';
 
 const LIMITE_CANDIDATOS = 10;
@@ -20,12 +21,19 @@ export async function executarTriagem(mensagens: MensagemChat[]): Promise<Respos
   const mensagensProtegidas = protecao.mensagens;
   const houveMascaramento = protecao.categoriasMascaradas.length > 0;
 
-  // O "perfil" da busca é tudo que o usuário contou até aqui, já protegido.
   const relatoUsuario = mensagensProtegidas
     .filter((m) => m.papel === 'usuario')
     .map((m) => m.conteudo)
     .join('\n');
+  const urgencia = detectarUrgencia(relatoUsuario);
+  if (urgencia) {
+    return {
+      ...urgencia,
+      ...(houveMascaramento ? { aviso_dados_mascarados: true } : {}),
+    };
+  }
 
+  // O "perfil" da busca é tudo que o usuário contou até aqui, já protegido.
   const candidatos = await buscarItensRelevantes(relatoUsuario, LIMITE_CANDIDATOS);
   const perguntasFeitas = mensagensProtegidas.filter((m) => m.papel === 'assistente').length;
 

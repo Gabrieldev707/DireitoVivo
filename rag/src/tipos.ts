@@ -70,10 +70,25 @@ export interface MensagemChat {
   conteudo: string;
 }
 
+export interface CanalUrgencia {
+  nome: string;
+  numero: string;
+  quando_usar: string;
+}
+
+export interface RespostaUrgencia {
+  tipo: 'urgencia';
+  nivel: 'imediato';
+  mensagem: string;
+  canais: CanalUrgencia[];
+  aviso_dados_mascarados?: boolean;
+}
+
 export type RespostaTriagem =
   | { tipo: 'pergunta'; mensagem: string; aviso_dados_mascarados?: boolean }
   | { tipo: 'resultado'; mensagem: string; itens: ItemLinhaDaVida[]; aviso_dados_mascarados?: boolean }
-  | { tipo: 'sem_match'; mensagem: string; aviso_dados_mascarados?: boolean };
+  | { tipo: 'sem_match'; mensagem: string; aviso_dados_mascarados?: boolean }
+  | RespostaUrgencia;
 
 /** Linha retornada pela função SQL buscar_direitos / select na tabela. */
 export interface LinhaDireitoItem {

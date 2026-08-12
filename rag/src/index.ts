@@ -9,3 +9,4 @@ export { executarTriagem, ordenarLinhaDaVida, ErroTriagem, TEXTO_DISCLAIMER } fr
 export { MAX_PERGUNTAS, MENSAGEM_SEM_MATCH } from './prompts.js';
 export { obterModoAplicacao, validarModoAplicacao, type ModoAplicacao } from './modo-aplicacao.js';
 export { protegerMensagens, type CategoriaDado } from './protecao-dados.js';
+export { detectarUrgencia } from './urgencia.js';

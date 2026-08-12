@@ -163,6 +163,19 @@ describe('executarTriagem', () => {
     });
   });
 
+  it('interrompe em risco imediato sem chamar busca, banco ou LLM', async () => {
+    const resposta = await executarTriagem([
+      { papel: 'usuario', conteudo: 'Ele está armado e vai me matar agora' },
+    ]);
+
+    expect(resposta.tipo).toBe('urgencia');
+    if (resposta.tipo !== 'urgencia') return;
+    expect(resposta.canais.map((canal) => canal.numero)).toEqual(['190']);
+    expect(mockBuscarItensRelevantes).not.toHaveBeenCalled();
+    expect(mockBuscarFichasPorIds).not.toHaveBeenCalled();
+    expect(mockGerarTexto).not.toHaveBeenCalled();
+  });
+
   it('devolve sem_match quando o LLM propõe id que não está entre candidatos', async () => {
     const bolsa = criarItem({ id: 'bolsa-familia', prioridade_base: 1 });
     mockBuscarItensRelevantes.mockResolvedValue([bolsa]);
