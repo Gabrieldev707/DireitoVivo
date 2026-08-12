@@ -7,7 +7,7 @@ interface PropriedadesGovFooter {
 }
 
 const PRINCIPIOS = [
-  'Anônimo',
+  'Modo demonstração',
   'Gratuito',
   'Sem cadastro',
   'Código aberto',
@@ -78,7 +78,7 @@ export function GovFooter({ aoMudarAba }: PropriedadesGovFooter) {
                 </li>
                 <li>
                   <button type="button" onClick={() => aoMudarAba?.('chat')} className="footer-link">
-                    Triagem anônima
+                    Demonstração da triagem
                   </button>
                 </li>
               </ul>

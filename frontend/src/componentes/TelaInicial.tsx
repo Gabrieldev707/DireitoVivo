@@ -68,7 +68,7 @@ export function TelaInicial({ aoComecar, aoVerCatalogo, aoVerCenarios }: Proprie
       descricao:
         'Uma conversa guiada para transformar um problema confuso em próximos passos possíveis.',
       imagem: '/assets/secao-chat-triagem.png',
-      alt: 'Atendimento digital em celular com foco em serviço público anônimo',
+      alt: 'Atendimento digital em celular com foco em orientação sobre serviços públicos',
       acao: 'Iniciar triagem',
       onClick: aoComecar,
       tom: 'border-[#FFCD07]',
@@ -105,7 +105,7 @@ export function TelaInicial({ aoComecar, aoVerCatalogo, aoVerCenarios }: Proprie
                 <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.4} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-5l-5 5v-5z" />
                 </svg>
-                Iniciar triagem anônima
+                Iniciar demonstração
               </button>
 
               <button type="button" onClick={aoVerCatalogo} className="btn-gov-hero-secondary">
@@ -118,8 +118,8 @@ export function TelaInicial({ aoComecar, aoVerCatalogo, aoVerCenarios }: Proprie
 
             <dl className="mt-9 grid max-w-3xl grid-cols-1 gap-3 text-sm sm:grid-cols-3">
               <div className="hero-stat border-[#FFCD07]">
-                <dt>Privacidade</dt>
-                <dd>0 documentos pessoais no chat</dd>
+                <dt>Proteção</dt>
+                <dd>Mascaramento de dados pessoais</dd>
               </div>
               <div className="hero-stat border-[#168821]">
                 <dt>Catálogo</dt>
@@ -174,10 +174,10 @@ export function TelaInicial({ aoComecar, aoVerCatalogo, aoVerCenarios }: Proprie
               O Direito Vivo é um <strong>projeto independente</strong>, sem vínculo com o Governo
               Federal. Ele não recebe pedidos, não consulta sistemas públicos e não decide
               benefício: organiza a informação que já é pública e indica onde confirmar
-              oficialmente. Toda a conversa é anônima e nada é armazenado.
+              oficialmente. A demonstração envia o texto a um provedor de IA e orienta o usuário a não compartilhar dados pessoais.
             </p>
             <div className="mt-5 flex flex-wrap gap-2">
-              {['Sem CPF ou RG', 'Sem cadastro', 'Nada é salvo', 'Gratuito'].map((selo) => (
+              {['Evite CPF ou RG', 'Sem cadastro', 'Modo demonstração', 'Gratuito'].map((selo) => (
                 <span
                   key={selo}
                   className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-xs font-black text-[#075e54]"
