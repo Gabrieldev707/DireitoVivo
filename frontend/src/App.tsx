@@ -8,6 +8,7 @@ import { CenariosVida } from './componentes/CenariosVida';
 import { GovHeader, type AbaNavegacao } from './componentes/GovHeader';
 import { GovFooter } from './componentes/GovFooter';
 import { ConsentimentoDemo } from './componentes/ConsentimentoDemo';
+import { PainelUrgencia } from './componentes/PainelUrgencia';
 import type { ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos';
 
 // Primeira fala do assistente — local, sem custo de LLM (RF01: acolhedora e sem pedir PII).
@@ -29,6 +30,7 @@ export function App() {
   const [abaAtiva, setAbaAtiva] = useState<AbaNavegacao>(obterAbaInicial);
   const [mensagens, setMensagens] = useState<MensagemChat[]>([MENSAGEM_ABERTURA]);
   const [resultado, setResultado] = useState<Extract<RespostaTriagem, { tipo: 'orientacao' | 'sem_match' }>>();
+  const [urgencia, setUrgencia] = useState<Extract<RespostaTriagem, { tipo: 'urgencia' }>>();
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string>();
   const [aceiteDemo, setAceiteDemo] = useState(false);
@@ -53,8 +55,11 @@ export function App() {
       if (resposta.tipo === 'pergunta') {
         setMensagens([...historico, { papel: 'assistente', conteudo: resposta.mensagem }]);
       } else if (resposta.tipo === 'urgencia') {
-        setErro(resposta.mensagem);
+        setUrgencia(resposta);
+        setResultado(undefined);
+        setAbaAtiva('resultado');
       } else {
+        setUrgencia(undefined);
         setResultado(resposta);
         setAbaAtiva('resultado');
       }
@@ -104,6 +109,7 @@ export function App() {
       },
     ];
     setResultado(undefined);
+    setUrgencia(undefined);
     setErro(undefined);
     if (!aceiteDemo) {
       setHistoricoPendente(novoHistorico);
@@ -125,6 +131,7 @@ export function App() {
       { papel: 'usuario', conteudo: mensagemInicial },
     ];
     setResultado(undefined);
+    setUrgencia(undefined);
     setErro(undefined);
     if (!aceiteDemo) {
       setHistoricoPendente(novoHistorico);
@@ -137,6 +144,7 @@ export function App() {
   function recomecar() {
     setMensagens([MENSAGEM_ABERTURA]);
     setResultado(undefined);
+    setUrgencia(undefined);
     setErro(undefined);
     setAbaAtiva('inicio');
   }
@@ -192,6 +200,10 @@ export function App() {
             aoRecomecar={recomecar}
             aoVerCatalogo={() => setAbaAtiva('catalogo')}
           />
+        )}
+
+        {abaAtiva === 'resultado' && urgencia && (
+          <PainelUrgencia resposta={urgencia} aoSair={recomecar} />
         )}
       </main>
 
