@@ -57,23 +57,37 @@ export async function executarTriagem(mensagens: MensagemChat[]): Promise<Respos
   if (indicados.length === 0) {
     return {
       tipo: 'sem_match',
-      mensagem: saida.mensagem || MENSAGEM_SEM_MATCH,
+      mensagem: saida.resumo || MENSAGEM_SEM_MATCH,
+      proximos_passos: ['Procure o CRAS ou a Defensoria Pública para uma análise individual.'],
       ...(houveMascaramento ? { aviso_dados_mascarados: true } : {}),
     };
   }
 
   const fichas = await buscarFichasPorIds(indicados.map((i) => i.id));
   const motivoPorId = new Map(indicados.map((i) => [i.id, i.motivo]));
-  const itens = ordenarLinhaDaVida(fichas, saida.risco_imediato).map((item, indice) => ({
-    ...item,
-    posicao: indice + 1,
-    motivo: motivoPorId.get(item.id) ?? '',
-  }));
+  const indicacaoPorId = new Map(indicados.map((item) => [item.id, item]));
+  const itens = ordenarLinhaDaVida(fichas, false).map((item, indice) => {
+    const indicacao = indicacaoPorId.get(item.id)!;
+    return {
+      ...item,
+      posicao: indice + 1,
+      motivo: motivoPorId.get(item.id) ?? '',
+      situacao: indicacao.situacao,
+      criterios_confirmados: indicacao.criterios_confirmados,
+      criterios_pendentes: indicacao.criterios_pendentes,
+      proximos_passos: item.passo_a_passo,
+      documentos: item.documentos_necessarios,
+    };
+  });
+  const totalPendencias = itens.reduce((total, item) => total + item.criterios_pendentes.length, 0);
+  const confianca = totalPendencias === 0 ? 'alta' : totalPendencias <= 2 ? 'media' : 'baixa';
 
   return {
-    tipo: 'resultado',
-    mensagem: saida.mensagem,
+    tipo: 'orientacao',
+    resumo: saida.resumo,
+    confianca,
     itens,
+    alertas: saida.alertas,
     ...(houveMascaramento ? { aviso_dados_mascarados: true } : {}),
   };
 }
@@ -101,14 +115,20 @@ interface SaidaPergunta {
   tipo: 'pergunta';
   mensagem: string;
 }
-interface SaidaResultado {
-  tipo: 'resultado';
-  mensagem: string;
-  risco_imediato: boolean;
-  itens: { id: string; motivo: string }[];
+interface SaidaOrientacao {
+  tipo: 'orientacao';
+  resumo: string;
+  alertas: string[];
+  itens: {
+    id: string;
+    situacao: 'compativel' | 'precisa_confirmar';
+    motivo: string;
+    criterios_confirmados: string[];
+    criterios_pendentes: string[];
+  }[];
 }
 
-function interpretarSaida(bruto: string): SaidaPergunta | SaidaResultado {
+function interpretarSaida(bruto: string): SaidaPergunta | SaidaOrientacao {
   const texto = extrairJson(bruto);
   let dado: unknown;
   try {
@@ -120,15 +140,28 @@ function interpretarSaida(bruto: string): SaidaPergunta | SaidaResultado {
   if (objeto?.tipo === 'pergunta' && typeof objeto.mensagem === 'string') {
     return { tipo: 'pergunta', mensagem: objeto.mensagem };
   }
-  if (objeto?.tipo === 'resultado' && typeof objeto.mensagem === 'string') {
+  if (objeto?.tipo === 'orientacao' && typeof objeto.resumo === 'string') {
     const itensBrutos = Array.isArray(objeto.itens) ? objeto.itens : [];
     return {
-      tipo: 'resultado',
-      mensagem: objeto.mensagem,
-      risco_imediato: objeto.risco_imediato === true,
+      tipo: 'orientacao',
+      resumo: objeto.resumo,
+      alertas: Array.isArray(objeto.alertas)
+        ? objeto.alertas.filter((alerta): alerta is string => typeof alerta === 'string')
+        : [],
       itens: itensBrutos
-        .filter((i): i is { id: string; motivo?: string } => typeof (i as { id?: unknown })?.id === 'string')
-        .map((i) => ({ id: i.id, motivo: typeof i.motivo === 'string' ? i.motivo : '' })),
+        .filter((i): i is Record<string, unknown> => typeof (i as { id?: unknown })?.id === 'string')
+        .filter((i) => i.situacao === 'compativel' || i.situacao === 'precisa_confirmar')
+        .map((i) => ({
+          id: i.id as string,
+          situacao: i.situacao as 'compativel' | 'precisa_confirmar',
+          motivo: typeof i.motivo === 'string' ? i.motivo : '',
+          criterios_confirmados: Array.isArray(i.criterios_confirmados)
+            ? i.criterios_confirmados.filter((criterio): criterio is string => typeof criterio === 'string')
+            : [],
+          criterios_pendentes: Array.isArray(i.criterios_pendentes)
+            ? i.criterios_pendentes.filter((criterio): criterio is string => typeof criterio === 'string')
+            : [],
+        })),
     };
   }
   throw new ErroTriagem(`O modelo respondeu um JSON com formato inesperado: ${texto.slice(0, 200)}`);

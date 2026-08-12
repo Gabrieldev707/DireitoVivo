@@ -25,10 +25,15 @@ while (rodando) {
     continue;
   }
 
-  console.log(`\nassistente > ${resposta.mensagem}\n`);
   if (resposta.tipo === 'sem_match') {
+    console.log(`\nassistente > ${resposta.mensagem}\n`);
     console.log('(nenhum item da base se aplicou)');
+    resposta.proximos_passos.forEach((passo, i) => console.log(`  ${i + 1}) ${passo}`));
+  } else if (resposta.tipo === 'urgencia') {
+    console.log(`\nassistente > ${resposta.mensagem}\n`);
+    resposta.canais.forEach((canal) => console.log(`  ${canal.nome}: ${canal.numero} — ${canal.quando_usar}`));
   } else {
+    console.log(`\nassistente > ${resposta.resumo}\n`);
     console.log('=== SUA LINHA DE VIDA (comece pelo 1) ===');
     for (const item of resposta.itens) {
       console.log(`\n${item.posicao}. ${item.nome_popular}  [${item.natureza}] [prioridade ${item.prioridade_base}]`);

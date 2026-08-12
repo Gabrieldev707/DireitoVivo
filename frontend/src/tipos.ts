@@ -45,6 +45,22 @@ export interface ItemLinhaDaVida {
   motivo: string;
 }
 
+export type SituacaoOrientacao = 'compativel' | 'precisa_confirmar';
+
+export interface ItemOrientacao extends ItemLinhaDaVida {
+  situacao: SituacaoOrientacao;
+  criterios_confirmados: string[];
+  criterios_pendentes: string[];
+  proximos_passos: string[];
+  documentos: string[];
+}
+
+export interface CanalUrgencia {
+  nome: string;
+  numero: string;
+  quando_usar: string;
+}
+
 /** Rótulos legíveis dos canais — a interface nunca deve exibir o enum cru. */
 export const ROTULOS_CANAL: Record<string, string> = {
   app_meu_inss: 'Aplicativo Meu INSS',
@@ -71,8 +87,22 @@ export interface ItemCatalogo extends ItemLinhaDaVida {
 
 export type RespostaTriagem =
   | { tipo: 'pergunta'; mensagem: string }
-  | { tipo: 'resultado'; mensagem: string; itens: ItemLinhaDaVida[] }
-  | { tipo: 'sem_match'; mensagem: string };
+  | {
+      tipo: 'orientacao';
+      resumo: string;
+      confianca: 'alta' | 'media' | 'baixa';
+      itens: ItemOrientacao[];
+      alertas: string[];
+      aviso_dados_mascarados?: true;
+    }
+  | { tipo: 'sem_match'; mensagem: string; proximos_passos: string[]; aviso_dados_mascarados?: true }
+  | {
+      tipo: 'urgencia';
+      nivel: 'imediato';
+      mensagem: string;
+      canais: CanalUrgencia[];
+      aviso_dados_mascarados?: true;
+    };
 
 export const TEXTO_DISCLAIMER =
   'Esta é uma triagem informativa e não substitui aconselhamento jurídico ou confirmação oficial. Sempre confirme as informações no canal oficial indicado.';

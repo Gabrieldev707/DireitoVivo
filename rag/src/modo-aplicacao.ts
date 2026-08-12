@@ -3,7 +3,7 @@ export type ModoAplicacao = 'desenvolvimento' | 'demo' | 'producao';
 const MODOS_VALIDOS = new Set<ModoAplicacao>(['desenvolvimento', 'demo', 'producao']);
 
 export function obterModoAplicacao(
-  ambiente: Pick<NodeJS.ProcessEnv, 'MODO_APLICACAO'> = process.env,
+  ambiente: { MODO_APLICACAO?: string } = process.env,
 ): ModoAplicacao {
   const valor = ambiente.MODO_APLICACAO?.trim() || 'desenvolvimento';
   if (!MODOS_VALIDOS.has(valor as ModoAplicacao)) {

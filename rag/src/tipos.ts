@@ -70,6 +70,16 @@ export interface MensagemChat {
   conteudo: string;
 }
 
+export type SituacaoOrientacao = 'compativel' | 'precisa_confirmar';
+
+export interface ItemOrientacao extends ItemLinhaDaVida {
+  situacao: SituacaoOrientacao;
+  criterios_confirmados: string[];
+  criterios_pendentes: string[];
+  proximos_passos: string[];
+  documentos: string[];
+}
+
 export interface CanalUrgencia {
   nome: string;
   numero: string;
@@ -86,8 +96,15 @@ export interface RespostaUrgencia {
 
 export type RespostaTriagem =
   | { tipo: 'pergunta'; mensagem: string; aviso_dados_mascarados?: boolean }
-  | { tipo: 'resultado'; mensagem: string; itens: ItemLinhaDaVida[]; aviso_dados_mascarados?: boolean }
-  | { tipo: 'sem_match'; mensagem: string; aviso_dados_mascarados?: boolean }
+  | {
+      tipo: 'orientacao';
+      resumo: string;
+      confianca: 'alta' | 'media' | 'baixa';
+      itens: ItemOrientacao[];
+      alertas: string[];
+      aviso_dados_mascarados?: boolean;
+    }
+  | { tipo: 'sem_match'; mensagem: string; proximos_passos: string[]; aviso_dados_mascarados?: boolean }
   | RespostaUrgencia;
 
 /** Linha retornada pela função SQL buscar_direitos / select na tabela. */

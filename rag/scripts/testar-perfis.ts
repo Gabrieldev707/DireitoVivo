@@ -81,7 +81,7 @@ for (const perfil of perfis) {
     falhas++;
     continue;
   }
-  if (resposta.tipo === 'sem_match' || resposta.itens.length === 0) {
+  if (resposta.tipo !== 'orientacao' || resposta.itens.length === 0) {
     console.error('  FALHOU: nenhum item retornado (critério: pelo menos 1 relevante).');
     falhas++;
     continue;

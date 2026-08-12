@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import type { ItemLinhaDaVida, RespostaTriagem } from '../tipos';
+import type { ItemOrientacao, RespostaTriagem } from '../tipos';
 import { TEXTO_DISCLAIMER } from '../tipos';
 import { FichaItem } from './FichaItem';
 
-type Resultado = Extract<RespostaTriagem, { tipo: 'resultado' | 'sem_match' }>;
+type Resultado = Extract<RespostaTriagem, { tipo: 'orientacao' | 'sem_match' }>;
 
 interface PropriedadesLinhaDaVida {
   resultado: Resultado;
@@ -11,19 +11,19 @@ interface PropriedadesLinhaDaVida {
   aoVerCatalogo: () => void;
 }
 
-function montarTextoCompartilhamento(itens: ItemLinhaDaVida[]): string {
+function montarTextoCompartilhamento(itens: ItemOrientacao[]): string {
   if (itens.length === 0) {
-    return 'Fiz minha triagem no Direito Vivo (triagem anônima de direitos brasileiros).';
+    return 'Consultei caminhos possíveis no Direito Vivo.';
   }
   const lista = itens
     .slice(0, 5)
     .map((item, i) => `${i + 1}. ${item.nome_popular}`)
     .join('\n');
-  return `Minha linha de vida no Direito Vivo:\n\n${lista}\n\nTriagem anônima e gratuita — quem sabe você também tem direito.`;
+  return `Caminhos que consultei no Direito Vivo:\n\n${lista}\n\nDemonstração informativa: confirme os requisitos nos canais oficiais.`;
 }
 
 export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: PropriedadesLinhaDaVida) {
-  const itens: ItemLinhaDaVida[] = resultado.tipo === 'resultado' ? resultado.itens : [];
+  const itens: ItemOrientacao[] = resultado.tipo === 'orientacao' ? resultado.itens : [];
   const [estadoShare, setEstadoShare] = useState<'inicial' | 'copiado' | 'erro'>('inicial');
 
   function imprimirPlano() {
@@ -61,7 +61,7 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
               <svg className="h-4 w-4 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>
-              <span>Sua linha de vida</span>
+              <span>Sua orientação</span>
             </div>
             <h2 className="text-2xl font-black text-[#071D41] sm:text-3xl">
               {itens.length > 0
@@ -69,7 +69,7 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
                 : 'Não encontrei um item específico para o que você contou'}
             </h2>
             <p className="whitespace-pre-wrap text-base leading-relaxed text-slate-700 sm:text-lg">
-              {resultado.mensagem}
+              {resultado.tipo === 'orientacao' ? resultado.resumo : resultado.mensagem}
             </p>
           </div>
 
@@ -100,9 +100,7 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
               </svg>
               <span>Imprimir / PDF</span>
             </button>
-            <span className="text-center text-[11px] text-slate-500">
-              Nada sai do seu navegador
-            </span>
+            <span className="text-center text-[11px] text-slate-500">Evite informar dados pessoais</span>
           </div>
         </div>
       </div>
@@ -128,6 +126,38 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
                   {item.posicao}
                 </div>
                 <FichaItem item={item} />
+                <div className="mt-3 grid gap-3 rounded-xl border border-slate-200 bg-white p-4 sm:grid-cols-2">
+                  <section>
+                    <h4 className="text-sm font-black text-[#075e54]">O que parece compatível</h4>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
+                      {(item.criterios_confirmados.length > 0
+                        ? item.criterios_confirmados
+                        : ['Nenhum critério foi confirmado ainda.']
+                      ).map((criterio) => <li key={criterio}>{criterio}</li>)}
+                    </ul>
+                  </section>
+                  <section>
+                    <h4 className="text-sm font-black text-amber-800">O que confirmar</h4>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
+                      {(item.criterios_pendentes.length > 0
+                        ? item.criterios_pendentes
+                        : ['Nenhuma confirmação adicional indicada.']
+                      ).map((criterio) => <li key={criterio}>{criterio}</li>)}
+                    </ul>
+                  </section>
+                  <section>
+                    <h4 className="text-sm font-black text-[#071D41]">Próximos passos</h4>
+                    <ol className="mt-2 list-decimal space-y-1 pl-5 text-sm text-slate-700">
+                      {item.proximos_passos.map((passo) => <li key={passo}>{passo}</li>)}
+                    </ol>
+                  </section>
+                  <section>
+                    <h4 className="text-sm font-black text-[#071D41]">Documentos</h4>
+                    <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-slate-700">
+                      {item.documentos.map((documento) => <li key={documento}>{documento}</li>)}
+                    </ul>
+                  </section>
+                </div>
               </li>
             ))}
           </ol>

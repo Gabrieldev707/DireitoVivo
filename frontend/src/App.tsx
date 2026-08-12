@@ -27,7 +27,7 @@ function obterAbaInicial(): AbaNavegacao {
 export function App() {
   const [abaAtiva, setAbaAtiva] = useState<AbaNavegacao>(obterAbaInicial);
   const [mensagens, setMensagens] = useState<MensagemChat[]>([MENSAGEM_ABERTURA]);
-  const [resultado, setResultado] = useState<Extract<RespostaTriagem, { tipo: 'resultado' | 'sem_match' }>>();
+  const [resultado, setResultado] = useState<Extract<RespostaTriagem, { tipo: 'orientacao' | 'sem_match' }>>();
   const [enviando, setEnviando] = useState(false);
   const [erro, setErro] = useState<string>();
 
@@ -48,6 +48,8 @@ export function App() {
       const resposta = await enviarTriagem(historico);
       if (resposta.tipo === 'pergunta') {
         setMensagens([...historico, { papel: 'assistente', conteudo: resposta.mensagem }]);
+      } else if (resposta.tipo === 'urgencia') {
+        setErro(resposta.mensagem);
       } else {
         setResultado(resposta);
         setAbaAtiva('resultado');

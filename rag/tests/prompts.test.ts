@@ -75,7 +75,15 @@ describe('montarPromptTriagem', () => {
     expect(prompt).toContain('190');
     expect(prompt).toContain('180');
     expect(prompt).toContain('188');
-    expect(prompt).toMatch(/risco_imediato/);
+    expect(prompt).toMatch(/urgência é tratada antes deste prompt/i);
+  });
+
+  it('exige orientação estruturada com situação e critérios verificáveis', () => {
+    const prompt = montarPromptTriagem(candidatos, MAX_PERGUNTAS);
+    expect(prompt).toContain('"tipo":"orientacao"');
+    expect(prompt).toContain('"situacao":"precisa_confirmar"');
+    expect(prompt).toContain('"criterios_confirmados"');
+    expect(prompt).toContain('"criterios_pendentes"');
   });
 
   it('exige resposta em JSON único, sem texto fora', () => {

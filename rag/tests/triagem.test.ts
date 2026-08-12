@@ -181,10 +181,16 @@ describe('executarTriagem', () => {
     mockBuscarItensRelevantes.mockResolvedValue([bolsa]);
     mockGerarTexto.mockResolvedValue(
       JSON.stringify({
-        tipo: 'resultado',
-        mensagem: 'Talvez isso ajude',
-        risco_imediato: false,
-        itens: [{ id: 'item-inventado', motivo: 'porque sim' }],
+        tipo: 'orientacao',
+        resumo: 'Talvez isso ajude',
+        itens: [{
+          id: 'item-inventado',
+          situacao: 'precisa_confirmar',
+          motivo: 'porque sim',
+          criterios_confirmados: [],
+          criterios_pendentes: ['confirmar no órgão'],
+        }],
+        alertas: [],
       }),
     );
 
@@ -193,7 +199,7 @@ describe('executarTriagem', () => {
     expect(mockBuscarFichasPorIds).not.toHaveBeenCalled();
   });
 
-  it('monta linha de vida em ordem, aplicando urgência do LLM (risco_imediato)', async () => {
+  it('monta orientação estruturada sem permitir que a LLM invente ações ou documentos', async () => {
     const bolsa = criarItem({ id: 'bolsa', prioridade_base: 1 });
     const caps = criarItem({
       id: 'caps',
@@ -203,13 +209,25 @@ describe('executarTriagem', () => {
     mockBuscarItensRelevantes.mockResolvedValue([bolsa, caps]);
     mockGerarTexto.mockResolvedValue(
       JSON.stringify({
-        tipo: 'resultado',
-        mensagem: 'Vamos lá',
-        risco_imediato: true,
+        tipo: 'orientacao',
+        resumo: 'Vamos lá',
         itens: [
-          { id: 'bolsa', motivo: 'renda baixa' },
-          { id: 'caps', motivo: 'sinal de crise' },
+          {
+            id: 'bolsa',
+            situacao: 'compativel',
+            motivo: 'renda baixa',
+            criterios_confirmados: ['renda informada'],
+            criterios_pendentes: [],
+          },
+          {
+            id: 'caps',
+            situacao: 'precisa_confirmar',
+            motivo: 'sinal de sofrimento',
+            criterios_confirmados: [],
+            criterios_pendentes: ['confirmar necessidade de atendimento'],
+          },
         ],
+        alertas: [],
       }),
     );
     mockBuscarFichasPorIds.mockResolvedValue([bolsa, caps]);
@@ -218,13 +236,17 @@ describe('executarTriagem', () => {
       { papel: 'usuario', conteudo: 'estou muito mal, sem renda' },
     ]);
 
-    expect(resposta.tipo).toBe('resultado');
-    if (resposta.tipo !== 'resultado') return;
-    // caps subiu por risco_imediato + saúde mental
-    expect(resposta.itens.map((i) => i.id)).toEqual(['caps', 'bolsa']);
+    expect(resposta.tipo).toBe('orientacao');
+    if (resposta.tipo !== 'orientacao') return;
+    expect(resposta.resumo).toBe('Vamos lá');
+    expect(resposta.confianca).toBe('media');
+    expect(resposta.itens.map((i) => i.id)).toEqual(['bolsa', 'caps']);
     expect(resposta.itens[0].posicao).toBe(1);
-    expect(resposta.itens[0].motivo).toBe('sinal de crise');
-    expect(resposta.itens[1].motivo).toBe('renda baixa');
+    expect(resposta.itens[0].proximos_passos).toEqual(['passo 1']);
+    expect(resposta.itens[0].documentos).toEqual(['CPF']);
+    expect(resposta.itens[1].criterios_pendentes).toEqual([
+      'confirmar necessidade de atendimento',
+    ]);
   });
 
   it('aceita JSON envelopado em cerca de código markdown', async () => {

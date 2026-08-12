@@ -80,7 +80,7 @@ const CAMPOS_FICHA = [
   'ultima_revisao',
 ] as const;
 
-function fichaEstaCompleta(resposta: Extract<RespostaTriagem, { tipo: 'resultado' }>): boolean {
+function fichaEstaCompleta(resposta: Extract<RespostaTriagem, { tipo: 'orientacao' }>): boolean {
   return resposta.itens.every(
     (item) =>
       CAMPOS_FICHA.every((campo) => {
@@ -120,7 +120,7 @@ async function medirUmaRodada(perfil: Perfil, rodada: number): Promise<Medicao> 
     };
   }
 
-  if (!resposta || resposta.tipo !== 'resultado') {
+  if (!resposta || resposta.tipo !== 'orientacao') {
     return {
       perfil: perfil.nome,
       rodada,

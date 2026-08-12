@@ -2,9 +2,9 @@ import { describe, expect, it, vi } from 'vitest';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { LinhaDaVida } from '../src/componentes/LinhaDaVida';
-import type { ItemLinhaDaVida, RespostaTriagem } from '../src/tipos';
+import type { ItemOrientacao, RespostaTriagem } from '../src/tipos';
 
-function criarItem(patch: Partial<ItemLinhaDaVida> = {}): ItemLinhaDaVida {
+function criarItem(patch: Partial<ItemOrientacao> = {}): ItemOrientacao {
   return {
     id: 'bolsa-familia',
     nome_popular: 'Bolsa Família',
@@ -20,14 +20,21 @@ function criarItem(patch: Partial<ItemLinhaDaVida> = {}): ItemLinhaDaVida {
     abrangencia: 'federal',
     posicao: 1,
     motivo: 'renda familiar baixa',
+    situacao: 'precisa_confirmar',
+    criterios_confirmados: ['Família com baixa renda'],
+    criterios_pendentes: ['Confirmar renda por pessoa'],
+    proximos_passos: ['Ir ao CRAS', 'Levar documentos'],
+    documentos: ['CPF', 'CadÚnico'],
     ...patch,
   };
 }
 
 describe('<LinhaDaVida>', () => {
-  const resultadoOk: Extract<RespostaTriagem, { tipo: 'resultado' }> = {
-    tipo: 'resultado',
-    mensagem: 'Encontrei alguns direitos que provavelmente se aplicam.',
+  const resultadoOk: Extract<RespostaTriagem, { tipo: 'orientacao' }> = {
+    tipo: 'orientacao',
+    resumo: 'Encontrei alguns caminhos que vale confirmar.',
+    confianca: 'media',
+    alertas: [],
     itens: [
       criarItem({ posicao: 1, id: 'bolsa-familia', nome_popular: 'Bolsa Família' }),
       criarItem({
@@ -50,6 +57,10 @@ describe('<LinhaDaVida>', () => {
     expect(screen.getByText(/comece por aqui/i)).toBeInTheDocument();
     expect(screen.getByText('Bolsa Família')).toBeInTheDocument();
     expect(screen.getByText('Seguro-desemprego')).toBeInTheDocument();
+    expect(screen.getAllByRole('heading', { name: /o que parece compatível/i }).length).toBe(2);
+    expect(screen.getAllByRole('heading', { name: /o que confirmar/i }).length).toBe(2);
+    expect(screen.getAllByRole('heading', { name: /próximos passos/i }).length).toBe(2);
+    expect(screen.getAllByRole('heading', { name: 'Documentos', exact: true }).length).toBe(2);
     // Disclaimer RF06
     expect(screen.getByText(/não substitui aconselhamento jurídico/i)).toBeInTheDocument();
   });
@@ -70,6 +81,7 @@ describe('<LinhaDaVida>', () => {
     const semMatch: Extract<RespostaTriagem, { tipo: 'sem_match' }> = {
       tipo: 'sem_match',
       mensagem: 'Não encontrei um item específico com o que você me contou.',
+      proximos_passos: ['Procure o CRAS.'],
     };
     const { container } = render(
       <LinhaDaVida
