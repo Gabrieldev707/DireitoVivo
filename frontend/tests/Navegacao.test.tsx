@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { act, render, screen, within } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { App } from '../src/App';
 import { Cabecalho } from '../src/componentes/layout/Cabecalho';
@@ -18,6 +18,36 @@ describe('navegação compatível', () => {
     window.location.hash = hash;
     render(<App />);
     expect(screen.getByRole('main')).toHaveAttribute('data-view', destino);
+  });
+
+  it.each([
+    ['#direitos', 'direitos'],
+    ['#situacoes', 'situacoes'],
+    ['#conversa', 'conversa'],
+  ])('abre o link canônico %s diretamente', (hash, destino) => {
+    window.location.hash = hash;
+    render(<App />);
+    expect(screen.getByRole('main')).toHaveAttribute('data-view', destino);
+  });
+
+  it('acompanha voltar, avançar e alterações manuais do hash', () => {
+    window.location.hash = '#inicio';
+    render(<App />);
+
+    act(() => {
+      window.location.hash = '#situacoes';
+      window.dispatchEvent(new HashChangeEvent('hashchange'));
+    });
+
+    expect(screen.getByRole('main')).toHaveAttribute('data-view', 'situacoes');
+  });
+
+  it('publica a rota canônica ao navegar pelo cabeçalho', async () => {
+    const user = userEvent.setup();
+    render(<App />);
+
+    await user.click(within(screen.getByRole('banner')).getByRole('button', { name: 'Direitos' }));
+    expect(window.location.hash).toBe('#direitos');
   });
 });
 

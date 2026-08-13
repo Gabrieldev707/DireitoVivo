@@ -21,13 +21,18 @@ const MENSAGEM_ABERTURA: MensagemChat = {
     'Para começarmos: me conte com suas palavras como está sua vida hoje? (ex: situação de trabalho, renda, família, saúde ou se cuida de crianças/idosos)',
 };
 
-function obterAbaInicial(): AbaNavegacao {
+function obterAbaPorHash(): AbaNavegacao | undefined {
   const hash = window.location.hash.replace('#', '');
   if (hash === 'direitos') return 'catalogo';
   if (hash === 'situacoes') return 'cenarios';
   if (hash === 'conversa') return 'chat';
   if (hash === 'catalogo' || hash === 'cenarios' || hash === 'chat') return hash;
-  return 'inicio';
+  if (hash === 'inicio') return 'inicio';
+  return undefined;
+}
+
+function obterAbaInicial(): AbaNavegacao {
+  return obterAbaPorHash() ?? 'inicio';
 }
 
 const VISAO_CANONICA: Record<AbaNavegacao, string> = {
@@ -53,9 +58,28 @@ export function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
     if (abaAtiva !== 'resultado') {
-      window.history.replaceState(null, '', `#${abaAtiva}`);
+      window.history.replaceState(null, '', `#${VISAO_CANONICA[abaAtiva]}`);
     }
   }, [abaAtiva]);
+
+  useEffect(() => {
+    function sincronizarComEndereco() {
+      const proximaAba = obterAbaPorHash();
+      if (!proximaAba) return;
+
+      if (proximaAba === 'chat' && !aceiteDemo) {
+        setHistoricoPendente(undefined);
+        setConsentimentoAberto(true);
+        return;
+      }
+
+      setConsentimentoAberto(false);
+      setAbaAtiva(proximaAba);
+    }
+
+    window.addEventListener('hashchange', sincronizarComEndereco);
+    return () => window.removeEventListener('hashchange', sincronizarComEndereco);
+  }, [aceiteDemo]);
 
   async function processarTriagem(historico: MensagemChat[], aceite = aceiteDemo) {
     setMensagens(historico);
