@@ -118,8 +118,8 @@ export function App() {
     setAbaAtiva('chat');
   }
 
-  // Integração entre Portfólio de Direitos e o Chat IA
-  function aoSelecionarDireitoParaChat(item: ItemLinhaDaVida) {
+  // Integração entre a biblioteca de direitos e a conversa
+  function aoConversarSobreDireito(item: ItemLinhaDaVida) {
     const novoHistorico: MensagemChat[] = [
       MENSAGEM_ABERTURA,
       {
@@ -139,8 +139,8 @@ export function App() {
     }
   }
 
-  // Integração entre Cenários de Vida e o Chat IA
-  function aoSelecionarCenarioParaChat(cenarioNome: string, mensagemInicial: string) {
+  // Integração entre situações cotidianas e a conversa
+  function prepararConversaDeSituacao(cenarioNome: string, mensagemInicial: string) {
     const novoHistorico: MensagemChat[] = [
       MENSAGEM_ABERTURA,
       {
@@ -170,7 +170,7 @@ export function App() {
   }
 
   function aoSelecionarSituacao(situacao: Situacao) {
-    aoSelecionarCenarioParaChat(situacao.titulo, situacao.mensagemInicial);
+    prepararConversaDeSituacao(situacao.titulo, situacao.mensagemInicial);
   }
 
   return (
@@ -205,7 +205,7 @@ export function App() {
         )}
 
         {abaAtiva === 'catalogo' && (
-          <Direitos aoConversarSobre={aoSelecionarDireitoParaChat} />
+          <Direitos aoConversarSobre={aoConversarSobreDireito} />
         )}
 
         {abaAtiva === 'cenarios' && (

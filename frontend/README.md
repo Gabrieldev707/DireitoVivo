@@ -1,23 +1,35 @@
-# Módulo `frontend` — Chat web
+# Frontend do Direito Vivo
 
-Interface única do MVP (React + Vite + Tailwind v4). Três fases num único fluxo:
+Interface React + Vite da demonstração pública. A experiência é mobile-first, sem cadastro e organizada em quatro áreas:
 
-1. **Tela inicial** — proposta de valor + disclaimer em destaque (RF06) + botão "Começar".
-2. **Chat** — conversa de triagem; o histórico fica só na memória do navegador e é enviado inteiro a cada chamada (`POST /api/triagem`). Nada persiste: fechar a aba apaga tudo.
-3. **Orientação** — sequência priorizada com compatibilidade aparente, requisitos a confirmar, documentos e próximos passos.
-4. **Urgência** — painel separado com canais telefônicos acionáveis quando a API identifica perigo atual.
+1. **Início** — proposta direta, seis situações prioritárias e a rota `Conte → Confirme → Procure`.
+2. **Situações** — 12 pontos de partida filtráveis, incluindo renda, cuidado, saúde, urgência e orientação geral.
+3. **Direitos** — catálogo pesquisável com somente os 7 conteúdos publicáveis e suas fontes oficiais.
+4. **Conversar** — orientação por IA com consentimento explícito, histórico somente na memória da aba e reenvio após falha.
 
-## Decisões
+O resultado separa possibilidade, critérios pendentes, documentos e próximo passo. Risco imediato abre uma tela própria com canais acionáveis antes de qualquer ação secundária.
 
-- Sem login, cookie de sessão ou analytics. O consentimento da demonstração vive apenas no estado React.
-- O texto é processado por um provedor externo de IA; a interface orienta a não informar dados pessoais e não promete anonimato absoluto.
-- Tipos da API duplicados em `src/tipos.ts` de propósito: o pacote `rag` é Node-only e não deve entrar no bundle do navegador.
-- Linguagem da interface: frases curtas, sem juridiquês (RF07); fonte base 17px e alvos de toque grandes para acessibilidade.
-- Em dev, o Vite faz proxy de `/api` para `http://localhost:3333` (sem CORS).
+## Privacidade e limites
 
-## Como rodar
+- Sem login, cookie de sessão, analytics ou persistência da conversa.
+- O aceite da demonstração vive somente no estado React.
+- A interface orienta a não enviar nome, CPF, RG, endereço, telefone ou e-mail.
+- O texto é processado por um provedor de IA e passa pelo mascaramento disponível no motor antes da chamada externa.
+- A resposta não garante concessão; requisitos e prazos devem ser confirmados na fonte oficial.
+
+## Executar localmente
 
 ```bash
-npm run api:dev     # terminal 1 — backend
-npm run front:dev   # terminal 2 — abre em http://localhost:5173
+npm run api:dev     # terminal 1 — http://localhost:3333
+npm run front:dev   # terminal 2 — http://localhost:5173
 ```
+
+## Gates
+
+```bash
+npm run test -w frontend
+npm run typecheck -w frontend
+npm run build -w frontend
+```
+
+A validação responsiva cobre 360, 390, 768, 1024 e 1440 px. A conversa usa `100dvh`, mantém somente o histórico como área vertical rolável e considera a área segura inferior do dispositivo.

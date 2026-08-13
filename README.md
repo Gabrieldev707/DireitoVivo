@@ -20,10 +20,10 @@ O Direito Vivo ataca esse ponto com uma **demonstração gratuita e sem cadastro
 - **Consentimento explícito no modo demo**, exigido também pela API em cada requisição
 - **Mascaramento por padrões** de CPF, e-mail, telefone e CEP antes da primeira chamada externa
 - **Urgência determinística** para perigo atual, violência e risco de autoextermínio, sem chamar LLM, busca ou banco
-- **Linha de vida** priorizada: o que resolver primeiro, o que destrava o próximo, ficha completa e links para fontes oficiais
+- **Resultado acionável**: possibilidade, critérios pendentes, documentos, próximo passo e fontes oficiais
 - **Base versionada de 30 itens**: 7 estão publicáveis após revisão inicial e 23 permanecem fora da demo até concluírem a revisão editorial
 - **Compartilhar o resultado** (Web Share API + fallback pra área de transferência)
-- **Interface estilo mensageiro** (chat, bolhas com tail, timestamp, ticks, indicador de digitação) — otimizada para celular
+- **Interface healthtech responsiva** com rota de orientação, 12 situações e conversa mobile-first
 - **PWA instalável** com manifest e ícones
 - **Acessibilidade**: leitura em voz alta (Web Speech), modo alto contraste, teclado, atalhos, textos ARIA
 
@@ -56,7 +56,7 @@ rag (Node)
 | [db/](db/) | Schema Supabase, 4 migrations, auditor editorial e base versionada com 30 itens | [db/README.md](db/README.md) |
 | [rag/](rag/) | Motor de triagem, priorização, provider LLM abstrato (troca Gemini↔Claude sem tocar o resto), busca semântica | [rag/README.md](rag/README.md) |
 | [backend/](backend/) | HTTP fino: valida schema, chama motor, devolve resposta. Sem sessão. | [backend/README.md](backend/README.md) |
-| [frontend/](frontend/) | Chat estilo mensageiro, catálogo, cenários de vida, resultado priorizado, PWA | [frontend/README.md](frontend/README.md) |
+| [frontend/](frontend/) | Início, 12 situações, 7 direitos revisados, conversa responsiva, resultado e urgência | [frontend/README.md](frontend/README.md) |
 
 ## Decisões técnicas que valem uma linha
 
@@ -69,11 +69,11 @@ rag (Node)
 
 ## Qualidade
 
-Verificação local em 12/08/2026: **99 testes passaram** (banco 16, RAG 45, API 17 e frontend 21), typecheck e build de produção passaram, e `npm audit --omit=dev` encontrou 0 vulnerabilidades. O comando `npm test` inclui o auditor e os contratos de segurança da migration. Testes que dependem de Gemini e Supabase reais são separados das suítes determinísticas e exigem credenciais próprias. Ainda não há um lint dedicado configurado; o gate estático atual é o TypeScript em modo estrito.
+Verificação local em 13/08/2026: **104 testes passaram** (banco 16, RAG 46, API 20 e frontend 22), typecheck e build de produção passaram, e `npm audit --omit=dev` encontrou 0 vulnerabilidades. O comando `npm test` inclui o auditor e os contratos de segurança da migration. Testes que dependem de Gemini e Supabase reais são separados das suítes determinísticas e exigem credenciais próprias. Ainda não há um lint dedicado configurado; o gate estático atual é o TypeScript em modo estrito.
 
 - **RAG**: mascaramento de dados, urgência sem dependências externas, ordenação, contrato pergunta/orientação/sem_match e robustez do parser
 - **API**: `fastify.inject` cobre schema (papel, tamanho, tamanho da conversa), erro genérico vs erro de triagem (mensagem opaca — nunca vaza detalhe do provider), teste explícito de que **o corpo da requisição nunca aparece no log**
-- **Frontend**: consentimento da demo, chat, painel de urgência, orientação estruturada, sem_match e compartilhamento
+- **Frontend**: consentimento, navegação compatível, filtros, busca, conversa responsiva, reenvio, resultado estruturado e urgência
 - **Conteúdo e banco**: metadados editoriais, fontes HTTPS oficiais, vigência, duplicidade, estados de publicação e contrato SQL de RLS/permissões/RPC
 - **Perfis end-to-end**: `npm run rag:testes` roda 3 conversas roteirizadas (mãe solo desempregada, idoso com deficiência, trabalhador informal acidentado) contra Gemini e Supabase reais e valida que cada perfil recebe ao menos 1 item esperado + ficha completa + ordem correta
 
@@ -122,7 +122,7 @@ Estão fora **de propósito** — cada um exige aprovação de terceiro ou conv�
 
 ## Estado de infraestrutura
 
-- **Local verificado em 12/08/2026**: 99 testes, typecheck e build passaram; catálogo gerado somente a partir de itens publicáveis.
+- **Local verificado em 13/08/2026**: 104 testes, typecheck e build passaram; catálogo gerado somente a partir de itens publicáveis.
 - **Supabase verificado em 12/08/2026**: migration `0004` aplicada manualmente no SQL Editor ao projeto `wajycuocmmuyxbzeskyl`; 30 itens internos, 7 publicáveis, 7 embeddings e 3/3 perfis reais aprovados.
 - **Segurança remota verificada**: RLS ativo; `anon` com SELECT/RPC e sem INSERT/UPDATE/DELETE; RPC como `security invoker` e `search_path` explícito; Security Advisor reexecutado com 0 erros, 0 avisos e 0 sugestões.
 - **Limite da evidência**: a aplicação manual não foi registrada pela CLI como migration remota; a chave `service_role` não foi armazenada localmente e não houve teste direto autenticado como `service_role`.
