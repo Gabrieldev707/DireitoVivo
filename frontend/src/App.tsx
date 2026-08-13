@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { enviarTriagem } from './api';
-import { Chat } from './componentes/Chat';
+import { Conversa } from './componentes/conversa/Conversa';
 import { LinhaDaVida } from './componentes/LinhaDaVida';
 import { Inicio } from './componentes/inicio/Inicio';
 import { Direitos } from './componentes/direitos/Direitos';
@@ -48,6 +48,7 @@ export function App() {
   const [aceiteDemo, setAceiteDemo] = useState(false);
   const [consentimentoAberto, setConsentimentoAberto] = useState(() => obterAbaInicial() === 'chat');
   const [historicoPendente, setHistoricoPendente] = useState<MensagemChat[]>();
+  const [historicoFalho, setHistoricoFalho] = useState<MensagemChat[]>();
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -64,6 +65,7 @@ export function App() {
 
     try {
       const resposta = await enviarTriagem(historico, aceite);
+      setHistoricoFalho(undefined);
       if (resposta.tipo === 'pergunta') {
         setMensagens([...historico, { papel: 'assistente', conteudo: resposta.mensagem }]);
       } else if (resposta.tipo === 'urgencia') {
@@ -77,6 +79,7 @@ export function App() {
       }
     } catch (excecao) {
       setErro((excecao as Error).message);
+      setHistoricoFalho(historico);
       // Mantém a mensagem do usuário no histórico para tentar de novo.
     } finally {
       setEnviando(false);
@@ -86,6 +89,10 @@ export function App() {
   async function aoEnviar(texto: string) {
     const historico = [...mensagens, { papel: 'usuario', conteudo: texto } as MensagemChat];
     await processarTriagem(historico);
+  }
+
+  function tentarNovamente() {
+    if (historicoFalho) void processarTriagem(historicoFalho);
   }
 
   function mudarAba(aba: AbaNavegacao) {
@@ -183,6 +190,8 @@ export function App() {
         className={
           abaAtiva === 'inicio'
             ? 'flex-1 w-full'
+            : abaAtiva === 'chat'
+              ? 'flex-1 min-h-0 w-full'
             : 'flex-1 mx-auto max-w-7xl w-full px-4 py-8 sm:px-6 lg:px-8'
         }
       >
@@ -204,12 +213,13 @@ export function App() {
         )}
 
         {abaAtiva === 'chat' && (
-          <Chat
+          <Conversa
             mensagens={mensagens}
             enviando={enviando}
             erro={erro}
             aoEnviar={aoEnviar}
             aoLimpar={recomecar}
+            aoTentarNovamente={tentarNovamente}
           />
         )}
 
@@ -227,7 +237,7 @@ export function App() {
       </main>
 
       {/* Rodapé Oficial Gov.br (com logo PNG, contatos governamentais e disclaimer RF06) */}
-      <Rodape aoMudarAba={mudarAba} />
+      {abaAtiva !== 'chat' && <Rodape aoMudarAba={mudarAba} />}
       {consentimentoAberto && (
         <ConsentimentoDemo
           aoAceitar={aceitarDemo}
