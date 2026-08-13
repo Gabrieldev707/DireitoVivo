@@ -1,7 +1,7 @@
 # Redesign healthtech do frontend do Direito Vivo
 
 **Data:** 2026-08-13  
-**Status:** aprovado em conversa  
+**Status:** aprovado em conversa
 **Escopo:** somente `frontend/`; API, RAG, banco e controles de segurança permanecem inalterados
 
 ## 1. Objetivo
@@ -108,7 +108,7 @@ Serão exibidas 12 situações:
 
 As situações 1–10 se conectam somente aos sete conteúdos publicáveis ou a perguntas de triagem. A situação 11 abre primeiro a orientação determinística de emergência; não promete benefício ainda não publicado. A situação 12 inicia triagem geral.
 
-Os dados sairão do componente grande e ficarão em `src/dados/situacoes.ts`. Cada item terá categoria, resumo, nível de prioridade, termo inicial de conversa e referências de conteúdo publicável. Haverá filtros por `Renda e trabalho`, `Cuidado e deficiência`, `Saúde` e `Urgência`.
+Os dados sairão do componente grande e ficarão em `src/dados/situacoes.ts`. Cada item terá categoria, resumo, nível de prioridade, termo inicial de conversa e referências de conteúdo publicável. Haverá filtros por `Renda e trabalho`, `Cuidado e deficiência`, `Saúde`, `Urgência` e `Orientação geral`.
 
 ### 5.3 Direitos
 
