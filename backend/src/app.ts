@@ -21,13 +21,12 @@ export async function montarAplicacao(
 }
 
 /** Registra os controles e rotas em uma instância já criada pelo runtime. */
-export async function configurarAplicacao(app: FastifyInstance): Promise<FastifyInstance> {
-
-  await app.register(cors, {
+export function configurarAplicacao(app: FastifyInstance): FastifyInstance {
+  app.register(cors, {
     origin: obterEnv('API_ORIGEM_PERMITIDA', 'http://localhost:5173'),
   });
 
-  await app.register(rateLimit, {
+  app.register(rateLimit, {
     max: Number(obterEnv('API_LIMITE_REQUISICOES', '20')),
     timeWindow: obterEnv('API_LIMITE_JANELA', '5 minutes'),
     keyGenerator: (requisicao) =>
@@ -42,6 +41,6 @@ export async function configurarAplicacao(app: FastifyInstance): Promise<Fastify
     }),
   });
 
-  await app.register(rotasTriagem, { prefix: '/api' });
+  app.register(rotasTriagem, { prefix: '/api' });
   return app;
 }
