@@ -3,8 +3,8 @@ import { enviarTriagem } from './api';
 import { Chat } from './componentes/Chat';
 import { LinhaDaVida } from './componentes/LinhaDaVida';
 import { Inicio } from './componentes/inicio/Inicio';
-import { Portifolio } from './componentes/Portifolio';
-import { CenariosVida } from './componentes/CenariosVida';
+import { Direitos } from './componentes/direitos/Direitos';
+import { Situacoes } from './componentes/situacoes/Situacoes';
 import { Cabecalho } from './componentes/layout/Cabecalho';
 import { Rodape } from './componentes/layout/Rodape';
 import { ConsentimentoDemo } from './componentes/ConsentimentoDemo';
@@ -196,11 +196,11 @@ export function App() {
         )}
 
         {abaAtiva === 'catalogo' && (
-          <Portifolio aoSelecionarDireitoParaChat={aoSelecionarDireitoParaChat} />
+          <Direitos aoConversarSobre={aoSelecionarDireitoParaChat} />
         )}
 
         {abaAtiva === 'cenarios' && (
-          <CenariosVida aoSelecionarCenarioParaChat={aoSelecionarCenarioParaChat} />
+          <Situacoes aoEscolher={aoSelecionarSituacao} />
         )}
 
         {abaAtiva === 'chat' && (
