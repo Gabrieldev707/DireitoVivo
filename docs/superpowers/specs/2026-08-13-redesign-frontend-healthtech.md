@@ -1,7 +1,7 @@
 # Redesign healthtech do frontend do Direito Vivo
 
 **Data:** 2026-08-13  
-**Status:** aprovado em conversa; aguardando revisão desta especificação  
+**Status:** aprovado em conversa  
 **Escopo:** somente `frontend/`; API, RAG, banco e controles de segurança permanecem inalterados
 
 ## 1. Objetivo
@@ -13,6 +13,8 @@ O novo frontend deve transmitir três atributos em poucos segundos:
 1. é simples relatar uma situação;
 2. a IA organiza possibilidades, não concede direitos;
 3. a orientação termina em canais públicos verificáveis.
+
+A experiência deve ter uma cara inequivocamente brasileira pelo vocabulário, pelas situações de vida, pela diversidade humana e pelas rotas reais de atendimento (CRAS, SUS, INSS, CAPS e Defensoria). Não usar bandeira, mapa, globo, brasão, verde-amarelo ornamental ou qualquer recurso que sugira vínculo institucional.
 
 ## 2. Problemas que o redesign resolve
 
@@ -31,6 +33,8 @@ O novo frontend deve transmitir três atributos em poucos segundos:
 A interface representa uma rota de cuidado: a pessoa relata um momento de vida, o produto faz perguntas curtas e a saída organiza o próximo passo. O elemento visual característico será uma linha de percurso que conecta situação, confirmação e canal oficial. Essa linha aparecerá com contenção na home, nas situações e no resultado.
 
 Não haverá fotografias geradas, mockups rasterizados, globo, brasão ou elementos que imitem uma identidade governamental. A personalidade virá da tipografia, composição, microinterações e iconografia vetorial simples.
+
+O calor brasileiro aparecerá em formas orgânicas discretas, cantos generosos, tons de barro usados como sinal, textos que soam naturais em português e exemplos de vida reconhecíveis. A referência healthtech organiza a interface; ela não deve apagar a origem cultural do produto nem produzir uma cópia fria de um aplicativo estrangeiro.
 
 ### 3.2 Paleta
 
