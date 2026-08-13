@@ -6,7 +6,7 @@ config({ path: fileURLToPath(new URL('../../.env', import.meta.url)), quiet: tru
 
 export function obterEnv(nome: string, padrao?: string): string {
   const bruto = process.env[nome];
-  const valor = bruto && bruto.trim() !== '' ? bruto : padrao;
+  const valor = bruto && bruto.trim() !== '' ? bruto.trim() : padrao?.trim();
   if (valor === undefined) {
     throw new Error(`Variável de ambiente obrigatória ausente: ${nome} (veja .env.example)`);
   }
