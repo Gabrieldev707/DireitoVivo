@@ -17,6 +17,12 @@ export async function montarAplicacao(
 ): Promise<FastifyInstance> {
   const app = Fastify({ disableRequestLogging: true, ...opcoes });
 
+  return configurarAplicacao(app);
+}
+
+/** Registra os controles e rotas em uma instância já criada pelo runtime. */
+export async function configurarAplicacao(app: FastifyInstance): Promise<FastifyInstance> {
+
   await app.register(cors, {
     origin: obterEnv('API_ORIGEM_PERMITIDA', 'http://localhost:5173'),
   });
