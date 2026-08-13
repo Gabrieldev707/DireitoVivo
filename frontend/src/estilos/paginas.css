@@ -1,1 +1,43 @@
-/* Composições de páginas são adicionadas nos blocos de home, situações e direitos. */
+.dv-home { background: var(--dv-canvas); }
+.dv-home__hero { position: relative; overflow: hidden; padding-block: clamp(3rem, 8vw, 7rem); background: linear-gradient(145deg, var(--dv-paper) 0 62%, var(--dv-mint-soft) 62%); }
+.dv-home__hero::after { position: absolute; right: -7rem; bottom: -9rem; width: 22rem; height: 22rem; border: 1px solid rgb(8 122 112 / .2); border-radius: 50%; content: ''; }
+.dv-home__hero-grid { position: relative; z-index: 1; display: grid; gap: 2.5rem; align-items: center; }
+.dv-home__copy h1 { max-width: 14ch; margin: 1.25rem 0 1rem; font-size: clamp(2.6rem, 7vw, 5.7rem); font-weight: 820; letter-spacing: -0.065em; line-height: 0.98; }
+.dv-home__lead { max-width: 43rem; margin: 0; color: var(--dv-ink-soft); font-size: clamp(1.05rem, 2vw, 1.25rem); }
+.dv-home__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+.dv-home__trust { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.5rem; }
+.dv-home__route-card { border-radius: var(--dv-radius-lg); background: var(--dv-care-deep); padding: clamp(1.5rem, 4vw, 2.5rem); color: var(--dv-paper); box-shadow: var(--dv-shadow); }
+.dv-home__route-card h2 { margin: 0.5rem 0 2rem; font-size: clamp(1.6rem, 3vw, 2.4rem); letter-spacing: -0.04em; }
+.dv-home__route-label { color: #a9ded4; font-family: var(--dv-font-utility); font-size: 0.72rem; text-transform: uppercase; }
+.dv-route { position: relative; display: grid; gap: 1.25rem; }
+.dv-route__line { position: absolute; top: 1.35rem; bottom: 1.35rem; left: 1.2rem; width: 1px; background: rgb(221 244 234 / .35); }
+.dv-route__step { position: relative; display: grid; grid-template-columns: 2.5rem 1fr; gap: 1rem; align-items: start; }
+.dv-route__step > span { display: grid; z-index: 1; width: 2.5rem; height: 2.5rem; place-items: center; border-radius: 50%; background: var(--dv-mint); color: var(--dv-care-deep); font-family: var(--dv-font-utility); font-size: 0.8rem; }
+.dv-route__step strong { display: block; font-size: 1rem; }
+.dv-route__step p { margin: 0.15rem 0 0; color: #cbe7e1; font-size: 0.88rem; }
+
+.dv-section { padding-block: clamp(3.5rem, 8vw, 6rem); }
+.dv-section__heading { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 1.5rem; margin-bottom: 2rem; }
+.dv-section__heading h2 { max-width: 18ch; margin: 0.35rem 0 0; font-size: clamp(2rem, 4vw, 3.4rem); letter-spacing: -0.055em; line-height: 1.05; }
+.dv-section__heading p { max-width: 42rem; color: var(--dv-muted); }
+.dv-eyebrow { color: var(--dv-care-dark); font-family: var(--dv-font-utility); font-size: 0.72rem; font-weight: 500; text-transform: uppercase; }
+.dv-situation-preview { display: grid; gap: 0.75rem; }
+.dv-situation-preview button { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 1rem; min-height: 5.5rem; border: 1px solid var(--dv-line); border-radius: var(--dv-radius-md); background: var(--dv-paper); padding: 1rem; color: var(--dv-ink); text-align: left; transition: transform var(--dv-duration) var(--dv-ease), border-color var(--dv-duration) var(--dv-ease); }
+.dv-situation-preview button:hover { transform: translateY(-2px); border-color: var(--dv-care); }
+.dv-situation-preview__icon { display: grid; width: 2.8rem; height: 2.8rem; place-items: center; border-radius: 50%; background: var(--dv-mint); color: var(--dv-care-dark); }
+.dv-home__rights { background: var(--dv-mint-soft); padding-block: clamp(3.5rem, 8vw, 6rem); }
+.dv-home__rights .dv-section__heading { margin-bottom: 2rem; }
+.dv-rights-preview { display: grid; gap: 1rem; }
+.dv-rights-preview article { display: grid; align-content: start; gap: 0.75rem; padding: 1.4rem; }
+.dv-rights-preview h3 { margin: 0; font-size: 1.3rem; }
+.dv-rights-preview p { margin: 0; color: var(--dv-muted); }
+.dv-rights-preview article > span:last-child { color: var(--dv-care-dark); font-size: 0.85rem; font-weight: 750; }
+
+@media (min-width: 48rem) {
+  .dv-situation-preview { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dv-rights-preview { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (min-width: 64rem) {
+  .dv-home__hero-grid { grid-template-columns: minmax(0, 1.25fr) minmax(20rem, .75fr); }
+}

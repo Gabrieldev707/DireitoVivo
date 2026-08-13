@@ -2,14 +2,15 @@ import { useEffect, useState } from 'react';
 import { enviarTriagem } from './api';
 import { Chat } from './componentes/Chat';
 import { LinhaDaVida } from './componentes/LinhaDaVida';
-import { TelaInicial } from './componentes/TelaInicial';
+import { Inicio } from './componentes/inicio/Inicio';
 import { Portifolio } from './componentes/Portifolio';
 import { CenariosVida } from './componentes/CenariosVida';
-import { GovHeader, type AbaNavegacao } from './componentes/GovHeader';
-import { GovFooter } from './componentes/GovFooter';
+import { Cabecalho } from './componentes/layout/Cabecalho';
+import { Rodape } from './componentes/layout/Rodape';
 import { ConsentimentoDemo } from './componentes/ConsentimentoDemo';
 import { PainelUrgencia } from './componentes/PainelUrgencia';
-import type { ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos';
+import type { AbaNavegacao, ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos';
+import type { Situacao } from './dados/situacoes';
 
 // Primeira fala do assistente — local, sem custo de LLM (RF01: acolhedora e sem pedir PII).
 const MENSAGEM_ABERTURA: MensagemChat = {
@@ -161,6 +162,10 @@ export function App() {
     setAbaAtiva('inicio');
   }
 
+  function aoSelecionarSituacao(situacao: Situacao) {
+    aoSelecionarCenarioParaChat(situacao.titulo, situacao.mensagemInicial);
+  }
+
   return (
     <div className="min-h-screen flex flex-col bg-[#f6f8fb] text-slate-900">
       <a href="#conteudo-principal" className="skip-link">
@@ -168,7 +173,7 @@ export function App() {
       </a>
 
       {/* Cabeçalho Oficial Gov.br (com acessibilidade, logos SVG e abas) */}
-      <GovHeader abaAtiva={abaAtiva} aoMudarAba={mudarAba} />
+      <Cabecalho abaAtiva={abaAtiva} aoMudarAba={mudarAba} />
 
       {/* Conteúdo Principal Dinâmico por Aba */}
       <main
@@ -182,10 +187,11 @@ export function App() {
         }
       >
         {abaAtiva === 'inicio' && (
-          <TelaInicial
+          <Inicio
             aoComecar={() => mudarAba('chat')}
-            aoVerCatalogo={() => setAbaAtiva('catalogo')}
-            aoVerCenarios={() => setAbaAtiva('cenarios')}
+            aoVerDireitos={() => setAbaAtiva('catalogo')}
+            aoVerSituacoes={() => setAbaAtiva('cenarios')}
+            aoEscolherSituacao={aoSelecionarSituacao}
           />
         )}
 
@@ -221,7 +227,7 @@ export function App() {
       </main>
 
       {/* Rodapé Oficial Gov.br (com logo PNG, contatos governamentais e disclaimer RF06) */}
-      <GovFooter aoMudarAba={mudarAba} />
+      <Rodape aoMudarAba={mudarAba} />
       {consentimentoAberto && (
         <ConsentimentoDemo
           aoAceitar={aceitarDemo}
