@@ -1,0 +1,120 @@
+.dv-container {
+  width: min(calc(100% - 2rem), var(--dv-content));
+  margin-inline: auto;
+}
+
+.dv-button {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  gap: var(--dv-space-2);
+  border: 1px solid transparent;
+  border-radius: var(--dv-radius-pill);
+  padding: 0.75rem 1.2rem;
+  font-weight: 750;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: transform var(--dv-duration) var(--dv-ease), background-color var(--dv-duration) var(--dv-ease), border-color var(--dv-duration) var(--dv-ease);
+}
+
+.dv-button:hover {
+  transform: translateY(-1px);
+}
+
+.dv-button--primary {
+  background: var(--dv-care-dark);
+  color: var(--dv-paper);
+}
+
+.dv-button--primary:hover {
+  background: var(--dv-care-deep);
+}
+
+.dv-button--secondary {
+  border-color: var(--dv-line-strong);
+  background: var(--dv-paper);
+  color: var(--dv-care-dark);
+}
+
+.dv-button--quiet {
+  background: transparent;
+  color: var(--dv-care-dark);
+}
+
+.dv-card {
+  border: 1px solid var(--dv-line);
+  border-radius: var(--dv-radius-md);
+  background: var(--dv-paper);
+  box-shadow: var(--dv-shadow-sm);
+}
+
+.dv-chip {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: var(--dv-space-2);
+  border: 1px solid var(--dv-line-strong);
+  border-radius: var(--dv-radius-pill);
+  background: var(--dv-paper);
+  padding: 0.625rem 1rem;
+  color: var(--dv-ink-soft);
+  font-size: 0.925rem;
+  font-weight: 700;
+}
+
+.dv-chip[aria-pressed='true'] {
+  border-color: var(--dv-care-dark);
+  background: var(--dv-care-dark);
+  color: var(--dv-paper);
+}
+
+.dv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  width: fit-content;
+  border-radius: var(--dv-radius-pill);
+  padding: 0.35rem 0.65rem;
+  background: #edf2f0;
+  color: var(--dv-ink-soft);
+  font-family: var(--dv-font-utility);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+.dv-badge--cuidado { background: var(--dv-mint); color: var(--dv-care-deep); }
+.dv-badge--informacao { background: var(--dv-clinical-soft); color: #244cbb; }
+.dv-badge--atencao { background: var(--dv-warning-soft); color: #774100; }
+.dv-badge--urgencia { background: var(--dv-signal-soft); color: #9b3025; }
+
+.dv-empty {
+  display: grid;
+  justify-items: center;
+  gap: var(--dv-space-3);
+  border: 1px dashed var(--dv-line-strong);
+  border-radius: var(--dv-radius-md);
+  padding: clamp(2rem, 8vw, 4rem);
+  background: var(--dv-paper);
+  text-align: center;
+}
+
+.dv-empty__icon {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--dv-mint);
+  color: var(--dv-care-dark);
+}
+
+.dv-empty h2,
+.dv-empty p { margin: 0; }
+.dv-empty p { max-width: 32rem; color: var(--dv-muted); }
+.dv-empty__action { margin-top: var(--dv-space-2); }
+
+@media (min-width: 48rem) {
+  .dv-container { width: min(calc(100% - 3rem), var(--dv-content)); }
+}
