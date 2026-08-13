@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { SimboloDireitoVivo } from './MarcaDireitoVivo';
 import { TOTAL_DIREITOS } from '../dados/catalogoDireitos';
+import type { AbaNavegacao } from '../tipos';
 
-export type AbaNavegacao = 'inicio' | 'catalogo' | 'cenarios' | 'chat' | 'resultado';
+export type { AbaNavegacao } from '../tipos';
 
 interface PropriedadesGovHeader {
   abaAtiva: AbaNavegacao;

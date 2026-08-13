@@ -22,9 +22,20 @@ const MENSAGEM_ABERTURA: MensagemChat = {
 
 function obterAbaInicial(): AbaNavegacao {
   const hash = window.location.hash.replace('#', '');
+  if (hash === 'direitos') return 'catalogo';
+  if (hash === 'situacoes') return 'cenarios';
+  if (hash === 'conversa') return 'chat';
   if (hash === 'catalogo' || hash === 'cenarios' || hash === 'chat') return hash;
   return 'inicio';
 }
+
+const VISAO_CANONICA: Record<AbaNavegacao, string> = {
+  inicio: 'inicio',
+  catalogo: 'direitos',
+  cenarios: 'situacoes',
+  chat: 'conversa',
+  resultado: 'resultado',
+};
 
 export function App() {
   const [abaAtiva, setAbaAtiva] = useState<AbaNavegacao>(obterAbaInicial);
@@ -163,6 +174,7 @@ export function App() {
       <main
         id="conteudo-principal"
         tabIndex={-1}
+        data-view={VISAO_CANONICA[abaAtiva]}
         className={
           abaAtiva === 'inicio'
             ? 'flex-1 w-full'
