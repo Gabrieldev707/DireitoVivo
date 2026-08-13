@@ -20,8 +20,8 @@ O Direito Vivo ataca esse ponto com uma **demonstração gratuita e sem cadastro
 - **Consentimento explícito no modo demo**, exigido também pela API em cada requisição
 - **Mascaramento por padrões** de CPF, e-mail, telefone e CEP antes da primeira chamada externa
 - **Urgência determinística** para perigo atual, violência e risco de autoextermínio, sem chamar LLM, busca ou banco
-- **Linha de vida** priorizada: o que resolver primeiro, o que destrava o próximo, ficha completa (critérios, documentos, canal, passo a passo, base legal, data de revisão)
-- **Base curada de 30 direitos federais** com fonte legal e prazo de revisão explícito
+- **Linha de vida** priorizada: o que resolver primeiro, o que destrava o próximo, ficha completa e links para fontes oficiais
+- **Base versionada de 30 itens**: 7 estão publicáveis após revisão inicial e 23 permanecem fora da demo até concluírem a revisão editorial
 - **Compartilhar o resultado** (Web Share API + fallback pra área de transferência)
 - **Interface estilo mensageiro** (chat, bolhas com tail, timestamp, ticks, indicador de digitação) — otimizada para celular
 - **PWA instalável** com manifest e ícones
@@ -53,7 +53,7 @@ rag (Node)
 
 | Módulo | Responsabilidade | Detalhes |
 |---|---|---|
-| [db/](db/) | Schema Supabase, 3 migrations, base de conhecimento com 30 itens | [db/README.md](db/README.md) |
+| [db/](db/) | Schema Supabase, 4 migrations, auditor editorial e base versionada com 30 itens | [db/README.md](db/README.md) |
 | [rag/](rag/) | Motor de triagem, priorização, provider LLM abstrato (troca Gemini↔Claude sem tocar o resto), busca semântica | [rag/README.md](rag/README.md) |
 | [api/](api/) | HTTP fino: valida schema, chama motor, devolve resposta. Sem sessão. | [api/README.md](api/README.md) |
 | [frontend/](frontend/) | Chat estilo mensageiro, catálogo, cenários de vida, resultado priorizado, PWA | [frontend/README.md](frontend/README.md) |
@@ -69,11 +69,12 @@ rag (Node)
 
 ## Qualidade
 
-Verificação local da Fase 1 (12/08/2026): **83 testes passaram** (RAG 45, API 17, frontend 21), typecheck e build passaram, e `npm audit --omit=dev` retornou zero vulnerabilidades. Testes que dependem de Gemini e Supabase reais são separados das suítes determinísticas e exigem credenciais próprias.
+Verificação local em 12/08/2026: **99 testes passaram** (banco 16, RAG 45, API 17 e frontend 21), typecheck e build de produção passaram, e `npm audit --omit=dev` encontrou 0 vulnerabilidades. O comando `npm test` inclui o auditor e os contratos de segurança da migration. Testes que dependem de Gemini e Supabase reais são separados das suítes determinísticas e exigem credenciais próprias. Ainda não há um lint dedicado configurado; o gate estático atual é o TypeScript em modo estrito.
 
 - **RAG**: mascaramento de dados, urgência sem dependências externas, ordenação, contrato pergunta/orientação/sem_match e robustez do parser
 - **API**: `fastify.inject` cobre schema (papel, tamanho, tamanho da conversa), erro genérico vs erro de triagem (mensagem opaca — nunca vaza detalhe do provider), teste explícito de que **o corpo da requisição nunca aparece no log**
 - **Frontend**: consentimento da demo, chat, painel de urgência, orientação estruturada, sem_match e compartilhamento
+- **Conteúdo e banco**: metadados editoriais, fontes HTTPS oficiais, vigência, duplicidade, estados de publicação e contrato SQL de RLS/permissões/RPC
 - **Perfis end-to-end**: `npm run rag:testes` roda 3 conversas roteirizadas (mãe solo desempregada, idoso com deficiência, trabalhador informal acidentado) contra Gemini e Supabase reais e valida que cada perfil recebe ao menos 1 item esperado + ficha completa + ordem correta
 
 ## Como rodar
@@ -85,10 +86,11 @@ Verificação local da Fase 1 (12/08/2026): **83 testes passaram** (RAG 45, API 
 #    SUPABASE_CHAVE_SERVICO → só se for rodar seed/embeddings
 npm install
 
-# 2. Gere embeddings da base (uma vez, e a cada mudança de conteúdo).
-npm run db:embeddings
+# 2. Audite o conteúdo e gere o catálogo público local.
+npm run db:auditar
+npm run db:catalogo
 
-# 3. Valide o motor sem frontend (rodam 3 perfis dos critérios de aceite).
+# 3. Valide o motor sem frontend (requer serviços reais e roda 3 perfis).
 npm run rag:testes
 
 # 4. Suba tudo.
@@ -97,8 +99,11 @@ npm run front:dev    # terminal 2 → http://localhost:5173
 
 # Extras
 npm run typecheck    # strict em rag + api + frontend
-npm test             # suítes determinísticas (Vitest)
+npm test             # suítes determinísticas dos quatro módulos
+npm run build        # build de produção do frontend
 ```
+
+Para atualizar o Supabase, siga a ordem e os gates documentados em [`db/README.md`](db/README.md). A migration `0004`, o seed governado e os embeddings **não são considerados aplicados no projeto remoto por este repositório sozinho**.
 
 ## Status dos critérios de aceite (SDD seção 7)
 
@@ -106,16 +111,17 @@ npm test             # suítes determinísticas (Vitest)
 |---|---|
 | Triagem sem exigir CPF/RG/nome | ✅ Sem login/cadastro; interface orienta a não enviar PII; padrões conhecidos são mascarados |
 | ≥1 item relevante para 3 perfis de teste | ✅ 3/3 passam em `npm run rag:testes` (com retry automático nos rate-limits do free tier) |
-| Ficha completa por item (RF05) | ✅ Todos os 30 itens têm todos os campos; validação automatizada |
+| Ficha completa por item (RF05) | ✅ Os 7 itens publicáveis têm campos editoriais, alertas e fontes oficiais; 23 itens continuam em revisão/rascunho |
 | Resultado em ordem de prioridade (RF04) | ✅ Violência/risco no topo, depois `prioridade_base`, alfabético como desempate |
 | Disclaimer antes da triagem (RF06) | ✅ Tela inicial, banner no chat, rodapé no resultado |
-| Base com ≥20 itens revisáveis | ✅ 30 itens com `ultima_revisao` e fonte legal em `db/seed/itens.json` |
+| Base com ≥20 itens revisáveis | ✅ 30 itens versionados e auditáveis; publicação é bloqueada até fonte, vigência e revisão estarem válidas |
 
 ## Fora de escopo do MVP (Fase 2 do SDD)
 
 Estão fora **de propósito** — cada um exige aprovação de terceiro ou convênio institucional, não é só código: WhatsApp Business API, validação por CPF/documento, integração com sistemas oficiais (CadÚnico/Meu INSS), regras estaduais/municipais detalhadas e alerta comunitário. O SDD prevê tocar essas features quando o MVP validar demanda.
 
-## Infra provisionada
+## Estado de infraestrutura
 
-- **Supabase**: projeto `direito-vivo` (`wajycuocmmuyxbzeskyl`), região `sa-east-1`, plano free. Migrations e seed já aplicados; advisors de segurança limpos. Pausa automaticamente após inatividade — restaurável em ~2min.
-- **Deploy previsto** (quando chegar a hora): Vercel (frontend PWA) + Railway (api), conforme SDD seção 5.
+- **Local verificado**: migration versionada e testada por contrato estático; catálogo gerado somente a partir de itens publicáveis.
+- **Remoto pendente**: aplicar a migration `0004`, carregar o seed, regerar embeddings, executar os advisors do Supabase e validar permissões com usuários `anon`/`authenticated`/`service_role`.
+- **Deploy previsto**: a arquitetura desenhada usa Vercel para frontend/API e Supabase para a base pública. Nenhuma URL pública é declarada aqui até uma preview ser validada em desktop e celular.
