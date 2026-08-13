@@ -3,7 +3,8 @@ import { afterAll, describe, expect, it, vi } from 'vitest';
 process.env.GEMINI_API_KEY = 'teste-fake';
 process.env.SUPABASE_URL = 'https://exemplo.supabase.co';
 process.env.SUPABASE_CHAVE_PUBLICA = 'chave-fake';
-process.env.API_ORIGEM_PERMITIDA = 'https://preview.direito-vivo.test';
+process.env.API_ORIGEM_PERMITIDA =
+  'https://*-gabriels-projects-c9eeaa61.vercel.app';
 
 vi.mock('../src/rag.js', async (importOriginal) => {
   const original = await importOriginal<typeof import('../src/rag.js')>();
@@ -24,17 +25,32 @@ describe('aplicação Fastify implantável', () => {
     expect(resposta.json()).toEqual({ ok: true });
   });
 
-  it('aceita CORS somente da origem configurada', async () => {
+  it('aceita uma Preview pertencente ao padrão configurado', async () => {
     const permitida = await app.inject({
       method: 'OPTIONS',
       url: '/api/triagem',
       headers: {
-        origin: 'https://preview.direito-vivo.test',
+        origin:
+          'https://direito-vivo-abc123-gabriels-projects-c9eeaa61.vercel.app',
         'access-control-request-method': 'POST',
       },
     });
     expect(permitida.headers['access-control-allow-origin']).toBe(
-      'https://preview.direito-vivo.test',
+      'https://direito-vivo-abc123-gabriels-projects-c9eeaa61.vercel.app',
     );
+  });
+
+  it('recusa origem fora do padrão configurado', async () => {
+    const recusada = await app.inject({
+      method: 'OPTIONS',
+      url: '/api/triagem',
+      headers: {
+        origin:
+          'https://direito-vivo-abc123-projeto-de-terceiro.vercel.app',
+        'access-control-request-method': 'POST',
+      },
+    });
+
+    expect(recusada.headers['access-control-allow-origin']).toBeUndefined();
   });
 });
