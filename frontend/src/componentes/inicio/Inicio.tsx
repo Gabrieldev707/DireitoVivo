@@ -2,7 +2,6 @@ import { CATALOGO_DIREITOS } from '../../dados/catalogoDireitos';
 import { SITUACOES, type Situacao } from '../../dados/situacoes';
 import { Icone } from '../compartilhados/Icone';
 import { Selo } from '../compartilhados/Selo';
-import { DemonstracaoRota } from './DemonstracaoRota';
 
 interface PropriedadesInicio {
   aoComecar: () => void;
@@ -30,10 +29,10 @@ export function Inicio({ aoComecar, aoVerDireitos, aoVerSituacoes, aoEscolherSit
       <section className="dv-home__hero">
         <div className="dv-container dv-home__hero-grid">
           <div className="dv-home__copy">
-            <Selo tom="cuidado"><Icone nome="escudo" /> orientação anônima</Selo>
-            <h1>Encontre o próximo passo para o momento que você está vivendo.</h1>
+            <p className="dv-home__kicker">Direitos públicos em linguagem simples</p>
+            <h1>Descubra onde buscar ajuda para o que você está vivendo.</h1>
             <p className="dv-home__lead">
-              Você conta o momento. O Direito Vivo organiza direitos possíveis, o que confirmar e quais canais oficiais procurar — sem prometer aprovação.
+              Conte o que aconteceu do seu jeito. A gente organiza possibilidades e mostra onde confirmar — sem cadastro e sem prometer aprovação.
             </p>
             <div className="dv-home__actions">
               <button className="dv-button dv-button--primary" type="button" onClick={aoComecar}>
@@ -50,11 +49,23 @@ export function Inicio({ aoComecar, aoVerDireitos, aoVerSituacoes, aoEscolherSit
               <Selo>7 conteúdos revisados</Selo>
             </div>
           </div>
-          <div className="dv-home__route-card">
-            <span className="dv-home__route-label">Uma rota, não um veredito</span>
-            <h2>Da dúvida ao lugar certo</h2>
-            <DemonstracaoRota />
+          <div className="dv-home__portrait">
+            <picture>
+              <source media="(max-width: 47.999rem)" srcSet="/assets/hero-brasil-familia-mobile.webp" />
+              <img
+                src="/assets/hero-brasil-familia.webp"
+                alt="Família brasileira consultando orientações em um celular"
+                width="1600"
+                height="800"
+                fetchPriority="high"
+              />
+            </picture>
           </div>
+        </div>
+        <div className="dv-container dv-home__channels" aria-label="Canais que a orientação pode indicar">
+          <strong>Você não precisa saber o nome do benefício.</strong>
+          <span>A orientação ajuda a encontrar portas de entrada como</span>
+          <div><b>CRAS</b><b>SUS</b><b>INSS</b><b>Defensoria</b></div>
         </div>
       </section>
 

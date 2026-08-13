@@ -16,9 +16,9 @@ import type { Situacao } from './dados/situacoes';
 const MENSAGEM_ABERTURA: MensagemChat = {
   papel: 'assistente',
   conteudo:
-    'Olá! Eu sou a Inteligência Artificial do Direito Vivo, criada para indicar benefícios e serviços públicos que talvez sejam compatíveis com a sua situação.\n\n' +
-    'Não informe nome completo, CPF, RG, endereço, telefone ou e-mail. A conversa será processada por um provedor de IA e alguns dados pessoais serão mascarados antes desse envio.\n\n' +
-    'Para começarmos: me conte com suas palavras como está sua vida hoje? (ex: situação de trabalho, renda, família, saúde ou se cuida de crianças/idosos)',
+    'Olá! Vou ajudar você a organizar direitos possíveis e descobrir onde confirmar.\n\n' +
+    'Não envie nome completo, CPF, RG, endereço, telefone ou e-mail.\n\n' +
+    'Para começar, conte o que aconteceu. Pode falar de trabalho, renda, saúde ou de alguém de quem você cuida.',
 };
 
 function obterAbaPorHash(): AbaNavegacao | undefined {
@@ -216,7 +216,7 @@ export function App() {
             ? 'flex-1 w-full'
             : abaAtiva === 'chat'
               ? 'flex-1 min-h-0 w-full'
-            : 'flex-1 mx-auto max-w-7xl w-full px-4 py-8 sm:px-6 lg:px-8'
+            : 'flex-1 w-full'
         }
       >
         {abaAtiva === 'inicio' && (

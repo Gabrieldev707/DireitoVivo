@@ -1,19 +1,23 @@
 :root {
-  --dv-ink: #102a2e;
-  --dv-ink-soft: #405b5e;
-  --dv-muted: #667b7d;
-  --dv-care: #087a70;
-  --dv-care-dark: #075b55;
-  --dv-care-deep: #043f3b;
-  --dv-mint: #ddf4ea;
-  --dv-mint-soft: #eef9f4;
-  --dv-clinical: #3568f0;
-  --dv-clinical-soft: #eaf0ff;
-  --dv-signal: #f06f5f;
-  --dv-signal-soft: #fff0ed;
-  --dv-warning: #aa5d00;
-  --dv-warning-soft: #fff4d9;
-  --dv-canvas: #f7faf8;
+  --dv-ink: #152c33;
+  --dv-ink-soft: #344f56;
+  --dv-muted: #587077;
+  --dv-care: #087f5b;
+  --dv-care-dark: #075f46;
+  --dv-care-deep: #063d33;
+  --dv-mint: #d9f3df;
+  --dv-mint-soft: #f0f8f1;
+  --dv-clinical: #175fc4;
+  --dv-clinical-soft: #e8f1ff;
+  --dv-signal: #d85d42;
+  --dv-signal-soft: #fff0e9;
+  --dv-warning: #9b5b00;
+  --dv-warning-soft: #fff3c4;
+  --dv-sun: #f4c542;
+  --dv-sun-soft: #fff8d9;
+  --dv-earth: #b95335;
+  --dv-sky: #1b68b3;
+  --dv-canvas: #f7f5ef;
   --dv-paper: #ffffff;
   --dv-line: #dbe6e2;
   --dv-line-strong: #b9cbc5;
@@ -37,6 +41,7 @@
   --dv-space-8: 4.5rem;
   --dv-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
   --dv-duration: 180ms;
-  --dv-font-body: 'Manrope Variable', 'Segoe UI', sans-serif;
-  --dv-font-utility: 'IBM Plex Mono', 'Consolas', monospace;
+  --dv-font-body: 'Atkinson Hyperlegible Next Variable', 'Atkinson Hyperlegible', 'Segoe UI', sans-serif;
+  --dv-font-display: 'Bricolage Grotesque Variable', 'Arial Black', sans-serif;
+  --dv-font-utility: var(--dv-font-body);
 }

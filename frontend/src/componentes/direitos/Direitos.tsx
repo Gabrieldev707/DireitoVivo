@@ -28,12 +28,17 @@ export function Direitos({ aoConversarSobre }: PropriedadesDireitos) {
   }, [busca, categoria]);
 
   return (
-    <section className="dv-page dv-container" aria-labelledby="titulo-direitos">
+    <section className="dv-page dv-page--direitos dv-container" aria-labelledby="titulo-direitos">
       <header className="dv-page__header">
         <span className="dv-eyebrow">7 conteúdos publicáveis</span>
         <h1 id="titulo-direitos">Direitos e serviços, com critérios que você pode conferir.</h1>
         <p>O catálogo mostra apenas conteúdos com fonte oficial e revisão editorial. A orientação não garante concessão.</p>
       </header>
+      <aside className="dv-page__guide" aria-label="Como consultar um direito">
+        <div><span>1</span><p><strong>Busque pelo seu momento</strong><small>Use palavras como remédio ou desemprego.</small></p></div>
+        <div><span>2</span><p><strong>Confira os critérios</strong><small>Veja documentos e onde solicitar.</small></p></div>
+        <div><span>3</span><p><strong>Abra a fonte oficial</strong><small>Confirme sempre a regra atual.</small></p></div>
+      </aside>
       <div className="dv-search">
         <Icone nome="busca" />
         <label className="sr-only" htmlFor="buscar-direitos">Buscar direitos</label>

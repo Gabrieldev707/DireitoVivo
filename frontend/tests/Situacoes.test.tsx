@@ -36,6 +36,12 @@ describe('situações orientadas', () => {
 });
 
 describe('página de situações', () => {
+  it('explica como usar a página antes das escolhas', () => {
+    render(<Situacoes aoEscolher={vi.fn()} />);
+    expect(screen.getByLabelText('Como usar as situações')).toHaveTextContent('Escolha o que mais se aproxima');
+    expect(screen.getByLabelText('Como usar as situações')).toHaveTextContent('Veja onde confirmar');
+  });
+
   it('filtra saúde e envia a situação selecionada', async () => {
     const user = userEvent.setup();
     const aoEscolher = vi.fn();

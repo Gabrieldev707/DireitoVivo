@@ -9,6 +9,13 @@ const mensagens: MensagemChat[] = [
 ];
 
 describe('conversa responsiva', () => {
+  it('explica o processo e oferece ajuda presencial sem parecer um formulário vazio', () => {
+    render(<Conversa mensagens={mensagens} enviando={false} aoEnviar={vi.fn()} />);
+    expect(screen.getByText('O que vamos descobrir')).toBeVisible();
+    expect(screen.getAllByText(/CRAS, SUS, INSS ou Defensoria/i)).toHaveLength(2);
+    expect(screen.getByText(/prefere atendimento presencial/i)).toBeVisible();
+  });
+
   it('envia com Enter e quebra linha com Shift+Enter', async () => {
     const user = userEvent.setup();
     const aoEnviar = vi.fn();

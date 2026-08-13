@@ -1,8 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
-import '@fontsource-variable/manrope';
-import '@fontsource/ibm-plex-mono/500.css';
+import '@fontsource-variable/atkinson-hyperlegible-next';
+import '@fontsource-variable/bricolage-grotesque';
 import './estilos/tokens.css';
 import './estilos/base.css';
 import './estilos/componentes.css';

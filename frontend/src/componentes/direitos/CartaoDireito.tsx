@@ -12,7 +12,7 @@ interface PropriedadesCartaoDireito {
 export function CartaoDireito({ item, aoConversarSobre }: PropriedadesCartaoDireito) {
   const [aberto, setAberto] = useState(false);
   return (
-    <article className="dv-card dv-right-card" data-testid="cartao-direito">
+    <article className="dv-card dv-right-card" data-natureza={item.natureza} data-testid="cartao-direito">
       <div className="dv-right-card__heading">
         <Selo tom="informacao">{item.natureza === 'beneficio' ? 'benefício' : 'serviço'}</Selo>
         <span>{item.canal_solicitacao.detalhe}</span>

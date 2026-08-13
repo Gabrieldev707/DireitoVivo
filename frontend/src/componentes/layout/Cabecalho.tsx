@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { AbaNavegacao } from '../../tipos';
 import { Icone } from '../compartilhados/Icone';
 import { Marca } from './Marca';
+import { PainelAcessibilidade } from './PainelAcessibilidade';
 
 interface PropriedadesCabecalho {
   abaAtiva: AbaNavegacao;
@@ -17,12 +18,7 @@ const ABAS: Array<{ id: AbaNavegacao; rotulo: string }> = [
 
 export function Cabecalho({ abaAtiva, aoMudarAba }: PropriedadesCabecalho) {
   const [menuAberto, setMenuAberto] = useState(false);
-  const [altoContraste, setAltoContraste] = useState(false);
-
-  useEffect(() => {
-    document.body.classList.toggle('alto-contraste', altoContraste);
-    return () => document.body.classList.remove('alto-contraste');
-  }, [altoContraste]);
+  useEffect(() => setMenuAberto(false), [abaAtiva]);
 
   function navegar(aba: AbaNavegacao) {
     setMenuAberto(false);
@@ -68,14 +64,7 @@ export function Cabecalho({ abaAtiva, aoMudarAba }: PropriedadesCabecalho) {
             ))}
           </nav>
           <div className="dv-header__tools">
-            <button
-              type="button"
-              className="dv-header__contrast"
-              aria-pressed={altoContraste}
-              onClick={() => setAltoContraste((atual) => !atual)}
-            >
-              Alto contraste
-            </button>
+            <PainelAcessibilidade />
             <button className="dv-button dv-button--primary" type="button" onClick={() => navegar('chat')}>
               Começar conversa <Icone nome="seta" />
             </button>

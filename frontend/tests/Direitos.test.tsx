@@ -4,6 +4,12 @@ import { describe, expect, it, vi } from 'vitest';
 import { Direitos } from '../src/componentes/direitos/Direitos';
 
 describe('catálogo de direitos', () => {
+  it('apresenta uma rota simples para consultar conteúdo oficial', () => {
+    render(<Direitos aoConversarSobre={vi.fn()} />);
+    expect(screen.getByLabelText('Como consultar um direito')).toHaveTextContent('Busque pelo seu momento');
+    expect(screen.getByLabelText('Como consultar um direito')).toHaveTextContent('Abra a fonte oficial');
+  });
+
   it('busca entre sete itens e abre detalhes verificáveis', async () => {
     const user = userEvent.setup();
     render(<Direitos aoConversarSobre={vi.fn()} />);

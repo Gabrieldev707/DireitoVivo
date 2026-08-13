@@ -26,11 +26,15 @@ export function Conversa({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoTent
       <ContextoConversa aoLimpar={aoLimpar} podeLimpar={mensagens.length > 1 && !enviando} />
       <div className="dv-conversation__main">
         <header className="dv-conversation__heading">
-          <div><strong>Conversa de orientação</strong><span>{enviando ? 'Organizando sua resposta…' : 'Demonstração com IA'}</span></div>
-          <span className="dv-conversation__privacy">Sem cadastro</span>
+          <div className="dv-conversation__agent"><span className="dv-conversation__avatar" aria-hidden="true">DV</span><div><strong>Direito Vivo</strong><span>{enviando ? 'Organizando uma resposta…' : 'Assistente de orientação'}</span></div></div>
+          <span className="dv-conversation__privacy"><span aria-hidden="true">●</span> conversa ativa</span>
         </header>
         <div className="dv-messages" ref={historico} data-testid="area-rolavel" aria-live="polite" aria-relevant="additions">
-          <div className="dv-messages__notice">Não informe nome completo, CPF, RG, endereço, telefone ou e-mail.</div>
+          <details className="dv-conversation__mobile-guide">
+            <summary>Como esta conversa ajuda</summary>
+            <p>Você conta o que aconteceu. A orientação organiza possibilidades, documentos e canais como CRAS, SUS, INSS ou Defensoria.</p>
+          </details>
+          <div className="dv-messages__notice"><strong>Sua privacidade vem primeiro.</strong><span>Não informe nome completo, CPF, RG, endereço, telefone ou e-mail.</span></div>
           {mensagens.map((mensagem, indice) => <Mensagem key={`${mensagem.papel}-${indice}`} mensagem={mensagem} />)}
           {enviando && <div className="dv-message dv-message--assistente"><div className="dv-message__label">Direito Vivo</div><div className="dv-message__typing" aria-label="Direito Vivo está digitando"><span /><span /><span /></div></div>}
           {erro && <div className="dv-conversation__error" role="alert"><strong>Não foi possível concluir.</strong><span>{erro}</span>{aoTentarNovamente && <button type="button" onClick={aoTentarNovamente}>Tentar novamente</button>}</div>}

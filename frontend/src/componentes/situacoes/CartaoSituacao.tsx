@@ -22,7 +22,7 @@ export function CartaoSituacao({ situacao, aoEscolher }: PropriedadesCartao) {
   const assunto = situacao.id === 'medicamentos' ? 'remédios' : situacao.titulo.toLocaleLowerCase('pt-BR');
 
   return (
-    <article className="dv-card dv-situation-card" data-testid="cartao-situacao">
+    <article className="dv-card dv-situation-card" data-categoria={situacao.categoria} data-testid="cartao-situacao">
       <div className="dv-situation-card__top">
         <span className="dv-situation-card__icon">
           <Icone nome={situacao.categoria === 'saude' ? 'saude' : situacao.categoria === 'urgencia' ? 'urgencia' : situacao.categoria === 'cuidado_deficiencia' ? 'cuidado' : 'trabalho'} />

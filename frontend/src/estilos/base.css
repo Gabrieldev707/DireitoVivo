@@ -4,8 +4,12 @@ html {
   background: var(--dv-canvas);
   color: var(--dv-ink);
   font-family: var(--dv-font-body);
+  overflow-x: clip;
   scroll-behavior: smooth;
 }
+
+html[data-tamanho-texto='grande'] { font-size: 112.5%; }
+html[data-tamanho-texto='maior'] { font-size: 125%; }
 
 .skip-link {
   position: fixed;
@@ -31,6 +35,11 @@ body {
   overflow-x: clip;
 }
 
+:where(h1, h2, h3) {
+  font-family: var(--dv-font-display);
+  font-variation-settings: 'wdth' 92;
+}
+
 button,
 input,
 select,
@@ -53,9 +62,30 @@ a {
 }
 
 ::selection {
-  background: var(--dv-mint);
+  background: var(--dv-sun);
   color: var(--dv-care-deep);
 }
+
+.contraste-reforcado {
+  --dv-ink: #000;
+  --dv-ink-soft: #111;
+  --dv-muted: #242424;
+  --dv-care: #006f45;
+  --dv-care-dark: #004e32;
+  --dv-care-deep: #002f21;
+  --dv-canvas: #fff;
+  --dv-paper: #fff;
+  --dv-line: #4a4a4a;
+  --dv-line-strong: #111;
+  --dv-shadow-sm: none;
+  --dv-shadow: none;
+}
+
+.contraste-reforcado :where(button, input, textarea, article) { border-width: 2px; }
+.destacar-links a { text-decoration: underline !important; text-decoration-thickness: 0.15em !important; text-underline-offset: 0.18em; }
+.reduzir-movimento *,
+.reduzir-movimento *::before,
+.reduzir-movimento *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
 
 .sr-only {
   position: absolute;
