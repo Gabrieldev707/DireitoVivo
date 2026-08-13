@@ -2,7 +2,7 @@ import Fastify, { type FastifyInstance, type FastifyServerOptions } from 'fastif
 import cors from '@fastify/cors';
 import rateLimit from '@fastify/rate-limit';
 import { createHash } from 'node:crypto';
-import { obterEnv } from '@direito-vivo/rag';
+import { obterEnv } from './rag.js';
 import { rotasTriagem } from './rotas/triagem.js';
 
 /**

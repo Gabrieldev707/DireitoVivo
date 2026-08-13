@@ -5,7 +5,7 @@ import {
   obterModoAplicacao,
   validarModoAplicacao,
   type MensagemChat,
-} from '@direito-vivo/rag';
+} from '../rag.js';
 
 // Limites defensivos: conversa curta por natureza (máx. 6 perguntas do assistente).
 const esquemaCorpo = {

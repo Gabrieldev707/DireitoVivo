@@ -1,4 +1,4 @@
-import { obterEnv } from '@direito-vivo/rag';
+import { obterEnv } from './rag.js';
 import { montarAplicacao } from './app.js';
 
 const app = await montarAplicacao();

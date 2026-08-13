@@ -10,8 +10,8 @@ process.env.API_ORIGEM_PERMITIDA = 'http://localhost:5173';
 // A rota importa executarTriagem em runtime; mockamos no nível de módulo pra não bater rede.
 const mockExecutarTriagem = vi.fn();
 
-vi.mock('@direito-vivo/rag', async (importOriginal) => {
-  const original = await importOriginal<typeof import('@direito-vivo/rag')>();
+vi.mock('../src/rag.js', async (importOriginal) => {
+  const original = await importOriginal<typeof import('../src/rag.js')>();
   return {
     ...original,
     executarTriagem: (...args: unknown[]) => mockExecutarTriagem(...args),
@@ -144,7 +144,7 @@ describe('POST /api/triagem', () => {
   });
 
   it('devolve 422 quando o motor lança ErroTriagem', async () => {
-    const { ErroTriagem } = await import('@direito-vivo/rag');
+    const { ErroTriagem } = await import('../src/rag.js');
     mockExecutarTriagem.mockRejectedValue(new ErroTriagem('formato ruim'));
     const r = await app.inject({
       method: 'POST',

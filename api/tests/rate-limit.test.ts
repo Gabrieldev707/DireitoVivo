@@ -9,8 +9,8 @@ process.env.SUPABASE_CHAVE_PUBLICA = 'chave-fake';
 
 const mockExecutarTriagem = vi.fn();
 
-vi.mock('@direito-vivo/rag', async (importOriginal) => {
-  const original = await importOriginal<typeof import('@direito-vivo/rag')>();
+vi.mock('../src/rag.js', async (importOriginal) => {
+  const original = await importOriginal<typeof import('../src/rag.js')>();
   return {
     ...original,
     executarTriagem: (...args: unknown[]) => mockExecutarTriagem(...args),

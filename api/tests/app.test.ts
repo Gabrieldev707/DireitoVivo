@@ -5,8 +5,8 @@ process.env.SUPABASE_URL = 'https://exemplo.supabase.co';
 process.env.SUPABASE_CHAVE_PUBLICA = 'chave-fake';
 process.env.API_ORIGEM_PERMITIDA = 'https://preview.direito-vivo.test';
 
-vi.mock('@direito-vivo/rag', async (importOriginal) => {
-  const original = await importOriginal<typeof import('@direito-vivo/rag')>();
+vi.mock('../src/rag.js', async (importOriginal) => {
+  const original = await importOriginal<typeof import('../src/rag.js')>();
   return { ...original, executarTriagem: vi.fn() };
 });
 
