@@ -1,4 +1,4 @@
-// Ponto de entrada do módulo rag — tudo que os outros módulos (api, db) podem usar.
+// Ponto de entrada do módulo rag — tudo que os outros módulos (backend, db) podem usar.
 export * from './tipos.js';
 export { obterEnv } from './config.js';
 export { criarProvedorLLM, obterProvedorLLM, type ProvedorLLM, type OpcoesGeracao } from './provedor-llm.js';

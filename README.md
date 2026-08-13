@@ -43,7 +43,7 @@ O SDD trata privacidade como restrição de projeto, não como cláusula:
 frontend (React 19 + Vite + Tailwind v4)
       │
       ▼ POST /api/triagem
-api (Fastify 5, stateless)
+backend (Fastify 5, stateless)
       │
       ▼
 rag (Node)
@@ -55,7 +55,7 @@ rag (Node)
 |---|---|---|
 | [db/](db/) | Schema Supabase, 4 migrations, auditor editorial e base versionada com 30 itens | [db/README.md](db/README.md) |
 | [rag/](rag/) | Motor de triagem, priorização, provider LLM abstrato (troca Gemini↔Claude sem tocar o resto), busca semântica | [rag/README.md](rag/README.md) |
-| [api/](api/) | HTTP fino: valida schema, chama motor, devolve resposta. Sem sessão. | [api/README.md](api/README.md) |
+| [backend/](backend/) | HTTP fino: valida schema, chama motor, devolve resposta. Sem sessão. | [backend/README.md](backend/README.md) |
 | [frontend/](frontend/) | Chat estilo mensageiro, catálogo, cenários de vida, resultado priorizado, PWA | [frontend/README.md](frontend/README.md) |
 
 ## Decisões técnicas que valem uma linha
@@ -98,7 +98,7 @@ npm run api:dev      # terminal 1 → http://localhost:3333
 npm run front:dev    # terminal 2 → http://localhost:5173
 
 # Extras
-npm run typecheck    # strict em rag + api + frontend
+npm run typecheck    # strict em rag + backend + frontend
 npm test             # suítes determinísticas dos quatro módulos
 npm run build        # build de produção do frontend
 ```

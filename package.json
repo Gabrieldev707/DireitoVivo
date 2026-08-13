@@ -7,7 +7,7 @@
   "workspaces": [
     "db",
     "rag",
-    "api",
+    "backend",
     "frontend"
   ],
   "scripts": {
@@ -18,10 +18,10 @@
     "rag:cli": "npm run cli -w rag",
     "rag:testes": "npm run testar-perfis -w rag",
     "rag:auditar": "npm run auditar -w rag",
-    "api:dev": "npm run dev -w api",
+    "api:dev": "npm run dev -w @direito-vivo/api",
     "front:dev": "npm run dev -w frontend",
-    "typecheck": "npm run typecheck -w rag && npm run typecheck -w api && npm run typecheck -w frontend",
-    "test": "npm run test -w db && npm run test -w rag && npm run test -w api && npm run test -w frontend",
+    "typecheck": "npm run typecheck -w rag && npm run typecheck -w @direito-vivo/api && npm run typecheck -w frontend",
+    "test": "npm run test -w db && npm run test -w rag && npm run test -w @direito-vivo/api && npm run test -w frontend",
     "build": "npm run build -w frontend"
   }
 }

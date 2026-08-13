@@ -213,7 +213,7 @@ interface DireitoItem {
 - Em caso de dúvida sobre incluir ou não um dado sensível, a resposta padrão é: não incluir.
 - **LLM padrão do MVP: Gemini API (tier free)**, não Claude API — ver seção 5. Abstrair a camada de LLM pra facilitar troca de provider no futuro.
 - **Estruturação obrigatória do projeto:**
-  - Organizar em módulos claros (ex: `/db`, `/rag`, `/api`, `/frontend`), sem lógica misturada em arquivos únicos gigantes
+  - Organizar em módulos claros (ex: `/db`, `/rag`, `/backend`, `/frontend`), sem lógica misturada em arquivos únicos gigantes
   - Documentar cada módulo com um README curto explicando responsabilidade e como rodar
   - Nomear variáveis, funções e arquivos em português ou inglês de forma consistente (escolher um e manter em todo o projeto, não misturar)
   - Commits pequenos e descritivos, seguindo o padrão que o usuário já usa em outros projetos (ex: Conventional Commits)
