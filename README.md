@@ -103,7 +103,7 @@ npm test             # suítes determinísticas dos quatro módulos
 npm run build        # build de produção do frontend
 ```
 
-Para atualizar o Supabase, siga a ordem e os gates documentados em [`db/README.md`](db/README.md). A migration `0004`, o seed governado e os embeddings **não são considerados aplicados no projeto remoto por este repositório sozinho**.
+Para atualizar o Supabase, siga a ordem e os gates documentados em [`db/README.md`](db/README.md). O estado remoto precisa sempre ser confirmado por consultas e testes; a presença dos arquivos no Git não comprova implantação.
 
 ## Status dos critérios de aceite (SDD seção 7)
 
@@ -122,6 +122,8 @@ Estão fora **de propósito** — cada um exige aprovação de terceiro ou conv�
 
 ## Estado de infraestrutura
 
-- **Local verificado**: migration versionada e testada por contrato estático; catálogo gerado somente a partir de itens publicáveis.
-- **Remoto pendente**: aplicar a migration `0004`, carregar o seed, regerar embeddings, executar os advisors do Supabase e validar permissões com usuários `anon`/`authenticated`/`service_role`.
+- **Local verificado em 12/08/2026**: 99 testes, typecheck e build passaram; catálogo gerado somente a partir de itens publicáveis.
+- **Supabase verificado em 12/08/2026**: migration `0004` aplicada manualmente no SQL Editor ao projeto `wajycuocmmuyxbzeskyl`; 30 itens internos, 7 publicáveis, 7 embeddings e 3/3 perfis reais aprovados.
+- **Segurança remota verificada**: RLS ativo; `anon` com SELECT/RPC e sem INSERT/UPDATE/DELETE; RPC como `security invoker` e `search_path` explícito; Security Advisor reexecutado com 0 erros, 0 avisos e 0 sugestões.
+- **Limite da evidência**: a aplicação manual não foi registrada pela CLI como migration remota; a chave `service_role` não foi armazenada localmente e não houve teste direto autenticado como `service_role`.
 - **Deploy previsto**: a arquitetura desenhada usa Vercel para frontend/API e Supabase para a base pública. Nenhuma URL pública é declarada aqui até uma preview ser validada em desktop e celular.

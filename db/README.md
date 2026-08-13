@@ -43,7 +43,22 @@ npm run db:seed
 npm run db:embeddings
 ```
 
-Após a carga, confirme no ambiente remoto: RLS ativo; `anon` e `authenticated` sem escrita; leitura retornando apenas itens publicáveis e vigentes; RPC limitando `limite` e `limiar`; advisors de segurança sem achados bloqueantes. Esses checks remotos ainda são pendentes enquanto não houver evidência de execução.
+Após a carga, confirme no ambiente remoto: RLS ativo; `anon` e `authenticated` sem escrita; leitura retornando apenas itens publicáveis e vigentes; RPC limitando `limite` e `limiar`; advisors de segurança sem achados bloqueantes.
+
+## Última verificação remota
+
+Em 12/08/2026, no projeto `wajycuocmmuyxbzeskyl`:
+
+- a migration `0004` foi aplicada manualmente pelo SQL Editor;
+- o seed preservou 30 registros internos e expôs somente 7 `publicavel` pela RLS;
+- os 7 itens publicáveis receberam embeddings novos de 768 dimensões;
+- a RPC pública retornou somente esses 7 itens e limitou uma solicitação com `limite=999`;
+- tentativas anônimas de INSERT e UPDATE retornaram `permission denied` e não alteraram a Bolsa Família;
+- consulta de catálogo confirmou RLS ativo, `security invoker`, `search_path=public, extensions` e ausência de INSERT/UPDATE/DELETE para `anon`;
+- o Security Advisor foi reexecutado e mostrou 0 erros, 0 avisos e 0 sugestões;
+- os três perfis reais de aceite passaram contra Gemini + Supabase.
+
+Limites: a execução pelo SQL Editor não cria automaticamente um registro equivalente à migration aplicada via CLI. A chave `service_role` não foi copiada para o ambiente local, portanto o papel administrativo não foi testado diretamente nesta sessão.
 
 ## Processo de atualização da base (MVP, manual)
 
