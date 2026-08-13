@@ -9,12 +9,12 @@ describe('<ConsentimentoDemo>', () => {
     const usuario = userEvent.setup();
     render(<ConsentimentoDemo aoAceitar={aoAceitar} aoCancelar={vi.fn()} />);
 
-    expect(screen.getByRole('dialog', { name: /antes de iniciar/i })).toBeInTheDocument();
-    expect(screen.getByText(/demonstração de portfólio/i)).toBeInTheDocument();
+    expect(screen.getByRole('dialog', { name: /você escolhe o que compartilhar/i })).toBeInTheDocument();
+    expect(screen.getByText(/antes da conversa/i)).toBeInTheDocument();
     expect(screen.getByText(/não informe cpf/i)).toBeInTheDocument();
     expect(screen.getByText(/provedor de inteligência artificial/i)).toBeInTheDocument();
 
-    const continuar = screen.getByRole('button', { name: /continuar para a demonstração/i });
+    const continuar = screen.getByRole('button', { name: /entendi e quero continuar/i });
     expect(continuar).toBeDisabled();
     await usuario.click(screen.getByRole('checkbox', { name: /entendi os limites/i }));
     await usuario.click(continuar);
@@ -27,7 +27,7 @@ describe('<ConsentimentoDemo>', () => {
     const gravar = vi.spyOn(Storage.prototype, 'setItem');
     render(<ConsentimentoDemo aoAceitar={vi.fn()} aoCancelar={aoCancelar} />);
 
-    await usuario.click(screen.getByRole('button', { name: /voltar sem iniciar/i }));
+    await usuario.click(screen.getByRole('button', { name: /voltar sem enviar/i }));
     expect(aoCancelar).toHaveBeenCalledOnce();
     expect(gravar).not.toHaveBeenCalled();
     gravar.mockRestore();

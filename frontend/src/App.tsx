@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 import { enviarTriagem } from './api';
 import { Conversa } from './componentes/conversa/Conversa';
-import { LinhaDaVida } from './componentes/LinhaDaVida';
+import { Resultado } from './componentes/resultado/Resultado';
 import { Inicio } from './componentes/inicio/Inicio';
 import { Direitos } from './componentes/direitos/Direitos';
 import { Situacoes } from './componentes/situacoes/Situacoes';
 import { Cabecalho } from './componentes/layout/Cabecalho';
 import { Rodape } from './componentes/layout/Rodape';
 import { ConsentimentoDemo } from './componentes/ConsentimentoDemo';
-import { PainelUrgencia } from './componentes/PainelUrgencia';
+import { Urgencia } from './componentes/resultado/Urgencia';
 import type { AbaNavegacao, ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos';
 import type { Situacao } from './dados/situacoes';
 
@@ -224,15 +224,15 @@ export function App() {
         )}
 
         {abaAtiva === 'resultado' && resultado && (
-          <LinhaDaVida
-            resultado={resultado}
+          <Resultado
+            resposta={resultado}
             aoRecomecar={recomecar}
-            aoVerCatalogo={() => setAbaAtiva('catalogo')}
+            aoVerDireitos={() => setAbaAtiva('catalogo')}
           />
         )}
 
         {abaAtiva === 'resultado' && urgencia && (
-          <PainelUrgencia resposta={urgencia} aoSair={recomecar} />
+          <Urgencia resposta={urgencia} aoSair={recomecar} />
         )}
       </main>
 
