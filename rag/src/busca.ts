@@ -9,8 +9,10 @@ import {
 } from './tipos.js';
 
 const COLUNAS_FICHA =
-  'id, nome_popular, categoria_vida, natureza, criterios_elegibilidade, documentos_necessarios, ' +
-  'canal_tipo, canal_detalhe, passo_a_passo, fonte_legal, prioridade_base, ultima_revisao, abrangencia';
+  'id, nome_popular, categoria_vida, natureza, resumo_simples, criterios_elegibilidade, ' +
+  'criterios_estruturados, documentos_necessarios, canal_tipo, canal_detalhe, passo_a_passo, ' +
+  'fonte_legal, excecoes_e_alertas, fontes_oficiais, prioridade_base, ultima_revisao, ' +
+  'revisao_prevista_em, vigencia_inicio, vigencia_fim, abrangencia, versao_conteudo';
 
 /**
  * Retorna os itens mais próximos da consulta por similaridade de cosseno.

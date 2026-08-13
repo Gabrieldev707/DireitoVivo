@@ -19,6 +19,19 @@ function criarItem(patch: Partial<LinhaDireitoItem>): DireitoItem {
     fonte_legal: 'Lei X',
     prioridade_base: 3,
     ultima_revisao: '2026-01-01',
+    resumo_simples: 'Resumo simples',
+    criterios_estruturados: [{ id: 'criterio', descricao: 'Confirmar critério', confirmacao: 'avaliacao_oficial' }],
+    excecoes_e_alertas: ['Confirme no canal oficial.'],
+    fontes_oficiais: [{
+      titulo: 'Serviço oficial',
+      url: 'https://www.gov.br/pt-br/servicos/servico-oficial',
+      orgao: 'Órgão responsável',
+      acessado_em: '2026-08-12',
+    }],
+    revisao_prevista_em: '2026-11-12',
+    vigencia_inicio: null,
+    vigencia_fim: null,
+    versao_conteudo: 1,
     abrangencia: 'federal',
   };
   return linhaParaItem({ ...base, ...patch });
@@ -244,6 +257,12 @@ describe('executarTriagem', () => {
     expect(resposta.itens[0].posicao).toBe(1);
     expect(resposta.itens[0].proximos_passos).toEqual(['passo 1']);
     expect(resposta.itens[0].documentos).toEqual(['CPF']);
+    expect(resposta.itens[0].fontes).toEqual([{
+      titulo: 'Serviço oficial',
+      url: 'https://www.gov.br/pt-br/servicos/servico-oficial',
+      orgao: 'Órgão responsável',
+      acessado_em: '2026-08-12',
+    }]);
     expect(resposta.itens[1].criterios_pendentes).toEqual([
       'confirmar necessidade de atendimento',
     ]);

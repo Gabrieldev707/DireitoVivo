@@ -21,7 +21,7 @@
     "api:dev": "npm run dev -w api",
     "front:dev": "npm run dev -w frontend",
     "typecheck": "npm run typecheck -w rag && npm run typecheck -w api && npm run typecheck -w frontend",
-    "test": "npm run test -w rag && npm run test -w api && npm run test -w frontend",
+    "test": "npm run test -w db && npm run test -w rag && npm run test -w api && npm run test -w frontend",
     "build": "npm run build -w frontend"
   }
 }

@@ -13,6 +13,8 @@ const provedor = criarProvedorLLM();
 const { data: itens, error } = await supabase
   .from('direitos_itens')
   .select('id, nome_popular, categoria_vida, natureza, criterios_elegibilidade, canal_detalhe, termos_populares')
+  .eq('status_conteudo', 'publicavel')
+  .gte('revisao_prevista_em', new Date().toISOString().slice(0, 10))
   .order('id');
 
 if (error || !itens) {

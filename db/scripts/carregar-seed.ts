@@ -1,12 +1,14 @@
 // Carrega (upsert) os itens de seed/itens.json na tabela direitos_itens.
 // Requer SUPABASE_CHAVE_SERVICO no .env da raiz (a tabela só aceita escrita via service_role).
 // Uso: npm run db:seed (na raiz) ou npm run seed (neste diretório).
-import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
-import { criarClienteSupabase, type DireitoItemSeed } from '@direito-vivo/rag';
+import { criarClienteSupabase } from '@direito-vivo/rag';
+import { auditarItens } from '../src/conteudo.js';
+import { carregarSeedGovernado } from '../src/seed-governado.js';
 
-const caminhoItens = fileURLToPath(new URL('../seed/itens.json', import.meta.url));
-const itens: DireitoItemSeed[] = JSON.parse(readFileSync(caminhoItens, 'utf8'));
+const itens = carregarSeedGovernado();
+const hoje = new Date().toISOString().slice(0, 10);
+const erros = auditarItens(itens, hoje).filter((problema) => problema.severidade === 'erro');
+if (erros.length > 0) throw new Error(`Seed bloqueado pela auditoria editorial: ${erros.length} erro(s).`);
 
 const supabase = criarClienteSupabase({ usarChaveServico: true });
 
@@ -21,8 +23,19 @@ const linhas = itens.map((item) => ({
   canal_detalhe: item.canal_solicitacao.detalhe,
   passo_a_passo: item.passo_a_passo,
   fonte_legal: item.fonte_legal,
+  resumo_simples: item.resumo_simples,
+  criterios_estruturados: item.criterios_estruturados,
+  excecoes_e_alertas: item.excecoes_e_alertas,
+  fontes_oficiais: item.fontes_oficiais,
   prioridade_base: item.prioridade_base,
   ultima_revisao: item.ultima_revisao,
+  revisao_prevista_em: item.revisao_prevista_em,
+  vigencia_inicio: item.vigencia_inicio,
+  vigencia_fim: item.vigencia_fim,
+  status_conteudo: item.status_conteudo,
+  revisado_por: item.revisado_por,
+  versao_conteudo: item.versao_conteudo,
+  programa_temporario: item.programa_temporario ?? false,
   abrangencia: item.abrangencia,
   termos_populares: item.termos_populares,
   atualizado_em: new Date().toISOString(),

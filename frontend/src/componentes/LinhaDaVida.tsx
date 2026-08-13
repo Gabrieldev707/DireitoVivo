@@ -157,6 +157,27 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
                       {item.documentos.map((documento) => <li key={documento}>{documento}</li>)}
                     </ul>
                   </section>
+                  <section className="sm:col-span-2">
+                    <h4 className="text-sm font-black text-[#071D41]">Fontes oficiais</h4>
+                    <ul className="mt-2 space-y-2 text-sm">
+                      {item.fontes.map((fonte) => (
+                        <li key={fonte.url}>
+                          <a
+                            href={fonte.url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-bold text-[#1351B4] underline underline-offset-2"
+                          >
+                            {fonte.titulo}
+                          </a>
+                          <span className="ml-2 text-xs text-slate-600">
+                            {fonte.orgao} · acesso em{' '}
+                            {new Date(`${fonte.acessado_em}T00:00:00`).toLocaleDateString('pt-BR')}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
                 </div>
               </li>
             ))}

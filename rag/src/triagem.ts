@@ -77,6 +77,7 @@ export async function executarTriagem(mensagens: MensagemChat[]): Promise<Respos
       criterios_pendentes: indicacao.criterios_pendentes,
       proximos_passos: item.passo_a_passo,
       documentos: item.documentos_necessarios,
+      fontes: item.fontes_oficiais,
     };
   });
   const totalPendencias = itens.reduce((total, item) => total + item.criterios_pendentes.length, 0);

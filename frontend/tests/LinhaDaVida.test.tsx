@@ -25,6 +25,25 @@ function criarItem(patch: Partial<ItemOrientacao> = {}): ItemOrientacao {
     criterios_pendentes: ['Confirmar renda por pessoa'],
     proximos_passos: ['Ir ao CRAS', 'Levar documentos'],
     documentos: ['CPF', 'CadÚnico'],
+    resumo_simples: 'Resumo simples do programa.',
+    criterios_estruturados: [{ id: 'renda', descricao: 'Confirmar renda', confirmacao: 'documental' }],
+    excecoes_e_alertas: ['Confirme no canal oficial.'],
+    fontes_oficiais: [{
+      titulo: 'Página oficial do programa',
+      url: 'https://www.gov.br/programa',
+      orgao: 'Ministério responsável',
+      acessado_em: '2026-08-12',
+    }],
+    revisao_prevista_em: '2026-11-12',
+    vigencia_inicio: null,
+    vigencia_fim: null,
+    versao_conteudo: 1,
+    fontes: [{
+      titulo: 'Página oficial do programa',
+      url: 'https://www.gov.br/programa',
+      orgao: 'Ministério responsável',
+      acessado_em: '2026-08-12',
+    }],
     ...patch,
   };
 }
@@ -61,6 +80,7 @@ describe('<LinhaDaVida>', () => {
     expect(screen.getAllByRole('heading', { name: /o que confirmar/i }).length).toBe(2);
     expect(screen.getAllByRole('heading', { name: /próximos passos/i }).length).toBe(2);
     expect(screen.getAllByRole('heading', { name: 'Documentos', exact: true }).length).toBe(2);
+    expect(screen.getAllByRole('link', { name: /página oficial do programa/i })).toHaveLength(2);
     // Disclaimer RF06
     expect(screen.getByText(/não substitui aconselhamento jurídico/i)).toBeInTheDocument();
   });

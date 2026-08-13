@@ -6,31 +6,19 @@
 // contradizer, e o catálogo mostrava direitos que a triagem jamais recomendaria.
 //
 // Uso: npm run db:catalogo (na raiz). Rode sempre que o seed mudar.
-import { readFile, writeFile } from 'node:fs/promises';
+import { writeFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { dirname, resolve } from 'node:path';
+import { auditarItens } from '../src/conteudo.js';
+import { carregarSeedGovernado, filtrarItensPublicaveis } from '../src/seed-governado.js';
 
 const aqui = dirname(fileURLToPath(import.meta.url));
-const caminhoSeed = resolve(aqui, '../seed/itens.json');
 const caminhoSaida = resolve(aqui, '../../frontend/src/dados/catalogoDireitos.ts');
-
-interface ItemSeed {
-  id: string;
-  nome_popular: string;
-  categoria_vida: string;
-  natureza: string;
-  criterios_elegibilidade: string;
-  documentos_necessarios: string[];
-  canal_solicitacao: { tipo: string; detalhe: string };
-  passo_a_passo: string[];
-  fonte_legal: string;
-  prioridade_base: number;
-  ultima_revisao: string;
-  abrangencia: string;
-  termos_populares?: string[];
-}
-
-const itens: ItemSeed[] = JSON.parse(await readFile(caminhoSeed, 'utf-8'));
+const hoje = new Date().toISOString().slice(0, 10);
+const todosItens = carregarSeedGovernado();
+const erros = auditarItens(todosItens, hoje).filter((problema) => problema.severidade === 'erro');
+if (erros.length > 0) throw new Error(`Catálogo bloqueado pela auditoria editorial: ${erros.length} erro(s).`);
+const itens = filtrarItensPublicaveis(todosItens, hoje);
 
 // Ordena por urgência/facilidade para o catálogo abrir com o que resolve mais rápido.
 const ordenados = [...itens].sort(
@@ -53,7 +41,7 @@ const conteudo = `import type { ItemCatalogo } from '../tipos';
 
 // ⚠️ ARQUIVO GERADO — não edite à mão.
 // Fonte de verdade: db/seed/itens.json. Regenere com \`npm run db:catalogo\`.
-// Gerado a partir de ${itens.length} itens da base de conhecimento.
+// Gerado a partir de ${itens.length} itens publicáveis da base de conhecimento.
 export const CATALOGO_DIREITOS: ItemCatalogo[] = ${JSON.stringify(catalogo, null, 2)};
 
 /** Quantidade de itens da base — use no lugar de números escritos à mão na interface. */

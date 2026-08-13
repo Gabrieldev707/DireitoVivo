@@ -28,18 +28,39 @@ export interface MensagemChat {
   conteudo: string;
 }
 
+export interface CriterioEstruturado {
+  id: string;
+  descricao: string;
+  confirmacao: 'autodeclaracao' | 'documental' | 'avaliacao_oficial';
+}
+
+export interface FonteOficial {
+  titulo: string;
+  url: string;
+  orgao: string;
+  acessado_em: string;
+}
+
 export interface ItemLinhaDaVida {
   id: string;
   nome_popular: string;
   categoria_vida: CategoriaVida;
   natureza: 'beneficio' | 'servico';
+  resumo_simples: string;
   criterios_elegibilidade: string;
+  criterios_estruturados: CriterioEstruturado[];
   documentos_necessarios: string[];
   canal_solicitacao: { tipo: string; detalhe: string };
   passo_a_passo: string[];
   fonte_legal: string;
+  excecoes_e_alertas: string[];
+  fontes_oficiais: FonteOficial[];
   prioridade_base: number;
   ultima_revisao: string;
+  revisao_prevista_em: string;
+  vigencia_inicio: string | null;
+  vigencia_fim: string | null;
+  versao_conteudo: number;
   abrangencia: 'federal' | 'estadual_variavel';
   posicao: number;
   motivo: string;
@@ -53,6 +74,7 @@ export interface ItemOrientacao extends ItemLinhaDaVida {
   criterios_pendentes: string[];
   proximos_passos: string[];
   documentos: string[];
+  fontes: FonteOficial[];
 }
 
 export interface CanalUrgencia {
@@ -83,6 +105,9 @@ export function rotularCanal(tipo: string): string {
  */
 export interface ItemCatalogo extends ItemLinhaDaVida {
   termos_populares: string[];
+  status_conteudo: 'publicavel' | 'revisao_pendente' | 'rascunho' | 'arquivado';
+  revisado_por: string;
+  programa_temporario: boolean;
 }
 
 export type RespostaTriagem =
