@@ -105,7 +105,7 @@ export function rotularCanal(tipo: string): string {
  */
 export interface ItemCatalogo extends ItemLinhaDaVida {
   termos_populares: string[];
-  status_conteudo: 'publicavel' | 'revisao_pendente' | 'rascunho' | 'arquivado';
+  status_conteudo: 'publicavel' | 'revisao_pendente' | 'rascunho' | 'expirado';
   revisado_por: string;
   programa_temporario: boolean;
 }
