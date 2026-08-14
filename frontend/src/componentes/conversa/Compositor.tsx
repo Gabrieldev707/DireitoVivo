@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Icone } from '../compartilhados/Icone';
+import { usePreferenciasAcessibilidade } from '../../acessibilidade/PreferenciasProvider';
+import { ConfirmacaoEnvio } from './ConfirmacaoEnvio';
 
 interface PropriedadesCompositor {
   enviando: boolean;
@@ -10,6 +12,8 @@ const SUGESTOES = ['Perdi meu emprego', 'Minha renda caiu', 'Preciso de remédio
 
 export function Compositor({ enviando, aoEnviar }: PropriedadesCompositor) {
   const [texto, setTexto] = useState('');
+  const [pendente,setPendente]=useState<string>();
+  const {preferencias}=usePreferenciasAcessibilidade();
   const entrada = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
@@ -21,8 +25,8 @@ export function Compositor({ enviando, aoEnviar }: PropriedadesCompositor) {
   function enviar(valor = texto) {
     const limpo = valor.trim();
     if (!limpo || enviando) return;
-    aoEnviar(limpo);
-    setTexto('');
+    if(preferencias.confirmarEnvio){setPendente(limpo);return;}
+    aoEnviar(limpo); setTexto('');
   }
 
   return (
@@ -53,6 +57,7 @@ export function Compositor({ enviando, aoEnviar }: PropriedadesCompositor) {
         </button>
       </form>
       <span className="dv-composer__hint">Enter envia · Shift+Enter quebra linha · {texto.length}/2000</span>
+      {pendente&&<ConfirmacaoEnvio texto={pendente} aoConfirmar={()=>{aoEnviar(pendente);setPendente(undefined);setTexto('')}} aoEditar={()=>{setPendente(undefined);queueMicrotask(()=>entrada.current?.focus())}} aoCancelar={()=>setPendente(undefined)}/>} 
     </div>
   );
 }

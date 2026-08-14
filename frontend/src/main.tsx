@@ -9,6 +9,7 @@ import './estilos/componentes.css';
 import './estilos/paginas.css';
 import './estilos/conversa.css';
 import './estilos/institucional.css';
+import './estilos/dialogos.css';
 import { PreferenciasProvider } from './acessibilidade/PreferenciasProvider';
 
 createRoot(document.getElementById('raiz')!).render(
