@@ -208,7 +208,7 @@ function Aplicacao() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#f6f8fb] text-slate-900">
+    <div data-chat={abaAtiva === 'chat'} className="min-h-screen flex flex-col bg-[#f6f8fb] text-slate-900">
       <a href="#conteudo-principal" className="skip-link">
         Ir para o conteúdo principal
       </a>

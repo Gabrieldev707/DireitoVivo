@@ -20,6 +20,10 @@ export function Compositor({ enviando, aoEnviar }: PropriedadesCompositor) {
 
   useEffect(() => {
     if (!entrada.current) return;
+    if (!texto) {
+      entrada.current.style.height = '3rem';
+      return;
+    }
     entrada.current.style.height = 'auto';
     entrada.current.style.height = `${Math.min(entrada.current.scrollHeight, 128)}px`;
   }, [texto]);

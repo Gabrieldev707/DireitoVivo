@@ -59,7 +59,10 @@ export function EntradaVoz({ desabilitada = false, aoTranscrever }: Propriedades
         aria-label={ouvindo ? 'Parar entrada por voz' : 'Falar em vez de digitar'}
         onClick={ouvindo ? parar : solicitarInicio}
       >
-        <span aria-hidden="true">●</span>
+        <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round">
+          <rect x="9" y="3" width="6" height="11" rx="3" />
+          <path d="M5.5 11.5a6.5 6.5 0 0 0 13 0M12 18v3M8.5 21h7" />
+        </svg>
         <span>{ouvindo ? 'Parar' : 'Falar'}</span>
       </button>
       {erro && <p className="dv-voice-error" role="status">{erro}</p>}
