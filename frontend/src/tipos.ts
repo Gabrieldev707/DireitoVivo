@@ -28,7 +28,8 @@ export interface MensagemChat {
   conteudo: string;
 }
 
-export type AbaNavegacao = 'inicio' | 'catalogo' | 'cenarios' | 'chat' | 'resultado';
+export type AbaInstitucional = 'acessibilidade' | 'privacidade' | 'termos' | 'sobre';
+export type AbaNavegacao = 'inicio' | 'catalogo' | 'cenarios' | 'chat' | 'resultado' | AbaInstitucional;
 
 export interface CriterioEstruturado {
   id: string;

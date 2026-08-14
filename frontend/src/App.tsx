@@ -28,6 +28,7 @@ function obterAbaPorHash(): AbaNavegacao | undefined {
   if (hash === 'conversa') return 'chat';
   if (hash === 'catalogo' || hash === 'cenarios' || hash === 'chat') return hash;
   if (hash === 'inicio') return 'inicio';
+  if (hash === 'acessibilidade' || hash === 'privacidade' || hash === 'termos' || hash === 'sobre') return hash;
   return undefined;
 }
 
@@ -41,6 +42,10 @@ const VISAO_CANONICA: Record<AbaNavegacao, string> = {
   cenarios: 'situacoes',
   chat: 'conversa',
   resultado: 'resultado',
+  acessibilidade: 'acessibilidade',
+  privacidade: 'privacidade',
+  termos: 'termos',
+  sobre: 'sobre',
 };
 
 export function App() {
@@ -203,7 +208,6 @@ export function App() {
         Ir para o conteúdo principal
       </a>
 
-      {/* Cabeçalho Oficial Gov.br (com acessibilidade, logos SVG e abas) */}
       <Cabecalho abaAtiva={abaAtiva} aoMudarAba={mudarAba} />
 
       {/* Conteúdo Principal Dinâmico por Aba */}
@@ -258,9 +262,13 @@ export function App() {
         {abaAtiva === 'resultado' && urgencia && (
           <Urgencia resposta={urgencia} aoSair={recomecar} />
         )}
+
+        {abaAtiva === 'acessibilidade' && <section className="dv-container"><h1>Acessibilidade e como usar</h1></section>}
+        {abaAtiva === 'privacidade' && <section className="dv-container"><h1>Privacidade e dados</h1></section>}
+        {abaAtiva === 'termos' && <section className="dv-container"><h1>Termos e limites</h1></section>}
+        {abaAtiva === 'sobre' && <section className="dv-container"><h1>Sobre o Direito Vivo</h1></section>}
       </main>
 
-      {/* Rodapé Oficial Gov.br (com logo PNG, contatos governamentais e disclaimer RF06) */}
       {abaAtiva !== 'chat' && <Rodape aoMudarAba={mudarAba} />}
       {consentimentoAberto && (
         <ConsentimentoDemo

@@ -30,6 +30,17 @@ describe('navegação compatível', () => {
     expect(screen.getByRole('main')).toHaveAttribute('data-view', destino);
   });
 
+  it.each([
+    ['#acessibilidade', 'acessibilidade'],
+    ['#privacidade', 'privacidade'],
+    ['#termos', 'termos'],
+    ['#sobre', 'sobre'],
+  ])('abre a página institucional %s', (hash, destino) => {
+    window.location.hash = hash;
+    render(<App />);
+    expect(screen.getByRole('main')).toHaveAttribute('data-view', destino);
+  });
+
   it('acompanha voltar, avançar e alterações manuais do hash', () => {
     window.location.hash = '#inicio';
     render(<App />);
@@ -52,6 +63,10 @@ describe('navegação compatível', () => {
 });
 
 describe('cabeçalho responsivo', () => {
+  it('mantém páginas institucionais fora da navegação principal', () => {
+    render(<Cabecalho abaAtiva="sobre" aoMudarAba={vi.fn()} />);
+    expect(within(screen.getByRole('navigation', { name: 'Principal' })).queryByRole('button', { name: 'Sobre' })).not.toBeInTheDocument();
+  });
   it('abre e fecha o menu móvel com nomes acessíveis', async () => {
     const user = userEvent.setup();
     render(<Cabecalho abaAtiva="inicio" aoMudarAba={vi.fn()} />);
