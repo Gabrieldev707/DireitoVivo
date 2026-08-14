@@ -15,6 +15,7 @@ import { PaginaAcessibilidade } from './componentes/institucional/PaginaAcessibi
 import { PaginaPrivacidade } from './componentes/institucional/PaginaPrivacidade';
 import { PaginaTermos } from './componentes/institucional/PaginaTermos';
 import { PaginaSobre } from './componentes/institucional/PaginaSobre';
+import { PreferenciasProvider } from './acessibilidade/PreferenciasProvider';
 
 // Primeira fala do assistente — local, sem custo de LLM (RF01: acolhedora e sem pedir PII).
 const MENSAGEM_ABERTURA: MensagemChat = {
@@ -52,7 +53,7 @@ const VISAO_CANONICA: Record<AbaNavegacao, string> = {
   sobre: 'sobre',
 };
 
-export function App() {
+function Aplicacao() {
   const [abaAtiva, setAbaAtiva] = useState<AbaNavegacao>(obterAbaInicial);
   const [mensagens, setMensagens] = useState<MensagemChat[]>([MENSAGEM_ABERTURA]);
   const [resultado, setResultado] = useState<Extract<RespostaTriagem, { tipo: 'orientacao' | 'sem_match' }>>();
@@ -286,4 +287,8 @@ export function App() {
       )}
     </div>
   );
+}
+
+export function App() {
+  return <PreferenciasProvider><Aplicacao /></PreferenciasProvider>;
 }

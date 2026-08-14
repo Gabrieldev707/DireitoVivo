@@ -15,7 +15,7 @@ describe('conversa responsiva', () => {
   it('explica o processo e oferece ajuda presencial sem parecer um formulário vazio', () => {
     renderConversa(<Conversa mensagens={mensagens} enviando={false} aoEnviar={vi.fn()} />);
     expect(screen.getByText('O que vamos descobrir')).toBeVisible();
-    expect(screen.getAllByText(/CRAS, SUS, INSS ou Defensoria/i)).toHaveLength(2);
+    expect(screen.getByText(/^Ao final, indicamos onde confirmar:/i)).toBeVisible();
     expect(screen.getByText(/prefere atendimento presencial/i)).toBeVisible();
   });
 

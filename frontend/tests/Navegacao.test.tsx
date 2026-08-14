@@ -3,6 +3,11 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { App } from '../src/App';
 import { Cabecalho } from '../src/componentes/layout/Cabecalho';
 import userEvent from '@testing-library/user-event';
+import { PreferenciasProvider } from '../src/acessibilidade/PreferenciasProvider';
+
+function renderCabecalho(abaAtiva: Parameters<typeof Cabecalho>[0]['abaAtiva']) {
+  return render(<PreferenciasProvider><Cabecalho abaAtiva={abaAtiva} aoMudarAba={vi.fn()} /></PreferenciasProvider>);
+}
 
 describe('navegação compatível', () => {
   beforeEach(() => {
@@ -64,12 +69,12 @@ describe('navegação compatível', () => {
 
 describe('cabeçalho responsivo', () => {
   it('mantém páginas institucionais fora da navegação principal', () => {
-    render(<Cabecalho abaAtiva="sobre" aoMudarAba={vi.fn()} />);
+    renderCabecalho('sobre');
     expect(within(screen.getByRole('navigation', { name: 'Principal' })).queryByRole('button', { name: 'Sobre' })).not.toBeInTheDocument();
   });
   it('abre e fecha o menu móvel com nomes acessíveis', async () => {
     const user = userEvent.setup();
-    render(<Cabecalho abaAtiva="inicio" aoMudarAba={vi.fn()} />);
+    renderCabecalho('inicio');
 
     await user.click(screen.getByRole('button', { name: 'Abrir menu' }));
     expect(screen.getByRole('navigation', { name: 'Principal' })).toBeVisible();

@@ -39,20 +39,20 @@ export function Conversa({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoTent
 
   return (
     <section className="dv-conversation" data-testid="conversa-shell" data-layout="viewport" aria-label="Conversa de orientação">
-      <ContextoConversa aoLimpar={aoLimpar} podeLimpar={mensagens.length > 1 && !enviando} />
+      <ContextoConversa etapa={respostas > 0 ? 'organizar' : 'entender'} aoLimpar={aoLimpar} podeLimpar={mensagens.length > 1 && !enviando} />
       <div className="dv-conversation__main">
         <header className="dv-conversation__heading">
           <div className="dv-conversation__agent"><span className="dv-conversation__avatar"><Marca variante="simbolo" clara /></span><div><strong>Direito Vivo</strong><span>{enviando ? 'Organizando uma resposta…' : 'Assistente de orientação'}</span></div></div>
           <div className="dv-conversation__heading-tools"><AcessibilidadeConversa/><span className="dv-conversation__privacy"><span aria-hidden="true">●</span> conversa ativa</span></div>
         </header>
-        <div className="dv-messages" ref={historico} data-testid="area-rolavel" aria-live="polite" aria-relevant="additions">
+        <div className="dv-messages" ref={historico} data-testid="area-rolavel" role="log" aria-label="Histórico da conversa" aria-live="polite" aria-relevant="additions" aria-busy={enviando}>
           <details className="dv-conversation__mobile-guide">
             <summary>Como esta conversa ajuda</summary>
             <p>Você conta o que aconteceu. A orientação organiza possibilidades, documentos e canais como CRAS, SUS, INSS ou Defensoria.</p>
           </details>
           <div className="dv-messages__notice"><strong>Sua privacidade vem primeiro.</strong><span>Não informe nome completo, CPF, RG, endereço, telefone ou e-mail.</span></div>
           {mensagens.map((mensagem, indice) => <Mensagem key={`${mensagem.papel}-${indice}`} mensagem={mensagem} velocidadeLeitura={preferencias.velocidadeLeitura} />)}
-          {enviando && <div className="dv-message dv-message--assistente"><div className="dv-message__label">Direito Vivo</div><div className="dv-message__typing" aria-label="Direito Vivo está digitando"><span /><span /><span /></div></div>}
+          {enviando && <div className="dv-message dv-message--assistente"><div className="dv-message__label">Direito Vivo</div><div className="dv-message__typing" role="status"><span className="sr-only">Direito Vivo está preparando uma resposta</span><span aria-hidden="true" /><span aria-hidden="true" /><span aria-hidden="true" /></div></div>}
           {erro && <div className="dv-conversation__error" role="alert"><strong>Não foi possível concluir.</strong><span>{erro}</span>{aoTentarNovamente && <button type="button" onClick={aoTentarNovamente}>Tentar novamente</button>}</div>}
         </div>
         {preferencias.modoGuiado&&mensagens.at(-1)?.papel==='assistente'&&!enviando&&<RespostasGuiadas pergunta={mensagens.at(-1)?.conteudo??''} desabilitado={enviando} aoEscolher={aoEnviar}/>} 
