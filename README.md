@@ -25,7 +25,8 @@ O Direito Vivo ataca esse ponto com uma **demonstração gratuita e sem cadastro
 - **Compartilhar o resultado** (Web Share API + fallback pra área de transferência)
 - **Interface healthtech responsiva** com rota de orientação, 12 situações e conversa mobile-first
 - **PWA instalável** com manifest e ícones
-- **Acessibilidade**: leitura em voz alta (Web Speech), modo alto contraste, teclado, atalhos, textos ARIA
+- **Acessibilidade**: contraste reforçado, tamanhos de texto, links destacados, redução de movimento, modo guiado, confirmação antes do envio, leitura controlável e entrada opcional por voz
+- **Central de confiança**: páginas próprias de acessibilidade, privacidade, termos e sobre, acessíveis pelos hashes `#acessibilidade`, `#privacidade`, `#termos` e `#sobre`
 
 ## Privacidade como design, não como banner
 
@@ -69,7 +70,9 @@ rag (Node)
 
 ## Qualidade
 
-Verificação local em 13/08/2026: **114 testes passaram** (banco 16, RAG 46, API 20 e frontend 32), typecheck e build de produção passaram, e `npm audit --omit=dev` encontrou 0 vulnerabilidades. O comando `npm test` inclui o auditor e os contratos de segurança da migration. Testes que dependem de Gemini e Supabase reais são separados das suítes determinísticas e exigem credenciais próprias. Ainda não há um lint dedicado configurado; o gate estático atual é o TypeScript em modo estrito.
+Verificação local em 13/08/2026: **143 testes passaram** (banco 16, RAG 46, API 20 e frontend 61), typecheck e build de produção passaram, e `npm audit --omit=dev` encontrou 0 vulnerabilidades. O comando `npm test` inclui o auditor e os contratos de segurança da migration. Testes que dependem de Gemini e Supabase reais são separados das suítes determinísticas e exigem credenciais próprias. Ainda não há um lint dedicado configurado; o gate estático atual é o TypeScript em modo estrito.
+
+A inspeção visual automatizada do chat foi executada em 360×800, 390×844, 768×1024 e 1440×950: não houve rolagem horizontal, o compositor permaneceu visível e o rodapé não apareceu na conversa. Isso não equivale a certificação WCAG/eMAG. A validação com NVDA, VoiceOver e TalkBack em dispositivos reais permanece pendente.
 
 - **RAG**: mascaramento de dados, urgência sem dependências externas, ordenação, contrato pergunta/orientação/sem_match e robustez do parser
 - **API**: `fastify.inject` cobre schema (papel, tamanho, tamanho da conversa), erro genérico vs erro de triagem (mensagem opaca — nunca vaza detalhe do provider), teste explícito de que **o corpo da requisição nunca aparece no log**
@@ -122,7 +125,7 @@ Estão fora **de propósito** — cada um exige aprovação de terceiro ou conv�
 
 ## Estado de infraestrutura
 
-- **Local verificado em 13/08/2026**: 114 testes, typecheck e build passaram; catálogo gerado somente a partir de itens publicáveis.
+- **Local verificado em 13/08/2026**: 143 testes, typecheck e build passaram; catálogo gerado somente a partir de itens publicáveis.
 - **Supabase verificado em 12/08/2026**: migration `0004` aplicada manualmente no SQL Editor ao projeto `wajycuocmmuyxbzeskyl`; 30 itens internos, 7 publicáveis, 7 embeddings e 3/3 perfis reais aprovados.
 - **Segurança remota verificada**: RLS ativo; `anon` com SELECT/RPC e sem INSERT/UPDATE/DELETE; RPC como `security invoker` e `search_path` explícito; Security Advisor reexecutado com 0 erros, 0 avisos e 0 sugestões.
 - **Limite da evidência**: a aplicação manual não foi registrada pela CLI como migration remota; a chave `service_role` não foi armazenada localmente e não houve teste direto autenticado como `service_role`.
