@@ -26,6 +26,12 @@ export const sintetizadorDeVoz = {
     window.speechSynthesis.speak(fala);
     return true;
   },
+  pausarOuContinuar() {
+    if (!this.disponivel()) return false;
+    if (window.speechSynthesis.paused) window.speechSynthesis.resume();
+    else window.speechSynthesis.pause();
+    return true;
+  },
   parar() {
     if (typeof window !== 'undefined' && 'speechSynthesis' in window) window.speechSynthesis.cancel();
   },

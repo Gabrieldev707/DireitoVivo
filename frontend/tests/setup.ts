@@ -28,6 +28,9 @@ if (typeof window !== 'undefined') {
     (window as unknown as { speechSynthesis: unknown }).speechSynthesis = {
       speak: vi.fn(),
       cancel: vi.fn(),
+      pause: vi.fn(),
+      resume: vi.fn(),
+      paused: false,
     };
     (window as unknown as { SpeechSynthesisUtterance: unknown }).SpeechSynthesisUtterance =
       class {

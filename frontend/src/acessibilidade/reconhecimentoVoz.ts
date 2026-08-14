@@ -8,7 +8,7 @@ export interface ReconhecimentoVozNativo {
   continuous: boolean;
   maxAlternatives: number;
   onresult: ((evento: EventoResultadoVoz) => void) | null;
-  onerror: (() => void) | null;
+  onerror: ((evento: { error?: string }) => void) | null;
   onend: (() => void) | null;
   start(): void;
   abort(): void;

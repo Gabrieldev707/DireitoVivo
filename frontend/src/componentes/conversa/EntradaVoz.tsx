@@ -24,8 +24,14 @@ export function EntradaVoz({ desabilitada = false, aoTranscrever }: Propriedades
       const texto = evento.results[0]?.[0]?.transcript?.trim();
       if (texto) aoTranscrever(texto);
     };
-    instancia.onerror = () => {
-      setErro('Não foi possível entender. Você pode tentar de novo ou continuar digitando.');
+    instancia.onerror = (evento) => {
+      const mensagens: Record<string, string> = {
+        'not-allowed': 'A permissão do microfone foi negada. Você pode continuar digitando ou liberar o acesso nas configurações do navegador.',
+        'no-speech': 'Nenhuma fala foi identificada. Você pode tentar de novo ou continuar digitando.',
+        'audio-capture': 'O navegador não encontrou um microfone disponível. Você pode continuar digitando.',
+        network: 'A entrada por voz ficou sem conexão. Você pode tentar de novo ou continuar digitando.',
+      };
+      setErro(mensagens[evento.error ?? ''] ?? 'Não foi possível entender. Você pode tentar de novo ou continuar digitando.');
       setOuvindo(false);
     };
     instancia.onend = () => setOuvindo(false);
