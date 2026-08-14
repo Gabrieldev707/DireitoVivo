@@ -3,6 +3,7 @@ import type { RespostaTriagem } from '../../tipos';
 import { rotularCanal, TEXTO_DISCLAIMER } from '../../tipos';
 import { Icone } from '../compartilhados/Icone';
 import { Selo } from '../compartilhados/Selo';
+import { LeituraFacilitada } from './LeituraFacilitada';
 
 interface PropriedadesResultado {
   resposta: Extract<RespostaTriagem, { tipo: 'orientacao' | 'sem_match' }>;
@@ -38,6 +39,12 @@ export function Resultado({ resposta, aoRecomecar, aoVerDireitos }: Propriedades
         <h1 id="titulo-resultado">Você já tem uma rota para confirmar.</h1>
         <p>{resposta.resumo}</p>
       </header>
+      <LeituraFacilitada
+        resumo={resposta.resumo}
+        possibilidades={itens.map((item) => item.nome_popular)}
+        passos={passos}
+        canal={itens[0] ? `${rotularCanal(itens[0].canal_solicitacao.tipo)} — ${itens[0].canal_solicitacao.detalhe}` : undefined}
+      />
       <div className="dv-result__grid">
         <article className="dv-result__block dv-result__block--main">
           <span className="dv-result__number">01</span><h2>O que pode se aplicar</h2>

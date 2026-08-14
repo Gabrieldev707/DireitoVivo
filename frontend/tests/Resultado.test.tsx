@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi } from 'vitest';
 import { CATALOGO_DIREITOS } from '../src/dados/catalogoDireitos';
 import { Resultado } from '../src/componentes/resultado/Resultado';
@@ -19,6 +20,15 @@ describe('resultado acionável', () => {
     expect(screen.getByRole('heading', { name: 'Documentos para preparar' })).toBeVisible();
     expect(screen.getByRole('heading', { name: 'Próximo passo' })).toBeVisible();
     expect(screen.getByText(/revisado em/i)).toBeVisible();
+  });
+
+  it('oferece uma versão curta, em linguagem direta e que pode ser ouvida', async () => {
+    render(<Resultado resposta={respostaOrientacao} aoRecomecar={vi.fn()} aoVerDireitos={vi.fn()} />);
+    await userEvent.click(screen.getByRole('button', { name: 'Abrir leitura facilitada' }));
+    const resumo = screen.getByRole('region', { name: 'Leitura facilitada do resultado' });
+    expect(resumo).toHaveTextContent('Em poucas palavras');
+    expect(resumo).toHaveTextContent('O que fazer agora');
+    expect(screen.getByRole('button', { name: 'Ouvir leitura facilitada' })).toBeVisible();
   });
 
   it('mostra canais urgentes antes da ação de saída', () => {

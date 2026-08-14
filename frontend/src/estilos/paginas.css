@@ -180,3 +180,4 @@
   .dv-urgent__channels { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .dv-consent__actions { flex-direction: row; justify-content: flex-end; }
 }
+.dv-easy-read{margin:1.5rem 0 2rem}.dv-easy-read>section{background:#fff8df;border:2px solid #e4b84f;border-radius:1.25rem;box-shadow:0 12px 32px rgb(74 53 0/.08);display:grid;gap:.75rem;margin-top:1rem;max-width:52rem;padding:clamp(1.25rem,3vw,2rem)}.dv-easy-read>section>span{color:#6d4d00;font-size:.78rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.dv-easy-read h2,.dv-easy-read h3,.dv-easy-read p{margin:0}.dv-easy-read h2{font-size:clamp(1.6rem,4vw,2.35rem)}.dv-easy-read h3{font-size:1.15rem;margin-top:.5rem}.dv-easy-read p{font-size:1.08rem;line-height:1.65;max-width:44rem}.dv-easy-read .dv-button{justify-self:start;margin-top:.5rem}
