@@ -3,6 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { Marca } from '../src/componentes/layout/Marca';
 import { Rodape } from '../src/componentes/layout/Rodape';
 import { Conversa } from '../src/componentes/conversa/Conversa';
+import { PreferenciasProvider } from '../src/acessibilidade/PreferenciasProvider';
 
 describe('marca e rodapé', () => {
   it('oferece variantes com o mesmo nome acessível', () => {
@@ -13,7 +14,7 @@ describe('marca e rodapé', () => {
   });
 
   it('usa a marca no agente da conversa e remove o avatar textual', () => {
-    render(<Conversa mensagens={[{ papel: 'assistente', conteudo: 'Olá' }]} enviando={false} aoEnviar={vi.fn()} />);
+    render(<PreferenciasProvider><Conversa mensagens={[{ papel: 'assistente', conteudo: 'Olá' }]} enviando={false} aoEnviar={vi.fn()} /></PreferenciasProvider>);
     expect(screen.getByLabelText('Direito Vivo')).toBeInTheDocument();
     expect(screen.queryByText(/^DV$/)).not.toBeInTheDocument();
   });

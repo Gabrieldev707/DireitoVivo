@@ -1,0 +1,2 @@
+export type EtapaConversa='entender'|'organizar'|'confirmar';
+export function ProgressoConversa({etapa}:{etapa:EtapaConversa}){const itens:[EtapaConversa,string][]=[['entender','Entender'],['organizar','Organizar'],['confirmar','Onde confirmar']];return <ol className="dv-chat-progress" aria-label="Etapas da orientação">{itens.map(([id,nome],i)=><li key={id} aria-current={id===etapa?'step':undefined}><span>{i+1}</span>{nome}</li>)}</ol>}

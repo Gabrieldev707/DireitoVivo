@@ -4,6 +4,9 @@ import { ContextoConversa } from './ContextoConversa';
 import { Mensagem } from './Mensagem';
 import { Compositor } from './Compositor';
 import { Marca } from '../layout/Marca';
+import { usePreferenciasAcessibilidade } from '../../acessibilidade/PreferenciasProvider';
+import { AcessibilidadeConversa } from './AcessibilidadeConversa';
+import { RespostasGuiadas } from './RespostasGuiadas';
 
 interface PropriedadesConversa {
   mensagens: MensagemChat[];
@@ -16,11 +19,14 @@ interface PropriedadesConversa {
 
 export function Conversa({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoTentarNovamente }: PropriedadesConversa) {
   const historico = useRef<HTMLDivElement>(null);
+  const {preferencias,atualizar}=usePreferenciasAcessibilidade();
+  const respostas=mensagens.filter(m=>m.papel==='usuario').length;
 
   useEffect(() => {
     const elemento = historico.current;
     if (elemento) elemento.scrollTo({ top: elemento.scrollHeight, behavior: 'smooth' });
   }, [mensagens.length, enviando, erro]);
+  useEffect(()=>{if(sessionStorage.getItem('direito-vivo-iniciar-guiado')){sessionStorage.removeItem('direito-vivo-iniciar-guiado');atualizar({modoGuiado:true});}},[atualizar]);
 
   return (
     <section className="dv-conversation" data-testid="conversa-shell" data-layout="viewport" aria-label="Conversa de orientação">
@@ -28,7 +34,7 @@ export function Conversa({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoTent
       <div className="dv-conversation__main">
         <header className="dv-conversation__heading">
           <div className="dv-conversation__agent"><span className="dv-conversation__avatar"><Marca variante="simbolo" clara /></span><div><strong>Direito Vivo</strong><span>{enviando ? 'Organizando uma resposta…' : 'Assistente de orientação'}</span></div></div>
-          <span className="dv-conversation__privacy"><span aria-hidden="true">●</span> conversa ativa</span>
+          <div className="dv-conversation__heading-tools"><AcessibilidadeConversa/><span className="dv-conversation__privacy"><span aria-hidden="true">●</span> conversa ativa</span></div>
         </header>
         <div className="dv-messages" ref={historico} data-testid="area-rolavel" aria-live="polite" aria-relevant="additions">
           <details className="dv-conversation__mobile-guide">
@@ -40,6 +46,7 @@ export function Conversa({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoTent
           {enviando && <div className="dv-message dv-message--assistente"><div className="dv-message__label">Direito Vivo</div><div className="dv-message__typing" aria-label="Direito Vivo está digitando"><span /><span /><span /></div></div>}
           {erro && <div className="dv-conversation__error" role="alert"><strong>Não foi possível concluir.</strong><span>{erro}</span>{aoTentarNovamente && <button type="button" onClick={aoTentarNovamente}>Tentar novamente</button>}</div>}
         </div>
+        {preferencias.modoGuiado&&mensagens.at(-1)?.papel==='assistente'&&!enviando&&<RespostasGuiadas pergunta={mensagens.at(-1)?.conteudo??''} desabilitado={enviando} aoEscolher={aoEnviar}/>} 
         <Compositor enviando={enviando} aoEnviar={aoEnviar} />
       </div>
     </section>
