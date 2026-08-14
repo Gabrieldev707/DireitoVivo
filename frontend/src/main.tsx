@@ -8,6 +8,7 @@ import './estilos/base.css';
 import './estilos/componentes.css';
 import './estilos/paginas.css';
 import './estilos/conversa.css';
+import './estilos/institucional.css';
 
 createRoot(document.getElementById('raiz')!).render(
   <StrictMode>

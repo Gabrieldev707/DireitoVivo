@@ -11,6 +11,10 @@ import { ConsentimentoDemo } from './componentes/ConsentimentoDemo';
 import { Urgencia } from './componentes/resultado/Urgencia';
 import type { AbaNavegacao, ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos';
 import type { Situacao } from './dados/situacoes';
+import { PaginaAcessibilidade } from './componentes/institucional/PaginaAcessibilidade';
+import { PaginaPrivacidade } from './componentes/institucional/PaginaPrivacidade';
+import { PaginaTermos } from './componentes/institucional/PaginaTermos';
+import { PaginaSobre } from './componentes/institucional/PaginaSobre';
 
 // Primeira fala do assistente — local, sem custo de LLM (RF01: acolhedora e sem pedir PII).
 const MENSAGEM_ABERTURA: MensagemChat = {
@@ -263,10 +267,10 @@ export function App() {
           <Urgencia resposta={urgencia} aoSair={recomecar} />
         )}
 
-        {abaAtiva === 'acessibilidade' && <section className="dv-container"><h1>Acessibilidade e como usar</h1></section>}
-        {abaAtiva === 'privacidade' && <section className="dv-container"><h1>Privacidade e dados</h1></section>}
-        {abaAtiva === 'termos' && <section className="dv-container"><h1>Termos e limites</h1></section>}
-        {abaAtiva === 'sobre' && <section className="dv-container"><h1>Sobre o Direito Vivo</h1></section>}
+        {abaAtiva === 'acessibilidade' && <PaginaAcessibilidade />}
+        {abaAtiva === 'privacidade' && <PaginaPrivacidade />}
+        {abaAtiva === 'termos' && <PaginaTermos />}
+        {abaAtiva === 'sobre' && <PaginaSobre />}
       </main>
 
       {abaAtiva !== 'chat' && <Rodape aoMudarAba={mudarAba} />}
