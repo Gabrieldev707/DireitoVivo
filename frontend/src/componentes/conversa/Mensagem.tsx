@@ -1,29 +1,30 @@
 import { useState } from 'react';
 import type { MensagemChat } from '../../tipos';
 import { Icone } from '../compartilhados/Icone';
+import { sintetizadorDeVoz } from '../../acessibilidade/sinteseVoz';
+import type { VelocidadeLeitura } from '../../acessibilidade/preferencias';
 
 interface PropriedadesMensagem {
   mensagem: MensagemChat;
+  velocidadeLeitura?: VelocidadeLeitura;
 }
 
-export function Mensagem({ mensagem }: PropriedadesMensagem) {
+export function Mensagem({ mensagem, velocidadeLeitura = 'normal' }: PropriedadesMensagem) {
   const [falando, setFalando] = useState(false);
-  const podeOuvir = typeof window !== 'undefined' && 'speechSynthesis' in window;
+  const podeOuvir = sintetizadorDeVoz.disponivel();
 
   function ouvir() {
     if (!podeOuvir) return;
     if (falando) {
-      window.speechSynthesis.cancel();
+      sintetizadorDeVoz.parar();
       setFalando(false);
       return;
     }
-    window.speechSynthesis.cancel();
-    const fala = new SpeechSynthesisUtterance(mensagem.conteudo);
-    fala.lang = 'pt-BR';
-    fala.onend = () => setFalando(false);
-    fala.onerror = () => setFalando(false);
     setFalando(true);
-    window.speechSynthesis.speak(fala);
+    sintetizadorDeVoz.ouvir(mensagem.conteudo, velocidadeLeitura, {
+      aoTerminar: () => setFalando(false),
+      aoFalhar: () => setFalando(false),
+    });
   }
 
   return (
