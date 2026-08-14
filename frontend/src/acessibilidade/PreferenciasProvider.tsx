@@ -1,0 +1,6 @@
+import { createContext,useContext,useEffect,useMemo,useState,type ReactNode } from 'react';
+import { aplicarPreferencias,carregarPreferencias,CHAVE_PREFERENCIAS,PREFERENCIAS_PADRAO,type PreferenciasAcessibilidade } from './preferencias';
+interface Contexto { preferencias:PreferenciasAcessibilidade; atualizar:(p:Partial<PreferenciasAcessibilidade>)=>void; restaurar:()=>void; }
+const PreferenciasContext=createContext<Contexto|undefined>(undefined);
+export function PreferenciasProvider({children,preferenciasIniciais}:{children:ReactNode;preferenciasIniciais?:Partial<PreferenciasAcessibilidade>}){const [preferencias,setPreferencias]=useState<PreferenciasAcessibilidade>(()=>({...carregarPreferencias(),...preferenciasIniciais}));useEffect(()=>{aplicarPreferencias(preferencias);try{localStorage.setItem(CHAVE_PREFERENCIAS,JSON.stringify(preferencias));}catch{/* armazenamento opcional */}},[preferencias]);const valor=useMemo(()=>({preferencias,atualizar:(p:Partial<PreferenciasAcessibilidade>)=>setPreferencias(a=>({...a,...p})),restaurar:()=>setPreferencias(PREFERENCIAS_PADRAO)}),[preferencias]);return <PreferenciasContext.Provider value={valor}>{children}</PreferenciasContext.Provider>}
+export function usePreferenciasAcessibilidade(){const c=useContext(PreferenciasContext);if(!c)throw new Error('PreferenciasProvider ausente');return c;}

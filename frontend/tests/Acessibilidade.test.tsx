@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it } from 'vitest';
 import { PainelAcessibilidade } from '../src/componentes/layout/PainelAcessibilidade';
+import { PreferenciasProvider } from '../src/acessibilidade/PreferenciasProvider';
 
 describe('painel de acessibilidade', () => {
   beforeEach(() => {
@@ -12,7 +13,7 @@ describe('painel de acessibilidade', () => {
 
   it('oferece ajustes compreensíveis e persiste preferências', async () => {
     const user = userEvent.setup();
-    render(<PainelAcessibilidade />);
+    render(<PreferenciasProvider><PainelAcessibilidade /></PreferenciasProvider>);
 
     await user.click(screen.getByRole('button', { name: 'Abrir acessibilidade' }));
     expect(screen.getByRole('dialog', { name: 'Preferências de acessibilidade' })).toBeVisible();
@@ -29,7 +30,7 @@ describe('painel de acessibilidade', () => {
 
   it('permite restaurar o padrão', async () => {
     const user = userEvent.setup();
-    render(<PainelAcessibilidade />);
+    render(<PreferenciasProvider><PainelAcessibilidade /></PreferenciasProvider>);
     await user.click(screen.getByRole('button', { name: 'Abrir acessibilidade' }));
     await user.click(screen.getByRole('button', { name: 'Aumentar texto' }));
     await user.click(screen.getByRole('button', { name: 'Restaurar padrão' }));

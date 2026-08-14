@@ -9,9 +9,10 @@ import './estilos/componentes.css';
 import './estilos/paginas.css';
 import './estilos/conversa.css';
 import './estilos/institucional.css';
+import { PreferenciasProvider } from './acessibilidade/PreferenciasProvider';
 
 createRoot(document.getElementById('raiz')!).render(
   <StrictMode>
-    <App />
+    <PreferenciasProvider><App /></PreferenciasProvider>
   </StrictMode>,
 );
