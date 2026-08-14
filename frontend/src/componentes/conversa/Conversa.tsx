@@ -3,6 +3,7 @@ import type { MensagemChat } from '../../tipos';
 import { ContextoConversa } from './ContextoConversa';
 import { Mensagem } from './Mensagem';
 import { Compositor } from './Compositor';
+import { Marca } from '../layout/Marca';
 
 interface PropriedadesConversa {
   mensagens: MensagemChat[];
@@ -26,7 +27,7 @@ export function Conversa({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoTent
       <ContextoConversa aoLimpar={aoLimpar} podeLimpar={mensagens.length > 1 && !enviando} />
       <div className="dv-conversation__main">
         <header className="dv-conversation__heading">
-          <div className="dv-conversation__agent"><span className="dv-conversation__avatar" aria-hidden="true">DV</span><div><strong>Direito Vivo</strong><span>{enviando ? 'Organizando uma resposta…' : 'Assistente de orientação'}</span></div></div>
+          <div className="dv-conversation__agent"><span className="dv-conversation__avatar"><Marca variante="simbolo" clara /></span><div><strong>Direito Vivo</strong><span>{enviando ? 'Organizando uma resposta…' : 'Assistente de orientação'}</span></div></div>
           <span className="dv-conversation__privacy"><span aria-hidden="true">●</span> conversa ativa</span>
         </header>
         <div className="dv-messages" ref={historico} data-testid="area-rolavel" aria-live="polite" aria-relevant="additions">
