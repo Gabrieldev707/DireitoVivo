@@ -139,7 +139,7 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
           Onde tirar dúvidas presencialmente e de graça
         </h3>
         <p className="mt-1 text-sm text-slate-600">
-          Se travar em algum passo, procure diretamente um destes órgãos — todos são gratuitos e atendem sem agendamento em muitas cidades.
+          Se travar em algum passo, consulte um destes órgãos. Confira horários e necessidade de agendamento no serviço da sua cidade.
         </p>
 
         <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4">
