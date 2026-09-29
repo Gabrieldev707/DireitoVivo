@@ -38,4 +38,4 @@ As outras 29 fichas não passaram por validação jurídica individual nesta eta
 
 ## Limites para publicação
 
-Esta entrega é local. Não houve deploy, uso de credenciais, chamada ao provedor externo, alteração remota do banco ou validação jurídica humana. Antes de uma demonstração pública, revisar as 30 fichas, política de dados e retenção do provedor/API, links, leitor de tela, zoom, impressão e fluxo com API real em ambiente controlado.
+Esta entrega é local. Não houve deploy, uso de credenciais, chamada ao provedor externo, alteração remota do banco ou validação jurídica humana. Antes de uma demonstração pública, revisar as 30 fichas, política de dados e retenção do provedor/API, links, leitor de tela, zoom próprio do navegador, impressão e fluxo com API real em ambiente controlado.

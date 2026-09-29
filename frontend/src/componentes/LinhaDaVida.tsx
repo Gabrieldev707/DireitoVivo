@@ -136,7 +136,7 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
 
       <div className="gov-panel bg-slate-50 p-6 md:p-8">
         <h3 className="font-bold text-lg text-[#071D41]">
-          Onde tirar dúvidas presencialmente e de graça
+          Onde tirar dúvidas com atendimento humano
         </h3>
         <p className="mt-1 text-sm text-slate-600">
           Se travar em algum passo, consulte um destes órgãos. Confira horários e necessidade de agendamento no serviço da sua cidade.
