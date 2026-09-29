@@ -212,7 +212,7 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar }: Propried
           <div className="wa-chat__avatar" aria-hidden="true">DV</div>
           <div className="wa-chat__identity">
             <strong>Direito Vivo</strong>
-            <span>{enviando ? 'digitando…' : 'IA de triagem · anônimo'}</span>
+            <span>{enviando ? 'digitando…' : 'Demonstração de orientação'}</span>
           </div>
           <div className="wa-chat__actions">
             {aoLimpar && (
@@ -244,8 +244,8 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar }: Propried
           <div className="wa-chat__banner" role="note">
             <IconeAviso />
             <span>
-              Conversa anônima. Não informe CPF, RG, nome completo ou endereço. A resposta é
-              orientativa — confirme no canal oficial.
+              Não informe CPF, RG, nome completo ou endereço. O relato é processado por um
+              provedor externo de IA. A resposta é orientativa — confirme no canal oficial.
             </span>
           </div>
 

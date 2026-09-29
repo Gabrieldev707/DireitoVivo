@@ -24,11 +24,11 @@ describe('<Chat>', () => {
     expect(screen.getByText(/digitando/i)).toBeInTheDocument();
   });
 
-  it('exibe o banner de anonimato e o aviso sobre CPF', () => {
+  it('exibe o aviso sobre dados e provedor externo', () => {
     render(
       <Chat mensagens={historicoInicial} enviando={false} aoEnviar={vi.fn()} />,
     );
-    expect(screen.getByText(/anônima/i)).toBeInTheDocument();
+    expect(screen.getByText(/provedor externo de IA/i)).toBeInTheDocument();
     expect(screen.getByText(/não informe cpf/i)).toBeInTheDocument();
   });
 

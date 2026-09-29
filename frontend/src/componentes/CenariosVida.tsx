@@ -354,7 +354,7 @@ export function CenariosVida({ aoSelecionarCenarioParaChat }: PropriedadesCenari
                   onClick={() => aoSelecionarCenarioParaChat(cenario.titulo, cenario.mensagemChat)}
                   className="btn-gov-primary px-5 py-3 text-sm"
                 >
-                  Simular cenário
+                  Ver prévia da conversa
                   <svg className="h-4 w-4 text-[#FFCD07]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
