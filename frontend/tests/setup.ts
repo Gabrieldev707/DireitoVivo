@@ -7,6 +7,7 @@ afterEach(() => {
 });
 
 if (typeof window !== 'undefined') {
+  window.scrollTo = vi.fn();
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
     value: (query: string) => ({

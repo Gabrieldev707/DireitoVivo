@@ -7,6 +7,7 @@ interface PropriedadesChat {
   erro?: string;
   aoEnviar: (texto: string) => void;
   aoLimpar?: () => void;
+  aoVoltar?: () => void;
 }
 
 const SUGESTOES_RESPOSTA = [
@@ -122,7 +123,7 @@ function IconeLimpar() {
   );
 }
 
-export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar }: PropriedadesChat) {
+export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar }: PropriedadesChat) {
   const [texto, setTexto] = useState('');
   const [falandoIndice, setFalandoIndice] = useState<number | null>(null);
   const [horariosMsg, setHorariosMsg] = useState<string[]>(() =>
@@ -203,7 +204,7 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar }: Propried
         <header className="wa-chat__header">
           <button
             type="button"
-            onClick={() => window.history.back()}
+            onClick={() => aoVoltar?.()}
             className="wa-chat__action md:hidden"
             aria-label="Voltar"
           >

@@ -8,6 +8,8 @@ import { CenariosVida } from './componentes/CenariosVida';
 import { GovHeader, type AbaNavegacao } from './componentes/GovHeader';
 import { GovFooter } from './componentes/GovFooter';
 import { AvisoDemo } from './componentes/AvisoDemo';
+import { Ajuda } from './componentes/Ajuda';
+import { abrirPagina, lerPagina, type Pagina } from './navegacao';
 import type { ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos';
 
 // Primeira fala do assistente — local, sem custo de LLM (RF01: acolhedora e sem pedir PII).
@@ -20,9 +22,7 @@ const MENSAGEM_ABERTURA: MensagemChat = {
 };
 
 function obterAbaInicial(): AbaNavegacao {
-  const hash = window.location.hash.replace('#', '');
-  if (hash === 'catalogo' || hash === 'cenarios' || hash === 'chat') return hash;
-  return 'inicio';
+  return lerPagina(window.location.hash);
 }
 
 export function App() {
@@ -34,19 +34,31 @@ export function App() {
   const [erro, setErro] = useState<string>();
   const [aceiteDemo, setAceiteDemo] = useState(false);
   const [pendente, setPendente] = useState<Pendente | null>(null);
+  const [origemConversa, setOrigemConversa] = useState<Pagina>('inicio');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
-    if (abaAtiva !== 'resultado') {
-      window.history.replaceState(null, '', `#${abaAtiva}`);
-    }
   }, [abaAtiva]);
+
+  useEffect(() => {
+    const aoMudarHash = () => setAbaAtiva(lerPagina(window.location.hash));
+    window.addEventListener('hashchange', aoMudarHash);
+    return () => window.removeEventListener('hashchange', aoMudarHash);
+  }, []);
+
+  function navegar(pagina: Pagina) {
+    if (pagina === 'conversa' && abaAtiva !== 'conversa' && abaAtiva !== 'resultado') {
+      setOrigemConversa(abaAtiva);
+    }
+    abrirPagina(pagina);
+    setAbaAtiva(pagina);
+  }
 
   async function processarTriagem(historico: MensagemChat[], aceite: true) {
     setMensagens(historico);
     setEnviando(true);
     setErro(undefined);
-    setAbaAtiva('chat'); // Garante que a tela de chat esteja visível
+    navegar('conversa');
 
     try {
       const resposta = await enviarTriagem(historico, aceite);
@@ -85,11 +97,13 @@ export function App() {
     setMensagens(novoHistorico);
     setResultado(undefined);
     setErro(undefined);
-    setAbaAtiva('chat');
+    setOrigemConversa('direitos');
+    navegar('conversa');
   }
 
   // Integração entre Cenários de Vida e o Chat IA
   function aoSelecionarCenarioParaChat(cenarioNome: string, mensagemInicial: string) {
+    setOrigemConversa('situacoes');
     setPendente({ tipo: 'cenario', titulo: cenarioNome, texto: mensagemInicial });
   }
 
@@ -112,7 +126,7 @@ export function App() {
     ];
     setResultado(undefined);
     setErro(undefined);
-    setAbaAtiva('chat');
+    navegar('conversa');
     void processarTriagem(novoHistorico, true);
   }
 
@@ -120,17 +134,16 @@ export function App() {
     setMensagens([MENSAGEM_ABERTURA]);
     setResultado(undefined);
     setErro(undefined);
-    setAbaAtiva('inicio');
+    navegar('inicio');
   }
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f6f8fb] text-slate-900">
-      <a href="#conteudo-principal" className="skip-link">
+      <a href="#conteudo-principal" onClick={(evento) => { evento.preventDefault(); document.getElementById('conteudo-principal')?.focus(); }} className="skip-link">
         Ir para o conteúdo principal
       </a>
 
-      {/* Cabeçalho Oficial Gov.br (com acessibilidade, logos SVG e abas) */}
-      <GovHeader abaAtiva={abaAtiva} aoMudarAba={setAbaAtiva} />
+      <GovHeader abaAtiva={abaAtiva} aoMudarAba={navegar} />
 
       {/* Conteúdo Principal Dinâmico por Aba */}
       <main
@@ -144,27 +157,30 @@ export function App() {
       >
         {abaAtiva === 'inicio' && (
           <TelaInicial
-            aoComecar={() => setAbaAtiva('chat')}
-            aoVerCatalogo={() => setAbaAtiva('catalogo')}
-            aoVerCenarios={() => setAbaAtiva('cenarios')}
+            aoComecar={() => navegar('conversa')}
+            aoVerCatalogo={() => navegar('direitos')}
+            aoVerCenarios={() => navegar('situacoes')}
           />
         )}
 
-        {abaAtiva === 'catalogo' && (
+        {abaAtiva === 'direitos' && (
           <Portifolio aoSelecionarDireitoParaChat={aoSelecionarDireitoParaChat} />
         )}
 
-        {abaAtiva === 'cenarios' && (
+        {abaAtiva === 'situacoes' && (
           <CenariosVida aoSelecionarCenarioParaChat={aoSelecionarCenarioParaChat} />
         )}
 
-        {abaAtiva === 'chat' && (
+        {abaAtiva === 'ajuda' && <Ajuda />}
+
+        {abaAtiva === 'conversa' && (
           <Chat
             mensagens={mensagens}
             enviando={enviando}
             erro={erro}
             aoEnviar={aoEnviar}
             aoLimpar={recomecar}
+            aoVoltar={() => navegar(origemConversa)}
           />
         )}
 
@@ -172,13 +188,12 @@ export function App() {
           <LinhaDaVida
             resultado={resultado}
             aoRecomecar={recomecar}
-            aoVerCatalogo={() => setAbaAtiva('catalogo')}
+            aoVerCatalogo={() => navegar('direitos')}
           />
         )}
       </main>
 
-      {/* Rodapé Oficial Gov.br (com logo PNG, contatos governamentais e disclaimer RF06) */}
-      <GovFooter aoMudarAba={setAbaAtiva} />
+      <GovFooter aoMudarAba={navegar} />
       <AvisoDemo
         aberto={pendente !== null}
         contexto={pendente?.tipo === 'cenario' ? { titulo: pendente.titulo, texto: pendente.texto } : pendente?.tipo === 'texto' ? { titulo: 'Seu relato', texto: pendente.texto } : undefined}

@@ -1,23 +1,17 @@
 import { TEXTO_DISCLAIMER } from '../tipos';
-import type { AbaNavegacao } from './GovHeader';
+import type { Pagina } from '../navegacao';
 import { SimboloDireitoVivo } from './MarcaDireitoVivo';
+import { CANAIS_AJUDA } from '../dados/canaisAjuda';
 
 interface PropriedadesGovFooter {
-  aoMudarAba?: (aba: AbaNavegacao) => void;
+  aoMudarAba?: (aba: Pagina) => void;
 }
 
 const PRINCIPIOS = [
-  'Anônimo',
+  'Sem conta',
   'Gratuito',
   'Sem cadastro',
   'Código aberto',
-];
-
-const CANAIS = [
-  { nome: 'Central INSS', valor: '135', detalhe: 'Benefícios previdenciários e assistenciais.' },
-  { nome: 'Direitos Humanos', valor: 'Disque 100', detalhe: 'Violações de direitos e proteção social.' },
-  { nome: 'Central da Mulher', valor: 'Ligue 180', detalhe: 'Violência doméstica e orientação.' },
-  { nome: 'Emergência', valor: '190 / 192', detalhe: 'Risco imediato ou urgência médica.' },
 ];
 
 export function GovFooter({ aoMudarAba }: PropriedadesGovFooter) {
@@ -67,18 +61,23 @@ export function GovFooter({ aoMudarAba }: PropriedadesGovFooter) {
                   </button>
                 </li>
                 <li>
-                  <button type="button" onClick={() => aoMudarAba?.('catalogo')} className="footer-link">
+                  <button type="button" onClick={() => aoMudarAba?.('direitos')} className="footer-link">
                     Catálogo de direitos
                   </button>
                 </li>
                 <li>
-                  <button type="button" onClick={() => aoMudarAba?.('cenarios')} className="footer-link">
+                  <button type="button" onClick={() => aoMudarAba?.('situacoes')} className="footer-link">
                     Cenários de vida
                   </button>
                 </li>
                 <li>
-                  <button type="button" onClick={() => aoMudarAba?.('chat')} className="footer-link">
-                    Triagem anônima
+                  <button type="button" onClick={() => aoMudarAba?.('conversa')} className="footer-link">
+                    Conversa guiada
+                  </button>
+                </li>
+                <li>
+                  <button type="button" onClick={() => aoMudarAba?.('ajuda')} className="footer-link">
+                    Ajuda e canais humanos
                   </button>
                 </li>
               </ul>
@@ -87,10 +86,10 @@ export function GovFooter({ aoMudarAba }: PropriedadesGovFooter) {
             <div>
               <h3 className="text-sm font-black uppercase tracking-wide text-[#FFCD07]">Canais úteis</h3>
               <ul className="mt-4 space-y-3">
-                {CANAIS.map((canal) => (
-                  <li key={canal.nome} className="rounded border border-white/10 bg-white/6 p-3">
-                    <strong className="block text-sm text-white">{canal.nome}: {canal.valor}</strong>
-                    <span className="mt-1 block text-xs leading-relaxed text-blue-100">{canal.detalhe}</span>
+                {CANAIS_AJUDA.map((canal) => (
+                  <li key={canal.id} className="rounded border border-white/10 bg-white/6 p-3">
+                    <strong className="block text-sm text-white">{canal.titulo}{canal.numero ? `: ${canal.numero}` : ''}</strong>
+                    <span className="mt-1 block text-xs leading-relaxed text-blue-100">{canal.quando_usar}</span>
                   </li>
                 ))}
               </ul>

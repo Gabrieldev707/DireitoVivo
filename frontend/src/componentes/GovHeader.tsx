@@ -2,16 +2,17 @@ import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
 import { SimboloDireitoVivo } from './MarcaDireitoVivo';
 import { TOTAL_DIREITOS } from '../dados/catalogoDireitos';
+import type { Pagina } from '../navegacao';
 
-export type AbaNavegacao = 'inicio' | 'catalogo' | 'cenarios' | 'chat' | 'resultado';
+export type AbaNavegacao = Pagina | 'resultado';
 
 interface PropriedadesGovHeader {
   abaAtiva: AbaNavegacao;
-  aoMudarAba: (aba: AbaNavegacao) => void;
+  aoMudarAba: (aba: Pagina) => void;
 }
 
 const ABAS: Array<{
-  id: AbaNavegacao;
+  id: Pagina;
   rotulo: string;
   descricao: string;
   badge?: string;
@@ -28,7 +29,7 @@ const ABAS: Array<{
     ),
   },
   {
-    id: 'catalogo',
+    id: 'direitos',
     rotulo: 'Direitos',
     descricao: 'Catálogo',
     badge: String(TOTAL_DIREITOS),
@@ -39,8 +40,8 @@ const ABAS: Array<{
     ),
   },
   {
-    id: 'cenarios',
-    rotulo: 'Cenários',
+    id: 'situacoes',
+    rotulo: 'Situações',
     descricao: 'Guias de vida',
     icone: (
       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -49,8 +50,8 @@ const ABAS: Array<{
     ),
   },
   {
-    id: 'chat',
-    rotulo: 'Triagem IA',
+    id: 'conversa',
+    rotulo: 'Conversa',
     descricao: 'Atendimento',
     icone: (
       <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -58,10 +59,20 @@ const ABAS: Array<{
       </svg>
     ),
   },
+  {
+    id: 'ajuda',
+    rotulo: 'Ajuda',
+    descricao: 'Canais e dúvidas',
+    icone: (
+      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M12 18h.01M9.1 9a3 3 0 1 1 4.6 2.54c-1.1.74-1.7 1.27-1.7 2.46M12 22a10 10 0 1 0 0-20 10 10 0 0 0 0 20z" />
+      </svg>
+    ),
+  },
 ];
 
 function estaAtiva(aba: AbaNavegacao, abaAtiva: AbaNavegacao) {
-  return abaAtiva === aba || (aba === 'chat' && abaAtiva === 'resultado');
+  return abaAtiva === aba || (aba === 'conversa' && abaAtiva === 'resultado');
 }
 
 function contrasteInicial() {
@@ -109,6 +120,9 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
           </div>
 
           <div className="flex items-center gap-2">
+            <button type="button" onClick={() => aoMudarAba('ajuda')} className="rounded px-2 py-1 text-left underline underline-offset-2 hover:bg-white/10">
+              Precisa de ajuda agora?
+            </button>
             <a href="#conteudo-principal" className="hidden rounded px-2 py-1 hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-[#FFCD07] sm:inline-flex">
               Conteúdo
             </a>
@@ -164,7 +178,7 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
                 </span>
               </span>
               <span className="mt-1 block text-xs font-semibold leading-relaxed text-slate-600 sm:text-sm">
-                Triagem anônima, catálogo de direitos e rotas para serviços públicos.
+                Orientação sobre direitos e caminhos para serviços públicos.
               </span>
             </span>
           </button>
@@ -182,8 +196,8 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
       </div>
 
       <nav aria-label="Navegação principal" className="border-t border-slate-200 bg-[#f8fafc]">
-        <div className="mx-auto max-w-7xl overflow-x-auto px-4 sm:px-6 lg:px-8">
-          <ul className="flex min-w-max gap-2 py-2">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <ul className="flex flex-wrap gap-1 py-2 sm:gap-2">
             {ABAS.map((aba) => {
               const ativa = estaAtiva(aba.id, abaAtiva);
               return (
