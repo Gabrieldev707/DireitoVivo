@@ -84,6 +84,8 @@ describe('<Chat>', () => {
     );
     const alerta = screen.getByRole('alert');
     expect(alerta).toHaveTextContent(/tempo esgotado/i);
+    expect(screen.getByRole('button', { name: /ver catálogo/i })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /ver ajuda humana/i })).toBeInTheDocument();
   });
 
   it('renderiza bolha do usuário à direita e do assistente à esquerda', () => {

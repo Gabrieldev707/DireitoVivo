@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { MensagemChat } from '../tipos';
 
 interface PropriedadesChat {
@@ -8,6 +8,8 @@ interface PropriedadesChat {
   aoEnviar: (texto: string) => void;
   aoLimpar?: () => void;
   aoVoltar?: () => void;
+  aoVerAjuda?: () => void;
+  aoVerCatalogo?: () => void;
 }
 
 const SUGESTOES_RESPOSTA = [
@@ -20,36 +22,6 @@ const SUGESTOES_RESPOSTA = [
   'BPC / Bolsa Família',
   'Não sei por onde começar',
 ];
-
-function formatarHora(): string {
-  return new Intl.DateTimeFormat('pt-BR', {
-    hour: '2-digit',
-    minute: '2-digit',
-  }).format(new Date());
-}
-
-function IconeTick({ visto }: { visto: boolean }) {
-  return (
-    <svg
-      className="wa-bubble__ticks"
-      width="16"
-      height="12"
-      viewBox="0 0 18 11"
-      fill="none"
-      aria-label={visto ? 'Visto' : 'Enviado'}
-      style={visto ? undefined : { color: 'currentColor', opacity: 0.55 }}
-    >
-      <path
-        d="M11.071.653a.457.457 0 0 0-.304-.109.53.53 0 0 0-.372.163L4.24 7.003 1.735 4.398a.454.454 0 0 0-.335-.146.505.505 0 0 0-.371.176l-.643.68a.505.505 0 0 0-.146.354c.008.144.056.253.144.325l3.16 3.291c.16.128.323.192.489.192.203 0 .389-.078.559-.234l7.145-8.037A.501.501 0 0 0 11.842.7L11.071.653z"
-        fill="currentColor"
-      />
-      <path
-        d="M17.037.653a.457.457 0 0 0-.304-.109.53.53 0 0 0-.372.163L10.207 7.003l-.822-.855a.5.5 0 0 0-.353-.163.44.44 0 0 0-.34.157l-.642.717a.5.5 0 0 0-.152.35.5.5 0 0 0 .152.355l1.822 1.938c.16.128.323.192.489.192.203 0 .389-.078.559-.234L17.807.699A.501.501 0 0 0 17.037.653z"
-        fill="currentColor"
-      />
-    </svg>
-  );
-}
 
 function IconeEnviar() {
   return (
@@ -123,30 +95,17 @@ function IconeLimpar() {
   );
 }
 
-export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar }: PropriedadesChat) {
+export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar, aoVerAjuda, aoVerCatalogo }: PropriedadesChat) {
   const [texto, setTexto] = useState('');
   const [falandoIndice, setFalandoIndice] = useState<number | null>(null);
-  const [horariosMsg, setHorariosMsg] = useState<string[]>(() =>
-    mensagens.map(() => formatarHora()),
-  );
   const listaMensagens = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  // Uma bolha, um horário: memoriza pra não ficar mudando a cada re-render.
-  useEffect(() => {
-    setHorariosMsg((atuais) => {
-      if (atuais.length === mensagens.length) return atuais;
-      if (atuais.length > mensagens.length) return atuais.slice(0, mensagens.length);
-      const novos = [...atuais];
-      while (novos.length < mensagens.length) novos.push(formatarHora());
-      return novos;
-    });
-  }, [mensagens.length]);
 
   useEffect(() => {
     const elemento = listaMensagens.current;
     if (!elemento) return;
-    elemento.scrollTo({ top: elemento.scrollHeight, behavior: 'smooth' });
+    const reduzido = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches ?? false;
+    elemento.scrollTo({ top: elemento.scrollHeight, behavior: reduzido ? 'auto' : 'smooth' });
   }, [mensagens.length, enviando]);
 
   // Textarea cresce até 4 linhas.
@@ -186,20 +145,11 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar }
     window.speechSynthesis.speak(utterance);
   }
 
-  const dataHoje = useMemo(
-    () =>
-      new Intl.DateTimeFormat('pt-BR', {
-        day: '2-digit',
-        month: 'long',
-        year: 'numeric',
-      }).format(new Date()),
-    [],
-  );
-
   const podeLimpar = mensagens.length > 1 && !enviando;
 
   return (
-    <section aria-label="Conversa de triagem de direitos" className="animate-fade-in pb-6">
+    <section aria-label="Conversa de triagem de direitos" className="pb-6">
+      <h1 className="sr-only">Conversa guiada</h1>
       <div className="wa-chat" role="region">
         <header className="wa-chat__header">
           <button
@@ -238,10 +188,6 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar }
           aria-live="polite"
           aria-relevant="additions"
         >
-          <div className="wa-chat__day">
-            <span>{dataHoje}</span>
-          </div>
-
           <div className="wa-chat__banner" role="note">
             <IconeAviso />
             <span>
@@ -252,7 +198,6 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar }
 
           {mensagens.map((mensagem, indice) => {
             const ehUsuario = mensagem.papel === 'usuario';
-            const hora = horariosMsg[indice] ?? formatarHora();
 
             return (
               <div
@@ -261,7 +206,7 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar }
               >
                 <div className={`wa-bubble ${ehUsuario ? 'wa-bubble--user' : 'wa-bubble--bot'}`}>
                   {mensagem.conteudo}
-                  <span className="wa-bubble__meta">
+                  <span className="wa-bubble__tools">
                     {!ehUsuario && (
                       <button
                         type="button"
@@ -273,8 +218,6 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar }
                         <IconeAltoFalante />
                       </button>
                     )}
-                    <span>{hora}</span>
-                    {ehUsuario && <IconeTick visto={indice < mensagens.length - 1} />}
                   </span>
                 </div>
               </div>
@@ -295,7 +238,11 @@ export function Chat({ mensagens, enviando, erro, aoEnviar, aoLimpar, aoVoltar }
 
           {erro && (
             <div role="alert" className="wa-error">
-              Não consegui completar essa etapa. {erro}. Tente reenviar.
+              <p>Não consegui completar essa etapa. {erro}. Você pode tentar novamente ou consultar orientações sem IA.</p>
+              <div className="mt-2 flex flex-wrap gap-3">
+                <button type="button" onClick={aoVerCatalogo} className="underline">Ver catálogo</button>
+                <button type="button" onClick={aoVerAjuda} className="underline">Ver ajuda humana</button>
+              </div>
             </div>
           )}
         </div>

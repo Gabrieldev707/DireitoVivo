@@ -174,7 +174,7 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
                   Direito<span className="text-[#25d366]">Vivo</span>
                 </span>
                 <span className="rounded-full bg-[#25d366]/12 px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-[#075e54]">
-                  IA social
+                  Projeto independente
                 </span>
               </span>
               <span className="mt-1 block text-xs font-semibold leading-relaxed text-slate-600 sm:text-sm">

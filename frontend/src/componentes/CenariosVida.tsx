@@ -1,5 +1,6 @@
 interface PropriedadesCenariosVida {
   aoSelecionarCenarioParaChat: (cenarioNome: string, mensagemInicial: string) => void;
+  aoVerAjuda?: () => void;
 }
 
 interface Cenario {
@@ -227,12 +228,11 @@ function rotuloUrgencia(urgencia: Cenario['urgencia']) {
   return 'Orientação guiada';
 }
 
-export function CenariosVida({ aoSelecionarCenarioParaChat }: PropriedadesCenariosVida) {
+export function CenariosVida({ aoSelecionarCenarioParaChat, aoVerAjuda }: PropriedadesCenariosVida) {
   return (
-    <section className="space-y-8 animate-fade-in pb-12">
+    <section className="space-y-8 pb-12">
       <div className="gov-panel overflow-hidden">
-        <div className="gov-ribbon" aria-hidden="true" />
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_26rem]">
+        <div className="grid grid-cols-1">
           <div className="p-6 md:p-8">
             <div className="gov-kicker">
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -240,11 +240,11 @@ export function CenariosVida({ aoSelecionarCenarioParaChat }: PropriedadesCenari
               </svg>
               Guias por cenário
             </div>
-            <h2 className="mt-2 text-2xl font-black text-[#071D41] sm:text-3xl">
+            <h1 className="mt-2 text-2xl font-black text-[#071D41] sm:text-3xl">
               Escolha o momento de vida mais próximo do que você está vivendo.
-            </h2>
+            </h1>
             <p className="mt-3 max-w-3xl text-base leading-relaxed text-slate-600">
-              Cada cenário abre uma triagem já contextualizada. A IA começa pelo problema público provável, indica os direitos relacionados e organiza o caminho para atendimento.
+              Leia caminhos possíveis e canais humanos. Se quiser iniciar a demonstração com IA, confira antes o texto que será enviado.
             </p>
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-3">
               <div className="border-l-4 border-[#FFCD07] bg-slate-50 p-4">
@@ -262,17 +262,6 @@ export function CenariosVida({ aoSelecionarCenarioParaChat }: PropriedadesCenari
             </div>
           </div>
 
-          <div className="scenario-hero-visual">
-            <img
-              src="/assets/secao-cenarios-vida.png"
-              alt="Unidade de apoio social com cidadãos em diferentes atendimentos"
-              className="gov-photo"
-            />
-            <div className="scenario-hero-visual__badge">
-              <strong>Entrada por vida real</strong>
-              <span>O usuário não precisa saber o nome do benefício.</span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -345,6 +334,12 @@ export function CenariosVida({ aoSelecionarCenarioParaChat }: PropriedadesCenari
                 </div>
               </div>
 
+              {cenario.urgencia === 'imediata' && (
+                <div className="mt-5 rounded-lg border border-rose-300 bg-rose-50 p-4 text-sm text-rose-950">
+                  <strong>Em perigo imediato, procure ajuda humana antes da conversa.</strong>
+                  <button type="button" onClick={aoVerAjuda} className="ml-2 font-bold underline underline-offset-2">Ver canais de urgência</button>
+                </div>
+              )}
               <div className="mt-6 flex flex-col gap-3 border-t border-slate-200 pt-4 sm:flex-row sm:items-center sm:justify-between">
                 <span className="text-xs font-semibold text-slate-500">
                   A conversa abre sem pedir nome, CPF ou RG.

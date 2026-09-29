@@ -13,13 +13,13 @@ interface PropriedadesLinhaDaVida {
 
 function montarTextoCompartilhamento(itens: ItemLinhaDaVida[]): string {
   if (itens.length === 0) {
-    return 'Fiz minha triagem no Direito Vivo (triagem anônima de direitos brasileiros).';
+    return 'Consultei orientações sobre direitos no Direito Vivo, um projeto independente.';
   }
   const lista = itens
     .slice(0, 5)
     .map((item, i) => `${i + 1}. ${item.nome_popular}`)
     .join('\n');
-  return `Minha linha de vida no Direito Vivo:\n\n${lista}\n\nTriagem anônima e gratuita — quem sabe você também tem direito.`;
+  return `Orientações do Direito Vivo:\n\n${lista}\n\nProjeto independente. Confirme critérios e próximos passos no canal oficial.`;
 }
 
 export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: PropriedadesLinhaDaVida) {
@@ -53,7 +53,7 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
   }
 
   return (
-    <section className="space-y-8 animate-fade-in pb-12">
+    <section className="space-y-8 pb-12">
       <div className="gov-panel p-6 md:p-8">
         <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
           <div className="space-y-3">
@@ -61,13 +61,13 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
               <svg className="h-4 w-4 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M5 13l4 4L19 7" />
               </svg>
-              <span>Sua linha de vida</span>
+              <span>Orientações para sua situação</span>
             </div>
-            <h2 className="text-2xl font-black text-[#071D41] sm:text-3xl">
+            <h1 className="text-2xl font-black text-[#071D41] sm:text-3xl">
               {itens.length > 0
-                ? 'Comece por aqui, depois siga a ordem'
+                ? 'Veja estas orientações e confirme cada passo'
                 : 'Não encontrei um item específico para o que você contou'}
-            </h2>
+            </h1>
             <p className="whitespace-pre-wrap text-base leading-relaxed text-slate-700 sm:text-lg">
               {resultado.mensagem}
             </p>
@@ -101,7 +101,7 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
               <span>Imprimir / PDF</span>
             </button>
             <span className="text-center text-[11px] text-slate-500">
-              Nada sai do seu navegador
+              O compartilhamento inclui nomes de direitos, sem seu relato.
             </span>
           </div>
         </div>
@@ -114,10 +114,10 @@ export function LinhaDaVida({ resultado, aoRecomecar, aoVerCatalogo }: Proprieda
               <svg className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>Ordem sugerida pela triagem</span>
+              <span>Ordem sugerida para consulta</span>
             </div>
             <p className="mt-1 pl-7 text-xs sm:text-sm">
-              O item 1 costuma resolver mais rápido e destravar os próximos. Clique em cada ficha para expandir critérios, documentos e passo a passo.
+              Esta ordem é uma orientação, não uma decisão de elegibilidade. Abra cada ficha para consultar critérios, documentos e passos.
             </p>
           </div>
 

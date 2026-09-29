@@ -9,8 +9,9 @@ function ListaCanais({ canais }: { canais: CanalAjuda[] }) {
           <p className="mt-2 text-sm leading-relaxed text-slate-700">{canal.quando_usar}</p>
           <div className="mt-4 flex flex-wrap items-center gap-4">
             {canal.numero && <a className="btn-gov-primary min-h-11" href={`tel:${canal.numero}`}>{canal.acao}</a>}
-            <a className="text-sm font-bold text-[#1351B4] underline underline-offset-4" href={canal.url_oficial} target="_blank" rel="noopener noreferrer">Ver informação oficial sobre {canal.titulo}</a>
+            <a className="text-sm font-bold text-[#176B5B] underline underline-offset-4" href={canal.url_oficial} target="_blank" rel="noopener noreferrer">{canal.numero ? `Ver informação oficial sobre ${canal.titulo}` : canal.acao}</a>
           </div>
+          <p className="mt-3 text-xs text-slate-500">Fonte: {canal.fonte} · verificada em {new Date(`${canal.verificado_em}T00:00:00`).toLocaleDateString('pt-BR')}</p>
         </article>
       ))}
     </div>

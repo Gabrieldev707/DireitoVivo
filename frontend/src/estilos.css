@@ -173,7 +173,7 @@ textarea:focus-visible {
 .gov-ribbon {
   height: 0.375rem;
   width: 100%;
-  background: linear-gradient(90deg, #168821 0 34%, #ffcd07 34% 67%, #1351b4 67% 100%);
+  background: var(--navy);
 }
 
 .home-hero {
@@ -297,111 +297,6 @@ textarea:focus-visible {
 
 .feature-card__media img {
   transition: transform 0.35s ease;
-}
-
-.brasil-focus-section {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 2rem;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 0.75rem;
-  background:
-    radial-gradient(circle at 82% 25%, rgba(255, 205, 7, 0.32), transparent 15rem),
-    linear-gradient(135deg, #04152f, #0c326f 58%, #1351b4);
-  padding: 1.5rem;
-  box-shadow: 0 20px 52px rgba(7, 29, 65, 0.18);
-}
-
-.brasil-globe-card {
-  display: grid;
-  justify-items: center;
-  gap: 0.45rem;
-  border-radius: 0.75rem;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  background: rgba(255, 255, 255, 0.1);
-  padding: 1.5rem;
-  text-align: center;
-  color: #ffffff;
-  backdrop-filter: blur(10px);
-}
-
-.brasil-globe-card > span {
-  max-width: 18rem;
-  color: #dbeafe;
-  font-size: 0.82rem;
-}
-
-.brasil-globe {
-  position: relative;
-  height: 14rem;
-  width: 14rem;
-  overflow: hidden;
-  border-radius: 999px;
-  background:
-    radial-gradient(circle at 34% 28%, rgba(255, 255, 255, 0.72), transparent 0.5rem),
-    radial-gradient(circle at 32% 30%, #47a5ff, #1351b4 48%, #071d41 100%);
-  box-shadow: inset -32px -22px 44px rgba(4, 21, 47, 0.46), 0 24px 55px rgba(0, 0, 0, 0.3);
-}
-
-.brasil-globe__grid {
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background:
-    repeating-linear-gradient(90deg, transparent 0 1.6rem, rgba(255, 255, 255, 0.18) 1.7rem 1.78rem),
-    repeating-linear-gradient(0deg, transparent 0 1.8rem, rgba(255, 255, 255, 0.14) 1.9rem 1.98rem);
-  opacity: 0.68;
-  animation: globeGrid 8s linear infinite;
-}
-
-.brasil-globe__land {
-  position: absolute;
-  display: block;
-  background: linear-gradient(135deg, #49b658, #168821);
-  filter: drop-shadow(0 4px 8px rgba(4, 21, 47, 0.28));
-}
-
-.brasil-globe__land--one {
-  left: 45%;
-  top: 44%;
-  height: 4.7rem;
-  width: 3.8rem;
-  border-radius: 52% 42% 48% 60%;
-  transform: rotate(18deg);
-}
-
-.brasil-globe__land--two {
-  left: 35%;
-  top: 30%;
-  height: 2.6rem;
-  width: 4.1rem;
-  border-radius: 60% 45% 55% 42%;
-  transform: rotate(-14deg);
-  opacity: 0.78;
-}
-
-.brasil-globe__focus,
-.brasil-globe__pulse {
-  position: absolute;
-  left: 53%;
-  top: 56%;
-  border-radius: 999px;
-  transform: translate(-50%, -50%);
-}
-
-.brasil-globe__focus {
-  height: 1rem;
-  width: 1rem;
-  background: var(--gov-yellow);
-  box-shadow: 0 0 0 4px rgba(255, 205, 7, 0.24);
-}
-
-.brasil-globe__pulse {
-  height: 3.8rem;
-  width: 3.8rem;
-  border: 2px solid rgba(255, 205, 7, 0.72);
-  animation: pulseBrazil 2.4s ease-out infinite;
 }
 
 .step-card,
@@ -535,7 +430,6 @@ textarea:focus-visible {
   height: 6.8rem;
   width: 6.8rem;
   border: 1px solid rgba(255, 205, 7, 0.38);
-  animation: pulseBrazil 2.8s ease-out infinite;
 }
 
 .chat-signal__core {
@@ -684,25 +578,6 @@ textarea:focus-visible {
   text-decoration: underline;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(6px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes globeGrid {
-  from { transform: translateX(-1.6rem); }
-  to { transform: translateX(1.6rem); }
-}
-
-@keyframes pulseBrazil {
-  0% { opacity: 0.85; transform: translate(-50%, -50%) scale(0.75); }
-  75% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.25); }
-}
-
-.animate-fade-in {
-  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
 
 ::-webkit-scrollbar {
   width: 8px;
@@ -867,13 +742,10 @@ body.alto-contraste :focus-visible {
     display: none;
   }
 
-  .brasil-globe {
-    height: 11.5rem;
-    width: 11.5rem;
   }
-}
 
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto !important; }
   *,
   *::before,
   *::after {
@@ -884,10 +756,7 @@ body.alto-contraste :focus-visible {
   }
 }
 
-/* ================================================================
-   Chat estilo WhatsApp — mensageria enxuta em cima do tema gov.br
-   Tokens claros/escuros, bolhas com tail, timestamp, ticks, typing.
-   ================================================================ */
+/* Conversa guiada da demonstração. */
 
 :root {
   --wa-teal: #075e54;
@@ -1186,10 +1055,6 @@ body.alto-contraste :focus-visible {
 .wa-typing span:nth-child(2) { animation-delay: 0.18s; }
 .wa-typing span:nth-child(3) { animation-delay: 0.36s; }
 
-@keyframes waTyping {
-  0%, 60%, 100% { transform: translateY(0); opacity: 0.35; }
-  30% { transform: translateY(-3px); opacity: 0.95; }
-}
 
 .wa-error {
   margin: 0.5rem 0.7rem;
@@ -1398,4 +1263,30 @@ body.alto-contraste :focus-visible {
 .home-new__limits-grid { display: grid; grid-template-columns: .8fr 1fr; gap: 4rem; }
 .home-new__limits-grid p { margin-bottom: 1rem; line-height: 1.65; }
 @media (max-width: 800px) { .home-new__situation-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .home-new__limits-grid { grid-template-columns: 1fr; gap: 1.5rem; } }
-@media (max-width: 600px) { .home-new__search-row { flex-direction: column; } .home-new__section-heading { align-items: start; flex-direction: column; } .home-new__path-grid { grid-template-columns: 1fr; } .home-new__situation { min-height: 130px; padding: 1rem; } }
+@media (max-width: 600px) { .home-new__search-row { flex-direction: column; } .home-new__section-heading { align-items: start; flex-direction: column; } .home-new__path-grid { grid-template-columns: 1fr; } .home-new__situation { min-height: 130px; padding: 1rem; } .site-header { position: relative; } .site-header nav ul { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); } .site-header nav li { min-width: 0; } .site-header .nav-tab { width: 100%; justify-content: center; padding: .55rem .35rem; font-size: .8rem; } .site-header .nav-tab svg, .site-header .nav-tab__badge { display: none; } }
+.catalog-hero-visual--type, .scenario-hero-visual--type { background: radial-gradient(circle at 75% 25%, #bddbd8 0, transparent 35%), linear-gradient(145deg, #eaf2f5, #c9dfe5); }
+.catalog-hero-visual--type::before, .scenario-hero-visual--type::before { content: ''; position: absolute; width: 18rem; height: 18rem; top: -5rem; right: -3rem; border: 2rem solid rgba(23,107,91,.14); border-radius: 50%; }
+.catalog-hero-visual__badge, .scenario-hero-visual__badge { background: var(--navy); backdrop-filter: none; }
+.wa-chat { border-color: #b7cbd2; }
+.wa-typing span { animation: none; opacity: .8; }
+.btn-gov-primary { background: var(--action); box-shadow: none; }
+.btn-gov-primary:hover { background: #115244; box-shadow: none; }
+.gov-panel { border-color: #d9e5e9; box-shadow: 0 8px 24px rgba(23,59,82,.05); }
+.gov-kicker { color: var(--action); }
+.wa-chat { --wa-header: var(--navy); --wa-canvas: #f7fafb; --wa-user-bubble: #eaf2f5; --wa-user-text: var(--ink); --wa-bot-bubble: white; --wa-bot-text: var(--ink); --wa-meta: #536c7a; --wa-composer-bg: white; min-height: 32rem; border-radius: .8rem; box-shadow: 0 8px 24px rgba(23,59,82,.06); }
+.wa-chat__header { padding: 1rem 1.25rem; }
+.wa-chat__avatar, .wa-chat__day, .wa-bubble__ticks, .wa-bubble__meta { display: none; }
+.wa-chat__messages { background: #f7fafb; padding: 1.5rem; }
+.wa-row { margin-bottom: 1rem; padding: 0; }
+.wa-bubble { max-width: min(88%, 42rem); padding: 1rem 1.25rem; border: 1px solid #d8e5e9; border-radius: .7rem; box-shadow: none; font-size: 1rem; line-height: 1.55; }
+.wa-bubble--user { background: #eaf2f5; border-color: #b9d5dc; border-radius: .7rem; }
+.wa-bubble--bot { background: white; border-radius: .7rem; }
+.wa-bubble--user::before, .wa-bubble--bot::before { display: none; }
+.wa-bubble__tools { display: flex; justify-content: flex-end; margin-top: .45rem; }
+.wa-listen { min-width: 44px; min-height: 44px; justify-content: center; border: 1px solid #d8e5e9; border-radius: .5rem; }
+.wa-chat__banner { background: white; border-color: #bfd0d7; color: var(--ink); font-size: .9rem; padding: .9rem 1rem; }
+.wa-quickchips { flex-wrap: wrap; overflow: visible; gap: .5rem; padding: .75rem; scroll-snap-type: none; }
+.wa-quickchip { min-height: 44px; border-radius: .5rem; color: var(--ink); font-size: .84rem; }
+.wa-composer__field { border-radius: .5rem; min-height: 48px; }
+.wa-composer__send { width: 48px; height: 48px; border-radius: .5rem; background: var(--action); box-shadow: none; }
+@media print { .site-header, .footer-brasil, .wa-chat, .skip-link { display: none !important; } body { background: white !important; } .gov-panel { box-shadow: none !important; } }

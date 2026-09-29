@@ -47,7 +47,7 @@ describe('<LinhaDaVida>', () => {
         aoVerCatalogo={vi.fn()}
       />,
     );
-    expect(screen.getByText(/comece por aqui/i)).toBeInTheDocument();
+    expect(screen.getByText(/veja estas orientações/i)).toBeInTheDocument();
     expect(screen.getByText('Bolsa Família')).toBeInTheDocument();
     expect(screen.getByText('Seguro-desemprego')).toBeInTheDocument();
     // Disclaimer RF06
@@ -116,6 +116,7 @@ describe('<LinhaDaVida>', () => {
     const payload = share.mock.calls[0][0] as { title: string; text: string; url: string };
     expect(payload.title).toContain('Direito Vivo');
     expect(payload.text).toContain('Bolsa Família');
+    expect(payload.text).not.toMatch(/anônim|meu relato/i);
     expect(payload.url).toMatch(/^http/);
   });
 });

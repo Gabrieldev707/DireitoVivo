@@ -16,7 +16,7 @@ import type { ItemLinhaDaVida, MensagemChat, RespostaTriagem } from './tipos';
 const MENSAGEM_ABERTURA: MensagemChat = {
   papel: 'assistente',
   conteudo:
-    'Olá! Eu sou a Inteligência Artificial do Direito Vivo, desenvolvida para descobrir benefícios e direitos públicos que podem ser seus por lei.\n\n' +
+    'Olá! Esta é a conversa guiada do Direito Vivo. Posso ajudar a organizar sua dúvida e indicar orientações para confirmar em canais oficiais.\n\n' +
     'Não informe nome, CPF, RG, endereço ou telefone. O texto enviado será processado por um provedor externo de IA.\n\n' +
     'Para começarmos: me conte com suas palavras como está sua vida hoje? (ex: situação de trabalho, renda, família, saúde ou se cuida de crianças/idosos)',
 };
@@ -42,7 +42,10 @@ export function App() {
   }, [abaAtiva]);
 
   useEffect(() => {
-    const aoMudarHash = () => setAbaAtiva(lerPagina(window.location.hash));
+    const aoMudarHash = () => {
+      const pagina = lerPagina(window.location.hash);
+      setAbaAtiva((atual) => atual === 'resultado' && pagina === 'conversa' ? atual : pagina);
+    };
     window.addEventListener('hashchange', aoMudarHash);
     return () => window.removeEventListener('hashchange', aoMudarHash);
   }, []);
@@ -92,7 +95,7 @@ export function App() {
       MENSAGEM_ABERTURA,
       {
         papel: 'assistente',
-        conteudo: `Excelente escolha! Para verificarmos se você tem direito ao **${item.nome_popular}** (${item.criterios_elegibilidade}), me conte rapidamente um pouco da sua renda mensal familiar e quantas pessoas moram com você.`,
+        conteudo: `Você abriu a ficha **${item.nome_popular}**. Se quiser seguir na conversa, descreva sua situação sem dados que identifiquem você. Os critérios informados na ficha são: ${item.criterios_elegibilidade}`,
       },
     ];
     setMensagens(novoHistorico);
@@ -131,11 +134,15 @@ export function App() {
     void processarTriagem(novoHistorico, true);
   }
 
-  function recomecar() {
+  function limparConversa() {
     setMensagens([MENSAGEM_ABERTURA]);
     setResultado(undefined);
     setErro(undefined);
-    navegar('inicio');
+  }
+
+  function recomecar() {
+    limparConversa();
+    navegar('conversa');
   }
 
   return (
@@ -170,7 +177,7 @@ export function App() {
         )}
 
         {abaAtiva === 'situacoes' && (
-          <CenariosVida aoSelecionarCenarioParaChat={aoSelecionarCenarioParaChat} />
+          <CenariosVida aoSelecionarCenarioParaChat={aoSelecionarCenarioParaChat} aoVerAjuda={() => navegar('ajuda')} />
         )}
 
         {abaAtiva === 'ajuda' && <Ajuda />}
@@ -181,8 +188,10 @@ export function App() {
             enviando={enviando}
             erro={erro}
             aoEnviar={aoEnviar}
-            aoLimpar={recomecar}
+            aoLimpar={limparConversa}
             aoVoltar={() => navegar(origemConversa)}
+            aoVerAjuda={() => navegar('ajuda')}
+            aoVerCatalogo={() => navegar('direitos')}
           />
         )}
 

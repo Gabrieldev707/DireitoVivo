@@ -422,25 +422,24 @@
     "nome_popular": "Novo Desenrola Brasil (renegociação de dívidas)",
     "categoria_vida": "divida_credito",
     "natureza": "beneficio",
-    "criterios_elegibilidade": "Programa federal para renegociar dívidas atrasadas com grandes descontos e limpar o nome. Criado por Medida Provisória em 2026 como sucessor do Desenrola Brasil. Voltado principalmente a pessoas negativadas de baixa renda ou inscritas no CadÚnico. As condições exatas (faixas, prazos e descontos) devem ser confirmadas no site oficial, pois o programa é recente.",
+    "criterios_elegibilidade": "A Medida Provisória 1.355/2026, que instituiu o Novo Desenrola Brasil, teve o prazo de vigência encerrado. Esta ficha não confirma adesão disponível hoje nem elegibilidade. Antes de informar dados ou assumir uma dívida, verifique o estado atual do programa no Ministério da Fazenda e as condições diretamente com a instituição participante.",
     "documentos_necessarios": [
-      "CPF e conta gov.br",
-      "Informações das dívidas (não precisa levar papel — o sistema mostra as dívidas elegíveis)"
+      "Informações das dívidas para conferir com a instituição participante",
+      "Identificação somente no canal oficial, caso uma adesão vigente seja confirmada"
     ],
     "canal_solicitacao": {
       "tipo": "site_especifico",
-      "detalhe": "Simulador oficial no site do Ministério da Fazenda / plataforma do programa"
+      "detalhe": "Página oficial do Ministério da Fazenda sobre o Novo Desenrola Brasil; confirme a disponibilidade atual antes de qualquer adesão"
     },
     "passo_a_passo": [
-      "Acesse o site oficial do programa (busque 'Novo Desenrola' no gov.br — desconfie de sites parecidos e de links por WhatsApp).",
-      "Entre com a conta gov.br (nível prata ou ouro).",
-      "Veja as dívidas elegíveis e simule o desconto.",
-      "Escolha pagar à vista (desconto maior) ou parcelado.",
-      "Guarde os comprovantes — o nome deve ser limpo depois da confirmação do acordo."
+      "Consulte a página oficial do Ministério da Fazenda e confirme se há adesão disponível na data da consulta.",
+      "Confirme com a instituição participante quais dívidas, prazos, taxas e documentos se aplicam ao seu caso.",
+      "Não informe CPF ou senha em links recebidos por mensagem; use apenas canais oficiais verificados.",
+      "Leia as condições antes de aceitar uma renegociação e guarde os comprovantes."
     ],
-    "fonte_legal": "Medida Provisória de 2026 (sucessora do Desenrola Brasil — confirme a norma vigente no site do Ministério da Fazenda)",
+    "fonte_legal": "MP 1.355/2026 — prazo de vigência encerrado conforme Congresso Nacional; confirme normas atuais",
     "prioridade_base": 2,
-    "ultima_revisao": "2026-07-05",
+    "ultima_revisao": "2026-09-29",
     "abrangencia": "federal",
     "termos_populares": ["nome sujo", "limpar o nome", "dívida atrasada", "serasa", "spc", "negativado", "renegociar dívida", "desenrola"]
   },
