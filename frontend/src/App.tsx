@@ -35,6 +35,7 @@ export function App() {
   const [aceiteDemo, setAceiteDemo] = useState(false);
   const [pendente, setPendente] = useState<Pendente | null>(null);
   const [origemConversa, setOrigemConversa] = useState<Pagina>('inicio');
+  const [termoInicial, setTermoInicial] = useState('');
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'auto' });
@@ -158,13 +159,14 @@ export function App() {
         {abaAtiva === 'inicio' && (
           <TelaInicial
             aoComecar={() => navegar('conversa')}
-            aoVerCatalogo={() => navegar('direitos')}
-            aoVerCenarios={() => navegar('situacoes')}
+            aoBuscarDireitos={(termo) => { setTermoInicial(termo); navegar('direitos'); }}
+            aoVerAjuda={() => navegar('ajuda')}
+            aoVerSituacoes={() => navegar('situacoes')}
           />
         )}
 
         {abaAtiva === 'direitos' && (
-          <Portifolio aoSelecionarDireitoParaChat={aoSelecionarDireitoParaChat} />
+          <Portifolio termoInicial={termoInicial} aoSelecionarDireitoParaChat={aoSelecionarDireitoParaChat} />
         )}
 
         {abaAtiva === 'situacoes' && (

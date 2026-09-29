@@ -16,8 +16,7 @@ const PRINCIPIOS = [
 
 export function GovFooter({ aoMudarAba }: PropriedadesGovFooter) {
   return (
-    <footer className="footer-brasil relative mt-16 overflow-hidden border-t border-[#0a5f55] bg-[#064942] text-white">
-      <div className="gov-ribbon" aria-hidden="true" />
+    <footer className="footer-brasil relative mt-16 overflow-hidden border-t border-[#173B52] bg-[#173B52] text-white">
 
       <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr]">

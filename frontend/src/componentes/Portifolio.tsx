@@ -1,9 +1,10 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { CATALOGO_DIREITOS } from '../dados/catalogoDireitos';
 import { ROTULOS_CATEGORIA, type CategoriaVida, type ItemLinhaDaVida } from '../tipos';
 
 interface PropriedadesPortifolio {
   aoSelecionarDireitoParaChat: (item: ItemLinhaDaVida) => void;
+  termoInicial?: string;
 }
 
 const CATEGORIA_RESUMO: Record<CategoriaVida, string> = {
@@ -97,8 +98,9 @@ function rotuloCanal(tipo: string) {
   return tipo.replaceAll('_', ' + ').toUpperCase();
 }
 
-export function Portifolio({ aoSelecionarDireitoParaChat }: PropriedadesPortifolio) {
-  const [termoBusca, setTermoBusca] = useState('');
+export function Portifolio({ aoSelecionarDireitoParaChat, termoInicial = '' }: PropriedadesPortifolio) {
+  const [termoBusca, setTermoBusca] = useState(termoInicial);
+  useEffect(() => setTermoBusca(termoInicial), [termoInicial]);
   const [categoriaSelecionada, setCategoriaSelecionada] = useState<CategoriaVida | 'todos'>('todos');
   const [itemModal, setItemModal] = useState<ItemLinhaDaVida | null>(null);
 

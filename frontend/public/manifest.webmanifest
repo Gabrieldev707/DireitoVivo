@@ -1,15 +1,15 @@
 {
-  "name": "Direito Vivo — triagem anônima de direitos",
+  "name": "Direito Vivo — orientação sobre direitos",
   "short_name": "Direito Vivo",
-  "description": "Triagem conversacional anônima e gratuita de benefícios, direitos e serviços públicos brasileiros.",
+  "description": "Projeto independente com orientações sobre direitos e canais de ajuda no Brasil.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#ffffff",
-  "theme_color": "#075e54",
+  "theme_color": "#173B52",
   "lang": "pt-BR",
-  "categories": ["government", "social", "utilities"],
+  "categories": ["social", "utilities"],
   "icons": [
     {
       "src": "/icon-192.svg",

@@ -108,7 +108,7 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
 
   return (
     <header className="site-header sticky top-0 z-50 w-full border-b border-slate-200 bg-white shadow-[0_6px_22px_rgba(7,29,65,0.08)]">
-      <div className="bg-[#064942] text-white">
+      <div className="header-utility text-white">
         <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-2 text-xs font-bold sm:px-6 lg:px-8">
           <div className="flex min-w-0 items-center gap-2">
             <svg className="h-3.5 w-3.5 shrink-0 text-[#a7f3d0]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -183,13 +183,13 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
             </span>
           </button>
 
-          <div className="hidden items-center gap-3 rounded-lg border border-emerald-100 bg-[#f0fdf9] px-4 py-3 text-sm text-[#064942] lg:flex">
+          <div className="hidden items-center gap-3 rounded-lg border border-slate-200 bg-[#EAF2F5] px-4 py-3 text-sm text-[#173B52] lg:flex">
             <svg className="h-5 w-5 text-[#075e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M21 21l-5.2-5.2m1.7-4.3a6 6 0 1 1-12 0 6 6 0 0 1 12 0z" />
             </svg>
             <div>
               <strong className="block text-xs uppercase tracking-wide">Busca orientada</strong>
-              <span className="text-xs text-slate-600">Digite no chat: renda, saúde, trabalho ou família.</span>
+              <span className="text-xs text-slate-600">Busque uma ficha ou escolha uma situação na página inicial.</span>
             </div>
           </div>
         </div>
