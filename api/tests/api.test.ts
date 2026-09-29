@@ -49,7 +49,19 @@ describe('GET /api/saude', () => {
 describe('POST /api/triagem', () => {
   const historicoValido = {
     mensagens: [{ papel: 'usuario', conteudo: 'estou desempregado' }],
+    aceite_demo: true,
   };
+
+  for (const aceite of [undefined, false]) {
+    it(`rejeita aceite ${String(aceite)} antes do motor`, async () => {
+      const payload = aceite === undefined
+        ? { mensagens: historicoValido.mensagens }
+        : { ...historicoValido, aceite_demo: aceite };
+      const r = await app.inject({ method: 'POST', url: '/api/triagem', payload });
+      expect(r.statusCode).toBe(400);
+      expect(mockExecutarTriagem).not.toHaveBeenCalled();
+    });
+  }
 
   it('encaminha para o motor e devolve a resposta', async () => {
     mockExecutarTriagem.mockResolvedValue({ tipo: 'pergunta', mensagem: 'renda?' });

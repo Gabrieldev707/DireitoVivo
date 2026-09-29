@@ -4,9 +4,10 @@ import { ErroTriagem, executarTriagem, type MensagemChat } from '@direito-vivo/r
 // Limites defensivos: conversa curta por natureza (máx. 6 perguntas do assistente).
 const esquemaCorpo = {
   type: 'object',
-  required: ['mensagens'],
+  required: ['mensagens', 'aceite_demo'],
   additionalProperties: false,
   properties: {
+    aceite_demo: { type: 'boolean', enum: [true] },
     mensagens: {
       type: 'array',
       minItems: 1,
@@ -28,7 +29,7 @@ export async function rotasTriagem(app: FastifyInstance) {
   app.get('/saude', async () => ({ ok: true }));
 
   app.post('/triagem', { schema: { body: esquemaCorpo } }, async (requisicao, resposta) => {
-    const { mensagens } = requisicao.body as { mensagens: MensagemChat[] };
+    const { mensagens } = requisicao.body as { mensagens: MensagemChat[]; aceite_demo: true };
     try {
       return await executarTriagem(mensagens);
     } catch (erro) {

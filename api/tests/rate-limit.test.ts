@@ -52,7 +52,7 @@ afterEach(async () => {
   await app.close();
 });
 
-const payload = { mensagens: [{ papel: 'usuario', conteudo: 'estou sem trabalho' }] };
+const payload = { mensagens: [{ papel: 'usuario', conteudo: 'estou sem trabalho' }], aceite_demo: true };
 
 describe('rate limit da triagem', () => {
   it('permite requisições até o limite configurado', async () => {
