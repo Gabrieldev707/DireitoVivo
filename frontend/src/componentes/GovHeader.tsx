@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ReactNode } from 'react';
-import { SimboloDireitoVivo } from './MarcaDireitoVivo';
+import { LogotipoDireitoVivo } from './MarcaDireitoVivo';
 import { TOTAL_DIREITOS } from '../dados/catalogoDireitos';
 import type { Pagina } from '../navegacao';
 
@@ -114,7 +114,7 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
             <svg className="h-3.5 w-3.5 shrink-0 text-[#a7f3d0]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M12 9v4m0 3h.01M4.72 19h14.56c1.44 0 2.34-1.55 1.62-2.8L13.62 4.2a1.88 1.88 0 00-3.24 0L3.1 16.2c-.72 1.25.18 2.8 1.62 2.8z" />
             </svg>
-            <span className="truncate">
+            <span className="header-independent-note">
               Projeto independente — não é um serviço oficial do Governo Federal
             </span>
           </div>
@@ -167,31 +167,15 @@ export function GovHeader({ abaAtiva, aoMudarAba }: PropriedadesGovHeader) {
             className="brand-lockup group flex min-w-0 items-center gap-3 rounded-lg text-left focus:outline-none focus:ring-4 focus:ring-[#075e54]/20"
             onClick={() => aoMudarAba('inicio')}
           >
-            <SimboloDireitoVivo tamanho={48} className="shrink-0 transition group-hover:scale-105" />
             <span className="min-w-0">
               <span className="flex flex-wrap items-center gap-2">
-                <span className="text-xl font-black tracking-tight text-[#075e54] sm:text-2xl">
-                  Direito<span className="text-[#25d366]">Vivo</span>
-                </span>
-                <span className="rounded-full bg-[#25d366]/12 px-2.5 py-1 text-[11px] font-black uppercase tracking-wide text-[#075e54]">
-                  Projeto independente
-                </span>
+                <LogotipoDireitoVivo />
               </span>
               <span className="mt-1 block text-xs font-semibold leading-relaxed text-slate-600 sm:text-sm">
-                Orientação sobre direitos e caminhos para serviços públicos.
+                Projeto independente de orientação sobre direitos.
               </span>
             </span>
           </button>
-
-          <div className="hidden items-center gap-3 rounded-lg border border-slate-200 bg-[#EAF2F5] px-4 py-3 text-sm text-[#173B52] lg:flex">
-            <svg className="h-5 w-5 text-[#075e54]" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.2} d="M21 21l-5.2-5.2m1.7-4.3a6 6 0 1 1-12 0 6 6 0 0 1 12 0z" />
-            </svg>
-            <div>
-              <strong className="block text-xs uppercase tracking-wide">Busca orientada</strong>
-              <span className="text-xs text-slate-600">Busque uma ficha ou escolha uma situação na página inicial.</span>
-            </div>
-          </div>
         </div>
       </div>
 

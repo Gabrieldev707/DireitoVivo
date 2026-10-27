@@ -31,10 +31,10 @@ export function TelaInicial({ aoComecar, aoBuscarDireitos, aoVerAjuda, aoVerSitu
   return (
     <div className="home-new">
       <section className="home-new__hero" aria-labelledby="titulo-inicio">
-        <div className="home-new__wrap">
-          <p className="home-new__eyebrow">Direito Vivo · projeto independente</p>
-          <h1 id="titulo-inicio">Encontre ajuda para sua situação.</h1>
-          <p className="home-new__lead">Comece pelo que está acontecendo. Consulte orientações sobre direitos e descubra onde confirmar seus próximos passos.</p>
+        <div className="home-new__wrap home-new__hero-grid">
+          <div className="home-new__hero-copy">
+          <h1 id="titulo-inicio">Quando a vida muda, por onde começar?</h1>
+          <p className="home-new__lead">Encontre orientações sobre direitos e serviços a partir da sua situação. Você escolhe o caminho.</p>
 
           <form className="home-new__search" role="search" onSubmit={buscar}>
             <label htmlFor="busca-inicial">O que está acontecendo?</label>
@@ -46,6 +46,11 @@ export function TelaInicial({ aoComecar, aoBuscarDireitos, aoVerAjuda, aoVerSitu
           </form>
 
           <button type="button" onClick={aoVerAjuda} className="home-new__urgent">Preciso de ajuda agora <span aria-hidden="true">→</span></button>
+          </div>
+          <figure className="home-new__photo">
+            <img src="/assets/rua-rio-felipe-vieira.jpg" alt="Pessoas caminhando em uma rua do centro do Rio de Janeiro" width="1500" height="2000" fetchPriority="high" />
+            <figcaption>Centro do Rio de Janeiro. Foto: Felipe Vieira / Unsplash.</figcaption>
+          </figure>
         </div>
       </section>
 
@@ -53,7 +58,6 @@ export function TelaInicial({ aoComecar, aoBuscarDireitos, aoVerAjuda, aoVerSitu
         <div className="home-new__wrap">
           <div className="home-new__section-heading">
             <div>
-              <p className="home-new__eyebrow">Comece pela sua realidade</p>
               <h2 id="titulo-situacoes">Qual assunto se aproxima do seu?</h2>
             </div>
             <button type="button" onClick={aoVerSituacoes} className="home-new__text-link">Ver todas as situações <span aria-hidden="true">→</span></button>
@@ -72,19 +76,24 @@ export function TelaInicial({ aoComecar, aoBuscarDireitos, aoVerAjuda, aoVerSitu
 
       <section className="home-new__section home-new__paths" aria-labelledby="titulo-caminhos">
         <div className="home-new__wrap">
-          <p className="home-new__eyebrow">Você escolhe o caminho</p>
           <h2 id="titulo-caminhos">Como prefere continuar?</h2>
-          <div className="home-new__path-grid">
-            <article><span className="home-new__path-number">01</span><h3>Orientações por situação</h3><p>Veja exemplos e caminhos de atendimento, sem enviar seu relato.</p><button type="button" onClick={aoVerSituacoes}>Ver orientações <span aria-hidden="true">→</span></button></article>
-            <article><span className="home-new__path-number">02</span><h3>Direitos pelo nome</h3><p>Leia critérios, documentos, fontes e passos das {TOTAL_DIREITOS} fichas.</p><button type="button" onClick={() => aoBuscarDireitos('')}>Explorar direitos <span aria-hidden="true">→</span></button></article>
-            <article><span className="home-new__path-number">03</span><h3>Conversa guiada</h3><p>Explique sua dúvida com suas palavras, depois de ler e aceitar o aviso de privacidade.</p><button type="button" onClick={aoComecar}>Iniciar conversa <span aria-hidden="true">→</span></button></article>
+          <div className="home-new__paths-layout">
+            <figure className="home-new__paths-photo">
+              <img src="/assets/anotacoes-zulfugar-karimov.jpg" alt="Mãos fazendo anotações em uma folha de papel" width="1200" height="800" loading="lazy" />
+              <figcaption>Foto ilustrativa: Zulfugar Karimov / Unsplash.</figcaption>
+            </figure>
+            <div className="home-new__path-grid">
+              <article><h3>Orientações por situação</h3><p>Veja exemplos e caminhos de atendimento, sem enviar seu relato.</p><button type="button" onClick={aoVerSituacoes}>Ver orientações <span aria-hidden="true">→</span></button></article>
+              <article><h3>Direitos pelo nome</h3><p>Leia critérios, documentos, fontes e passos das {TOTAL_DIREITOS} fichas.</p><button type="button" onClick={() => aoBuscarDireitos('')}>Explorar direitos <span aria-hidden="true">→</span></button></article>
+              <article><h3>Conversa guiada</h3><p>Explique sua dúvida com suas palavras, depois de ler e aceitar o aviso de privacidade.</p><button type="button" onClick={aoComecar}>Iniciar conversa <span aria-hidden="true">→</span></button></article>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="home-new__section home-new__limits" aria-labelledby="titulo-limites">
         <div className="home-new__wrap home-new__limits-grid">
-          <div><p className="home-new__eyebrow">Antes de começar</p><h2 id="titulo-limites">Informação para você decidir o próximo passo.</h2></div>
+          <div><h2 id="titulo-limites">Informação para você decidir o próximo passo.</h2></div>
           <div><p>O Direito Vivo é um <strong>projeto independente</strong>, sem vínculo governamental. Não recebe pedidos de benefício nem decide elegibilidade.</p><p>Você pode consultar fichas e canais de ajuda sem usar IA. Na conversa, o texto enviado é processado por um provedor externo. Evite nome, CPF, endereço e telefone.</p><p>{TEXTO_DISCLAIMER}</p><button type="button" onClick={aoVerAjuda} className="home-new__text-link">Entenda privacidade e ajuda <span aria-hidden="true">→</span></button></div>
         </div>
       </section>

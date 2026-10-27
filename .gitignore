@@ -5,3 +5,10 @@ dist/
 *.log
 .DS_Store
 .worktrees/
+
+# Pastas de ferramentas locais (IA/automação)
+.arcadia/
+.codex/
+.agents/
+.claude/
+.superpowers/

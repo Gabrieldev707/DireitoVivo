@@ -1290,3 +1290,45 @@ body.alto-contraste :focus-visible {
 .wa-composer__field { border-radius: .5rem; min-height: 48px; }
 .wa-composer__send { width: 48px; height: 48px; border-radius: .5rem; background: var(--action); box-shadow: none; }
 @media print { .site-header, .footer-brasil, .wa-chat, .skip-link { display: none !important; } body { background: white !important; } .gov-panel { box-shadow: none !important; } }
+
+/* Direção editorial: tipografia clara e fotografia documental. */
+.dv-wordmark { display: inline-block; color: #173B52; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(1.75rem, 2.2vw, 2.25rem); font-weight: 700; letter-spacing: -.065em; line-height: 1; white-space: nowrap; }
+.dv-wordmark span { color: #176B5B; font-weight: 400; }
+.dv-wordmark i { color: #D08D39; font-style: normal; }
+.dv-wordmark--inverse { color: #fff; }
+.dv-wordmark--inverse span { color: #c9e8dc; }
+.dv-monograma { display: inline-flex; align-items: center; justify-content: center; border: 1px solid currentColor; border-radius: 50%; font-family: Georgia, serif; font-weight: 700; letter-spacing: -.09em; line-height: 1; }
+.dv-monograma span { color: #D08D39; }
+.site-header { box-shadow: none; }
+.site-header .brand-lockup { padding-block: .2rem; }
+.site-header nav { background: white; }
+.header-independent-note { line-height: 1.35; }
+.site-header .nav-tab { border-radius: 0; }
+.home-new__hero { overflow: visible; background: #f2f5f2; padding: clamp(2rem, 4.5vw, 4.25rem) 0; }
+.home-new__hero::after { display: none; }
+.home-new__hero-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(290px, .85fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); }
+.home-new__hero-copy { min-width: 0; }
+.home-new h1 { max-width: 720px; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; font-size: clamp(2.85rem, 5vw, 4.8rem); letter-spacing: -.055em; line-height: 1.09; }
+.home-new__lead { max-width: 550px; margin-top: 1.25rem; font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.55; }
+.home-new__search { margin-top: 2rem; }
+.home-new__photo { margin: 0; }
+.home-new__photo img { display: block; width: 100%; height: clamp(380px, 41vw, 570px); object-fit: cover; object-position: center 75%; }
+.home-new__photo figcaption { padding-top: .55rem; color: #526875; font-size: .72rem; line-height: 1.4; }
+.home-new__section h2 { max-width: 750px; font-family: Georgia, 'Times New Roman', serif; font-weight: 400; letter-spacing: -.045em; }
+.home-new__situation-grid { background: transparent; border: 0; gap: 0 1.5rem; }
+.home-new__situation { min-height: 132px; border-bottom: 1px solid #c7d3d2; padding: 1.25rem .25rem 1.25rem 0; }
+.home-new__situation strong { font-size: 1.1rem; }
+.home-new__arrow { right: .35rem; bottom: 1.1rem; }
+.home-new__paths { background: #f6f7f5; }
+.home-new__paths-layout { display: grid; grid-template-columns: minmax(0, .7fr) minmax(0, 1fr); align-items: start; gap: clamp(2rem, 5vw, 5rem); margin-top: 2rem; }
+.home-new__paths-photo { margin: 0; }
+.home-new__paths-photo img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.home-new__paths-photo figcaption { padding-top: .5rem; color: #526875; font-size: .72rem; }
+.home-new__path-grid { display: block; margin-top: 0; }
+.home-new__path-grid article { padding-bottom: 1.5rem; }
+.home-new__path-grid article { border-top: 1px solid #9bb7af; padding-top: 1rem; }
+.home-new__path-grid h3 { margin-top: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 1.6rem; font-weight: 400; }
+.home-new__limits { background: #173B52; }
+.home-new__limits h2 { max-width: 450px; }
+@media (max-width: 760px) { .home-new__hero-grid, .home-new__paths-layout { grid-template-columns: 1fr; } .home-new__photo img { height: 300px; object-position: center 78%; } .home-new__paths-photo img { aspect-ratio: 16 / 8; } }
+@media (max-width: 600px) { .header-independent-note { max-width: 100%; } .home-new__hero { padding-top: 2rem; } .home-new__photo { margin-top: .5rem; } .home-new__photo img { height: 240px; } .home-new__situation-grid { gap: 0 1rem; } }

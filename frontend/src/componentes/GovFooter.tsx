@@ -1,6 +1,6 @@
 import { TEXTO_DISCLAIMER } from '../tipos';
 import type { Pagina } from '../navegacao';
-import { SimboloDireitoVivo } from './MarcaDireitoVivo';
+import { LogotipoDireitoVivo } from './MarcaDireitoVivo';
 import { CANAIS_AJUDA } from '../dados/canaisAjuda';
 
 interface PropriedadesGovFooter {
@@ -22,11 +22,8 @@ export function GovFooter({ aoMudarAba }: PropriedadesGovFooter) {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           <section className="space-y-6">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-              <SimboloDireitoVivo tamanho={56} className="shrink-0" />
               <div>
-                <h2 className="text-2xl font-black tracking-tight">
-                  Direito<span className="text-[#25d366]">Vivo</span>
-                </h2>
+                <h2><LogotipoDireitoVivo className="dv-wordmark--inverse" /></h2>
                 <p className="mt-1 max-w-2xl text-sm leading-relaxed text-emerald-50">
                   Uma camada de orientação cidadã para organizar direitos, documentos e próximos passos antes do atendimento oficial.
                 </p>
